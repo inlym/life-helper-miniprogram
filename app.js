@@ -2,10 +2,12 @@
 
 const configProd = require('./config/config.prod.js')
 const configTest = require('./config/config.test.js')
-const requestBase = require('./lib/request.js')
+const requestWrap = require('./lib/request.js')
 
 App({
-  onLaunch() {},
+  onLaunch() {
+    // wx.setStorageSync('token', 'laiyiming')
+  },
 
   /**
    * 环境
@@ -25,20 +27,20 @@ App({
     } else if (env === 'test') {
       return configTest
     } else {
-      // empty
+      throw new Error('环境变量 env 配置错误')
     }
   },
 
   request(options) {
     const { baseURL } = this.config
     if (typeof options === 'string') {
-      return requestBase({
+      return requestWrap({
         url: options,
         baseURL,
       })
     } else {
       options.baseURL = baseURL
-      return requestBase(options)
+      return requestWrap(options)
     }
   },
 
