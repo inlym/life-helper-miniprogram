@@ -1,6 +1,56 @@
-//app.js
+'use strict'
+
+const configProd = require('./config/config.prod.js')
+const configTest = require('./config/config.test.js')
+const requestBase = require('./lib/request.js')
+
 App({
-	onLaunch(){
-		console.log('hello')
-	}
+  onLaunch() {},
+
+  /**
+   * 环境
+   * 'prod' => 生产环境
+   * 'test' => 测试环境
+   */
+  env: 'prod',
+
+  /**
+   * 配置信息，根据环境变量取对应配置文件
+   * 配置文件均放置在 config/ 文件夹下
+   */
+  get config() {
+    const { env } = this
+    if (env === 'prod') {
+      return configProd
+    } else if (env === 'test') {
+      return configTest
+    } else {
+      // empty
+    }
+  },
+
+  request(options) {
+    const { baseURL } = this.config
+    if (typeof options === 'string') {
+      return requestBase({
+        url: options,
+        baseURL,
+      })
+    } else {
+      options.baseURL = baseURL
+      return requestBase(options)
+    }
+  },
+
+  get(options) {
+    return this.request(options)
+  },
+
+  post(options) {
+    if (typeof options !== 'object') {
+      throw new Error('POST 请求的参数应该是一个对象')
+    }
+    options.method = 'POST'
+    return this.request(options)
+  },
 })
