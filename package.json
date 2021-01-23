@@ -1,0 +1,26 @@
+{
+  "name": "life-helper-miniprogram",
+  "version": "1.0.0",
+  "description": "「我的个人助手」小程序端部分代码",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inlym/life-helper-miniprogram.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inlym/life-helper-miniprogram/issues"
+  },
+  "homepage": "https://github.com/inlym/life-helper-miniprogram#readme",
+  "dependencies": {
+    "miniprogram-api-promise": "^1.0.4"
+  }
+}

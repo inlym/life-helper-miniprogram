@@ -3,6 +3,7 @@
 const configProd = require('./config/config.prod.js')
 const configTest = require('./config/config.test.js')
 const requestWrap = require('./lib/request.js')
+const wxp = require('./lib/wxp.js')
 
 App({
   onLaunch() {
@@ -30,6 +31,9 @@ App({
       throw new Error('环境变量 env 配置错误')
     }
   },
+
+  /** Promise 化后的 wx 接口 */
+  wxp,
 
   request(options) {
     const { baseURL } = this.config
