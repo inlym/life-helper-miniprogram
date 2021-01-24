@@ -2,12 +2,14 @@
 
 const configProd = require('./config/config.prod.js')
 const configTest = require('./config/config.test.js')
-const requestWrap = require('./lib/request.js')
+const { requestWrap } = require('./lib/request.js')
 const wxp = require('./lib/wxp.js')
 
 App({
+  /** 生命周期回调 —— 监听小程序初始化 */
   onLaunch() {
-    // wx.setStorageSync('token', 'laiyiming')
+    // 小程序初始化时进行一次登录，从服务端获取 token，保存至缓存中
+    this.login()
   },
 
   /**
@@ -15,10 +17,10 @@ App({
    * 'prod' => 生产环境
    * 'test' => 测试环境
    */
-  env: 'prod',
+  env: 'test',
 
   /**
-   * 配置信息，根据环境变量取对应配置文件
+   * 配置信息，根据环境变量（env）取对应配置文件
    * 配置文件均放置在 config/ 文件夹下
    */
   get config() {
@@ -35,17 +37,71 @@ App({
   /** Promise 化后的 wx 接口 */
   wxp,
 
-  request(options) {
+  /** 对请求的封装，内部处理取对应环境的 baseURL */
+  async request(options) {
     const { baseURL } = this.config
+    let opt = {}
     if (typeof options === 'string') {
-      return requestWrap({
+      opt = {
         url: options,
         baseURL,
-      })
+        method: 'GET',
+      }
     } else {
-      options.baseURL = baseURL
-      return requestWrap(options)
+      opt = options
+      opt.baseURL = baseURL
     }
+
+    const response = await requestWrap(opt)
+
+    if (response.status === 200) {
+      return response
+    } else if (response.status === 401) {
+      await this.login()
+      return await requestWrap(opt)
+    }
+  },
+
+  /** 登录接口，获取 token 并存储 */
+  async login() {
+    /** 最近一次登录时间（毫秒数） */
+    const lastLoginTime = wx.getStorageSync('last_login')
+
+    if (lastLoginTime) {
+      /** 当前时间（毫秒数） */
+      const now = new Date().getTime()
+
+      /** 保留登录时间 60s，期间内不再发起请求而返回已有的 token */
+      const TIME_DIFF = 60 * 1000
+
+      if (now - lastLoginTime < TIME_DIFF) {
+        return wx.getStorageSync('token')
+      }
+    }
+
+    const { baseURL } = this.config
+    const { code } = await wxp.login()
+
+    return requestWrap({
+      baseURL,
+      url: '/login',
+      params: {
+        code,
+      },
+      method: 'GET',
+    }).then((res) => {
+      const { token } = res.data
+      if (token) {
+        wx.setStorageSync('token', token)
+        wx.setStorageSync('last_login', new Date().getTime())
+        return token
+      } else {
+        wx.showToast({
+          title: '登录失败',
+          icon: 'none',
+        })
+      }
+    })
   },
 
   get(options) {
