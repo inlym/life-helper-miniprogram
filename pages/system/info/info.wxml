@@ -4,4 +4,36 @@
     <mp-cell value="品牌" footer="{{brand}}"></mp-cell>
     <mp-cell value="型号" footer="{{model}}"></mp-cell>
   </mp-cells>
+  <mp-cells title="屏幕信息">
+    <mp-cell value="设备像素比" footer="{{pixelRatio}}"></mp-cell>
+    <mp-cell value="屏幕宽度" footer="{{screenWidth}}px"></mp-cell>
+    <mp-cell value="屏幕高度" footer="{{screenHeight}}px"></mp-cell>
+    <mp-cell value="可使用窗口宽度" footer="{{windowWidth}}px"></mp-cell>
+    <mp-cell value="可使用窗口高度" footer="{{windowHeight}}px"></mp-cell>
+    <mp-cell value="状态栏的高度" footer="{{statusBarHeight}}px"></mp-cell>
+  </mp-cells>
+  <mp-cells title="系统信息">
+    <mp-cell value="微信设置的语言	" footer="{{language}}"></mp-cell>
+    <mp-cell value="微信版本号" footer="{{version}}"></mp-cell>
+    <mp-cell value="操作系统及版本" footer="{{system}}"></mp-cell>
+    <mp-cell value="客户端平台" footer="{{platform}}"></mp-cell>
+    <mp-cell value="用户字体大小" footer="{{fontSizeSetting}}px"></mp-cell>
+    <mp-cell value="客户端基础库版本	" footer="{{SDKVersion}}"></mp-cell>
+    <mp-cell value="设备性能等级" footer="{{benchmarkLevel}}"></mp-cell>
+  </mp-cells>
+  <mp-cells title="微信权限">
+    <mp-cell value="微信使用相册" footer="{{albumAuthorized?'允许':'不允许'}}"></mp-cell>
+    <mp-cell value="微信使用摄像头" footer="{{cameraAuthorized?'允许':'不允许'}}"></mp-cell>
+    <mp-cell value="微信使用定位" footer="{{locationAuthorized?'允许':'不允许'}}"></mp-cell>
+    <mp-cell value="微信使用麦克风" footer="{{microphoneAuthorized?'允许':'不允许'}}"></mp-cell>
+    <mp-cell value="微信通知" footer="{{notificationAuthorized?'允许':'不允许'}}"></mp-cell>
+    <mp-cell value="微信通知带有提醒" footer="{{notificationAlertAuthorized?'允许':'不允许'}}"></mp-cell>
+    <mp-cell value="微信通知带有标记" footer="{{notificationBadgeAuthorized?'允许':'不允许'}}"></mp-cell>
+    <mp-cell value="微信通知带有声音" footer="{{notificationSoundAuthorized?'允许':'不允许'}}"></mp-cell>
+  </mp-cells>
+  <mp-cells title="设备权限">
+    <mp-cell value="蓝牙" footer="{{bluetoothEnabled?'已开启':'已关闭'}}"></mp-cell>
+    <mp-cell value="定位" footer="{{locationEnabled?'已开启':'已关闭'}}"></mp-cell>
+    <mp-cell value="Wi-Fi" footer="{{wifiEnabled?'已开启':'已关闭'}}"></mp-cell>
+  </mp-cells>
 </view>
