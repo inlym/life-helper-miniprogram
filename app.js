@@ -119,4 +119,13 @@ App({
     options.method = 'POST'
     return this.request(options)
   },
+
+  /** 日志对象 */
+  get logger() {
+    if (this.env === 'test') {
+      return console
+    } else if (this.env === 'prod') {
+      return wx.getRealtimeLogManager()
+    }
+  },
 })
