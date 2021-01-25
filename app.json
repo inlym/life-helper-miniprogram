@@ -6,6 +6,7 @@
     "pages/me/me",
     "pages/system/info/info"
   ],
+  "entryPagePath": "pages/index/index",
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

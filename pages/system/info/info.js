@@ -53,8 +53,12 @@ Page({
   /** 页面初始化 */
   init() {
     const res = wx.getSystemInfoSync()
-    app.logger.debug(res)
     this.setData(res)
+
+    app.logger.debug('测试 debug 日志')
+    app.logger.info('测试 info 日志')
+    app.logger.warn('测试 warn 日志')
+    app.logger.error('测试 error 日志')
   },
 
   /** 生命周期函数--监听页面加载 */
