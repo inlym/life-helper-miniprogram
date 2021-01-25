@@ -18,8 +18,7 @@
   justify-content: center;
 }
 
-.search-entry .icon {
-  background: url('./search.png') center no-repeat;
+.search-entry .search-image {
   background-size: 100%;
   width: 28rpx;
   height: 28rpx;

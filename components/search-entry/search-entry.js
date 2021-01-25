@@ -1,8 +1,7 @@
-// components/search-entry/search-entry.js
+'use strict'
+
 Component({
-  /**
-   * 组件的属性列表
-   */
+  /** 组件的属性列表 */
   properties: {
     /** 输入框中默认显示文案 */
     content: {
@@ -16,13 +15,9 @@ Component({
     },
   },
 
-  /**
-   * 组件的初始数据
-   */
+  /** 组件的初始数据 */
   data: {},
 
-  /**
-   * 组件的方法列表
-   */
+  /** 组件的方法列表 */
   methods: {},
 })

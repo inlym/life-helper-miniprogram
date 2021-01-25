@@ -1,5 +1,2 @@
 <!-- index.wxml -->
-<view class="container">
-  <navigator url="/pages/system/info/info">点击查看设备信息</navigator>
-</view>
-<search-entry content="点击搜索" url="/pages/system/info/info"></search-entry>
+<search-entry content="输入关键词搜索" url="/pages/system/info/info"></search-entry>

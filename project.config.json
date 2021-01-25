@@ -63,8 +63,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/system/info/info",
+          "name": "系统信息页",
           "pathName": "pages/system/info/info",
+          "query": "",
           "scene": null
         }
       ]
