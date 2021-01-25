@@ -55,10 +55,14 @@ App({
     const response = await requestWrap(opt)
 
     if (response.status === 200) {
+      // 除特定情况外，一律响应 200 状态码
       return response
     } else if (response.status === 401) {
+      // 需要鉴权的接口无法获取 userId，则响应 401 状态码，小程序端先登录一遍后再次发起请求
       await this.login()
       return await requestWrap(opt)
+    } else {
+      // TO DO
     }
   },
 
