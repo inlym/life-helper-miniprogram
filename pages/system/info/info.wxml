@@ -1,0 +1,7 @@
+<!-- pages/system/info/info.wxml -->
+<view>
+  <mp-cells title="品牌和型号">
+    <mp-cell value="品牌" footer="{{brand}}"></mp-cell>
+    <mp-cell value="型号" footer="{{model}}"></mp-cell>
+  </mp-cells>
+</view>

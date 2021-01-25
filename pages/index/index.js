@@ -9,5 +9,7 @@ Page({
     app.get('/ping/redis')
     app.get('/ping/mysql')
     app.get('/ping/ots')
+
+    app.logger.warn('sadfasd')
   },
 })
