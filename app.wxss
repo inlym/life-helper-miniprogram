@@ -1,4 +1,11 @@
 /**app.wxss**/
+
+page {
+  min-height: 100%;
+  background-color: #f7f7f7;
+}
+
+/** 包裹可视内容区 */
 .container {
   height: 100%;
   box-sizing: border-box;

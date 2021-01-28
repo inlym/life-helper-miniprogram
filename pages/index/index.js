@@ -1,15 +1,54 @@
-//index.js
-//获取应用实例
+'use strict'
+
 const app = getApp()
 
 Page({
-  data: {},
-  //事件处理函数
-  onLoad: function () {
-    app.get('/ping/redis')
-    app.get('/ping/mysql')
-    app.get('/ping/ots')
+  /** 页面的初始数据 */
+  data: {
+    weatherCondition: {},
+  },
 
-    app.logger.warn('sadfasd')
+  /** 生命周期函数--监听页面加载 */
+  onLoad(options) {
+    // this.init()
+  },
+
+  /** 生命周期函数--监听页面初次渲染完成 */
+  onReady() {},
+
+  /** 生命周期函数--监听页面显示 */
+  onShow() {},
+
+  /** 生命周期函数--监听页面隐藏 */
+  onHide() {},
+
+  /** 生命周期函数--监听页面卸载 */
+  onUnload() {},
+
+  /** 页面相关事件处理函数--监听用户下拉动作 */
+  onPullDownRefresh() {
+    this.init()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000)
+  },
+
+  /** 页面上拉触底事件的处理函数 */
+  onReachBottom() {},
+
+  /** * 用户点击右上角分享 */
+  onShareAppMessage() {},
+
+  /** 页面初始化 */
+  init() {
+    this.getWeatherCondition()
+  },
+
+  /** 获取天气实况 */
+  async getWeatherCondition() {
+    const res = await app.get('/weather/now')
+    this.setData({
+      weatherCondition: res.data,
+    })
   },
 })

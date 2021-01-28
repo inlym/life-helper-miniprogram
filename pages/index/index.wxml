@@ -1,2 +1,14 @@
 <!-- index.wxml -->
-<search-entry content="输入关键词搜索" url="/pages/system/info/info"></search-entry>
+<view class="container">
+  <!-- 天气实况 -->
+  <view class="weather-condition">
+    <!-- 定位信息区域 -->
+    <view class="location">
+      <image src="../../image/icon/location.svg" mode="widthFix" fill="green"></image>
+    </view>
+
+    <!-- 温度区域 -->
+    <view class="temperature"></view>
+  </view>
+
+</view>
