@@ -1,5 +1,5 @@
 'use strict'
 
 module.exports = {
-  baseURL: 'http://api.lh.inlym.com',
+  baseURL: 'https://api.lh.inlym.com',
 }

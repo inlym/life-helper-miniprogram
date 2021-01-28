@@ -5,10 +5,59 @@
     <!-- 定位信息区域 -->
     <view class="location">
       <image src="../../image/icon/location.svg" mode="widthFix" fill="green"></image>
+      <view class="address">{{weatherCondition.location}}</view>
     </view>
 
     <!-- 温度区域 -->
-    <view class="temperature"></view>
+    <view class="temperature">
+      <view class="temp-num">{{weatherCondition.temperature}}</view>
+      <view class="unit">°C</view>
+      <image src="{{weatherCondition.iconUrl}}" mode="widthFix"></image>
+    </view>
+
+    <!-- 天气和体感温度 -->
+    <view class="temperature-feel">
+      <view class="condition">{{weatherCondition.condition}}</view>
+      <text>|</text>
+      <view class="temp-feel">体感温度 {{weatherCondition.sensibleTemperature}}°C</view>
+    </view>
+
+    <!-- 日出和日落时间 -->
+    <view class="sun">
+      <view>日出时间 {{weatherCondition.sunrise}}</view>
+      <view>日落时间 {{weatherCondition.sunset}}</view>
+    </view>
+
+    <!-- 一句话提示 -->
+    <view class="oneword">
+      <text>{{weatherCondition.tip}}</text>
+    </view>
+
+    <!-- 其他信息 -->
+    <view class="weather-other">
+      <view class="other-item">
+        <view class="item-name">气压</view>
+        <view class="item-num">{{weatherCondition.airPressure}}hPa</view>
+      </view>
+      <view class="other-item">
+        <view class="item-name">湿度</view>
+        <view class="item-num">{{weatherCondition.humidity}}%</view>
+      </view>
+      <view class="other-item">
+        <view class="item-name">风力</view>
+        <view class="item-num">{{weatherCondition.windScale}}级</view>
+      </view>
+      <view class="other-item">
+        <view class="item-name">风速</view>
+        <view class="item-num">{{weatherCondition.windSpeed}}m/s</view>
+      </view>
+      <view class="other-item">
+        <view class="item-name">风向</view>
+        <view class="item-num">{{weatherCondition.windDirection}}</view>
+      </view>
+
+
+    </view>
   </view>
 
 </view>
