@@ -67,6 +67,11 @@
           "pathName": "pages/system/info/info",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "个人中心",
+          "pathName": "pages/me/me",
+          "scene": null
         }
       ]
     }

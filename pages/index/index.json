@@ -1,3 +1,4 @@
 {
-  "usingComponents": {}
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "我的个人助手"
 }

@@ -61,3 +61,8 @@
   </view>
 
 </view>
+
+<!--以下为非页面元素-->
+
+<!--Toptips顶部错误提示组件-->
+<mp-toptips type="{{toptip.type}}" show="{{toptip.show}}" msg="{{toptip.msg}}"></mp-toptips>

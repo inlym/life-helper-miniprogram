@@ -9,7 +9,8 @@
   "entryPagePath": "pages/index/index",
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#f7f7f7",
+    "navigationBarBackgroundColor": "#f7f7f7",
     "navigationBarTitleText": "我的个人助手",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
@@ -44,5 +45,8 @@
   "sitemapLocation": "sitemap.json",
   "useExtendedLib": {
     "weui": true
+  },
+  "usingComponents": {
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
   }
 }

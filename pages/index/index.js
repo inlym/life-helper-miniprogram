@@ -9,6 +9,13 @@ Page({
       temperature: '0',
       location: '正在定位中 ...',
     },
+
+    /** Toptips顶部错误提示组件 */
+    toptip: {
+      type: 'success',
+      show: false,
+      msg: '',
+    },
   },
 
   /** 生命周期函数--监听页面加载 */
@@ -33,6 +40,13 @@ Page({
     this.init()
     setTimeout(() => {
       wx.stopPullDownRefresh()
+      this.setData({
+        toptip: {
+          type: 'success',
+          show: true,
+          msg: '哇哦！已经更新了哦 ~',
+        },
+      })
     }, 1000)
   },
 
