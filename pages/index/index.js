@@ -68,6 +68,9 @@ Page({
   /** 用户点击右上角菜单“分享到朋友圈”按钮 */
   onShareTimeline() {
     const title = '[来自好友推荐] 好友评价：五星好评的智能生活助手'
+    return {
+      title,
+    }
   },
 
   /** 页面初始化 */
