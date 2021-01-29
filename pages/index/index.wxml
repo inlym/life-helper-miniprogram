@@ -60,6 +60,23 @@
     </view>
   </view>
 
+
+  <!-- 未来 15 天的天气预报 -->
+  <view class="forecast15days">
+    <!-- 标题头文案 -->
+    <view class="fore-head">
+      15天预报
+    </view>
+
+    <!-- 滚动的列表区 -->
+    <scroll-view class="forecast-items" scroll-x="{{true}}" scroll-with-animation="{{true}}">
+      <!-- 列表项，一个列表表示一天 -->
+      <view class="forecast-item" wx:for="{{forecastList}}" wx:key="date">
+        
+      </view>
+    </scroll-view>
+  </view>
+
 </view>
 
 <!--以下为非页面元素-->

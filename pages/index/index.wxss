@@ -83,3 +83,13 @@
   width: 100rpx;
   text-align: center;
 }
+
+.forecast15days {
+  margin-top: 50rpx;
+}
+
+.forecast-items {
+  height: 500rpx;
+
+  border: 1rpx solid red;
+}

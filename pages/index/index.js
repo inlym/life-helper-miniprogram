@@ -5,10 +5,14 @@ const app = getApp()
 Page({
   /** 页面的初始数据 */
   data: {
+    /** 实时天气情况 */
     weatherCondition: {
       temperature: '0',
       location: '正在定位中 ...',
     },
+
+    /** 未来 15 天的天气预报 */
+    forecastList: [],
 
     /** Toptips顶部错误提示组件 */
     toptip: {
@@ -20,7 +24,7 @@ Page({
 
   /** 生命周期函数--监听页面加载 */
   onLoad(options) {
-    // this.init()
+    this.init()
   },
 
   /** 生命周期函数--监听页面初次渲染完成 */
@@ -76,6 +80,7 @@ Page({
   /** 页面初始化 */
   init() {
     this.getWeatherCondition()
+    this.getForecast15days()
   },
 
   /** 获取天气实况 */
@@ -84,5 +89,10 @@ Page({
     this.setData({
       weatherCondition: res.data,
     })
+  },
+
+  async getForecast15days() {
+    const res = await app.get('/weather/forecast15days')
+    console.log('res: ', res.data[0])
   },
 })
