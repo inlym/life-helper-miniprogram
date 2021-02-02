@@ -1,6 +1,7 @@
 'use strict'
 
 const app = getApp()
+const echarts = require('../../components/ec-canvas/echarts.js')
 
 Page({
   /** 页面的初始数据 */
@@ -13,6 +14,17 @@ Page({
 
     /** 未来 15 天的天气预报 */
     forecastList: [],
+
+    /** 未来 15 天的天气预报的最高温度列表 */
+    maxTemperature: [],
+
+    /** 未来 15 天的天气预报的最低温度列表 */
+    minTemperature: [],
+
+    /** 未来 15 天的天气预报的折线图 */
+    ec: {
+      lazyLoad: true,
+    },
 
     /** Toptips顶部错误提示组件 */
     toptip: {
@@ -28,7 +40,10 @@ Page({
   },
 
   /** 生命周期函数--监听页面初次渲染完成 */
-  onReady() {},
+  onReady() {
+    // 获取15天预报的折线图组件
+    this.ecFore15Line = this.selectComponent('#fore15line')
+  },
 
   /** 生命周期函数--监听页面显示 */
   onShow() {},
@@ -91,8 +106,59 @@ Page({
     })
   },
 
+  /** 获取未来 15 天的天气预报 */
   async getForecast15days() {
     const res = await app.get('/weather/forecast15days')
-    console.log('res: ', res.data[0])
+    this.setData({
+      forecastList: res.data.list,
+      maxTemperature: res.data.maxTemperature,
+      minTemperature: res.data.minTemperature,
+    })
+
+    this.render15Line(res.data.maxTemperature, res.data.minTemperature)
+  },
+
+  /** 渲染 15 天预报的折线图 */
+  render15Line(maxTemperature, minTemperature) {
+    this.ecFore15Line.init((canvas, width, height, dpr) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr,
+      })
+
+      const options = {
+        xAxis: {
+          type: 'category',
+          show: false,
+        },
+        yAxis: {
+          // type: 'value',
+          show: false,
+        },
+        series: [
+          {
+            label: {
+              show: true,
+              position: 'top',
+            },
+            data: maxTemperature,
+            type: 'line',
+          },
+          {
+            label: {
+              show: true,
+              position: 'bottom',
+            },
+            data: minTemperature,
+            type: 'line',
+          },
+        ],
+      }
+
+      chart.setOption(options)
+      this.chart = chart
+      return chart
+    })
   },
 })

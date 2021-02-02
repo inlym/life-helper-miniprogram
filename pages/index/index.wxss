@@ -88,8 +88,52 @@
   margin-top: 50rpx;
 }
 
-.forecast-items {
-  height: 500rpx;
+.fore-scroll {
+  width: 100%;
+  height: 800rpx;
 
   border: 1rpx solid red;
+}
+
+.fore-day {
+  width: 2250rpx;
+  height: 270rpx;
+  display: flex;
+  justify-content: flex-start;
+
+  border: 1rpx solid blue;
+}
+
+.fore-item {
+  width: 150rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  border: 1px solid green;
+}
+
+.fore-item image {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.fore-line {
+  width: 100%;
+  height: 260rpx;
+}
+
+.fore-line ec-canvas {
+  width: 2250rpx;
+}
+
+.fore-night {
+  width: 2250rpx;
+  height: 270rpx;
+  display: flex;
+  justify-content: flex-start;
+
+  border: 1rpx solid blue;
 }

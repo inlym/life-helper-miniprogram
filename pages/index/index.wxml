@@ -69,10 +69,30 @@
     </view>
 
     <!-- 滚动的列表区 -->
-    <scroll-view class="forecast-items" scroll-x="{{true}}" scroll-with-animation="{{true}}">
-      <!-- 列表项，一个列表表示一天 -->
-      <view class="forecast-item" wx:for="{{forecastList}}" wx:key="date">
-        
+    <scroll-view class="fore-scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}" enable-flex="{{true}}">
+      <!-- 白天的天气列表 -->
+      <view class="fore-day">
+        <view class="fore-item" wx:for="{{forecastList}}" wx:key="date">
+          <view>{{item.weekday}}</view>
+          <view>{{item.dateFormatted}}</view>
+          <view>{{item.day.condition}}</view>
+          <image src="{{item.day.iconUrl}}"></image>
+        </view>
+      </view>
+
+      <!-- 最高温、最低温折线图 -->
+      <view class="fore-line">
+        <ec-canvas id="fore15line" ec="{{ec}}"></ec-canvas>
+      </view>
+
+      <!-- 夜间的天气列表 -->
+      <view class="fore-night">
+        <view class="fore-item" wx:for="{{forecastList}}" wx:key="dateFormatted">
+          <image src="{{item.night.iconUrl}}"></image>
+          <view>{{item.night.condition}}</view>
+          <view>{{item.night.windDirection}}</view>
+          <view>{{item.night.windScale}}级</view>
+        </view>
       </view>
     </scroll-view>
   </view>
