@@ -37,22 +37,27 @@
     <view class="weather-other">
       <view class="other-item">
         <view class="item-name">气压</view>
+        <view class="myicon icon-qiya icon"></view>
         <view class="item-num">{{weatherCondition.airPressure}}hPa</view>
       </view>
       <view class="other-item">
         <view class="item-name">湿度</view>
+        <view class="myicon icon-shidu icon"></view>
         <view class="item-num">{{weatherCondition.humidity}}%</view>
       </view>
       <view class="other-item">
         <view class="item-name">风力</view>
+        <view class="myicon icon-fengli icon"></view>
         <view class="item-num">{{weatherCondition.windScale}}级</view>
       </view>
       <view class="other-item">
         <view class="item-name">风速</view>
+        <view class="myicon icon-fengsu1 icon"></view>
         <view class="item-num">{{weatherCondition.windSpeed}}m/s</view>
       </view>
       <view class="other-item">
         <view class="item-name">风向</view>
+        <view class="myicon icon-fengxiang icon"></view>
         <view class="item-num">{{weatherCondition.windDirection}}</view>
       </view>
 

@@ -2,7 +2,6 @@
   "backgroundTextStyle": "dark",
   "navigationBarTitleText": "我的个人助手",
   "usingComponents": {
-    "mp-toptips": "weui-miniprogram/toptips/toptips",
-    "ec-canvas": "../../components/ec-canvas/ec-canvas"
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
   }
 }

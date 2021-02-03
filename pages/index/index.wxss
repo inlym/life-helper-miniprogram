@@ -1,4 +1,10 @@
 /**index.wxss**/
+.weather-condition {
+  /* background-color: #fff; */
+  padding-bottom: 30rpx;
+  background-image: linear-gradient(to top right, #c9e7f3, #afdaed, #9acfe9, #cae4f5, #ffffff);
+}
+
 .location {
   display: flex;
   justify-content: center;
@@ -76,16 +82,21 @@
 .weather-other {
   display: flex;
   justify-content: space-around;
-  margin-top: 20rpx;
+  margin-top: 30rpx;
 }
 
 .weather-other .other-item {
-  width: 100rpx;
+  width: 120rpx;
   text-align: center;
 }
 
+.weather-other .other-item .icon {
+  font-size: 40rpx;
+  color: #333;
+}
+
 .forecast15days {
-  margin-top: 50rpx;
+  margin-top: 80rpx;
 }
 
 .fore-scroll {
