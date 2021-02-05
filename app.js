@@ -2,8 +2,10 @@
 
 const configProd = require('./config/config.prod.js')
 const configTest = require('./config/config.test.js')
+const configAll = require('./config/config.js')
 const { requestWrap } = require('./lib/request.js')
 const wxp = require('./lib/wxp.js')
+const Cache = require('./lib/cache.js')
 
 App({
   /** 生命周期回调 —— 监听小程序初始化 */
@@ -12,30 +14,16 @@ App({
     this.login()
   },
 
-  /**
-   * 环境
-   * 'prod' => 生产环境
-   * 'test' => 测试环境
-   */
-  env: 'prod',
-
-  /**
-   * 配置信息，根据环境变量（env）取对应配置文件
-   * 配置文件均放置在 config/ 文件夹下
-   */
+  /** 挂载配置信息 */
   get config() {
-    const { env } = this
-    if (env === 'prod') {
-      return configProd
-    } else if (env === 'test') {
-      return configTest
-    } else {
-      throw new Error('环境变量 env 配置错误')
-    }
+    return configAll
   },
 
   /** Promise 化后的 wx 接口 */
   wxp,
+
+  /** 挂载封装好的缓存处理函数 */
+  cache: new Cache(),
 
   /** 对请求的封装，内部处理取对应环境的 baseURL */
   async request(options) {
