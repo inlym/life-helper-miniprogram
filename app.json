@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/tools/tools",
     "pages/me/me",
-    "pages/system/info/info"
+    "pages/system/info/info",
+    "pages/test/test"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
