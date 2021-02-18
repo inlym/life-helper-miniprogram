@@ -123,8 +123,6 @@
 
   </view>
 
-  <image src="{{imageData}}" mode="widthFix" style="width:1920rpx;"></image>
-
 
 </view>
 
