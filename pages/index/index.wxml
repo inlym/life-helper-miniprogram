@@ -5,7 +5,8 @@
     <!-- 定位信息区域 -->
     <view class="location">
       <image src="../../image/icon/location.svg" mode="widthFix" fill="green"></image>
-      <view class="address">{{weatherCondition.location}}</view>
+      <view class="address">{{weatherCondition.address}}</view>
+      <view class="myicon icon-down icon"></view>
     </view>
 
     <!-- 温度区域 -->
@@ -60,47 +61,52 @@
         <view class="myicon icon-fengxiang icon"></view>
         <view class="item-num">{{weatherCondition.windDirection}}</view>
       </view>
-
-
     </view>
   </view>
 
 
   <!-- 未来 15 天的天气预报 -->
-  <view class="forecast15days">
+  <view class="forecast15days container-box">
     <!-- 标题头文案 -->
-    <view class="fore-head">
-      15天预报
+    <view class="head">
+      <view class="title">15天预报</view>
     </view>
 
     <!-- 滚动的列表区 -->
-    <scroll-view class="fore-scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}" enable-flex="{{true}}">
-      <!-- 白天的天气列表 -->
-      <view class="fore-day">
-        <view class="fore-item" wx:for="{{forecastList}}" wx:key="date">
-          <view>{{item.weekday}}</view>
-          <view>{{item.dateFormatted}}</view>
-          <view>{{item.day.condition}}</view>
-          <image src="{{item.day.iconUrl}}"></image>
+    <view>
+      <scroll-view class="fore-scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}" enable-flex="{{true}}">
+        <!-- 白天的天气列表 -->
+        <view class="fore-day">
+          <view class="fore-item" wx:for="{{forecastList}}" wx:key="date">
+            <view class="weekday">{{item.weekday}}</view>
+            <view class="date">{{item.dateFormatted}}</view>
+            <view>{{item.day.condition}}</view>
+            <image src="{{item.day.iconUrl}}"></image>
+            <view class="temperature">{{item.day.temperature}}°</view>
+          </view>
         </view>
-      </view>
 
-      <!-- 最高温、最低温折线图 -->
-      <view class="fore-line">
-        <ec-canvas id="fore15line" ec="{{ec}}"></ec-canvas>
-      </view>
-
-      <!-- 夜间的天气列表 -->
-      <view class="fore-night">
-        <view class="fore-item" wx:for="{{forecastList}}" wx:key="dateFormatted">
-          <image src="{{item.night.iconUrl}}"></image>
-          <view>{{item.night.condition}}</view>
-          <view>{{item.night.windDirection}}</view>
-          <view>{{item.night.windScale}}级</view>
+        <!-- 最高温、最低温折线图 -->
+        <view class="fore-line">
+          <canvas type="2d" id="fore15line"></canvas>
         </view>
-      </view>
-    </scroll-view>
+
+        <!-- 夜间的天气列表 -->
+        <view class="fore-night">
+          <view class="fore-item" wx:for="{{forecastList}}" wx:key="dateFormatted">
+            <view class="temperature">{{item.night.temperature}}°</view>
+            <image src=" {{item.night.iconUrl}}">
+            </image>
+            <view>{{item.night.condition}}</view>
+            <view>{{item.night.windDirection}}</view>
+            <view>{{item.night.windScale}}级</view>
+          </view>
+        </view>
+      </scroll-view>
+
+    </view>
   </view>
+
 
 </view>
 
