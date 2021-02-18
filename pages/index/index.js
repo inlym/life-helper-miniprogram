@@ -23,8 +23,6 @@ Page({
     /** 生活指数 */
     liveIndex: {},
 
-    imageData: '',
-
     /** Toptips顶部错误提示组件 */
     toptip: {
       type: 'success',
@@ -34,7 +32,7 @@ Page({
 
     /** 半屏弹窗组件 */
     halfScreen: {
-      show: false,
+      show: true,
       title: '我是标题',
       subTitle: '我是副标题',
       desc: '辅助操作描述内容',
@@ -52,7 +50,10 @@ Page({
     const query = wx.createSelectorQuery()
     query
       .select('#fore15line')
-      .fields({ node: true, size: true })
+      .fields({
+        node: true,
+        size: true,
+      })
       .exec((res) => {
         const canvas = res[0].node
         const ctx = canvas.getContext('2d')
@@ -137,14 +138,6 @@ Page({
     })
 
     this.render15Line(this.data.ctxFore15Line, res.data.maxTemperature, res.data.minTemperature)
-
-    // 2021-02-18 17:53:26
-    // 临时测试代码 --- start ---
-    const img = this.data.canvasFore15Line.toDataURL('image/jpeg', 1)
-    this.setData({
-      imageData: img,
-    })
-    // 临时测试代码  --- end ---
   },
 
   /** 获取生活指数 */
