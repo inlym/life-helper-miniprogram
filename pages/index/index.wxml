@@ -67,7 +67,7 @@
 
   <!-- 未来 15 天的天气预报 -->
   <view class="forecast15days container-box">
-    <!-- 标题头文案 -->
+    <!-- 标题文案 -->
     <view class="head">
       <view class="title">15天预报</view>
     </view>
@@ -107,6 +107,24 @@
     </view>
   </view>
 
+  <!-- 生活指数 -->
+  <view class="liveindex container-box">
+    <!-- 标题文案 -->
+    <view class="head">
+      <view class="title">生活指数</view>
+    </view>
+    <view class="body">
+      <view class="item" wx:for="{{liveIndex}}" wx:key="name">
+        <image src="{{item.icon}}" mode="widthFix"></image>
+        <view class="status">{{item.status}}</view>
+        <view class="name">{{item.name}}</view>
+      </view>
+    </view>
+
+  </view>
+
+  <image src="{{imageData}}" mode="widthFix" style="width:1920rpx;"></image>
+
 
 </view>
 
@@ -114,3 +132,7 @@
 
 <!--Toptips顶部错误提示组件-->
 <mp-toptips type="{{toptip.type}}" show="{{toptip.show}}" msg="{{toptip.msg}}"></mp-toptips>
+
+<!-- 半屏弹窗组件 -->
+<mp-half-screen-dialog bindbuttontap="buttontap" show="{{halfScreen.show}}" title="{{halfScreen.title}}"
+  subTitle="{{halfScreen.subTitle}}" desc="{{halfScreen.desc}}" tips="{{halfScreen.tips}}"></mp-half-screen-dialog>

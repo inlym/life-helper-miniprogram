@@ -8,26 +8,37 @@ Page({
     /** 实时天气情况 */
     weatherCondition: {
       temperature: '0',
-      location: '正在定位中 ...',
+      address: '正在定位中 ...',
     },
 
     /** 未来 15 天的天气预报 */
     forecastList: [],
 
-    /** 未来 15 天的天气预报的最高温度列表 */
-    maxTemperature: [],
-
-    /** 未来 15 天的天气预报的最低温度列表 */
-    minTemperature: [],
-
     /** 未来 15 天的天气预报折线图的 canvas 画笔 */
     ctxFore15Line: null,
+
+    /** 未来 15 天的天气预报折线图的 canvas  */
+    canvasFore15Line: null,
+
+    /** 生活指数 */
+    liveIndex: {},
+
+    imageData: '',
 
     /** Toptips顶部错误提示组件 */
     toptip: {
       type: 'success',
       show: false,
       msg: '',
+    },
+
+    /** 半屏弹窗组件 */
+    halfScreen: {
+      show: false,
+      title: '我是标题',
+      subTitle: '我是副标题',
+      desc: '辅助操作描述内容',
+      tips: '辅助操作提示内容',
     },
   },
 
@@ -51,6 +62,7 @@ Page({
 
         this.setData({
           ctxFore15Line: ctx,
+          canvasFore15Line: canvas,
         })
       })
   },
@@ -106,6 +118,7 @@ Page({
   init() {
     this.getWeatherCondition()
     this.getForecast15days()
+    this.getLiveIndex()
   },
 
   /** 获取天气实况 */
@@ -121,11 +134,25 @@ Page({
     const res = await app.get('/weather/forecast15days')
     this.setData({
       forecastList: res.data.list,
-      maxTemperature: res.data.maxTemperature,
-      minTemperature: res.data.minTemperature,
     })
 
     this.render15Line(this.data.ctxFore15Line, res.data.maxTemperature, res.data.minTemperature)
+
+    // 2021-02-18 17:53:26
+    // 临时测试代码 --- start ---
+    const img = this.data.canvasFore15Line.toDataURL('image/jpeg', 1)
+    this.setData({
+      imageData: img,
+    })
+    // 临时测试代码  --- end ---
+  },
+
+  /** 获取生活指数 */
+  async getLiveIndex() {
+    const res = await app.get('/weather/liveindex')
+    this.setData({
+      liveIndex: res.data.list,
+    })
   },
 
   /**
@@ -182,7 +209,13 @@ Page({
       })
     }
 
+    // 先画一个白色背景
+    ctx.beginPath()
+    ctx.fillStyle = '#fff'
+    ctx.fillRect(0, 0, width, height)
+
     /** 给第2个格子（今天）画个背景色 */
+    ctx.beginPath()
     ctx.fillStyle = '#eaeaea'
     ctx.fillRect(wUnit, -100, wUnit, height * 3)
 

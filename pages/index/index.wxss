@@ -102,6 +102,7 @@
 }
 
 .oneword {
+  margin-top: 20rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,7 +111,6 @@
 
 .oneword text {
   padding: 4rpx 30rpx;
-  background-color: #fff8dc;
 }
 
 .weather-other {
@@ -195,4 +195,33 @@ scroll-view.fore-scroll {
   height: 326rpx;
   display: flex;
   justify-content: flex-start;
+}
+
+.liveindex .body {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.liveindex .body .item {
+  width: 25%;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20rpx 0;
+}
+
+.liveindex .body .item image {
+  width: 70rpx;
+}
+
+.liveindex .body .item .status {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.liveindex .body .item .name {
+  color: #666;
 }
