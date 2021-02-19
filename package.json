@@ -14,8 +14,8 @@
     "url": "git+https://github.com/inlym/life-helper-miniprogram.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "inlym",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/inlym/life-helper-miniprogram/issues"
   },

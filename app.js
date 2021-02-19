@@ -1,10 +1,10 @@
 'use strict'
 
-const configAll = require('./config/config.js')
-const { requestWrap, request } = require('./lib/request.js')
-const wxp = require('./lib/wxp.js')
-const cache = require('./lib/cache.js')
-const login = require('./lib/login.js')
+const configAll = require('./app/config/config.js')
+const { requestWrap, request } = require('./app/lib/request.js')
+const wxp = require('./app/lib/wxp.js')
+const cache = require('./app/lib/cache.js')
+const login = require('./app/lib/login.js')
 
 App({
   /** 生命周期回调 —— 监听小程序初始化 */

@@ -1,4 +1,4 @@
-@import '/css/iconfont.wxss';
+@import '/app/static/css/iconfont.wxss';
 
 page {
   min-height: 100%;

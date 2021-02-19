@@ -24,20 +24,20 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "image/tabbar/icon_index.png",
-        "selectedIconPath": "image/tabbar/icon_index_HL.png"
+        "iconPath": "/app/static/image/tabbar/icon_index.png",
+        "selectedIconPath": "/app/static/image/tabbar/icon_index_HL.png"
       },
       {
         "pagePath": "pages/tools/tools",
         "text": "工具",
-        "iconPath": "image/tabbar/icon_tool.png",
-        "selectedIconPath": "image/tabbar/icon_tool_HL.png"
+        "iconPath": "/app/static/image/tabbar/icon_tool.png",
+        "selectedIconPath": "/app/static/image/tabbar/icon_tool_HL.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我的",
-        "iconPath": "image/tabbar/icon_me.png",
-        "selectedIconPath": "image/tabbar/icon_me_HL.png"
+        "iconPath": "/app/static/image/tabbar/icon_me.png",
+        "selectedIconPath": "/app/static/image/tabbar/icon_me_HL.png"
       }
     ]
   },
@@ -47,6 +47,7 @@
     "weui": true
   },
   "usingComponents": {
-    "mp-toptips": "weui-miniprogram/toptips/toptips"
+    "mp-toptips": "weui-miniprogram/toptips/toptips",
+    "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog"
   }
 }
