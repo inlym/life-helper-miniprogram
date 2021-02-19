@@ -1,7 +1,7 @@
 'use strict'
 
 const configAll = require('./app/config/config.js')
-const { requestWrap, request } = require('./app/lib/request.js')
+const { request } = require('./app/lib/request.js')
 const wxp = require('./app/lib/wxp.js')
 const cache = require('./app/lib/cache.js')
 const login = require('./app/lib/login.js')
@@ -48,6 +48,8 @@ App({
       return console
     } else if (this.env === 'prod') {
       return wx.getRealtimeLogManager()
+    } else {
+      return console
     }
   },
 })

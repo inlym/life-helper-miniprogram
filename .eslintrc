@@ -6,6 +6,12 @@
     "es6": true,
     "mocha": true
   },
+  "globals": {
+    "App": false,
+    "Page": false,
+    "wx": false,
+    "getApp": false
+  },
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parserOptions": {
     "ecmaVersion": 2019
@@ -29,7 +35,6 @@
     "no-console": "off",
     "no-div-regex": "error",
     "no-else-return": "off",
-    "no-empty-function": "error",
     "no-empty-pattern": "error",
     "no-eq-null": "error",
     "no-eval": "error",
@@ -155,13 +160,6 @@
     "lines-between-class-members": ["error", "always"],
     "max-lines": ["error", 500],
     "multiline-comment-style": ["error", "starred-block"],
-    "new-cap": [
-      "error",
-      {
-        "newIsCap": true,
-        "properties": false
-      }
-    ],
     "newline-per-chained-call": "off",
     "no-array-constructor": "error",
     "no-bitwise": "error",
@@ -180,7 +178,6 @@
     "no-plusplus": "off",
     "no-restricted-syntax": ["error", "SwitchStatement"],
     "no-tabs": "off",
-    "no-ternary": "error",
     "no-trailing-spaces": [
       "error",
       {

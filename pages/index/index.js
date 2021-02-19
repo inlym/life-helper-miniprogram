@@ -1,6 +1,7 @@
 'use strict'
 
 const app = getApp()
+const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
 
 Page({
   /** 页面的初始数据 */
@@ -142,7 +143,11 @@ Page({
      * @since 2021-02-19
      */
     setTimeout(() => {
-      this.render15Line(this.data.ctxFore15Line, res.data.maxTemperature, res.data.minTemperature)
+      drawForecast15DaysLine(
+        this.data.ctxFore15Line,
+        res.data.maxTemperature,
+        res.data.minTemperature
+      )
     }, 500)
   },
 
@@ -172,117 +177,6 @@ Page({
           tips: detail.description,
         },
       })
-    }
-  },
-
-  /**
-   * 渲染 15 天预报的折线图
-   * @param {*} ctx 画笔
-   * @param {number[]} maxList 最高温度值列表
-   * @param {number[]} minList 最低温度值列表
-   */
-  render15Line(ctx, maxList, minList) {
-    const width = 1920
-    const height = 300
-    const days = 16
-
-    // 获取最大温度数值
-    let max = -999
-    for (let i = 0; i < maxList.length; i++) {
-      max = maxList[i] > max ? maxList[i] : max
-    }
-
-    // 获取最小温度数值
-    let min = 999
-    for (let i = 0; i < minList.length; i++) {
-      min = minList[i] < min ? minList[i] : min
-    }
-
-    /** 画布高度上下留白占比 */
-    const space = 0.1
-
-    /** 每摄氏度温度值所占的高度 */
-    const hUnit = Math.floor((height * (1 - space * 2)) / (max - min))
-
-    /** 一个为一个格子，计算每个格子的宽度 */
-    const wUnit = width / days
-
-    /** 计算最高温度值折线的坐标 */
-    const maxCoordinate = []
-    for (let i = 0; i < maxList.length; i++) {
-      const x = wUnit * (0.5 + i)
-      const y = height * space + (max - maxList[i]) * hUnit
-      maxCoordinate.push({
-        x,
-        y,
-      })
-    }
-
-    /** 计算最低温度值折线的坐标 */
-    const minCoordinate = []
-    for (let i = 0; i < minList.length; i++) {
-      const x = wUnit * (0.5 + i)
-      const y = height * space + (max - minList[i]) * hUnit
-      minCoordinate.push({
-        x,
-        y,
-      })
-    }
-
-    // 先画一个白色背景
-    ctx.beginPath()
-    ctx.fillStyle = '#fff'
-    ctx.fillRect(0, 0, width, height)
-
-    /** 给第2个格子（今天）画个背景色 */
-    ctx.beginPath()
-    ctx.fillStyle = '#eaeaea'
-    ctx.fillRect(wUnit, -100, wUnit, height * 3)
-
-    /** 画最高温度折线 */
-    ctx.beginPath()
-    for (let i = 0; i < maxCoordinate.length; i++) {
-      const { x, y } = maxCoordinate[i]
-      ctx.lineTo(x, y)
-    }
-    ctx.strokeStyle = '#D54476'
-    ctx.lineWidth = 5
-    ctx.stroke()
-
-    /** 画最低温度折线 */
-    ctx.beginPath()
-    for (let i = 0; i < minCoordinate.length; i++) {
-      const { x, y } = minCoordinate[i]
-      ctx.lineTo(x, y)
-    }
-    ctx.strokeStyle = '#5253D7'
-    ctx.lineWidth = 5
-    ctx.stroke()
-
-    // 画最高温度折线上的圆圈
-    for (let i = 0; i < maxCoordinate.length; i++) {
-      ctx.beginPath()
-      const { x, y } = maxCoordinate[i]
-      ctx.arc(x, y, 10, 0, Math.PI * 2)
-      ctx.strokeStyle = '#D54476'
-      ctx.lineWidth = 10
-      ctx.stroke()
-      ctx.arc(x, y, 1, 0, Math.PI * 2)
-      ctx.fillStyle = '#fff'
-      ctx.fill()
-    }
-
-    // 画最低温度折线上的圆圈
-    for (let i = 0; i < minCoordinate.length; i++) {
-      ctx.beginPath()
-      const { x, y } = minCoordinate[i]
-      ctx.arc(x, y, 10, 0, Math.PI * 2)
-      ctx.strokeStyle = '#5253D7'
-      ctx.lineWidth = 10
-      ctx.stroke()
-      ctx.arc(x, y, 1, 0, Math.PI * 2)
-      ctx.fillStyle = '#fff'
-      ctx.fill()
     }
   },
 })
