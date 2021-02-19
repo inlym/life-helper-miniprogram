@@ -21,7 +21,7 @@ Page({
     canvasFore15Line: null,
 
     /** 生活指数 */
-    liveIndex: {},
+    liveIndex: [],
 
     /** Toptips顶部错误提示组件 */
     toptip: {
@@ -32,7 +32,7 @@ Page({
 
     /** 半屏弹窗组件 */
     halfScreen: {
-      show: true,
+      show: false,
       title: '我是标题',
       subTitle: '我是副标题',
       desc: '辅助操作描述内容',
@@ -137,7 +137,13 @@ Page({
       forecastList: res.data.list,
     })
 
-    this.render15Line(this.data.ctxFore15Line, res.data.maxTemperature, res.data.minTemperature)
+    /**
+     * 完全不知道为什么，如果不延迟加载，存在三四成的概率会报错。
+     * @since 2021-02-19
+     */
+    setTimeout(() => {
+      this.render15Line(this.data.ctxFore15Line, res.data.maxTemperature, res.data.minTemperature)
+    }, 500)
   },
 
   /** 获取生活指数 */
@@ -146,6 +152,27 @@ Page({
     this.setData({
       liveIndex: res.data.list,
     })
+  },
+
+  /**
+   * 点击「生活指数」模块单个按钮，使用半屏弹窗组件显示细节
+   * @since 2021-02-19
+   */
+  showLiveIndexDetail(e) {
+    /** 点击按钮的索引 */
+    const { index } = e.currentTarget.dataset
+
+    const detail = this.data.liveIndex[index]
+    if (detail) {
+      this.setData({
+        halfScreen: {
+          show: true,
+          title: detail.name + '指数',
+          desc: detail.status,
+          tips: detail.description,
+        },
+      })
+    }
   },
 
   /**

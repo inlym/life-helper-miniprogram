@@ -114,7 +114,7 @@
       <view class="title">生活指数</view>
     </view>
     <view class="body">
-      <view class="item" wx:for="{{liveIndex}}" wx:key="name">
+      <view class="item" wx:for="{{liveIndex}}" wx:key="name" data-index="{{index}}" bindtap="showLiveIndexDetail">
         <image src="{{item.icon}}" mode="widthFix"></image>
         <view class="status">{{item.status}}</view>
         <view class="name">{{item.name}}</view>
