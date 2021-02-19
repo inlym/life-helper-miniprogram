@@ -1,8 +1,12 @@
 @import '/app/static/css/iconfont.wxss';
+@import '/miniprogram_npm/@vant/weapp/common/index.wxss';
 
 page {
   min-height: 100%;
   background-color: #f7f7f7;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial,
+    Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
 }
 
 /** 包裹可视内容区 */
