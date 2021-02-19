@@ -1,7 +1,7 @@
 /**index.wxss**/
 /* 公共复用部分 */
 .container-box {
-  margin: 15rpx;
+  margin: 25rpx 15rpx 15rpx;
   border-radius: 16rpx;
   background-color: #ffffff;
   box-shadow: 0px 0px 10px 10px #eaeaea;
@@ -134,7 +134,6 @@
 }
 
 scroll-view.fore-scroll {
-  /* width: 1920rpx; */
   height: 900rpx;
 }
 
@@ -224,4 +223,32 @@ scroll-view.fore-scroll {
 
 .liveindex .body .item .name {
   color: #666;
+}
+
+/* 未来24小时预报部分 */
+.forecast24hours .right {
+  width: 510rpx;
+  height: 100%;
+  margin-left: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.forecast24hours .right image {
+  width: 46rpx;
+}
+
+.forecast24hours .right text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.forecast24hours-scroll {
+  height: 306rpx;
+}
+
+#fore24hoursline {
+  width: 2600rpx;
+  height: 300rpx;
 }

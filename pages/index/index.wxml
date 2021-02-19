@@ -4,7 +4,7 @@
   <view class="weather-condition">
     <!-- 定位信息区域 -->
     <view class="location">
-      <image src="../../image/icon/location.svg" mode="widthFix" fill="green"></image>
+      <image src="/app/static/image/icon/location.svg" mode="widthFix" fill="green"></image>
       <view class="address">{{weatherCondition.address}}</view>
       <view class="myicon icon-down icon"></view>
     </view>
@@ -64,6 +64,30 @@
     </view>
   </view>
 
+  <view class="forecast24hours container-box">
+    <!-- 标题文案 -->
+    <view class="head">
+      <view class="title">24小时预报</view>
+      <view class="right">
+        <!-- TO DO -->
+        <text wx:if="{{forecast24HoursMaxTemp}}">最高 {{forecast24HoursMaxTemp}}℃</text>
+        <text wx:if="{{forecast24HoursMinTemp}}">最低 {{forecast24HoursMinTemp}}℃</text>
+        <text wx:if="{{weatherCondition.sunrise}}">日出 {{weatherCondition.sunrise}}</text>
+        <text wx:if="{{weatherCondition.sunset}}">日落 {{weatherCondition.sunset}}</text>
+      </view>
+    </view>
+
+    <!-- 滚动的列表区 -->
+    <view class="body">
+      <scroll-view class="forecast24hours-scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}"
+        enable-flex="{{true}}" scroll-anchoring="{{true}}">
+        <view><canvas type="2d" id="fore24hoursline" canvas-id="fore24hoursline"></canvas></view>
+      </scroll-view>
+    </view>
+
+
+  </view>
+
 
   <!-- 未来 15 天的天气预报 -->
   <view class="forecast15days container-box">
@@ -73,8 +97,9 @@
     </view>
 
     <!-- 滚动的列表区 -->
-    <view>
-      <scroll-view class="fore-scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}" enable-flex="{{true}}">
+    <view class="body">
+      <scroll-view class="fore-scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}" enable-flex="{{true}}"
+        scroll-anchoring="{{true}}">
         <!-- 白天的天气列表 -->
         <view class="fore-day">
           <view class="fore-item" wx:for="{{forecastList}}" wx:key="date">
@@ -88,7 +113,7 @@
 
         <!-- 最高温、最低温折线图 -->
         <view class="fore-line">
-          <canvas type="2d" id="fore15line"></canvas>
+          <canvas type="2d" id="fore15line" canvas-id="fore15line"></canvas>
         </view>
 
         <!-- 夜间的天气列表 -->

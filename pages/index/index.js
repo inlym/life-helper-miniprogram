@@ -2,6 +2,7 @@
 
 const app = getApp()
 const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
+const drawForecast24HoursLine = require('../../app/canvas/forecast24HoursLine')
 
 Page({
   /** 页面的初始数据 */
@@ -15,11 +16,26 @@ Page({
     /** 未来 15 天的天气预报 */
     forecastList: [],
 
+    /** 未来 24 小时天气预报 */
+    forecast24hoursList: [],
+
+    /** 未来 24 小时天气预报的最高温 */
+    forecast24HoursMaxTemp: '',
+
+    /** 未来 24 小时天气预报的最低温 */
+    forecast24HoursMinTemp: '',
+
     /** 未来 15 天的天气预报折线图的 canvas 画笔 */
     ctxFore15Line: null,
 
     /** 未来 15 天的天气预报折线图的 canvas  */
     canvasFore15Line: null,
+
+    /** 未来 24 小时天气预报折线图的 canvas 画笔 */
+    ctxFore24hoursline: null,
+
+    /** 未来 24 小时天气预报折线图的 canvas  */
+    canvasFore24hoursline: null,
 
     /** 生活指数 */
     liveIndex: [],
@@ -48,14 +64,14 @@ Page({
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {
-    const query = wx.createSelectorQuery()
-    query
+    wx.createSelectorQuery()
       .select('#fore15line')
       .fields({
         node: true,
         size: true,
       })
       .exec((res) => {
+        console.log('fore15line', res)
         const canvas = res[0].node
         const ctx = canvas.getContext('2d')
 
@@ -65,6 +81,27 @@ Page({
         this.setData({
           ctxFore15Line: ctx,
           canvasFore15Line: canvas,
+        })
+      })
+
+    wx.createSelectorQuery()
+      .select('#fore24hoursline')
+      .fields({
+        node: true,
+        size: true,
+      })
+      .exec((res) => {
+        console.log('fore24hoursline', res)
+
+        const canvas = res[0].node
+        const ctx = canvas.getContext('2d')
+
+        canvas.width = 2600
+        canvas.height = 300
+
+        this.setData({
+          ctxFore24hoursline: ctx,
+          canvasFore24hoursline: canvas,
         })
       })
   },
@@ -121,6 +158,7 @@ Page({
     this.getWeatherCondition()
     this.getForecast15days()
     this.getLiveIndex()
+    this.getForecast24hours()
   },
 
   /** 获取天气实况 */
@@ -148,7 +186,7 @@ Page({
         res.data.maxTemperature,
         res.data.minTemperature
       )
-    }, 500)
+    }, 700)
   },
 
   /** 获取生活指数 */
@@ -157,6 +195,23 @@ Page({
     this.setData({
       liveIndex: res.data.list,
     })
+  },
+
+  /**
+   * 获取未来 24 小时天气预报
+   * @since 2021-02-19
+   */
+  async getForecast24hours() {
+    const res = await app.get('/weather/forecast24hours')
+    this.setData({
+      forecast24hoursList: res.data.list,
+      forecast24HoursMaxTemp: res.data.maxTemperature,
+      forecast24HoursMinTemp: res.data.minTemperature,
+    })
+
+    setTimeout(() => {
+      drawForecast24HoursLine(this.data.ctxFore24hoursline, res.data.list)
+    }, 500)
   },
 
   /**
