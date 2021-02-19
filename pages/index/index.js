@@ -59,7 +59,7 @@ Page({
 
   /** 生命周期函数--监听页面加载 */
   onLoad(options) {
-    this.init()
+    this.init('onLoad')
   },
 
   /** 生命周期函数--监听页面初次渲染完成 */
@@ -70,8 +70,7 @@ Page({
         node: true,
         size: true,
       })
-      .exec((res) => {
-        console.log('fore15line', res)
+      .exec(async (res) => {
         const canvas = res[0].node
         const ctx = canvas.getContext('2d')
 
@@ -82,6 +81,13 @@ Page({
           ctxFore15Line: ctx,
           canvasFore15Line: canvas,
         })
+
+        app.get('/weather/forecast15days').then((res2) => {
+          this.setData({
+            forecastList: res2.data.list,
+          })
+          drawForecast15DaysLine(ctx, res2.data.maxTemperature, res2.data.minTemperature)
+        })
       })
 
     wx.createSelectorQuery()
@@ -91,8 +97,6 @@ Page({
         size: true,
       })
       .exec((res) => {
-        console.log('fore24hoursline', res)
-
         const canvas = res[0].node
         const ctx = canvas.getContext('2d')
 
@@ -102,6 +106,15 @@ Page({
         this.setData({
           ctxFore24hoursline: ctx,
           canvasFore24hoursline: canvas,
+        })
+
+        app.get('/weather/forecast24hours').then((res2) => {
+          this.setData({
+            forecast24hoursList: res2.data.list,
+            forecast24HoursMaxTemp: res2.data.maxTemperature,
+            forecast24HoursMinTemp: res2.data.minTemperature,
+          })
+          drawForecast24HoursLine(ctx, res2.data.list)
         })
       })
   },
@@ -117,7 +130,7 @@ Page({
 
   /** 页面相关事件处理函数--监听用户下拉动作 */
   onPullDownRefresh() {
-    this.init()
+    this.init('onPullDownRefresh')
     setTimeout(() => {
       wx.stopPullDownRefresh()
       this.setData({
@@ -127,7 +140,7 @@ Page({
           msg: '哇哦！已经更新了哦 ~',
         },
       })
-    }, 1000)
+    }, 500)
   },
 
   /** 页面上拉触底事件的处理函数 */
@@ -153,20 +166,22 @@ Page({
     }
   },
 
-  /** 页面初始化 */
-  init() {
-    this.getWeatherCondition()
-    this.getForecast15days()
-    this.getLiveIndex()
-    this.getForecast24hours()
-  },
+  /**
+   * 页面初始化
+   * @update 2021-02-19
+   * @param {string} stage 页面阶段，目前为两个值：'onLoad', 'onPullDownRefresh'
+   */
+  init(stage) {
+    /** 天气实况 */
+    app.bindData(this, 'weatherCondition', '/weather/now')
 
-  /** 获取天气实况 */
-  async getWeatherCondition() {
-    const res = await app.get('/weather/now')
-    this.setData({
-      weatherCondition: res.data,
-    })
+    /** 生活指数 */
+    app.bindData(this, 'liveIndex', '/weather/liveindex')
+
+    if (stage === 'onPullDownRefresh') {
+      this.getForecast15days()
+      this.getForecast24hours()
+    }
   },
 
   /** 获取未来 15 天的天气预报 */
@@ -176,25 +191,11 @@ Page({
       forecastList: res.data.list,
     })
 
-    /**
-     * 完全不知道为什么，如果不延迟加载，存在三四成的概率会报错。
-     * @since 2021-02-19
-     */
-    setTimeout(() => {
-      drawForecast15DaysLine(
-        this.data.ctxFore15Line,
-        res.data.maxTemperature,
-        res.data.minTemperature
-      )
-    }, 700)
-  },
-
-  /** 获取生活指数 */
-  async getLiveIndex() {
-    const res = await app.get('/weather/liveindex')
-    this.setData({
-      liveIndex: res.data.list,
-    })
+    drawForecast15DaysLine(
+      this.data.ctxFore15Line,
+      res.data.maxTemperature,
+      res.data.minTemperature
+    )
   },
 
   /**
@@ -209,9 +210,7 @@ Page({
       forecast24HoursMinTemp: res.data.minTemperature,
     })
 
-    setTimeout(() => {
-      drawForecast24HoursLine(this.data.ctxFore24hoursline, res.data.list)
-    }, 500)
+    drawForecast24HoursLine(this.data.ctxFore24hoursline, res.data.list)
   },
 
   /**
@@ -227,7 +226,7 @@ Page({
       this.setData({
         halfScreen: {
           show: true,
-          title: detail.name + '指数',
+          title: `${detail.name}指数`,
           desc: detail.status,
           tips: detail.description,
         },

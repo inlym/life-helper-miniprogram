@@ -5,6 +5,7 @@ const { request } = require('./app/lib/request.js')
 const wxp = require('./app/lib/wxp.js')
 const cache = require('./app/lib/cache.js')
 const login = require('./app/lib/login.js')
+const bindData = require('./app/lib/bindData.js')
 
 App({
   /** 生命周期回调 —— 监听小程序初始化 */
@@ -29,6 +30,8 @@ App({
 
   /** 挂载封装好的登录函数 */
   login,
+
+  bindData,
 
   get(options) {
     return this.request(options)
