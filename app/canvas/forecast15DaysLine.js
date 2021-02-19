@@ -30,7 +30,7 @@ function drawForecast15DaysLine(ctx, maxList, minList) {
   const lineColorMinTemp = '#5253D7'
 
   /** 折线图上坐标点的圆圈半径 */
-  const circleRadius = 6
+  const circleRadius = 4
 
   // 初始化画布
   ctx.clearRect(0, 0, width, height)
