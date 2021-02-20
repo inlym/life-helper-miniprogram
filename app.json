@@ -4,7 +4,8 @@
     "pages/tools/tools",
     "pages/me/me",
     "pages/system/info/info",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/location/location"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
