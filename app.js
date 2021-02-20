@@ -1,11 +1,11 @@
 'use strict'
 
 const configAll = require('./app/config/config.js')
-const { request } = require('./app/lib/request.js')
-const wxp = require('./app/lib/wxp.js')
-const cache = require('./app/lib/cache.js')
-const login = require('./app/lib/login.js')
-const bindData = require('./app/lib/bindData.js')
+const { request } = require('./app/core/request.js')
+const wxp = require('./app/core/wxp.js')
+const cache = require('./app/core/cache.js')
+const login = require('./app/core/login.js')
+const bindData = require('./app/core/bindData.js')
 
 App({
   /** 生命周期回调 —— 监听小程序初始化 */
