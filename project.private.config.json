@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -24,7 +25,7 @@
           "scene": null
         },
         {
-          "name": "pages/test/test",
+          "name": "测试页",
           "pathName": "pages/test/test",
           "query": "id=223",
           "scene": null
