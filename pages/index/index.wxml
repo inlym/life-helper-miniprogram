@@ -154,7 +154,8 @@
 <!--以下为非页面元素-->
 
 <!--Toptips顶部错误提示组件-->
-<mp-toptips type="{{toptip.type}}" show="{{toptip.show}}" msg="{{toptip.msg}}"></mp-toptips>
+<mp-toptips type="{{toptips.type}}" show="{{toptips.show}}" msg="{{toptips.msg}}" delay="{{toptips.delay}}">
+</mp-toptips>
 
 <!-- 半屏弹窗组件 -->
 <mp-half-screen-dialog bindbuttontap="buttontap" show="{{halfScreen.show}}" title="{{halfScreen.title}}"

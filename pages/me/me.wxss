@@ -1,1 +1,4 @@
-/* pages/me/me.wxss */
+/* 顶部预留的区域 */
+.reserved-top {
+  background-color: aqua;
+}

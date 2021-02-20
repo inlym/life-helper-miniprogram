@@ -5,8 +5,11 @@ const app = getApp()
 Page({
   /** 页面的初始数据 */
   data: {
+    /** 顶部预留的高度，不放置任何内容 */
+    reservedHeight: 80,
+
     /** Toptips顶部错误提示组件 */
-    toptip: {
+    toptips: {
       type: 'success',
       show: false,
       msg: '',
@@ -15,11 +18,13 @@ Page({
 
   /** 生命周期函数--监听页面加载 */
   onLoad(options) {
-    //this.init()
+    // this.init()
   },
 
   /** 生命周期函数--监听页面初次渲染完成 */
-  onReady() {},
+  onReady() {
+    this.setreservedHeight()
+  },
 
   /** 生命周期函数--监听页面显示 */
   onShow() {},
@@ -53,4 +58,12 @@ Page({
 
   /** 页面初始化 */
   init() {},
+
+  /** 设置顶部预留高度 */
+  setreservedHeight() {
+    const { bottom } = wx.getMenuButtonBoundingClientRect()
+    this.setData({
+      reservedHeight: bottom,
+    })
+  },
 })

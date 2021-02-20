@@ -42,10 +42,11 @@ Page({
     liveIndex: [],
 
     /** Toptips顶部错误提示组件 */
-    toptip: {
+    toptips: {
       type: 'success',
       show: false,
       msg: '',
+      delay: 1000,
     },
 
     /** 半屏弹窗组件 */
@@ -129,7 +130,7 @@ Page({
     // 从地图选点插件返回后，在页面的 onShow 生命周期函数中能够调用插件接口，取得选点结果对象
     const location = chooseLocation.getLocation()
     if (location) {
-      app.cache.save('location', location)
+      app.write('location', location)
       this.init('onResetLocation')
     }
   },
@@ -146,16 +147,6 @@ Page({
   /** 页面相关事件处理函数--监听用户下拉动作 */
   onPullDownRefresh() {
     this.init('onPullDownRefresh')
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-      this.setData({
-        toptip: {
-          type: 'success',
-          show: true,
-          msg: '哇哦！已经更新了哦 ~',
-        },
-      })
-    }, 500)
   },
 
   /** 页面上拉触底事件的处理函数 */
@@ -196,6 +187,36 @@ Page({
     if (stage !== 'onLoad') {
       this.getForecast15days()
       this.getForecast24hours()
+    }
+
+    if (stage === 'onPullDownRefresh') {
+      setTimeout(() => {
+        wx.stopPullDownRefresh()
+      }, 1000)
+      this.showUpdateTips('哇哦 ~ 数据已经更新了哦！')
+    }
+
+    if (stage === 'onResetLocation') {
+      this.showUpdateTips('已经切换至新的地点')
+    }
+  },
+
+  queryHandler() {
+    const location = app.cache.get('location')
+
+    if (location) {
+      const { province, city, district, latitude, longitude, name, address } = location
+      return {
+        province,
+        city,
+        district,
+        latitude,
+        longitude,
+        name,
+        address,
+      }
+    } else {
+      return ''
     }
   },
 
@@ -262,22 +283,17 @@ Page({
     })
   },
 
-  queryHandler() {
-    const location = app.cache.get('location')
-
-    if (location) {
-      const { province, city, district, latitude, longitude, name, address } = location
-      return {
-        province,
-        city,
-        district,
-        latitude,
-        longitude,
-        name,
-        address,
-      }
-    } else {
-      return ''
-    }
+  /**
+   * 使用 toptips 显示更新提示，除了 onLoad 时不显示，其余更新操作均展示
+   */
+  showUpdateTips(content) {
+    this.setData({
+      toptips: {
+        type: 'success',
+        show: true,
+        delay: 1000,
+        msg: content,
+      },
+    })
   },
 })

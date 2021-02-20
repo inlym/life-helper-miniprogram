@@ -1,2 +1,18 @@
-<!--pages/me/me.wxml-->
-<text>pages/me/me.wxml</text>
+<!-- 顶部预留高度 -->
+<view class="reserved-top" style="height:{{reservedHeight+4}}px;"></view>
+
+<!-- 用户个人信息（为空情况）- 使用微信开放数据 -->
+<view class="profile">
+    <!-- 头像 -->
+    <view class="avatar">
+        <open-data type="userAvatarUrl"></open-data>
+    </view>
+
+    <!-- 昵称、加入时间 -->
+    <view class="info">
+        <open-data type="userNickName"></open-data>
+        <view>加入时间：12天前</view>
+    </view>
+
+    <button>更新</button>
+</view>
