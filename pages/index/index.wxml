@@ -3,7 +3,7 @@
   <!-- 天气实况 -->
   <view class="weather-condition">
     <!-- 定位信息区域 -->
-    <view class="location">
+    <view class="location" bindtap="getLocation">
       <image src="/app/static/image/icon/location.svg" mode="widthFix" fill="green"></image>
       <view class="address">{{weatherCondition.address}}</view>
       <view class="myicon icon-down icon"></view>

@@ -1,5 +1,6 @@
 'use strict'
 
+const chooseLocation = requirePlugin('chooseLocation')
 const app = getApp()
 const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
 const drawForecast24HoursLine = require('../../app/canvas/forecast24HoursLine')
@@ -50,10 +51,10 @@ Page({
     /** 半屏弹窗组件 */
     halfScreen: {
       show: false,
-      title: '我是标题',
-      subTitle: '我是副标题',
-      desc: '辅助操作描述内容',
-      tips: '辅助操作提示内容',
+      title: '',
+      subTitle: '',
+      desc: '',
+      tips: '',
     },
   },
 
@@ -82,11 +83,8 @@ Page({
           canvasFore15Line: canvas,
         })
 
-        app.get('/weather/forecast15days').then((res2) => {
-          this.setData({
-            forecastList: res2.data.list,
-          })
-          drawForecast15DaysLine(ctx, res2.data.maxTemperature, res2.data.minTemperature)
+        app.bindData(this, 'forecastList', '/weather/forecast15days').then((res2) => {
+          drawForecast15DaysLine(ctx, res2.maxTemperature, res2.minTemperature)
         })
       })
 
@@ -108,25 +106,42 @@ Page({
           canvasFore24hoursline: canvas,
         })
 
-        app.get('/weather/forecast24hours').then((res2) => {
-          this.setData({
-            forecast24hoursList: res2.data.list,
-            forecast24HoursMaxTemp: res2.data.maxTemperature,
-            forecast24HoursMinTemp: res2.data.minTemperature,
+        const params = this.queryHandler()
+
+        app
+          .request({
+            url: '/weather/forecast24hours',
+            params,
           })
-          drawForecast24HoursLine(ctx, res2.data.list)
-        })
+          .then((res2) => {
+            this.setData({
+              forecast24hoursList: res2.data.list,
+              forecast24HoursMaxTemp: res2.data.maxTemperature,
+              forecast24HoursMinTemp: res2.data.minTemperature,
+            })
+            drawForecast24HoursLine(ctx, res2.data.list)
+          })
       })
   },
 
   /** 生命周期函数--监听页面显示 */
-  onShow() {},
+  onShow() {
+    // 从地图选点插件返回后，在页面的 onShow 生命周期函数中能够调用插件接口，取得选点结果对象
+    const location = chooseLocation.getLocation()
+    if (location) {
+      app.cache.save('location', location)
+      this.init('onResetLocation')
+    }
+  },
 
   /** 生命周期函数--监听页面隐藏 */
   onHide() {},
 
   /** 生命周期函数--监听页面卸载 */
-  onUnload() {},
+  onUnload() {
+    // 页面卸载时设置插件选点数据为null，防止再次进入页面，geLocation返回的是上次选点结果
+    chooseLocation.setLocation(null)
+  },
 
   /** 页面相关事件处理函数--监听用户下拉动作 */
   onPullDownRefresh() {
@@ -169,7 +184,7 @@ Page({
   /**
    * 页面初始化
    * @update 2021-02-19
-   * @param {string} stage 页面阶段，目前为两个值：'onLoad', 'onPullDownRefresh'
+   * @param {string} stage 页面阶段，目前为以下值：'onLoad', 'onPullDownRefresh', 'onResetLocation'
    */
   init(stage) {
     /** 天气实况 */
@@ -178,7 +193,7 @@ Page({
     /** 生活指数 */
     app.bindData(this, 'liveIndex', '/weather/liveindex')
 
-    if (stage === 'onPullDownRefresh') {
+    if (stage !== 'onLoad') {
       this.getForecast15days()
       this.getForecast24hours()
     }
@@ -186,7 +201,8 @@ Page({
 
   /** 获取未来 15 天的天气预报 */
   async getForecast15days() {
-    const res = await app.get('/weather/forecast15days')
+    const self = this
+    const res = await app.request({ url: '/weather/forecast15days', params: self.queryHandler() })
     this.setData({
       forecastList: res.data.list,
     })
@@ -203,7 +219,8 @@ Page({
    * @since 2021-02-19
    */
   async getForecast24hours() {
-    const res = await app.get('/weather/forecast24hours')
+    const self = this
+    const res = await app.request({ url: '/weather/forecast24hours', params: self.queryHandler() })
     this.setData({
       forecast24hoursList: res.data.list,
       forecast24HoursMaxTemp: res.data.maxTemperature,
@@ -231,6 +248,36 @@ Page({
           tips: detail.description,
         },
       })
+    }
+  },
+
+  /**
+   * 点击地址栏区域，跳转地图选点插件
+   * @since 2021-02-20
+   */
+  getLocation() {
+    const { key, referer } = app.config.locationPicker
+    wx.navigateTo({
+      url: `plugin://chooseLocation/index?key=${key}&referer=${referer}`,
+    })
+  },
+
+  queryHandler() {
+    const location = app.cache.get('location')
+
+    if (location) {
+      const { province, city, district, latitude, longitude, name, address } = location
+      return {
+        province,
+        city,
+        district,
+        latitude,
+        longitude,
+        name,
+        address,
+      }
+    } else {
+      return ''
     }
   },
 })
