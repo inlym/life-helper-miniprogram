@@ -5,6 +5,7 @@ const { request } = require('./request.js')
 const wxp = require('./wxp.js')
 const cache = require('./storage.js')
 const bindData = require('./bindData.js')
+const authorize = require('../common/authorize.js')
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法
@@ -23,6 +24,8 @@ function loadApp(app) {
 
     /** 挂载封装好的缓存处理函数 */
     cache,
+
+    authorize,
 
     get read() {
       return cache.read
