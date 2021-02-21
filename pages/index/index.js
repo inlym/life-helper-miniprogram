@@ -276,11 +276,14 @@ Page({
    * 点击地址栏区域，跳转地图选点插件
    * @since 2021-02-20
    */
-  getLocation() {
-    const { key, referer } = app.config.locationPicker
-    wx.navigateTo({
-      url: `plugin://chooseLocation/index?key=${key}&referer=${referer}`,
-    })
+  async getLocation() {
+    const authRes = await app.authorize('scope.userLocation')
+    if (authRes) {
+      const { key, referer } = app.config.locationPicker
+      wx.navigateTo({
+        url: `plugin://chooseLocation/index?key=${key}&referer=${referer}`,
+      })
+    }
   },
 
   /**
