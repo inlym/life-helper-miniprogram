@@ -1,5 +1,7 @@
 'use strict'
 
+const keys = require('./keys.js')
+
 /**
  * 对原生 Storage 相关操作的简单封装，然后挂载到 app 实例上
  * @since 2021-02-05
@@ -34,4 +36,6 @@ module.exports = {
   time(key) {
     return wx.getStorageSync(`${TIME_PREFIX}${key}`)
   },
+
+  keys,
 }

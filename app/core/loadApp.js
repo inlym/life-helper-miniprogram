@@ -6,6 +6,7 @@ const wxp = require('./wxp.js')
 const cache = require('./storage.js')
 const bindData = require('./bindData.js')
 const authorize = require('../common/authorize.js')
+const keys = require('./keys.js')
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法
@@ -26,6 +27,8 @@ function loadApp(app) {
     cache,
 
     authorize,
+
+    keys,
 
     get read() {
       return cache.read
