@@ -34,7 +34,12 @@ module.exports = {
   },
 
   time(key) {
-    return wx.getStorageSync(`${TIME_PREFIX}${key}`)
+    const res = wx.getStorageSync(`${TIME_PREFIX}${key}`)
+    if (res) {
+      return res
+    } else {
+      return 0
+    }
   },
 
   keys,
