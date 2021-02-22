@@ -3,7 +3,7 @@
 const configAll = require('../config/config.js')
 const { request } = require('./request.js')
 const wxp = require('./wxp.js')
-const cache = require('./storage.js')
+const storage = require('./storage.js')
 const bindData = require('./bindData.js')
 const authorize = require('../common/authorize.js')
 const keys = require('./keys.js')
@@ -24,18 +24,19 @@ function loadApp(app) {
     wxp,
 
     /** 挂载封装好的缓存处理函数 */
-    cache,
+    cache: storage,
+    storage,
 
     authorize,
 
     keys,
 
     get read() {
-      return cache.read
+      return storage.read
     },
 
     get write() {
-      return cache.write
+      return storage.write
     },
 
     /** 挂载封装好的请求函数 */
