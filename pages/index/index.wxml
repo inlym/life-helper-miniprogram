@@ -72,8 +72,8 @@
       <view class="title">24小时预报</view>
       <view class="right">
         <!-- TO DO -->
-        <text wx:if="{{forecast24HoursMaxTemp}}">最高 {{forecast24HoursMaxTemp}}℃</text>
-        <text wx:if="{{forecast24HoursMinTemp}}">最低 {{forecast24HoursMinTemp}}℃</text>
+        <text wx:if="{{forecast24Hours.maxTemperature}}">最高 {{forecast24Hours.maxTemperature}}℃</text>
+        <text wx:if="{{forecast24Hours.minTemperature}}">最低 {{forecast24Hours.minTemperature}}℃</text>
         <text wx:if="{{weatherCondition.sunrise}}">日出 {{weatherCondition.sunrise}}</text>
         <text wx:if="{{weatherCondition.sunset}}">日落 {{weatherCondition.sunset}}</text>
       </view>
@@ -104,7 +104,7 @@
         scroll-anchoring="{{true}}">
         <!-- 白天的天气列表 -->
         <view class="fore-day">
-          <view class="fore-item" wx:for="{{forecastList}}" wx:key="date">
+          <view class="fore-item" wx:for="{{forecast15Days.list}}" wx:key="date">
             <view class="weekday">{{item.weekday}}</view>
             <view class="date">{{item.dateFormatted}}</view>
             <view>{{item.day.condition}}</view>
@@ -120,7 +120,7 @@
 
         <!-- 夜间的天气列表 -->
         <view class="fore-night">
-          <view class="fore-item" wx:for="{{forecastList}}" wx:key="dateFormatted">
+          <view class="fore-item" wx:for="{{forecast15Days.list}}" wx:key="dateFormatted">
             <view class="temperature">{{item.night.temperature}}°</view>
             <image src=" {{item.night.iconUrl}}">
             </image>
@@ -141,7 +141,7 @@
       <view class="title">生活指数</view>
     </view>
     <view class="body">
-      <view class="item" wx:for="{{liveIndex}}" wx:key="name" data-index="{{index}}" bindtap="showLiveIndexDetail">
+      <view class="item" wx:for="{{liveIndex.list}}" wx:key="name" data-index="{{index}}" bindtap="showLiveIndexDetail">
         <image src="{{item.icon}}" mode="widthFix"></image>
         <view class="status">{{item.status}}</view>
         <view class="name">{{item.name}}</view>

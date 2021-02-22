@@ -2,7 +2,7 @@
 
 const app = getApp()
 const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
-const drawForecast24HoursLine = require('../../app/canvas/forecast24HoursLine')
+const drawForecast24HoursLine = require('../../app/canvas/forecast24HoursLine.js')
 
 Page({
   /** 页面的初始数据 */
@@ -14,16 +14,10 @@ Page({
     },
 
     /** 未来 15 天的天气预报 */
-    forecastList: [],
+    forecast15Days: {},
 
     /** 未来 24 小时天气预报 */
-    forecast24hoursList: [],
-
-    /** 未来 24 小时天气预报的最高温 */
-    forecast24HoursMaxTemp: '',
-
-    /** 未来 24 小时天气预报的最低温 */
-    forecast24HoursMinTemp: '',
+    forecast24Hours: {},
 
     /** 未来 15 天的天气预报折线图的 canvas 画笔 */
     ctxFore15Line: null,
@@ -38,7 +32,7 @@ Page({
     canvasFore24hoursline: null,
 
     /** 生活指数 */
-    liveIndex: [],
+    liveIndex: {},
 
     /** Toptips顶部错误提示组件 */
     toptips: {
@@ -60,7 +54,7 @@ Page({
 
   /** 生命周期函数--监听页面加载 */
   onLoad(options) {
-    this.init('onLoad')
+    this._init('onLoad')
   },
 
   /** 生命周期函数--监听页面初次渲染完成 */
@@ -83,7 +77,7 @@ Page({
           canvasFore15Line: canvas,
         })
 
-        app.bindData(this, 'forecastList', '/weather/forecast15days').then((res2) => {
+        app.bindData(this, 'forecast15Days', '/weather/forecast15days').then((res2) => {
           drawForecast15DaysLine(ctx, res2.maxTemperature, res2.minTemperature)
         })
       })
@@ -106,21 +100,9 @@ Page({
           canvasFore24hoursline: canvas,
         })
 
-        const params = this.queryHandler()
-
-        app
-          .request({
-            url: '/weather/forecast24hours',
-            params,
-          })
-          .then((res2) => {
-            this.setData({
-              forecast24hoursList: res2.data.list,
-              forecast24HoursMaxTemp: res2.data.maxTemperature,
-              forecast24HoursMinTemp: res2.data.minTemperature,
-            })
-            drawForecast24HoursLine(ctx, res2.data.list)
-          })
+        app.bindData(this, 'forecast24Hours', '/weather/forecast24hours').then((res2) => {
+          drawForecast24HoursLine(ctx, res2.list)
+        })
       })
   },
 
@@ -135,7 +117,7 @@ Page({
 
   /** 页面相关事件处理函数--监听用户下拉动作 */
   onPullDownRefresh() {
-    this.init('onPullDownRefresh')
+    this._init('onPullDownRefresh')
   },
 
   /** 页面上拉触底事件的处理函数 */
@@ -166,7 +148,7 @@ Page({
    * @update 2021-02-19
    * @param {string} stage 页面阶段，目前为以下值：'onLoad', 'onPullDownRefresh', 'onResetLocation'
    */
-  init(stage) {
+  _init(stage) {
     /** 天气实况 */
     app.bindData(this, 'weatherCondition', '/weather/now')
 
@@ -181,8 +163,8 @@ Page({
     if (stage === 'onPullDownRefresh') {
       setTimeout(() => {
         wx.stopPullDownRefresh()
+        this.showUpdateTips('哇哦 ~ 数据已经更新了哦！')
       }, 1000)
-      this.showUpdateTips('哇哦 ~ 数据已经更新了哦！')
     }
 
     if (stage === 'onResetLocation') {
@@ -190,7 +172,7 @@ Page({
     }
   },
 
-  queryHandler() {
+  _query() {
     const location = app.read(app.keys.KEY_CHOOSE_LOCATION)
 
     if (location) {
@@ -204,24 +186,14 @@ Page({
         name,
         address,
       }
-    } else {
-      return ''
     }
   },
 
   /** 获取未来 15 天的天气预报 */
   async getForecast15days() {
-    const self = this
-    const res = await app.request({ url: '/weather/forecast15days', params: self.queryHandler() })
-    this.setData({
-      forecastList: res.data.list,
+    app.bindData(this, 'forecast15Days', '/weather/forecast15days').then((res) => {
+      drawForecast15DaysLine(this.data.ctxFore15Line, res.maxTemperature, res.minTemperature)
     })
-
-    drawForecast15DaysLine(
-      this.data.ctxFore15Line,
-      res.data.maxTemperature,
-      res.data.minTemperature
-    )
   },
 
   /**
@@ -229,15 +201,9 @@ Page({
    * @since 2021-02-19
    */
   async getForecast24hours() {
-    const self = this
-    const res = await app.request({ url: '/weather/forecast24hours', params: self.queryHandler() })
-    this.setData({
-      forecast24hoursList: res.data.list,
-      forecast24HoursMaxTemp: res.data.maxTemperature,
-      forecast24HoursMinTemp: res.data.minTemperature,
+    app.bindData(this, 'forecast24Hours', '/weather/forecast24hours').then((res2) => {
+      drawForecast24HoursLine(this.data.ctxFore24hoursline, res2.list)
     })
-
-    drawForecast24HoursLine(this.data.ctxFore24hoursline, res.data.list)
   },
 
   /**
@@ -248,7 +214,7 @@ Page({
     /** 点击按钮的索引 */
     const { index } = e.currentTarget.dataset
 
-    const detail = this.data.liveIndex[index]
+    const detail = this.data.liveIndex.list[index]
     if (detail) {
       this.setData({
         halfScreen: {
@@ -261,6 +227,7 @@ Page({
     }
   },
 
+  /** 人工选择定位 */
   async chooseLocation() {
     const self = this
     const authRes = await app.authorize('scope.userLocation')
@@ -269,7 +236,7 @@ Page({
         success(res) {
           if (res) {
             app.write(app.keys.KEY_CHOOSE_LOCATION, res)
-            self.init('onResetLocation')
+            self._init('onResetLocation')
           }
         },
       })
