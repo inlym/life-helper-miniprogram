@@ -1,6 +1,5 @@
 'use strict'
 
-const chooseLocation = requirePlugin('chooseLocation')
 const app = getApp()
 const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
 const drawForecast24HoursLine = require('../../app/canvas/forecast24HoursLine')
@@ -126,23 +125,13 @@ Page({
   },
 
   /** 生命周期函数--监听页面显示 */
-  onShow() {
-    // 从地图选点插件返回后，在页面的 onShow 生命周期函数中能够调用插件接口，取得选点结果对象
-    const location = chooseLocation.getLocation()
-    if (location) {
-      app.write('location', location)
-      this.init('onResetLocation')
-    }
-  },
+  onShow() {},
 
   /** 生命周期函数--监听页面隐藏 */
   onHide() {},
 
   /** 生命周期函数--监听页面卸载 */
-  onUnload() {
-    // 页面卸载时设置插件选点数据为null，防止再次进入页面，geLocation返回的是上次选点结果
-    chooseLocation.setLocation(null)
-  },
+  onUnload() {},
 
   /** 页面相关事件处理函数--监听用户下拉动作 */
   onPullDownRefresh() {
@@ -202,7 +191,7 @@ Page({
   },
 
   queryHandler() {
-    const location = app.cache.get('location')
+    const location = app.read(app.keys.KEY_CHOOSE_LOCATION)
 
     if (location) {
       const { province, city, district, latitude, longitude, name, address } = location
@@ -272,16 +261,17 @@ Page({
     }
   },
 
-  /**
-   * 点击地址栏区域，跳转地图选点插件
-   * @since 2021-02-20
-   */
-  async getLocation() {
+  async chooseLocation() {
+    const self = this
     const authRes = await app.authorize('scope.userLocation')
     if (authRes) {
-      const { key, referer } = app.config.locationPicker
-      wx.navigateTo({
-        url: `plugin://chooseLocation/index?key=${key}&referer=${referer}`,
+      wx.chooseLocation({
+        success(res) {
+          if (res) {
+            app.write(app.keys.KEY_CHOOSE_LOCATION, res)
+            self.init('onResetLocation')
+          }
+        },
       })
     }
   },
