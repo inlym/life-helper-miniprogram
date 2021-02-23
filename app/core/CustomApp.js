@@ -7,6 +7,7 @@ const storage = require('./storage.js')
 const authorize = require('../common/authorize.js')
 const keys = require('./keys.js')
 const CustomPage = require('./CustomPage.js')
+const logger = require('./logger.js')
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法
@@ -33,6 +34,8 @@ function transformAppConfiguration(configuration) {
 
     keys,
 
+    logger,
+
     get read() {
       return storage.read
     },
@@ -54,18 +57,6 @@ function transformAppConfiguration(configuration) {
       }
       options.method = 'POST'
       return this.request(options)
-    },
-
-    /** 日志对象 */
-    get logger() {
-      const { env } = configAll
-      if (env === 'test') {
-        return console
-      } else if (env === 'prod') {
-        return wx.getRealtimeLogManager()
-      } else {
-        return console
-      }
     },
   }
 
