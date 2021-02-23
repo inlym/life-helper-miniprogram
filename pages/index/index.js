@@ -14,12 +14,6 @@ CustomPage({
       address: '正在定位中 ...',
     },
 
-    /** 未来 15 天的天气预报 */
-    forecast15Days: {},
-
-    /** 未来 24 小时天气预报 */
-    forecast24Hours: {},
-
     /** 未来 15 天的天气预报折线图的 canvas 画笔 */
     ctxFore15Line: null,
 
@@ -31,9 +25,6 @@ CustomPage({
 
     /** 未来 24 小时天气预报折线图的 canvas  */
     canvasFore24hoursline: null,
-
-    /** 生活指数 */
-    liveIndex: {},
 
     /** Toptips顶部错误提示组件 */
     toptips: {
@@ -53,10 +44,36 @@ CustomPage({
     },
   },
 
-  /** 生命周期函数--监听页面加载 */
-  onLoad(options) {
-    this._init('onLoad')
+  requested: {
+    weatherCondition: {
+      url: '/weather/now',
+    },
+
+    liveIndex: {
+      url: '/weather/liveindex',
+    },
+
+    forecast15Days: {
+      url: '/weather/forecast15days',
+      ignore: 'onLoad',
+      handler(res, self) {
+        drawForecast15DaysLine(self.data.ctxFore15Line, res.maxTemperature, res.minTemperature)
+      },
+    },
+
+    forecast24Hours: {
+      url: '/weather/forecast24hours',
+      ignore: 'onLoad',
+      handler(res, self) {
+        drawForecast24HoursLine(self.data.ctxFore24hoursline, res.list)
+      },
+    },
   },
+
+  debug: true,
+
+  /** 生命周期函数--监听页面加载 */
+  onLoad(options) {},
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {
@@ -117,32 +134,10 @@ CustomPage({
   onUnload() {},
 
   /** 页面相关事件处理函数--监听用户下拉动作 */
-  onPullDownRefresh() {
-    this._init('onPullDownRefresh')
-  },
+  onPullDownRefresh() {},
 
   /** 页面上拉触底事件的处理函数 */
   onReachBottom() {},
-
-  /** 用户点击右上角分享 */
-  onShareAppMessage() {
-    const imageUrl = 'https://img.lh.inlym.com/share/index_share.jpeg'
-    const title = '[来自好友推荐] 好友评价：十分实用，页面也很好看，推荐给你'
-    const path = '/pages/index/index'
-    return {
-      imageUrl,
-      title,
-      path,
-    }
-  },
-
-  /** 用户点击右上角菜单“分享到朋友圈”按钮 */
-  onShareTimeline() {
-    const title = '[来自好友推荐] 好友评价：五星好评的智能生活助手'
-    return {
-      title,
-    }
-  },
 
   /**
    * 页面初始化
@@ -150,22 +145,6 @@ CustomPage({
    * @param {string} stage 页面阶段，目前为以下值：'onLoad', 'onPullDownRefresh', 'onResetLocation'
    */
   _init(stage) {
-    /** 天气实况 */
-    this.bindRequestData('weatherCondition', '/weather/now')
-
-    /** 生活指数 */
-    this.bindRequestData('liveIndex', '/weather/liveindex')
-
-    if (stage !== 'onLoad') {
-      this.bindRequestData('forecast15Days', '/weather/forecast15days', 'default', (res) => {
-        drawForecast15DaysLine(this.data.ctxFore15Line, res.maxTemperature, res.minTemperature)
-      })
-
-      this.bindRequestData('forecast24Hours', '/weather/forecast24hours', (res2) => {
-        drawForecast24HoursLine(this.data.ctxFore24hoursline, res2.list)
-      })
-    }
-
     if (stage === 'onPullDownRefresh') {
       setTimeout(() => {
         wx.stopPullDownRefresh()

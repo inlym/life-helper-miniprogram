@@ -61,7 +61,7 @@ async function bindRequestData(pageDataName, url, queryHandlerList, responseData
   })
 
   if (responseDataHandler && typeof responseDataHandler === 'function') {
-    responseDataHandler(responseData)
+    responseDataHandler(responseData, this)
   } else {
     return responseData
   }
