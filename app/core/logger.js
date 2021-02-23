@@ -7,4 +7,6 @@ const loggers = {
   prod: wx.getRealtimeLogManager(),
 }
 
-module.exports = loggers[env]
+const logger = loggers[env]
+
+module.exports = logger
