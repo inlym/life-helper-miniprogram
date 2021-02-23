@@ -4,6 +4,7 @@ const app = getApp()
 const { CustomPage } = app
 const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
 const drawForecast24HoursLine = require('../../app/canvas/forecast24HoursLine.js')
+const { getCanvas } = require('../../app/core/canvas.js')
 
 CustomPage({
   /** 页面的初始数据 */
@@ -13,18 +14,6 @@ CustomPage({
       temperature: '0',
       address: '正在定位中 ...',
     },
-
-    /** 未来 15 天的天气预报折线图的 canvas 画笔 */
-    ctxFore15Line: null,
-
-    /** 未来 15 天的天气预报折线图的 canvas  */
-    canvasFore15Line: null,
-
-    /** 未来 24 小时天气预报折线图的 canvas 画笔 */
-    ctxFore24hoursline: null,
-
-    /** 未来 24 小时天气预报折线图的 canvas  */
-    canvasFore24hoursline: null,
 
     /** Toptips顶部错误提示组件 */
     toptips: {
@@ -57,7 +46,7 @@ CustomPage({
       url: '/weather/forecast15days',
       ignore: 'onLoad',
       handler(res, self) {
-        drawForecast15DaysLine(self.data.ctxFore15Line, res.maxTemperature, res.minTemperature)
+        drawForecast15DaysLine(self.data.ctx_fore15line, res.maxTemperature, res.minTemperature)
       },
     },
 
@@ -65,7 +54,7 @@ CustomPage({
       url: '/weather/forecast24hours',
       ignore: 'onLoad',
       handler(res, self) {
-        drawForecast24HoursLine(self.data.ctxFore24hoursline, res.list)
+        drawForecast24HoursLine(self.data.ctx_forecast24Hours, res.list)
       },
     },
   },
@@ -77,51 +66,23 @@ CustomPage({
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {
-    wx.createSelectorQuery()
-      .select('#fore15line')
-      .fields({
-        node: true,
-        size: true,
-      })
-      .exec(async (res) => {
-        const canvas = res[0].node
-        const ctx = canvas.getContext('2d')
+    const promisesFor15Days = []
+    promisesFor15Days.push(getCanvas.call(this, 'fore15line', { width: 1920, height: 300 }))
+    promisesFor15Days.push(this.bindRequestData('forecast15Days', '/weather/forecast15days'))
+    Promise.all(promisesFor15Days).then((res) => {
+      const { ctx } = res[0]
+      const { maxTemperature, minTemperature } = res[1]
+      drawForecast15DaysLine(ctx, maxTemperature, minTemperature)
+    })
 
-        canvas.width = 1920
-        canvas.height = 300
-
-        this.setData({
-          ctxFore15Line: ctx,
-          canvasFore15Line: canvas,
-        })
-
-        this.bindRequestData('forecast15Days', '/weather/forecast15days').then((res2) => {
-          drawForecast15DaysLine(ctx, res2.maxTemperature, res2.minTemperature)
-        })
-      })
-
-    wx.createSelectorQuery()
-      .select('#fore24hoursline')
-      .fields({
-        node: true,
-        size: true,
-      })
-      .exec((res) => {
-        const canvas = res[0].node
-        const ctx = canvas.getContext('2d')
-
-        canvas.width = 2600
-        canvas.height = 300
-
-        this.setData({
-          ctxFore24hoursline: ctx,
-          canvasFore24hoursline: canvas,
-        })
-
-        this.bindRequestData('forecast24Hours', '/weather/forecast24hours').then((res2) => {
-          drawForecast24HoursLine(ctx, res2.list)
-        })
-      })
+    const promisesFor24Hours = []
+    promisesFor24Hours.push(getCanvas.call(this, 'fore24hoursline', { width: 2600, height: 300 }))
+    promisesFor24Hours.push(this.bindRequestData('forecast24Hours', '/weather/forecast24hours'))
+    Promise.all(promisesFor24Hours).then((res) => {
+      const { ctx } = res[0]
+      const { list } = res[1]
+      drawForecast24HoursLine(ctx, list)
+    })
   },
 
   /** 生命周期函数--监听页面显示 */
