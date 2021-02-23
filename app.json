@@ -5,7 +5,8 @@
     "pages/me/me",
     "pages/system/info/info",
     "pages/test/test",
-    "pages/location/location"
+    "pages/location/location",
+    "pages/template/template"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
