@@ -41,8 +41,10 @@ function transformPageConfiguration(configuration) {
   const _onLoad = output.onLoad
 
   output.onLoad = function onLoad(options) {
-    // 执行原有的 onLoad
-    _onLoad.call(this, options)
+    if (typeof _onLoad === 'function') {
+      // 执行原有的 onLoad
+      _onLoad.call(this, options)
+    }
     this._execRequestTask('onLoad')
   }
 
@@ -50,7 +52,11 @@ function transformPageConfiguration(configuration) {
 }
 
 function CustomPage(configuration) {
-  Page(transformPageConfiguration(configuration))
+  const finalConfiguration = transformPageConfiguration(configuration)
+  if (finalConfiguration.debug) {
+    console.log('Page Configuration', finalConfiguration)
+  }
+  Page(transformPageConfiguration(finalConfiguration))
 }
 
 module.exports = CustomPage

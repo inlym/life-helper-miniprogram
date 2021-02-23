@@ -13,7 +13,7 @@ const CustomPage = require('./CustomPage.js')
  * @since 2021-02-20
  * @param {App} app app 实例对象
  */
-function produceAppConfiguration(configuration) {
+function transformAppConfiguration(configuration) {
   const res = {
     /** 挂载配置信息 */
     get config() {
@@ -75,7 +75,10 @@ function produceAppConfiguration(configuration) {
 }
 
 function CustomApp(configuration) {
-  const finalConfiguration = produceAppConfiguration(configuration)
+  const finalConfiguration = transformAppConfiguration(configuration)
+  if (finalConfiguration.debug) {
+    console.log('App Configuration', finalConfiguration)
+  }
   App(finalConfiguration)
 }
 
