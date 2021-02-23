@@ -1,8 +1,9 @@
 'use strict'
 
 const bindRequestData = require('./bindRequestData.js')
+const { matchStr } = require('./utils.js')
 
-function producePageConfiguration(configuration) {
+function transformPageConfiguration(configuration) {
   /** 页面默认方法 */
   const defaultPageMethods = {
     bindRequestData,
@@ -26,9 +27,11 @@ function producePageConfiguration(configuration) {
   output._execRequestTask = function _execRequestTask(stage) {
     if (this.requested) {
       const { requested } = this
+      console.log(requested)
       Object.keys(requested).forEach((key) => {
-        const { ignore } = requested[key]
-        if (!ignore) {
+        const { url, query, handler, ignore } = requested[key]
+        if (!matchStr(stage, ignore)) {
+          this.bindRequestData(key, url, query, handler)
         }
       })
     }
@@ -40,13 +43,14 @@ function producePageConfiguration(configuration) {
   output.onLoad = function onLoad(options) {
     // 执行原有的 onLoad
     _onLoad.call(this, options)
+    this._execRequestTask('onLoad')
   }
 
   return output
 }
 
 function CustomPage(configuration) {
-  Page(producePageConfiguration(configuration))
+  Page(transformPageConfiguration(configuration))
 }
 
 module.exports = CustomPage
