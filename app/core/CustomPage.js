@@ -38,7 +38,24 @@ function transformPageConfiguration(configuration) {
   Object.assign(output, defaultLifecycle, configuration, customPageMethods)
 
   // 如果没有 data 属性，则加上
-  output.data = output.data || {}
+  const originData = output.data || {}
+
+  /** 默认放置在 data 的参数 */
+  const defaultData = {
+    /** Toptips顶部错误提示组件 */
+    toptips: {
+      type: 'success',
+      show: false,
+      msg: '',
+      delay: 1000,
+    },
+  }
+
+  const finalData = {}
+
+  Object.assign(finalData, defaultData, originData)
+
+  output.data = finalData
 
   // 处理 requested 参数，如果 data 中没有同名属性，则添加
   if (output.requested) {
@@ -97,7 +114,6 @@ function transformPageConfiguration(configuration) {
 
     // 在 onLoad 中执行一次请求任务
     this._init('onPullDownRefresh')
-    console.log('onPullDownRefresh')
   }
 
   return output

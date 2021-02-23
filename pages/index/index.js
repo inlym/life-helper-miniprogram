@@ -15,14 +15,6 @@ CustomPage({
       address: '正在定位中 ...',
     },
 
-    /** Toptips顶部错误提示组件 */
-    toptips: {
-      type: 'success',
-      show: false,
-      msg: '',
-      delay: 1000,
-    },
-
     /** 半屏弹窗组件 */
     halfScreen: {
       show: false,
@@ -54,7 +46,7 @@ CustomPage({
       url: '/weather/forecast24hours',
       ignore: 'onLoad',
       handler(res, self) {
-        drawForecast24HoursLine(self.data.ctx_forecast24Hours, res.list)
+        drawForecast24HoursLine(self.data.ctx_fore24hoursline, res.list)
       },
     },
   },
