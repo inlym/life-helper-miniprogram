@@ -4,16 +4,16 @@ const configAll = require('../config/config.js')
 const { request } = require('./request.js')
 const wxp = require('./wxp.js')
 const storage = require('./storage.js')
-const bindData = require('./bindData.js')
 const authorize = require('../common/authorize.js')
 const keys = require('./keys.js')
+const CustomPage = require('./CustomPage.js')
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法
  * @since 2021-02-20
  * @param {App} app app 实例对象
  */
-function loadApp(app) {
+function produceAppConfiguration(configuration) {
   const res = {
     /** 挂载配置信息 */
     get config() {
@@ -29,6 +29,8 @@ function loadApp(app) {
 
     authorize,
 
+    CustomPage,
+
     keys,
 
     get read() {
@@ -41,8 +43,6 @@ function loadApp(app) {
 
     /** 挂载封装好的请求函数 */
     request,
-
-    bindData,
 
     get(options) {
       return this.request(options)
@@ -69,9 +69,14 @@ function loadApp(app) {
     },
   }
 
-  Object.assign(res, app)
+  Object.assign(res, configuration)
 
   return res
 }
 
-module.exports = loadApp
+function CustomApp(configuration) {
+  const finalConfiguration = produceAppConfiguration(configuration)
+  App(finalConfiguration)
+}
+
+module.exports = CustomApp

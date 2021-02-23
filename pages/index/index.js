@@ -1,10 +1,11 @@
 'use strict'
 
 const app = getApp()
+const { CustomPage } = app
 const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
 const drawForecast24HoursLine = require('../../app/canvas/forecast24HoursLine.js')
 
-Page({
+CustomPage({
   /** 页面的初始数据 */
   data: {
     /** 实时天气情况 */
@@ -77,7 +78,7 @@ Page({
           canvasFore15Line: canvas,
         })
 
-        app.bindData(this, 'forecast15Days', '/weather/forecast15days').then((res2) => {
+        this.bindRequestData('forecast15Days', '/weather/forecast15days').then((res2) => {
           drawForecast15DaysLine(ctx, res2.maxTemperature, res2.minTemperature)
         })
       })
@@ -100,7 +101,7 @@ Page({
           canvasFore24hoursline: canvas,
         })
 
-        app.bindData(this, 'forecast24Hours', '/weather/forecast24hours').then((res2) => {
+        this.bindRequestData('forecast24Hours', '/weather/forecast24hours').then((res2) => {
           drawForecast24HoursLine(ctx, res2.list)
         })
       })
@@ -150,14 +151,19 @@ Page({
    */
   _init(stage) {
     /** 天气实况 */
-    app.bindData(this, 'weatherCondition', '/weather/now')
+    this.bindRequestData('weatherCondition', '/weather/now')
 
     /** 生活指数 */
-    app.bindData(this, 'liveIndex', '/weather/liveindex')
+    this.bindRequestData('liveIndex', '/weather/liveindex')
 
     if (stage !== 'onLoad') {
-      this.getForecast15days()
-      this.getForecast24hours()
+      this.bindRequestData('forecast15Days', '/weather/forecast15days', 'default', (res) => {
+        drawForecast15DaysLine(this.data.ctxFore15Line, res.maxTemperature, res.minTemperature)
+      })
+
+      this.bindRequestData('forecast24Hours', '/weather/forecast24hours', (res2) => {
+        drawForecast24HoursLine(this.data.ctxFore24hoursline, res2.list)
+      })
     }
 
     if (stage === 'onPullDownRefresh') {
@@ -187,23 +193,6 @@ Page({
         address,
       }
     }
-  },
-
-  /** 获取未来 15 天的天气预报 */
-  async getForecast15days() {
-    app.bindData(this, 'forecast15Days', '/weather/forecast15days').then((res) => {
-      drawForecast15DaysLine(this.data.ctxFore15Line, res.maxTemperature, res.minTemperature)
-    })
-  },
-
-  /**
-   * 获取未来 24 小时天气预报
-   * @since 2021-02-19
-   */
-  async getForecast24hours() {
-    app.bindData(this, 'forecast24Hours', '/weather/forecast24hours').then((res2) => {
-      drawForecast24HoursLine(this.data.ctxFore24hoursline, res2.list)
-    })
   },
 
   /**
