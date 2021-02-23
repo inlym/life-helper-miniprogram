@@ -16,6 +16,7 @@ function transformPageConfiguration(configuration) {
 
   // 处理 requested 参数，如果 data 中没有同名属性，则添加
   if (output.requested) {
+    output.data = output.data || {}
     Object.keys(output.requested).forEach((key) => {
       if (!output['data'][key] || typeof output['data'][key] !== 'object') {
         output['data'][key] = {}
