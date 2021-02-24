@@ -11,4 +11,10 @@ module.exports = {
 
   /** 用户选点位置信息，非定位产生 */
   KEY_CHOOSE_LOCATION: 'location:choose',
+
+  /** 小程序启动时间 */
+  KEY_APP_LAUNCH_TIME: 'time:appOnLaunch',
+
+  /** 小程序启动或且前台时间 */
+  KEY_APP_SHOW_TIME: 'time:appShow',
 }

@@ -8,6 +8,7 @@ const authorize = require('../common/authorize.js')
 const keys = require('./keys.js')
 const CustomPage = require('./CustomPage.js')
 const logger = require('./logger.js')
+const utils = require('./utils.js')
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法
@@ -15,7 +16,7 @@ const logger = require('./logger.js')
  * @param {App} app app 实例对象
  */
 function transformAppConfiguration(configuration) {
-  const res = {
+  const output = {
     /** 挂载配置信息 */
     get config() {
       return configAll
@@ -35,6 +36,8 @@ function transformAppConfiguration(configuration) {
     keys,
 
     logger,
+
+    utils,
 
     get read() {
       return storage.read
@@ -60,9 +63,39 @@ function transformAppConfiguration(configuration) {
     },
   }
 
-  Object.assign(res, configuration)
+  Object.assign(output, configuration)
 
-  return res
+  // 重写 onLaunch
+  const _onLaunch = output.onLaunch
+  output.onLaunch = function onLaunch(options) {
+    // 先执行原有的 onLaunch
+    if (typeof _onLaunch === 'function') {
+      _onLaunch.call(this, options)
+    }
+
+    this.logger.info('小程序 onLaunch，参数为', options)
+
+    // 本地记录小程序启动时间
+    this.write(this.keys.KEY_APP_LAUNCH_TIME, utils.nowMs())
+  }
+
+  // 重写 onShow
+  const _onShow = output.onShow
+  output.onShow = function onShow(options) {
+    // 覆盖记录小程序 onShow 时间（大于1s才覆盖）
+    if (utils.nowMs() - this.read(this.keys.KEY_APP_SHOW_TIME) > 1000) {
+      this.write(this.keys.KEY_APP_SHOW_TIME, utils.nowMs())
+    }
+
+    // 执行原有的 onShow
+    if (typeof _onShow === 'function') {
+      _onShow.call(this, options)
+    }
+
+    this.logger.info('小程序 onShow，参数为', options)
+  }
+
+  return output
 }
 
 function CustomApp(configuration) {
