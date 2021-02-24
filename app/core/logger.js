@@ -9,50 +9,77 @@ const storage = require('./storage.js')
 const realtimeLogger = wx.getRealtimeLogManager()
 const localLogger = console
 
+/** 当前日志距小程序启动时间的时间差 */
 function diff() {
-  let appShowTime = storage.get(keys.KEY_APP_SHOW_TIME)
-  if (!appShowTime) {
-    appShowTime = nowMs()
-    storage.set(keys.KEY_APP_SHOW_TIME, appShowTime)
+  const key = keys.KEY_APP_LAUNCH_TIME
+  let time = storage.get(key)
+  if (!time) {
+    time = nowMs()
+    storage.set(key, time)
   }
+  return formatMs(nowMs() - time)
+}
 
-  return formatMs(nowMs() - appShowTime)
+/** 是否使用本地的 console 打印日志 */
+function useLocal() {
+  if (platform === 'devtools' || enableDebug) {
+    return true
+  }
+  return false
+}
+
+/** 是否使用实时日志功能打印日志 */
+function useRealtime() {
+  if (platform !== 'devtools') {
+    return true
+  }
+  return false
+}
+
+/** 本地日志前缀 */
+function prefixLocal() {
+  return `[${now()}] [${diff()}] [${env.toUpperCase()}]`
+}
+
+/** 实时日志前缀 */
+function prefixRealtime() {
+  return `[${diff()}] [${env.toUpperCase()}]`
 }
 
 module.exports = {
   debug(...args) {
-    localLogger.log(`[${now()}] [${diff()}]`, '[DEBUG]', ...args)
+    localLogger.log(prefixLocal(), '[DEBUG]', ...args)
   },
 
   info(...args) {
-    if (platform === 'devtools' || enableDebug) {
-      localLogger.info(`[${now()}]`, `[${diff()}]`, '[INFO]', ...args)
+    if (useLocal()) {
+      localLogger.info(prefixLocal(), '[INFO]', ...args)
     }
-    if (platform !== 'devtools' && env === 'prod') {
-      realtimeLogger.info(`[${diff()}]`, ...args)
+    if (useRealtime()) {
+      realtimeLogger.info(prefixRealtime(), ...args)
     }
   },
 
   warn(...args) {
-    if (platform === 'devtools' || enableDebug) {
-      localLogger.warn(`[${now()}]`, `[${diff()}]`, '[WARN]', ...args)
+    if (useLocal()) {
+      localLogger.warn(prefixLocal(), '[WARN]', ...args)
     }
-    if (platform !== 'devtools' && env === 'prod') {
-      realtimeLogger.warn(`[${diff()}]`, ...args)
+    if (useRealtime()) {
+      realtimeLogger.warn(prefixRealtime(), ...args)
     }
   },
 
   error(...args) {
-    if (platform === 'devtools' || enableDebug) {
-      localLogger.error(`[${now()}]`, `[${diff()}]`, '[ERROR]', ...args)
+    if (useLocal()) {
+      localLogger.error(prefixLocal(), '[ERROR]', ...args)
     }
-    if (platform !== 'devtools' && env === 'prod') {
-      realtimeLogger.error(`[${diff()}]`, ...args)
+    if (useRealtime()) {
+      realtimeLogger.error(prefixRealtime(), ...args)
     }
   },
 
   tag(msg, ...args) {
-    if (platform !== 'devtools' && env === 'prod') {
+    if (useRealtime()) {
       realtimeLogger.setFilterMsg(msg)
 
       if (args.length > 0) {

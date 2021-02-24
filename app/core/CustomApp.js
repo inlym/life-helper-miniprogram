@@ -68,24 +68,22 @@ function transformAppConfiguration(configuration) {
   // 重写 onLaunch
   const _onLaunch = output.onLaunch
   output.onLaunch = function onLaunch(options) {
-    // 先执行原有的 onLaunch
+    // 本地记录小程序启动时间
+    this.write(this.keys.KEY_APP_LAUNCH_TIME, utils.nowMs())
+
+    // 执行原有的 onLaunch
     if (typeof _onLaunch === 'function') {
       _onLaunch.call(this, options)
     }
 
     this.logger.info('小程序 onLaunch，参数为', options)
-
-    // 本地记录小程序启动时间
-    this.write(this.keys.KEY_APP_LAUNCH_TIME, utils.nowMs())
   }
 
   // 重写 onShow
   const _onShow = output.onShow
   output.onShow = function onShow(options) {
-    // 覆盖记录小程序 onShow 时间（大于1s才覆盖）
-    if (utils.nowMs() - this.read(this.keys.KEY_APP_SHOW_TIME) > 1000) {
-      this.write(this.keys.KEY_APP_SHOW_TIME, utils.nowMs())
-    }
+    // 覆盖记录小程序 onShow 时间
+    this.write(this.keys.KEY_APP_SHOW_TIME, utils.nowMs())
 
     // 执行原有的 onShow
     if (typeof _onShow === 'function') {
