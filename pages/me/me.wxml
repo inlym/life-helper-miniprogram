@@ -13,6 +13,6 @@
     <open-data type="userNickName"></open-data>
     <view>加入时间：12天前</view>
   </view>
-  <view> <button size="mini" type="primary">更新</button>
+  <view> <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
   </view>
 </view>

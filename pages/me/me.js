@@ -2,6 +2,7 @@
 
 const app = getApp()
 const { CustomPage } = app
+const { updateUserInfo } = require('../../app/common/user.js')
 
 CustomPage({
   /** 页面的初始数据 */
@@ -66,5 +67,9 @@ CustomPage({
     this.setData({
       reservedHeight: bottom,
     })
+  },
+
+  onUpdateButtonTap() {
+    updateUserInfo()
   },
 })
