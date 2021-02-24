@@ -2,3 +2,20 @@
 .reserved-top {
   background-color: aqua;
 }
+
+
+.profile {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile .avatar {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50rpx;
+}
+
+.profile .info {
+  width: 300rpx;
+}
