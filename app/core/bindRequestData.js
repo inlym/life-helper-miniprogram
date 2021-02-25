@@ -56,7 +56,7 @@ async function bindRequestData(pageDataName, url, queryHandlerList, responseData
 
   const { data: responseData } = await request(options)
 
-  this.setData({
+  this.updateData({
     [pageDataName]: responseData,
   })
 

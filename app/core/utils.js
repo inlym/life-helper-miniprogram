@@ -103,10 +103,27 @@ function nowMs() {
   return new Date().getTime()
 }
 
+/**
+ * 检查 2 个数组是否包含相同的元素
+ * @param {array} arr1 数组1
+ * @param {array} arr2 数组2
+ */
+function hasSameArrayElement(arr1, arr2) {
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] === arr2[j]) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
 module.exports = {
   matchStr,
   zerofill,
   formatMs,
   now,
   nowMs,
+  hasSameArrayElement,
 }

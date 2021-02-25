@@ -1,12 +1,16 @@
 'use strict'
 
 const bindRequestData = require('./bindRequestData.js')
+const updateData = require('./updateData.js')
+const logger = require('./logger.js')
 const { matchStr } = require('./utils.js')
 
 function transformPageConfiguration(configuration) {
   /** 自定义的页面方法，请不要在页面配置中使用同名参数覆盖 */
   const customPageMethods = {
     bindRequestData,
+
+    updateData,
 
     getLoadOptions() {
       return this.data._loadOptions
@@ -37,7 +41,7 @@ function transformPageConfiguration(configuration) {
 
   Object.assign(output, defaultLifecycle, configuration, customPageMethods)
 
-  // 如果没有 data 属性，则加上
+  /** 存储原生放在 data 的数据 */
   const originData = output.data || {}
 
   /** 默认放置在 data 的参数 */
@@ -63,6 +67,19 @@ function transformPageConfiguration(configuration) {
       if (!output['data'][key] || typeof output['data'][key] !== 'object') {
         output['data'][key] = {}
       }
+    })
+  }
+
+  // 处理 computed 参数，将值逐个加到 this.data
+  if (output.computed) {
+    Object.keys(output.computed).forEach((key) => {
+      let value = {}
+      try {
+        value = output.computed[key](output.data)
+      } catch (err) {
+        logger.error(err)
+      }
+      output.data[key] = value
     })
   }
 
@@ -93,7 +110,7 @@ function transformPageConfiguration(configuration) {
   const _onLoad = output.onLoad
   output.onLoad = function onLoad(options) {
     // 将入参 options 存储
-    this.setData({
+    this.updateData({
       _loadOptions: options,
     })
     if (typeof _onLoad === 'function') {
