@@ -18,6 +18,18 @@ CustomPage({
     },
   },
 
+  computed: {
+    hasUserInfo(data) {
+      return Boolean(data.userInfo.nickname)
+    },
+  },
+
+  requested: {
+    userInfo: {
+      url: '/user/info',
+    },
+  },
+
   /** 生命周期函数--监听页面加载 */
   onLoad(options) {
     // this.init()
@@ -70,6 +82,16 @@ CustomPage({
   },
 
   onUpdateButtonTap() {
-    updateUserInfo()
+    updateUserInfo().then(() => {
+      this._init()
+    })
+  },
+
+  test() {
+    this.updateData({
+      userInfo: {
+        nickname: '',
+      },
+    })
   },
 })

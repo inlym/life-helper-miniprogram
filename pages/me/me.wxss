@@ -3,19 +3,26 @@
   background-color: aqua;
 }
 
-
 .profile {
   padding: 30rpx;
   display: flex;
   justify-content: space-around;
 }
 
-.profile .avatar {
+.profile .avatar image {
   width: 180rpx;
   height: 180rpx;
-  border-radius: 50rpx;
+  border-radius: 90rpx;
 }
 
 .profile .info {
-  width: 300rpx;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 500rpx;
+}
+
+.profile .info text {
+  font-size: 30rpx;
 }
