@@ -11,8 +11,8 @@
   "entryPagePath": "pages/index/index",
   "window": {
     "backgroundTextStyle": "light",
-    "backgroundColor": "#f7f7f7",
-    "navigationBarBackgroundColor": "#f7f7f7",
+    "backgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "我的个人助手",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
@@ -20,7 +20,7 @@
   "tabBar": {
     "color": "#7A7E83",
     "selectedColor": "#1AAD19",
-    "backgroundColor": "#F7F7F7",
+    "backgroundColor": "#F5F5F5",
     "borderStyle": "white",
     "list": [
       {
@@ -56,6 +56,8 @@
   "plugins": {},
   "usingComponents": {
     "mp-toptips": "weui-miniprogram/toptips/toptips",
-    "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog"
+    "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell"
   }
 }

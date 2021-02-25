@@ -16,8 +16,6 @@
         <view class="nickname"> {{userInfo.nickname}} </view>
         <view class="desc">欢迎使用我的个人助手</view>
       </view>
-      <view class="onecenter"> <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
-      </view>
     </block>
 
     <!-- 用户个人信息（为空情况） -->
@@ -32,10 +30,16 @@
         <view class="nickname">我的个人助手</view>
         <view class="desc">点击更新获取昵称</view>
       </view>
-      <view class="onecenter"> <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
-      </view>
-
     </block>
+    <view class="onecenter"><button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button></view>
+  </view>
+
+  <view>
+    <mp-cells>
+      <mp-cell link hover value="设备信息">
+        <image slot="title" src="/app/static/image/icon/phone.svg"></image>
+      </mp-cell>
+    </mp-cells>
   </view>
 
 

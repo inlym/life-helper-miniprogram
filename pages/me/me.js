@@ -8,7 +8,7 @@ CustomPage({
   /** 页面的初始数据 */
   data: {
     /** 顶部预留的高度，不放置任何内容 */
-    reservedHeight: 100,
+    reservedHeight: 110,
   },
 
   computed: {
@@ -68,7 +68,7 @@ CustomPage({
   setreservedHeight() {
     const { bottom } = wx.getMenuButtonBoundingClientRect()
     this.setData({
-      reservedHeight: bottom + 20,
+      reservedHeight: bottom + 30,
     })
   },
 
