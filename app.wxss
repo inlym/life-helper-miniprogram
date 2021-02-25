@@ -34,6 +34,13 @@ text {
   color: #333;
 }
 
+/* 容器内单个元素水平垂直居中 */
+.onecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* 用于临时调试增加边框 */
 .tempborder {
   border: 1rpx solid red;

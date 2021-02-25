@@ -1,13 +1,29 @@
 'use strict'
 
 /**
+ * 静默检测是否获取某项权限
+ * @since 2021-02-25
+ * @param {string} scope
+ * @return {boolean} 是否已授权
+ */
+function check(scope) {
+  return new Promise((resolve, reject) => {
+    wx.getSetting({
+      success(res) {
+        resolve(Boolean(res['authSetting'][scope]))
+      },
+    })
+  })
+}
+
+/**
  * 封装获取授权方法
  * @since 2021-02-20
  * @see https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/authorize.html
  * @param {string} scope 需要获取权限的 scope
  * @return {boolean} 是否已授权
  */
-function authorize(scope) {
+function get(scope) {
   return new Promise((resolve, reject) => {
     // 获取用户权限信息
     wx.getSetting({
@@ -110,4 +126,7 @@ function authorize(scope) {
   })
 }
 
-module.exports = authorize
+module.exports = {
+  get,
+  check,
+}

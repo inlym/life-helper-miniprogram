@@ -8,14 +8,7 @@ CustomPage({
   /** 页面的初始数据 */
   data: {
     /** 顶部预留的高度，不放置任何内容 */
-    reservedHeight: 80,
-
-    /** Toptips顶部错误提示组件 */
-    toptips: {
-      type: 'success',
-      show: false,
-      msg: '',
-    },
+    reservedHeight: 100,
   },
 
   computed: {
@@ -31,9 +24,7 @@ CustomPage({
   },
 
   /** 生命周期函数--监听页面加载 */
-  onLoad(options) {
-    // this.init()
-  },
+  onLoad(options) {},
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {
@@ -77,7 +68,7 @@ CustomPage({
   setreservedHeight() {
     const { bottom } = wx.getMenuButtonBoundingClientRect()
     this.setData({
-      reservedHeight: bottom,
+      reservedHeight: bottom + 20,
     })
   },
 

@@ -1,38 +1,44 @@
 <!-- 顶部预留高度 -->
 <view class="reserved-top" style="height:{{reservedHeight+4}}px;"></view>
 
-<!-- 用户个人信息（非空情况） -->
-<block wx:if="{{hasUserInfo}}">
+<view class="container">
+  <!-- 顶部个人信息区域 -->
   <view class="profile">
-    <!-- 头像 -->
-    <view class="avatar">
-      <image src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
-    </view>
-
-    <!-- 昵称、按钮 -->
-    <view class="info">
-      <text> {{userInfo.nickname}} </text>
-      <view> <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
-      </view>
-    </view>
-  </view>
-</block>
-
-<!-- 用户个人信息（为空情况） -->
-<block wx:else>
-  <view class="profile">
-    <!-- 头像 -->
-    <view class="avatar">
-      <image src="https://img.lh.inlym.com/default_avatar/1.svg" mode="widthFix"></image>
-    </view>
-
-    <!-- 昵称、按钮 -->
-    <view class="info">
-      <text> 暂未获取昵称，请点击下方“更新” </text>
-      <view> <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
+    <!-- 用户个人信息（非空情况） -->
+    <block wx:if="{{hasUserInfo}}">
+      <!-- 头像 -->
+      <view class="avatar">
+        <image src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
       </view>
 
-    </view>
+      <!-- 昵称、按钮 -->
+      <view class="info">
+        <view class="nickname"> {{userInfo.nickname}} </view>
+        <view class="desc">欢迎使用我的个人助手</view>
+      </view>
+      <view class="onecenter"> <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
+      </view>
+    </block>
+
+    <!-- 用户个人信息（为空情况） -->
+    <block wx:else>
+      <!-- 头像 -->
+      <view class="avatar">
+        <image src="https://img.lh.inlym.com/common/logo.png" mode="widthFix"></image>
+      </view>
+
+      <!-- 昵称、按钮 -->
+      <view class="info">
+        <view class="nickname">我的个人助手</view>
+        <view class="desc">点击更新获取昵称</view>
+      </view>
+      <view class="onecenter"> <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
+      </view>
+
+    </block>
   </view>
 
-</block>
+
+
+
+</view>

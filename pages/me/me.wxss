@@ -1,28 +1,35 @@
 /* 顶部预留的区域 */
 .reserved-top {
-  background-color: aqua;
+  background-color: #fff;
 }
 
 .profile {
-  padding: 30rpx;
+  background-color: #fff;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  padding-left: 50rpx;
 }
 
 .profile .avatar image {
-  width: 180rpx;
-  height: 180rpx;
-  border-radius: 90rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
 }
 
 .profile .info {
-  margin-left: 20rpx;
+  margin-left: 30rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 500rpx;
+  width: 350rpx;
 }
 
-.profile .info text {
+.profile .info .nickname {
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.profile .info .desc {
+  color: #7c7c7c;
   font-size: 30rpx;
 }

@@ -151,7 +151,7 @@ CustomPage({
   /** 人工选择定位 */
   async chooseLocation() {
     const self = this
-    const authRes = await app.authorize('scope.userLocation')
+    const authRes = await app.authorize.get('scope.userLocation')
     if (authRes) {
       wx.chooseLocation({
         success(res) {
@@ -168,7 +168,7 @@ CustomPage({
    * 使用 toptips 显示更新提示，除了 onLoad 时不显示，其余更新操作均展示
    */
   showUpdateTips(content) {
-    this.setData({
+    this.updateData({
       toptips: {
         type: 'success',
         show: true,
