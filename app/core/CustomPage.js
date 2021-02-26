@@ -1,7 +1,7 @@
 'use strict'
 
 const bindRequestData = require('./bindRequestData.js')
-const updateData = require('./updateData.js')
+const updateData = require('./page/methods/setData.js')
 const logger = require('./logger.js')
 const { matchStr } = require('./utils.js')
 
@@ -109,6 +109,8 @@ function transformPageConfiguration(configuration) {
   // 重写原有的 onLoad
   const _onLoad = output.onLoad
   output.onLoad = function onLoad(options) {
+    this._originalSetData = this.setData
+
     // 将入参 options 存储
     this.updateData({
       _loadOptions: options,
