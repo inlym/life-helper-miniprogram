@@ -10,7 +10,8 @@
     "App": false,
     "Page": false,
     "wx": false,
-    "getApp": false
+    "getApp": false,
+    "Component": false
   },
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parserOptions": {

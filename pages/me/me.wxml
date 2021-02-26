@@ -1,5 +1,5 @@
 <!-- 顶部预留高度 -->
-<view class="reserved-top" style="height:{{reservedHeight+4}}px;"></view>
+<topspace offset="50"></topspace>
 
 <view class="container">
   <!-- 顶部个人信息区域 -->

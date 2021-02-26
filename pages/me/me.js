@@ -6,10 +6,7 @@ const { updateUserInfo } = require('../../app/common/user.js')
 
 CustomPage({
   /** 页面的初始数据 */
-  data: {
-    /** 顶部预留的高度，不放置任何内容 */
-    reservedHeight: 110,
-  },
+  data: {},
 
   computed: {
     hasUserInfo(data) {
@@ -27,9 +24,7 @@ CustomPage({
   onLoad(options) {},
 
   /** 生命周期函数--监听页面初次渲染完成 */
-  onReady() {
-    this.setreservedHeight()
-  },
+  onReady() {},
 
   /** 生命周期函数--监听页面显示 */
   onShow() {},
@@ -63,14 +58,6 @@ CustomPage({
 
   /** 页面初始化 */
   init() {},
-
-  /** 设置顶部预留高度 */
-  setreservedHeight() {
-    const { bottom } = wx.getMenuButtonBoundingClientRect()
-    this.setData({
-      reservedHeight: bottom + 30,
-    })
-  },
 
   onUpdateButtonTap() {
     updateUserInfo().then(() => {
