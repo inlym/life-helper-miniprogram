@@ -10,11 +10,3 @@
 .cell-hover {
   background-color: var(--weui-BG-COLOR-ACTIVE);
 }
-
-.weui-cell__bd {
-  font-size: 32rpx;
-}
-
-.weui-cell__ft {
-  font-size: 32rpx;
-}
