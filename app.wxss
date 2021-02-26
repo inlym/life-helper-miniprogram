@@ -2,19 +2,13 @@
 @import '/miniprogram_npm/@vant/weapp/common/index.wxss';
 
 page {
-  min-height: 100%;
-  background-color: #ededed;
-  box-sizing: border-box;
+  background-color: var(--weui-BG-0);
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial,
     Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
 }
 
 /** 包裹可视内容区 */
 .container {
-  height: 100%;
-  box-sizing: border-box;
-  background-color: #ededed;
-  font-family: PingFangSC-Light, 'Microsoft YaHei', helvetica, 'Heiti SC';
   font-size: 28rpx;
   color: #333;
 }
@@ -26,12 +20,6 @@ navigator {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
-
-view,
-text {
-  font-size: 28rpx;
-  color: #333;
 }
 
 /* 容器内单个元素水平垂直居中 */

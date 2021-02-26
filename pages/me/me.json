@@ -1,6 +1,7 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
-    "topspace": "/components/topspace/topspace"
+    "topspace": "/components/topspace/topspace",
+    "mpc-list": "/components/list/list"
   }
 }
