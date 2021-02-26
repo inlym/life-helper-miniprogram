@@ -1,0 +1,20 @@
+/* components/list/list.wxss */
+
+.weui-cell__hd .icon {
+  margin-right: 32rpx;
+  vertical-align: middle;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.cell-hover {
+  background-color: var(--weui-BG-COLOR-ACTIVE);
+}
+
+.weui-cell__bd {
+  font-size: 32rpx;
+}
+
+.weui-cell__ft {
+  font-size: 32rpx;
+}
