@@ -1,7 +1,0 @@
-<!--components/search-entry/search-entry.wxml-->
-<view class="search-entry">
-  <navigator url="{{url}}" class="input">
-    <image src="search.png" class="search-image"></image>
-    <text class="txt">{{content}}</text>
-  </navigator>
-</view>
