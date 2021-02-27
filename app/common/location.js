@@ -24,10 +24,10 @@ function updateCurrentLocationSilently() {
           // 当前已获取定位权限
           wx.getLocation({
             type: 'gcj02',
-            success(res) {
+            success(locationResult) {
               const location = {
-                latitude: res.latitude,
-                longitude: res.longitude,
+                latitude: locationResult.latitude,
+                longitude: locationResult.longitude,
               }
               storage.set(storage.keys.KEY_CURRENT_LOCATION, location)
               resolve(location)
