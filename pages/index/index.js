@@ -58,7 +58,7 @@ CustomPage({
   onReady() {
     const promisesFor15Days = []
     promisesFor15Days.push(getCanvas.call(this, 'fore15line', { width: 1920, height: 300 }))
-    promisesFor15Days.push(this.bindRequestData('forecast15Days', '/weather/forecast15days'))
+    promisesFor15Days.push(this.bindResponseData('forecast15Days', '/weather/forecast15days'))
     Promise.all(promisesFor15Days).then((res) => {
       const { ctx } = res[0]
       const { maxTemperature, minTemperature } = res[1]
@@ -67,7 +67,7 @@ CustomPage({
 
     const promisesFor24Hours = []
     promisesFor24Hours.push(getCanvas.call(this, 'fore24hoursline', { width: 2600, height: 300 }))
-    promisesFor24Hours.push(this.bindRequestData('forecast24Hours', '/weather/forecast24hours'))
+    promisesFor24Hours.push(this.bindResponseData('forecast24Hours', '/weather/forecast24hours'))
     Promise.all(promisesFor24Hours).then((res) => {
       const { ctx } = res[0]
       const { list } = res[1]

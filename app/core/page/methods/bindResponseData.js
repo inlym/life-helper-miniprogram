@@ -10,13 +10,13 @@ const { request } = require('../../request.js')
  * 4. 如定义了响应处理函数则一并执行
  *
  * @since 2021-02-27
- * @this
+ * @this WechatMiniprogram.Page.Instance
  * @param {string} name 在 data 中的变量名
  * @param {string} url 请求的 URL，不包含 query（查询字符串） 部分
  * @param {?Object} query 查询字符串对象
  * @param {?Function} handler 处理响应数据的函数
  */
-module.exports = async function bindRequestData(name, url, query, handler) {
+module.exports = async function bindResponseData(name, url, query, handler) {
   if (!name || !url) {
     throw new Error('name 或 url 参数为空！')
   }

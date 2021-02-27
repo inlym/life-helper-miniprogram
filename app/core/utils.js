@@ -119,6 +119,17 @@ function hasSameArrayElement(arr1, arr2) {
   return false
 }
 
+/**
+ * 将源数组的元素添加到目标数组上
+ * @param {Array} target 目标数组
+ * @param {Array} source 源数组
+ */
+function assignArray(target, source) {
+  for (let i = 0; i < source.length; i++) {
+    target.push(source[i])
+  }
+}
+
 module.exports = {
   matchStr,
   zerofill,
@@ -126,4 +137,5 @@ module.exports = {
   now,
   nowMs,
   hasSameArrayElement,
+  assignArray,
 }

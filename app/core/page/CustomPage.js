@@ -2,19 +2,22 @@
 
 const logger = require('../logger.js')
 const setData = require('./methods/setData.js')
-const bindRequestData = require('./methods/bindRequestData.js')
 const showLoading = require('./methods/showLoading.js')
+const bindResponseData = require('./methods/bindResponseData.js')
+const mergeQueries = require('./methods/mergeQueries')
 const utils = require('../utils.js')
 const defaults = require('./defaults.js')
 
 module.exports = function CustomPage(configuration) {
-  /** 在 在 {page}.js 的 data 中的内容 */
+  /** 在 {page}.js 的 data 中的内容 */
   const _originalData = configuration.data || {}
 
   /** 给页面添加的自定义方法 */
   const customMethods = {
-    bindRequestData,
     showLoading,
+    logger,
+    bindResponseData,
+    mergeQueries,
   }
 
   /** 最终用原生 Page 方法执行的配置内容 */
@@ -36,7 +39,9 @@ module.exports = function CustomPage(configuration) {
   _finalConfiguration._debugOptions = configuration.debug || {}
 
   /** 页面配置项，可以覆盖在 defaults.config 配置的内容 */
-  _finalConfiguration._configOptions = configuration.config || {}
+  const _configOptions = {}
+  Object.assign(_configOptions, defaults.config, configuration.config || {})
+  _finalConfiguration._configOptions = _configOptions
 
   // 处理 requested 参数，如果 data 中没有同名属性，则添加
   if (configuration.requested) {
@@ -64,7 +69,7 @@ module.exports = function CustomPage(configuration) {
   }
 
   // 添加执行 requested 中的请求任务方法
-  _finalConfiguration._execRequestTask = function _execRequestTask(stage) {
+  _finalConfiguration._execAllRequestTask = function _execAllRequestTask(stage) {
     return new Promise((resolve) => {
       if (this.requested) {
         const taskPromises = []
@@ -72,9 +77,10 @@ module.exports = function CustomPage(configuration) {
           _onRequesting: true,
         })
         Object.keys(this.requested).forEach((key) => {
-          const { url, query, handler, ignore } = this.requested[key]
+          const { url, queries, handler, ignore } = this.requested[key]
           if (!utils.matchStr(stage, ignore)) {
-            taskPromises.push(this.bindRequestData(key, url, query, handler))
+            const query = this.mergeQueries(queries)
+            taskPromises.push(this.bindResponseData(key, url, query, handler))
           }
         })
         Promise.all(taskPromises).then((res) => {
@@ -98,7 +104,7 @@ module.exports = function CustomPage(configuration) {
     }
 
     this.showLoading('数据加载中 ...')
-    this._execRequestTask(stage).then(() => {
+    this._execAllRequestTask(stage).then(() => {
       wx.hideLoading()
       if (stage === 'onPullDownRefresh') {
         wx.stopPullDownRefresh()

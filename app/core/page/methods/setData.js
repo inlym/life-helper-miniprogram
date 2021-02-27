@@ -5,7 +5,7 @@ const logger = require('../../logger.js')
 /**
  * 重写小程序原生的 setData 方法
  * @2021-02-25
- * @this
+ * @this WechatMiniprogram.Page.Instance
  * @param {Object} assignment 待赋值的对象
  */
 module.exports = function setData(assignment) {
