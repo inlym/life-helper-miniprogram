@@ -97,7 +97,13 @@ module.exports = function CustomPage(configuration) {
       _originalInit.call(this, stage)
     }
 
-    // 目前暂无其他初始化任务，同时将请求任务从这里剥离出去，单独执行
+    this.showLoading('数据加载中 ...')
+    this._execRequestTask(stage).then(() => {
+      wx.hideLoading()
+      if (stage === 'onPullDownRefresh') {
+        wx.stopPullDownRefresh()
+      }
+    })
   }
 
   // 重写原生的 onLoad
@@ -120,11 +126,7 @@ module.exports = function CustomPage(configuration) {
       _originalOnLoad.call(this, options)
     }
 
-    this.showLoading('页面加载中 ...')
     this.init('onLoad')
-    this._execRequestTask('onLoad').then((res) => {
-      wx.hideLoading()
-    })
   }
 
   // 重写原有的 onPullDownRefresh
@@ -136,11 +138,6 @@ module.exports = function CustomPage(configuration) {
     }
 
     this.init('onPullDownRefresh')
-    this._execRequestTask('onPullDownRefresh').then(() => {
-      logger.debug('请求结束')
-      wx.hideLoading()
-      wx.stopPullDownRefresh()
-    })
   }
 
   // 删除多余配置项

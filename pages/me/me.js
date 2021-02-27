@@ -44,18 +44,7 @@ CustomPage({
   onUnload() {},
 
   /** 页面相关事件处理函数--监听用户下拉动作 */
-  onPullDownRefresh() {
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-      this.setData({
-        toptip: {
-          type: 'success',
-          show: true,
-          msg: '哇！页面数据已经更新了哦 ~',
-        },
-      })
-    }, 1000)
-  },
+  onPullDownRefresh() {},
 
   /** 页面上拉触底事件的处理函数 */
   onReachBottom() {},

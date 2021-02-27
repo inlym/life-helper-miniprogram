@@ -17,6 +17,10 @@ module.exports = {
     wx.setStorageSync(`${TIME_PREFIX}${key}`, new Date().getTime())
   },
 
+  save(key, value) {
+    wx.setStorageSync(key, value)
+  },
+
   get write() {
     return this.set
   },
