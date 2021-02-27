@@ -6,7 +6,7 @@ const wxp = require('./wxp.js')
 const storage = require('./storage.js')
 const authorize = require('../common/authorize.js')
 const keys = require('./keys.js')
-const CustomPage = require('./CustomPage.js')
+const CustomPage = require('./page/CustomPage.js')
 const logger = require('./logger.js')
 const utils = require('./utils.js')
 
@@ -76,7 +76,7 @@ function transformAppConfiguration(configuration) {
       _onLaunch.call(this, options)
     }
 
-    this.logger.info('小程序 onLaunch，参数为', options)
+    logger.info('[App - onLaunch] \n options:', options)
   }
 
   // 重写 onShow
@@ -90,7 +90,7 @@ function transformAppConfiguration(configuration) {
       _onShow.call(this, options)
     }
 
-    this.logger.info('小程序 onShow，参数为', options)
+    logger.info('[App - onShow] \n options:', options)
   }
 
   return output

@@ -20,6 +20,14 @@ CustomPage({
     },
   },
 
+  debug: {
+    configuration: true,
+    setData: true,
+    request: true,
+  },
+
+  config: {},
+
   /** 生命周期函数--监听页面加载 */
   onLoad(options) {},
 
@@ -37,7 +45,6 @@ CustomPage({
 
   /** 页面相关事件处理函数--监听用户下拉动作 */
   onPullDownRefresh() {
-    this.init()
     setTimeout(() => {
       wx.stopPullDownRefresh()
       this.setData({
@@ -57,11 +64,15 @@ CustomPage({
   onShareAppMessage() {},
 
   /** 页面初始化 */
-  init() {},
+  init() {
+    this.setData({
+      tip: '在 init 方法执行',
+    })
+  },
 
   onUpdateButtonTap() {
     updateUserInfo().then(() => {
-      this._init()
+      this.init()
     })
   },
 

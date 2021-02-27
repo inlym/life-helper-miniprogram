@@ -28,8 +28,8 @@ module.exports = function setData(assignment) {
   this._originalSetData(assignment)
 
   // 赋值日志
-  if (this.debug) {
-    logger.debug('Originan setData assignment', assignment)
+  if (this._debugOptions.setData) {
+    logger.debug('[setData - Original] \n', assignment)
   }
 
   // 逐个判断计算属性中的值是否要更新（先记录，再一次性更新）
@@ -41,7 +41,9 @@ module.exports = function setData(assignment) {
     try {
       newValue = computed[key](this.data)
     } catch (err) {
-      logger.error(err)
+      if (this._debugOptions.setData) {
+        logger.error(err)
+      }
     }
 
     if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
@@ -52,8 +54,8 @@ module.exports = function setData(assignment) {
 
   if (Object.keys(computedAssignment).length > 0) {
     this._originalSetData(computedAssignment)
-    if (this.debug) {
-      logger.debug('Computed setData assignmeng', computedAssignment)
+    if (this._debugOptions.setData) {
+      logger.debug('[setData - Computed] \n', computedAssignment)
     }
   }
 }
