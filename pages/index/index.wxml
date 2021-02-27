@@ -5,35 +5,33 @@
     <!-- 定位信息区域 -->
     <view class="location" bindtap="chooseLocation">
       <image src="/app/static/image/icon/location.svg" mode="widthFix" fill="green"></image>
-      <view class="address">{{weatherCondition.address}}</view>
+      <view class="address">{{ weatherCondition.address }}</view>
       <view class="myicon icon-down icon"></view>
     </view>
 
-
-
     <!-- 温度区域 -->
     <view class="temperature">
-      <view class="temp-num">{{weatherCondition.temperature}}</view>
+      <view class="temp-num">{{ weatherCondition.temperature }}</view>
       <view class="unit">°C</view>
-      <image src="{{weatherCondition.iconUrl}}" mode="widthFix"></image>
+      <image src="{{ weatherCondition.iconUrl }}" mode="widthFix"></image>
     </view>
 
     <!-- 天气和体感温度 -->
     <view class="temperature-feel">
-      <view class="condition">{{weatherCondition.condition}}</view>
+      <view class="condition">{{ weatherCondition.condition }}</view>
       <text>|</text>
-      <view class="temp-feel">体感温度 {{weatherCondition.sensibleTemperature}}°C</view>
+      <view class="temp-feel">体感温度 {{ weatherCondition.sensibleTemperature }}°C</view>
     </view>
 
     <!-- 日出和日落时间 -->
     <view class="sun">
-      <view>日出时间 {{weatherCondition.sunrise}}</view>
-      <view>日落时间 {{weatherCondition.sunset}}</view>
+      <view>日出时间 {{ weatherCondition.sunrise }}</view>
+      <view>日落时间 {{ weatherCondition.sunset }}</view>
     </view>
 
     <!-- 一句话提示 -->
     <view class="oneword">
-      <text>{{weatherCondition.tip}}</text>
+      <text>{{ weatherCondition.tip }}</text>
     </view>
 
     <!-- 其他信息 -->
@@ -41,27 +39,27 @@
       <view class="other-item">
         <view class="item-name">气压</view>
         <view class="myicon icon-qiya icon"></view>
-        <view class="item-num">{{weatherCondition.airPressure}}hPa</view>
+        <view class="item-num">{{ weatherCondition.airPressure }}hPa</view>
       </view>
       <view class="other-item">
         <view class="item-name">湿度</view>
         <view class="myicon icon-shidu icon"></view>
-        <view class="item-num">{{weatherCondition.humidity}}%</view>
+        <view class="item-num">{{ weatherCondition.humidity }}%</view>
       </view>
       <view class="other-item">
         <view class="item-name">风力</view>
         <view class="myicon icon-fengli icon"></view>
-        <view class="item-num">{{weatherCondition.windScale}}级</view>
+        <view class="item-num">{{ weatherCondition.windScale }}级</view>
       </view>
       <view class="other-item">
         <view class="item-name">风速</view>
         <view class="myicon icon-fengsu1 icon"></view>
-        <view class="item-num">{{weatherCondition.windSpeed}}m/s</view>
+        <view class="item-num">{{ weatherCondition.windSpeed }}m/s</view>
       </view>
       <view class="other-item">
         <view class="item-name">风向</view>
         <view class="myicon icon-fengxiang icon"></view>
-        <view class="item-num">{{weatherCondition.windDirection}}</view>
+        <view class="item-num">{{ weatherCondition.windDirection }}</view>
       </view>
     </view>
   </view>
@@ -72,24 +70,21 @@
       <view class="title">24小时预报</view>
       <view class="right">
         <!-- TO DO -->
-        <text wx:if="{{forecast24Hours.maxTemperature}}">最高 {{forecast24Hours.maxTemperature}}℃</text>
-        <text wx:if="{{forecast24Hours.minTemperature}}">最低 {{forecast24Hours.minTemperature}}℃</text>
-        <text wx:if="{{weatherCondition.sunrise}}">日出 {{weatherCondition.sunrise}}</text>
-        <text wx:if="{{weatherCondition.sunset}}">日落 {{weatherCondition.sunset}}</text>
+        <text wx:if="{{ forecast24Hours.maxTemperature }}">最高 {{ forecast24Hours.maxTemperature }}℃</text>
+        <text wx:if="{{ forecast24Hours.minTemperature }}">最低 {{ forecast24Hours.minTemperature }}℃</text>
+        <text wx:if="{{ weatherCondition.sunrise }}">日出 {{ weatherCondition.sunrise }}</text>
+        <text wx:if="{{ weatherCondition.sunset }}">日落 {{ weatherCondition.sunset }}</text>
       </view>
     </view>
 
     <!-- 滚动的列表区 -->
     <view class="body">
-      <scroll-view class="forecast24hours-scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}"
-        enable-flex="{{true}}" scroll-anchoring="{{true}}">
+      <scroll-view class="forecast24hours-scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}"
+        enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
         <view><canvas type="2d" id="fore24hoursline" canvas-id="fore24hoursline"></canvas></view>
       </scroll-view>
     </view>
-
-
   </view>
-
 
   <!-- 未来 15 天的天气预报 -->
   <view class="forecast15days container-box">
@@ -100,16 +95,16 @@
 
     <!-- 滚动的列表区 -->
     <view class="body">
-      <scroll-view class="fore-scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}" enable-flex="{{true}}"
-        scroll-anchoring="{{true}}">
+      <scroll-view class="fore-scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
+        scroll-anchoring="{{ true }}">
         <!-- 白天的天气列表 -->
         <view class="fore-day">
-          <view class="fore-item" wx:for="{{forecast15Days.list}}" wx:key="date">
-            <view class="weekday">{{item.weekday}}</view>
-            <view class="date">{{item.dateFormatted}}</view>
-            <view>{{item.day.condition}}</view>
-            <image src="{{item.day.iconUrl}}"></image>
-            <view class="temperature">{{item.day.temperature}}°</view>
+          <view class="fore-item" wx:for="{{ forecast15Days.list }}" wx:key="date">
+            <view class="weekday">{{ item.weekday }}</view>
+            <view class="date">{{ item.dateFormatted }}</view>
+            <view>{{ item.day.condition }}</view>
+            <image src="{{ item.day.iconUrl }}"></image>
+            <view class="temperature">{{ item.day.temperature }}°</view>
           </view>
         </view>
 
@@ -120,17 +115,15 @@
 
         <!-- 夜间的天气列表 -->
         <view class="fore-night">
-          <view class="fore-item" wx:for="{{forecast15Days.list}}" wx:key="dateFormatted">
-            <view class="temperature">{{item.night.temperature}}°</view>
-            <image src=" {{item.night.iconUrl}}">
-            </image>
-            <view>{{item.night.condition}}</view>
-            <view>{{item.night.windDirection}}</view>
-            <view>{{item.night.windScale}}级</view>
+          <view class="fore-item" wx:for="{{ forecast15Days.list }}" wx:key="dateFormatted">
+            <view class="temperature">{{ item.night.temperature }}°</view>
+            <image src=" {{ item.night.iconUrl }}"> </image>
+            <view>{{ item.night.condition }}</view>
+            <view>{{ item.night.windDirection }}</view>
+            <view>{{ item.night.windScale }}级</view>
           </view>
         </view>
       </scroll-view>
-
     </view>
   </view>
 
@@ -141,24 +134,23 @@
       <view class="title">生活指数</view>
     </view>
     <view class="body">
-      <view class="item" wx:for="{{liveIndex.list}}" wx:key="name" data-index="{{index}}" bindtap="showLiveIndexDetail">
-        <image src="{{item.icon}}" mode="widthFix"></image>
-        <view class="status">{{item.status}}</view>
-        <view class="name">{{item.name}}</view>
+      <view class="item" wx:for="{{ liveIndex.list }}" wx:key="name" data-index="{{ index }}"
+        bindtap="showLiveIndexDetail">
+        <image src="{{ item.icon }}" mode="widthFix"></image>
+        <view class="status">{{ item.status }}</view>
+        <view class="name">{{ item.name }}</view>
       </view>
     </view>
-
   </view>
-
-
 </view>
 
 <!--以下为非页面元素-->
 
 <!--Toptips顶部错误提示组件-->
-<mp-toptips type="{{toptips.type}}" show="{{toptips.show}}" msg="{{toptips.msg}}" delay="{{toptips.delay}}">
+<mp-toptips type="{{ toptips.type }}" show="{{ toptips.show }}" msg="{{ toptips.msg }}" delay="{{ toptips.delay }}">
 </mp-toptips>
 
 <!-- 半屏弹窗组件 -->
-<mp-half-screen-dialog bindbuttontap="buttontap" show="{{halfScreen.show}}" title="{{halfScreen.title}}"
-  subTitle="{{halfScreen.subTitle}}" desc="{{halfScreen.desc}}" tips="{{halfScreen.tips}}"></mp-half-screen-dialog>
+<mp-half-screen-dialog bindbuttontap="buttontap" show="{{ halfScreen.show }}" title="{{ halfScreen.title }}"
+  subTitle="{{ halfScreen.subTitle }}" desc="{{ halfScreen.desc }}" tips="{{ halfScreen.tips }}">
+</mp-half-screen-dialog>

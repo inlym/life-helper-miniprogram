@@ -30,12 +30,6 @@
         "selectedIconPath": "/app/static/image/tabbar/icon_index_HL.png"
       },
       {
-        "pagePath": "pages/tools/tools",
-        "text": "工具",
-        "iconPath": "/app/static/image/tabbar/icon_tool.png",
-        "selectedIconPath": "/app/static/image/tabbar/icon_tool_HL.png"
-      },
-      {
         "pagePath": "pages/me/me",
         "text": "我的",
         "iconPath": "/app/static/image/tabbar/icon_me.png",
@@ -56,6 +50,7 @@
   "plugins": {},
   "usingComponents": {
     "mp-toptips": "weui-miniprogram/toptips/toptips",
-    "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog"
+    "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
+    "mpc-list": "/components/list/list"
   }
 }

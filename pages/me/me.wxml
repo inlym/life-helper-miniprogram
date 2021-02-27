@@ -33,4 +33,6 @@
     </block>
     <view class="onecenter"><button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button></view>
   </view>
+
+  <mpc-list list="{{list1}}"></mpc-list>
 </view>

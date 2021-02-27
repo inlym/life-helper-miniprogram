@@ -51,8 +51,6 @@ CustomPage({
     },
   },
 
-  debug: true,
-
   /** 生命周期函数--监听页面加载 */
   onLoad(options) {},
 
@@ -97,14 +95,7 @@ CustomPage({
    * @update 2021-02-19
    * @param {string} stage 页面阶段，目前为以下值：'onLoad', 'onPullDownRefresh', 'onResetLocation'
    */
-  _init(stage) {
-    if (stage === 'onPullDownRefresh') {
-      setTimeout(() => {
-        wx.stopPullDownRefresh()
-        this.showUpdateTips('哇哦 ~ 数据已经更新了哦！')
-      }, 1000)
-    }
-
+  init(stage) {
     if (stage === 'onResetLocation') {
       this.showUpdateTips('已经切换至新的地点')
     }
@@ -157,7 +148,7 @@ CustomPage({
         success(res) {
           if (res) {
             app.write(app.keys.KEY_CHOOSE_LOCATION, res)
-            self._init('onResetLocation')
+            self.init('onResetLocation')
           }
         },
       })
@@ -168,7 +159,7 @@ CustomPage({
    * 使用 toptips 显示更新提示，除了 onLoad 时不显示，其余更新操作均展示
    */
   showUpdateTips(content) {
-    this.updateData({
+    this.setData({
       toptips: {
         type: 'success',
         show: true,

@@ -6,7 +6,15 @@ const { updateUserInfo } = require('../../app/common/user.js')
 
 CustomPage({
   /** 页面的初始数据 */
-  data: {},
+  data: {
+    list1: [
+      {
+        name: '我的设备',
+        url: '/pages/system/info/info',
+        icon: 'https://img.lh.inlym.com/icon/keyboard.png',
+      },
+    ],
+  },
 
   computed: {
     hasUserInfo(data) {
@@ -53,23 +61,14 @@ CustomPage({
   onShareAppMessage() {},
 
   /** 页面初始化 */
-  init() {
-    this.setData({
-      tip: '在 init 方法执行',
-    })
-  },
+  init() {},
 
   onUpdateButtonTap() {
-    updateUserInfo().then(() => {
-      this.init()
-    })
-  },
-
-  test() {
-    this.updateData({
-      userInfo: {
-        nickname: '',
-      },
+    updateUserInfo().then((res) => {
+      const { avatarUrl, nickName: nickname } = res
+      this.setData({
+        userInfo: { avatarUrl, nickname },
+      })
     })
   },
 })

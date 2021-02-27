@@ -102,6 +102,11 @@ module.exports = function CustomPage(configuration) {
       wx.hideLoading()
       if (stage === 'onPullDownRefresh') {
         wx.stopPullDownRefresh()
+        wx.showToast({
+          title: '页面数据已更新',
+          icon: 'none',
+          duration: 1000,
+        })
       }
     })
   }
