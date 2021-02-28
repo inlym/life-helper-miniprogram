@@ -15,7 +15,7 @@ function diff() {
   let time = storage.get(key)
   if (!time) {
     time = nowMs()
-    storage.set(key, time)
+    storage.save(key, time)
   }
   return formatMs(nowMs() - time)
 }

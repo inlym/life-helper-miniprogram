@@ -5,7 +5,7 @@
     <!-- 定位信息区域 -->
     <view class="location" bindtap="chooseLocation">
       <image src="/app/static/image/icon/location.svg" mode="widthFix" fill="green"></image>
-      <view class="address">{{ weatherCondition.address }}</view>
+      <view class="address">{{ address.address }}</view>
       <view class="myicon icon-down icon"></view>
     </view>
 

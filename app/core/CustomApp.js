@@ -9,6 +9,7 @@ const keys = require('./keys.js')
 const CustomPage = require('./page/CustomPage.js')
 const logger = require('./logger.js')
 const utils = require('./utils.js')
+const location = require('../common/location.js')
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法
@@ -30,6 +31,8 @@ function transformAppConfiguration(configuration) {
     storage,
 
     authorize,
+
+    location,
 
     CustomPage,
 
@@ -69,7 +72,7 @@ function transformAppConfiguration(configuration) {
   const _onLaunch = output.onLaunch
   output.onLaunch = function onLaunch(options) {
     // 本地记录小程序启动时间
-    this.write(this.keys.KEY_APP_LAUNCH_TIME, utils.nowMs())
+    this.storage.save(this.keys.KEY_APP_LAUNCH_TIME, utils.nowMs())
 
     // 执行原有的 onLaunch
     if (typeof _onLaunch === 'function') {
@@ -83,7 +86,7 @@ function transformAppConfiguration(configuration) {
   const _onShow = output.onShow
   output.onShow = function onShow(options) {
     // 覆盖记录小程序 onShow 时间
-    this.write(this.keys.KEY_APP_SHOW_TIME, utils.nowMs())
+    this.storage.save(this.keys.KEY_APP_SHOW_TIME, utils.nowMs())
 
     // 执行原有的 onShow
     if (typeof _onShow === 'function') {

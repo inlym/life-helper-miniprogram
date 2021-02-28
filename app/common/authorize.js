@@ -7,7 +7,7 @@
  * @return {boolean} 是否已授权
  */
 function check(scope) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     wx.getSetting({
       success(res) {
         resolve(Boolean(res['authSetting'][scope]))

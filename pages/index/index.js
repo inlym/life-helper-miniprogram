@@ -12,8 +12,14 @@ CustomPage({
     /** 实时天气情况 */
     weatherCondition: {
       temperature: '0',
+    },
+
+    address: {
       address: '正在定位中 ...',
     },
+
+    /** 定位信息，每次定位 push 一个新对象 */
+    _location: [],
 
     /** 半屏弹窗组件 */
     halfScreen: {
@@ -26,57 +32,146 @@ CustomPage({
   },
 
   requested: {
+    address: {
+      url: '/location/address',
+      ignore: ['afterChooseLocation', 'onLoad'],
+      queries: 'qs',
+    },
+
     weatherCondition: {
       url: '/weather/now',
+      queries: 'qs',
+      ignore: 'onLoad',
     },
 
     liveIndex: {
       url: '/weather/liveindex',
+      queries: 'qs',
+      ignore: 'onLoad',
     },
 
     forecast15Days: {
       url: '/weather/forecast15days',
       ignore: 'onLoad',
-      handler(res, self) {
-        drawForecast15DaysLine(self.data.ctx_fore15line, res.maxTemperature, res.minTemperature)
+      handler(res, _this) {
+        drawForecast15DaysLine(_this.data.ctx_fore15line, res.maxTemperature, res.minTemperature)
       },
+      queries: 'qs',
     },
 
     forecast24Hours: {
       url: '/weather/forecast24hours',
       ignore: 'onLoad',
-      handler(res, self) {
-        drawForecast24HoursLine(self.data.ctx_fore24hoursline, res.list)
+      handler(res, _this) {
+        drawForecast24HoursLine(_this.data.ctx_fore24hoursline, res.list)
       },
+      queries: 'qs',
     },
   },
 
+  /** 查询字符串处理函数 */
+  qs() {
+    const locationList = this.data._location
+    if (locationList.length === 0) {
+      return {}
+    } else {
+      const item = locationList[locationList.length - 1]
+      const { longitude, latitude } = item
+      return {
+        location: `${longitude},${latitude}`,
+      }
+    }
+  },
+
+  pushLocation(location, mode = 'get') {
+    const { longitude, latitude } = location
+    const locationList = this.data._location
+    locationList.push({
+      longitude,
+      latitude,
+      mode,
+      time: app.utils.nowMs(),
+    })
+    this.setData({
+      _location: locationList,
+    })
+  },
+
   /** 生命周期函数--监听页面加载 */
-  onLoad(options) {},
+  onLoad() {
+    app.location.getLocation().then((res) => {
+      if (res) {
+        this.pushLocation(res)
+      }
+
+      this.logger.debug('[onLoad] res', res)
+      this.logger.debug('[onLoad] this.qs()', this.qs())
+
+      this.bindResponseData('address', '/location/address', this.qs())
+      this.bindResponseData('weatherCondition', '/weather/now', this.qs())
+      this.bindResponseData('liveIndex', '/weather/liveindex', this.qs())
+    })
+  },
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {
-    const promisesFor15Days = []
-    promisesFor15Days.push(getCanvas.call(this, 'fore15line', { width: 1920, height: 300 }))
-    promisesFor15Days.push(this.bindResponseData('forecast15Days', '/weather/forecast15days'))
-    Promise.all(promisesFor15Days).then((res) => {
-      const { ctx } = res[0]
-      const { maxTemperature, minTemperature } = res[1]
-      drawForecast15DaysLine(ctx, maxTemperature, minTemperature)
-    })
+    app.location.getLocation().then((res) => {
+      if (res) {
+        this.pushLocation(res)
+      }
 
-    const promisesFor24Hours = []
-    promisesFor24Hours.push(getCanvas.call(this, 'fore24hoursline', { width: 2600, height: 300 }))
-    promisesFor24Hours.push(this.bindResponseData('forecast24Hours', '/weather/forecast24hours'))
-    Promise.all(promisesFor24Hours).then((res) => {
-      const { ctx } = res[0]
-      const { list } = res[1]
-      drawForecast24HoursLine(ctx, list)
+      this.logger.debug('[onReady] res', res)
+      this.logger.debug('[onReady] this.qs()', this.qs())
+
+      const promisesFor15Days = []
+      promisesFor15Days.push(getCanvas.call(this, 'fore15line', { width: 1920, height: 300 }))
+      promisesFor15Days.push(
+        this.bindResponseData('forecast15Days', '/weather/forecast15days', this.qs())
+      )
+      Promise.all(promisesFor15Days).then((res2) => {
+        const { ctx } = res2[0]
+        const { maxTemperature, minTemperature } = res2[1]
+        drawForecast15DaysLine(ctx, maxTemperature, minTemperature)
+      })
+
+      const promisesFor24Hours = []
+      promisesFor24Hours.push(getCanvas.call(this, 'fore24hoursline', { width: 2600, height: 300 }))
+      promisesFor24Hours.push(
+        this.bindResponseData('forecast24Hours', '/weather/forecast24hours', this.qs())
+      )
+      Promise.all(promisesFor24Hours).then((res3) => {
+        const { ctx } = res3[0]
+        const { list } = res3[1]
+        drawForecast24HoursLine(ctx, list)
+      })
     })
   },
 
   /** 生命周期函数--监听页面显示 */
-  onShow() {},
+  onShow() {
+    /** 在该时间内（ 20 分钟）无需重新请求，单位：ms */
+    const exp = 20 * 60 * 1000
+
+    const locationList = this.data._location
+    if (locationList.length === 0) {
+      return
+    }
+
+    if (locationList.length > 0) {
+      const lastTime = locationList[locationList.length - 1]['time']
+      if (app.utils.nowMs() - lastTime < exp) {
+        return
+      }
+    }
+
+    app.location.getLocation().then((res) => {
+      if (res) {
+        this.pushLocation(res)
+      }
+
+      this.init('onShowGetNewLocation')
+    })
+  },
 
   /** 生命周期函数--监听页面隐藏 */
   onHide() {},
@@ -93,28 +188,22 @@ CustomPage({
   /**
    * 页面初始化
    * @update 2021-02-19
-   * @param {string} stage 页面阶段，目前为以下值：'onLoad', 'onPullDownRefresh', 'onResetLocation'
+   * @param {string} stage 页面阶段
+   *
+   * 当前页面 stage 包含以下值：
+   * 1. 'onLoad' - 页面初始化
+   * 2. 'onPullDownRefresh' - 页面下拉刷新
+   * 3. 'afterChooseLocation' - 手工选择新的定位
+   * 4. 'afterGetLocationSilently' - 静默获取新的当前定位
+   * 5. 'onShowGetNewLocation' - 页面重新展示时，获取了新的定位
    */
   init(stage) {
-    if (stage === 'onResetLocation') {
+    if (stage === 'afterChooseLocation') {
       this.showUpdateTips('已经切换至新的地点')
     }
-  },
 
-  _query() {
-    const location = app.read(app.keys.KEY_CHOOSE_LOCATION)
-
-    if (location) {
-      const { province, city, district, latitude, longitude, name, address } = location
-      return {
-        province,
-        city,
-        district,
-        latitude,
-        longitude,
-        name,
-        address,
-      }
+    if (stage === 'onShowGetNewLocation') {
+      this.showUpdateTips('已将定位切换成当前所在位置')
     }
   },
 
@@ -147,8 +236,13 @@ CustomPage({
       wx.chooseLocation({
         success(res) {
           if (res) {
-            app.write(app.keys.KEY_CHOOSE_LOCATION, res)
-            self.init('onResetLocation')
+            self.pushLocation(res, 'choose')
+            self.setData({
+              address: {
+                address: res.name,
+              },
+            })
+            self.init('afterChooseLocation')
           }
         },
       })
@@ -163,7 +257,7 @@ CustomPage({
       toptips: {
         type: 'success',
         show: true,
-        delay: 1000,
+        delay: 2000,
         msg: content,
       },
     })
