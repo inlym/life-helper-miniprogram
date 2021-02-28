@@ -34,7 +34,7 @@ CustomPage({
   requested: {
     address: {
       url: '/location/address',
-      ignore: ['afterChooseLocation', 'onLoad'],
+      ignore: ['afterChooseLocation', 'onLoad', 'onPullDownRefresh'],
       queries: 'qs',
     },
 
