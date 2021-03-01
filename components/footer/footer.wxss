@@ -1,0 +1,3 @@
+.weui-footer__text{
+  margin-top: 16rpx;
+}
