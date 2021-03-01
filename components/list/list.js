@@ -1,4 +1,5 @@
-// components/list/list.js
+'use strict'
+
 Component({
   options: {
     addGlobalClass: true,

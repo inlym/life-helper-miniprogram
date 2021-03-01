@@ -19,7 +19,7 @@
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#1AAD19",
+    "selectedColor": "#07c160",
     "backgroundColor": "#F5F5F5",
     "borderStyle": "white",
     "list": [
@@ -51,6 +51,7 @@
   "usingComponents": {
     "mp-toptips": "weui-miniprogram/toptips/toptips",
     "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
-    "mpc-list": "/components/list/list"
+    "mpc-list": "/components/list/list",
+    "mpc-footer": "/components/footer/footer"
   }
 }
