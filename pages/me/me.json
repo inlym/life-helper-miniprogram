@@ -1,7 +1,8 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
-    "topspace": "/components/topspace/topspace",
-    "mpc-list": "/components/list/list"
-  }
+    "topspace": "/components/topspace/topspace"
+  },
+  "backgroundColor": "#ededed",
+  "backgroundColorTop": "#fff"
 }
