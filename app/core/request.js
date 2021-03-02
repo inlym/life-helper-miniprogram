@@ -4,10 +4,10 @@ const wxp = require('./wxp.js')
 const config = require('../config/config.js')
 
 /** token 在请求头中的字段名 */
-const HEADER_FIELD_TOKEN = 'X-Lh-Token'
+const { HEADER_FIELD_TOKEN } = config
 
 /** code 在请求头中的字段名 */
-const HEADER_FIELD_CODE = 'X-Lh-Code'
+const { HEADER_FIELD_CODE } = config
 
 /** 登录接口的路径地址 */
 const LOGIN_API_PATH = '/login'

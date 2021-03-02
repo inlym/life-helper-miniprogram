@@ -13,6 +13,12 @@ const env = 'prod'
 /** 最终输出的配置 */
 const config = {
   env,
+
+  /** token 在请求头中的字段名 */
+  HEADER_FIELD_TOKEN: 'X-Lh-Token',
+
+  /** code 在请求头中的字段名 */
+  HEADER_FIELD_CODE: 'X-Lh-Code',
 }
 
 if (env === 'prod') {
