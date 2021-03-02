@@ -128,7 +128,7 @@ module.exports = function CustomPage(configuration) {
 
     // 将入参存储
     this._originalSetData({
-      _loadOptions: options,
+      __page_loadOptions__: options,
     })
 
     // 执行原有的 onLoad
