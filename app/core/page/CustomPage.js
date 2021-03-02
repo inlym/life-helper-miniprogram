@@ -74,7 +74,7 @@ module.exports = function CustomPage(configuration) {
       if (this.requested) {
         const taskPromises = []
         this._originalSetData({
-          _onRequesting: true,
+          __page_onRequesting__: true,
         })
         Object.keys(this.requested).forEach((key) => {
           const { url, queries, handler, ignore } = this.requested[key]
@@ -85,7 +85,7 @@ module.exports = function CustomPage(configuration) {
         })
         Promise.all(taskPromises).then((res) => {
           this._originalSetData({
-            _onRequesting: false,
+            __page_onRequesting__: false,
           })
           resolve(res)
         })

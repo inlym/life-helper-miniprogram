@@ -10,10 +10,10 @@
 function getCanvas(id, width = 300, height = 150) {
   return new Promise((resolve) => {
     /** 在 data 中存储的 ctx 变量名 */
-    const ctxName = `__ctx__${id}__`
+    const ctxName = `__ctx_${id}__`
 
     /** 在 data 中存储的 canvas 变量名 */
-    const canvasName = `__canvas__${id}__`
+    const canvasName = `__canvas_${id}__`
 
     if (this.data[ctxName] && this.data[canvasName]) {
       resolve({
