@@ -54,7 +54,9 @@ CustomPage({
       url: '/weather/forecast15days',
       ignore: 'onLoad',
       handler(res, _this) {
-        drawForecast15DaysLine(_this.data.ctx_fore15line, res.maxTemperature, res.minTemperature)
+        getCanvas.call(_this, 'fore15line').then((res2) => {
+          drawForecast15DaysLine(res2.ctx, res.maxTemperature, res.minTemperature)
+        })
       },
       queries: 'qs',
     },
@@ -63,8 +65,11 @@ CustomPage({
       url: '/weather/forecast24hours',
       ignore: 'onLoad',
       handler(res, _this) {
-        drawForecast24HoursLine(_this.data.ctx_fore24hoursline, res.list)
+        getCanvas.call(_this, 'fore24hoursline').then((res2) => {
+          drawForecast24HoursLine(res2.ctx, res.list)
+        })
       },
+
       queries: 'qs',
     },
   },
@@ -124,7 +129,7 @@ CustomPage({
       this.logger.debug('[onReady] this.qs()', this.qs())
 
       const promisesFor15Days = []
-      promisesFor15Days.push(getCanvas.call(this, 'fore15line', { width: 1920, height: 300 }))
+      promisesFor15Days.push(getCanvas.call(this, 'fore15line', 1920, 300))
       promisesFor15Days.push(
         this.bindResponseData('forecast15Days', '/weather/forecast15days', this.qs())
       )
@@ -135,7 +140,7 @@ CustomPage({
       })
 
       const promisesFor24Hours = []
-      promisesFor24Hours.push(getCanvas.call(this, 'fore24hoursline', { width: 2600, height: 300 }))
+      promisesFor24Hours.push(getCanvas.call(this, 'fore24hoursline', 2600, 300))
       promisesFor24Hours.push(
         this.bindResponseData('forecast24Hours', '/weather/forecast24hours', this.qs())
       )
