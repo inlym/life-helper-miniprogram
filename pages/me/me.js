@@ -65,10 +65,15 @@ CustomPage({
 
   onUpdateButtonTap() {
     updateUserInfo().then((res) => {
-      const { avatarUrl, nickName: nickname } = res
-      this.setData({
-        userInfo: { avatarUrl, nickname },
-      })
+      if (res) {
+        const { avatarUrl, nickName: nickname } = res
+        this.setData({
+          userInfo: {
+            avatarUrl,
+            nickname,
+          },
+        })
+      }
     })
   },
 })
