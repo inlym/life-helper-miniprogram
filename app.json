@@ -26,14 +26,14 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "/app/static/image/tabbar/icon_index.png",
-        "selectedIconPath": "/app/static/image/tabbar/icon_index_HL.png"
+        "iconPath": "/images/tabbar/icon_index.png",
+        "selectedIconPath": "/images/tabbar/icon_index_HL.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我的",
-        "iconPath": "/app/static/image/tabbar/icon_me.png",
-        "selectedIconPath": "/app/static/image/tabbar/icon_me_HL.png"
+        "iconPath": "/images/tabbar/icon_me.png",
+        "selectedIconPath": "/images/tabbar/icon_me_HL.png"
       }
     ]
   },
