@@ -1,5 +1,5 @@
 <!-- index.wxml -->
-<view class="container">
+<view class="page">
   <!-- 天气实况 -->
   <view class="weather-condition">
     <!-- 定位信息区域 -->

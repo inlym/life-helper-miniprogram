@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/inlym/life-helper-miniprogram#readme",
   "dependencies": {
-    "@vant/weapp": "^1.5.3",
     "miniprogram-api-promise": "^1.0.4"
   },
   "devDependencies": {

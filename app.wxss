@@ -1,5 +1,4 @@
 @import '/app/static/css/iconfont.wxss';
-@import '/miniprogram_npm/@vant/weapp/common/index.wxss';
 
 /* 页面根元素使用的类 */
 .page {
@@ -8,6 +7,7 @@
   color: var(--weui-FG-0);
   font-size: 32rpx;
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+  line-height: 1.41176471;
 }
 
 image {
@@ -70,4 +70,11 @@ navigator {
 /* 用于临时调试增加边框 */
 .tempborder {
   border: 1rpx solid red;
+}
+
+/* 单行文本缩略 */
+.text-ellipsis-l1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
