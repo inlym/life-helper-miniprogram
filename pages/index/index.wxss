@@ -129,6 +129,64 @@
   color: #333;
 }
 
+/* 今天和明天的天气情况 - start */
+.forecast2days {
+  position: relative;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+  height: 160rpx;
+  background-color: #fff;
+}
+
+.forecast2days .day {
+  width: 50%;
+  padding: 10rpx 20rpx 0;
+}
+
+.forecast2days .day:first-child {
+  border-right: 4rpx solid #ededed;
+}
+
+.forecast2days .day {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.forecast2days .day .firstline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forecast2days .day .firstline .textaqi {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.forecast2days .day .firstline .aqi {
+  padding: 0 16rpx;
+  border-radius: 10rpx;
+  margin-left: 16rpx;
+  font-size: 90%;
+}
+
+.forecast2days .day .secondline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 90%;
+}
+
+.forecast2days .day .secondline image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 今天和明天的天气情况 - end */
+
 .forecast15days {
   margin-top: 40rpx;
 }

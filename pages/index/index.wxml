@@ -64,6 +64,27 @@
     </view>
   </view>
 
+  <!-- 今天和明天2天的天气情况 - start -->
+  <view class="forecast2days">
+    <view class="day" wx:for="{{ forecast2Days.list }}" wx:key="daytext">
+      <view class="firstline">
+        <view class="textaqi">
+          <view class="text">{{ item.daytext }}</view>
+          <view class="aqi" style="background-color:{{ item.aqiColor }};">{{ item.aqiClass }}</view>
+        </view>
+        <view class="temp">{{ item.max }}°/{{ item.min }}°</view>
+      </view>
+
+      <view class="secondline">
+        <view class="desc">{{ item.desc }}</view>
+        <view class="icon">
+          <image src="{{ item.iconUrl }}" mode="widthFix"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 今天和明天2天的天气情况 - end -->
+
   <view class="forecast24hours container-box">
     <!-- 标题文案 -->
     <view class="head">

@@ -44,6 +44,12 @@ CustomPage({
       ignore: 'onLoad',
     },
 
+    forecast2Days: {
+      url: '/weather/forecast2days',
+      queries: 'qs',
+      ignore: 'onLoad',
+    },
+
     liveIndex: {
       url: '/weather/liveindex',
       queries: 'qs',
@@ -113,6 +119,7 @@ CustomPage({
       this.logger.debug('[onLoad] this.qs()', this.qs())
 
       this.bindResponseData('address', '/location/address', this.qs())
+      this.bindResponseData('forecast2Days', '/weather/forecast2days', this.qs())
       this.bindResponseData('weatherCondition', '/weather/now', this.qs())
       this.bindResponseData('liveIndex', '/weather/liveindex', this.qs())
     })
