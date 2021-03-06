@@ -11,6 +11,12 @@ Component({
       type: Number,
       value: 0,
     },
+
+    /** 不透明度，透传至 CSS 的 opacity 属性。默认为 1，即背景色为纯白色 */
+    opacity: {
+      type: Number,
+      value: 1,
+    },
   },
 
   data: {
