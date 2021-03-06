@@ -5,13 +5,18 @@ const { CustomPage } = app
 
 CustomPage({
   /** 页面的初始数据 */
-  data: {},
+  data: {
+    conditionStyle: {
+      bgClass: 'bg-common',
+      rainLevel: 0,
+      decoration: ['sun', 'snowman', 'cloud', 'moon', 'rain'],
+    },
+  },
 
   requested: {},
 
   /** 生命周期函数--监听页面加载 */
-  onLoad(options) {
-  },
+  onLoad(options) {},
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {},

@@ -1,4 +1,5 @@
 @import '/app/static/css/iconfont.wxss';
+@import '/app/static/css/weather.wxss';
 
 /* 页面根元素使用的类 */
 .page {

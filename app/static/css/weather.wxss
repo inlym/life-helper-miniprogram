@@ -1,0 +1,238 @@
+/* 天气相关类样式文件 */
+/* 晴、云、阴、雨、雪、雾、尘 */
+
+/* 以下是背景区域 */
+.wgb {
+  position: relative;
+}
+
+/* 通用背景，用于：晴、云、阴 */
+.wbg-common {
+  background: linear-gradient(15deg, #4BADE3, #75BDE4, #C1DBE3);
+}
+
+/* 夜晚背景，用于：晴、云、阴且当前时间大于日落时间后一小时 */
+.wbg-night {
+  background: linear-gradient(15deg, #A94DBA, #894FB8, #6551B5);
+  color: #fff;
+}
+
+/* 小中雨背景 */
+.wbg-lightrain {
+  background: linear-gradient(15deg, #5FACC8, #83C1CF, #C2DAE4);
+}
+
+/* 灰暗背景，用于：雪、雾、尘、大暴雨 */
+.wbg-grey {
+  background: linear-gradient(15deg, #D3D7DB, #B6BEC6, #929FAB);
+}
+
+.wbg-night .moon {
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 100%;
+  background: radial-gradient(circle at bottom left, #e6e8db, #fef07e);
+}
+
+.moon::before,
+.moon::after {
+  content: '';
+  position: absolute;
+  border-radius: 100%;
+  background-color: #777777;
+  box-shadow: 4rpx 4rpx 4rpx 0 #555555;
+}
+
+.moon::before {
+  top: 15%;
+  left: 55%;
+  width: 20%;
+  height: 20%;
+  opacity: 0.2;
+}
+
+.moon::after {
+  bottom: 50%;
+  left: 25%;
+  width: 15%;
+  height: 15%;
+  opacity: 0.1;
+}
+
+.star::before {
+  content: attr();
+}
+
+.meteor {
+  position: absolute;
+  background-color: #fff;
+  opacity: 0;
+  top: 30%;
+  left: 30%;
+  width: 2rpx;
+  height: 30rpx;
+  transform: rotate(45deg);
+  will-change: transform, opacity;
+  animation: meteor 6250ms infinite ease-in;
+}
+
+.meteor:nth-child(1) {
+  top: 30%;
+  left: 30%;
+  animation: meteor 6s infinite ease-in;
+}
+
+
+.meteor:nth-child(2) {
+  top: 60%;
+  left: 85%;
+  animation: meteor 12s infinite ease-in;
+}
+
+.meteor:nth-child(3) {
+  top: 70%;
+  left: 85%;
+  animation: meteor 20s infinite ease-in;
+}
+
+.meteor:nth-child(4) {
+  top: 90%;
+  left: 90%;
+  animation: meteor 3s infinite ease-in;
+}
+
+@keyframes meteor {
+  5% {
+    opacity: 1;
+  }
+
+  15% {
+    transform: translate(-500rpx, 500rpx) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.cloud {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  width: 200rpx;
+  height: 70rpx;
+  border-radius: 70rpx;
+  background-color: #fff;
+  box-shadow: 0 0 8rpx 8rpx #e6e8db inset, 0 0 8rpx -8rpx #e6e8db;
+  animation: cloudmove 5s infinite ease-in-out;
+}
+
+.cloud+.cloud {
+  top: 20%;
+  left: 70%;
+  animation: cloudmove 7s infinite linear;
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: inherit;
+  border-radius: inherit;
+  background-color: inherit;
+  box-shadow: inherit;
+  bottom: 30%;
+}
+
+.cloud::before {
+  left: 25rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.cloud::after {
+  left: 100rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+@keyframes cloudmove {
+  50% {
+    transform: translateX(-200rpx);
+  }
+}
+
+
+/* 下雨动画 - start */
+.rain,
+.rain::before,
+.rain::after {
+  position: absolute;
+  width: 4rpx;
+  height: 2rpx;
+  border-radius: 50%;
+  background-color: #eee;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: rain 6s infinite linear;
+  transform: rotate(60deg);
+}
+
+.rain::before,
+.rain::after {
+  content: '';
+}
+
+.rain:nth-child(5n + 3)::before,
+.rain:nth-child(11n + 7)::after,
+.rain:nth-child(2n + 1) {
+  top: 30%;
+  right: 10%;
+  animation-delay: 500ms;
+}
+
+.rain:nth-child(3n + 2)::after,
+.rain:nth-child(7n + 5)::after,
+.rain:nth-child(3n + 2) {
+  top: 30%;
+  left: 45%;
+  animation-delay: 1250ms;
+}
+
+.rain:nth-child(2n + 1)::before,
+.rain:nth-child(5n + 3)::after,
+.rain:nth-child(7n + 5) {
+  top: 14%;
+  left: 82%;
+  animation-delay: 3s;
+}
+
+.rain:nth-child(11n + 7)::before,
+.rain:nth-child(3n + 2)::after,
+.rain:nth-child(7n + 5) {
+  top: 25%;
+  left: 45%;
+  animation-delay: 2000ms;
+}
+
+.rain:nth-child(7n + 5)::before,
+.rain:nth-child(2n + 1)::after,
+.rain:nth-child(11n + 7) {
+  top: 20%;
+  left: 43%;
+  animation-delay: 2500ms;
+}
+
+@keyframes rain {
+  10% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-100rpx, 600rpx);
+  }
+}

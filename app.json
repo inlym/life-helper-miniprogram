@@ -52,6 +52,7 @@
     "mp-toptips": "weui-miniprogram/toptips/toptips",
     "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
     "mpc-list": "/components/list/list",
-    "mpc-footer": "/components/footer/footer"
+    "mpc-footer": "/components/footer/footer",
+    "topspace": "/components/topspace/topspace"
   }
 }

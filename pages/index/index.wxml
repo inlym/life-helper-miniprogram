@@ -1,7 +1,51 @@
-<!-- index.wxml -->
 <view class="page">
-  <!-- 天气实况 -->
-  <view class="weather-condition">
+  <!-- 天气实况（新版） -->
+  <view class="condition wbg-night">
+    <!-- 顶部预留高度 -->
+    <topspace offset="0" opacity="0"></topspace>
+
+    <!-- 大片背景区域 -->
+    <view class="cond-background">
+      <view class="moon"></view>
+      <view class="meteor"></view>
+      <view class="meteor"></view>
+      <view class="meteor"></view>
+      <view class="meteor" style="top:300rpx;right:100rpx;"></view>
+      <view class="cloud"></view>
+      <view class="cloud"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+      <view class="rain"></view>
+    </view>
+
+
+
+  </view>
+
+
+
+  <!-- 天气实况（旧，预备删除） -->
+  <view class="weather-condition" wx:if="{{false}}">
+    <!-- 顶部预留高度 -->
+    <topspace offset="0" opacity="0"></topspace>
+
     <!-- 定位信息区域 -->
     <view class="location" bindtap="chooseLocation">
       <image src="/images/icon/location.svg" mode="widthFix" fill="green"></image>

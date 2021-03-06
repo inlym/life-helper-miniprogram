@@ -1,3 +1,3 @@
-<!--pages/test/test.wxml-->
-<text>pages/test/test.wxml</text>
-<mpc-footer title="我的个人助手" desc="Copyright 2020-2021 inlym"></mpc-footer>
+<view class="main wbg wbg-night">
+  <view class="star" diameter="10rpx" x="50" y="50" duration="10s"></view>
+</view>

@@ -1,5 +1,6 @@
 {
   "backgroundTextStyle": "dark",
   "navigationBarTitleText": "我的个人助手",
+  "navigationStyle": "custom",
   "usingComponents": {}
 }

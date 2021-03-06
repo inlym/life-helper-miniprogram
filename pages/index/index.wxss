@@ -24,9 +24,20 @@
 }
 
 /* 单独设置部分 */
+
+/* 天气实况（新版） - start */
+.condition {
+  height: 1250rpx;
+  position: relative;
+}
+
+
+/* 天气实况（新版） - end */
+
+
+/* 天气实况（旧，预备删除） - start */
 .weather-condition {
   padding-bottom: 30rpx;
-  background-image: linear-gradient(to top right, #c9e7f3, #afdaed, #9acfe9, #cae4f5, #ffffff);
 }
 
 .location {
@@ -129,6 +140,9 @@
   color: #333;
 }
 
+/* 天气实况（旧，预备删除） - end */
+
+
 /* 今天和明天的天气情况 - start */
 .forecast2days {
   position: relative;
@@ -146,7 +160,7 @@
 }
 
 .forecast2days .day:first-child {
-  border-right: 4rpx solid #ededed;
+  border-right: 2rpx solid #ededed;
 }
 
 .forecast2days .day {
@@ -167,10 +181,11 @@
 }
 
 .forecast2days .day .firstline .aqi {
-  padding: 0 16rpx;
-  border-radius: 10rpx;
+  padding: 0 20rpx;
+  border-radius: 20rpx;
   margin-left: 16rpx;
   font-size: 90%;
+  color: #fff;
 }
 
 .forecast2days .day .secondline {
@@ -186,6 +201,8 @@
 }
 
 /* 今天和明天的天气情况 - end */
+
+/* 未来 15 天的天气预报 - start */
 
 .forecast15days {
   margin-top: 40rpx;
@@ -215,8 +232,9 @@ scroll-view.fore-scroll {
   background-color: #eaeaea;
 }
 
-.fore-night .fore-item:nth-child(2) {
-  background-color: #eaeaea;
+.fore-night .fore-item:nth-child(2n+1) {
+  --abc: rgba(249, 140, 36, 0.1);
+  background-color: var(--abc);
 }
 
 .fore-item .weekday {
