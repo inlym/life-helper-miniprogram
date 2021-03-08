@@ -1,38 +1,38 @@
 <view class="page">
   <!-- 天气实况（新版） -->
-  <view class="condition wbg-night">
+  <view class="condition wgb wbg-night">
     <!-- 顶部预留高度 -->
     <topspace offset="0" opacity="0"></topspace>
 
     <!-- 大片背景区域 -->
     <view class="cond-background">
-      <view class="moon"></view>
-      <view class="meteor"></view>
-      <view class="meteor"></view>
-      <view class="meteor"></view>
-      <view class="meteor" style="top:300rpx;right:100rpx;"></view>
-      <view class="cloud"></view>
-      <view class="cloud"></view>
+      <view class="fullmoon" wx:if="{{false}}"></view>
+      <view class="halfmoon" wx:if="{{false}}"></view>
+      <view class="sun"></view>
+      <view class="cloud darkcloud"></view>
+      <view class="cloud darkcloud"></view>
       <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
-      <view class="rain"></view>
+    </view>
+
+    <view class="content">
+      <view class="location" bindtap="chooseLocation">
+        <image src="/images/icon/location.svg" mode="widthFix" fill="green"></image>
+        <view class="address">{{ address.address }}</view>
+        <view class="myicon icon-down icon"></view>
+      </view>
+
+      <view class="temperature degree">{{ weatherCondition.temperature }}</view>
+
+      <view>{{ weatherCondition.condition }}</view>
+
+      <view>日出 {{ weatherCondition.sunrise }} 日落 {{ weatherCondition.sunset }}</view>
+
+      <view class="wind">气压 {{ weatherCondition.airPressure }}hPa 湿度 {{ weatherCondition.humidity }}% 风力
+        {{ weatherCondition.windScale }}级 风速{{ weatherCondition.windSpeed }}m/s 风向 {{ weatherCondition.windDirection }}
+      </view>
+
+
+
     </view>
 
 
@@ -116,7 +116,8 @@
           <view class="text">{{ item.daytext }}</view>
           <view class="aqi" style="background-color:{{ item.aqiColor }};">{{ item.aqiClass }}</view>
         </view>
-        <view class="temp">{{ item.max }}°/{{ item.min }}°</view>
+        <!-- <view class="temp">{{ item.max }}°/{{ item.min }}°</view> -->
+        <view class="temp"><text class="degree">{{ item.max }}</text>/<text class="degree">{{ item.min }}</text></view>
       </view>
 
       <view class="secondline">

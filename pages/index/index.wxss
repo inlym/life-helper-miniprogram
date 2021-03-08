@@ -23,6 +23,11 @@
   font-weight: bold;
 }
 
+/* 温度的 ° 符号 */
+.degree::after {
+  content: '\00b0';
+}
+
 /* 单独设置部分 */
 
 /* 天气实况（新版） - start */
@@ -30,6 +35,28 @@
   height: 1250rpx;
   position: relative;
 }
+
+.condition .content {
+  position: absolute;
+  bottom: 0;
+  height: 800rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.condition .content .temperature {
+  font-size: 200rpx;
+  font-weight: 100;
+  text-align: center;
+}
+
+.condition .content .wind{
+  font-size: 80%;
+}
+
 
 
 /* 天气实况（新版） - end */
@@ -146,7 +173,7 @@
 /* 今天和明天的天气情况 - start */
 .forecast2days {
   position: relative;
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
   padding: 20rpx 0;
   display: flex;
   justify-content: space-between;

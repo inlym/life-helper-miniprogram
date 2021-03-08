@@ -4,11 +4,13 @@
 /* 以下是背景区域 */
 .wgb {
   position: relative;
+  overflow: hidden;
 }
 
 /* 通用背景，用于：晴、云、阴 */
 .wbg-common {
-  background: linear-gradient(15deg, #4BADE3, #75BDE4, #C1DBE3);
+  background: linear-gradient(15deg, #C1DBE3, #75BDE4, #4fc1e9);
+  color: #555555;
 }
 
 /* 夜晚背景，用于：晴、云、阴且当前时间大于日落时间后一小时 */
@@ -19,35 +21,35 @@
 
 /* 小中雨背景 */
 .wbg-lightrain {
-  background: linear-gradient(15deg, #5FACC8, #83C1CF, #C2DAE4);
+  background: linear-gradient(15deg, #C2DAE4, #83C1CF, #5FACC8);
 }
 
 /* 灰暗背景，用于：雪、雾、尘、大暴雨 */
 .wbg-grey {
-  background: linear-gradient(15deg, #D3D7DB, #B6BEC6, #929FAB);
+  background: linear-gradient(15deg, #ccd1d9, #656d78);
 }
 
-.wbg-night .moon {
+/* 满月 */
+.fullmoon {
   position: absolute;
-  top: 25%;
-  left: 20%;
-  transform: translate(-50%, -50%);
+  top: 16%;
+  left: 10%;
   width: 200rpx;
   height: 200rpx;
-  border-radius: 100%;
+  border-radius: 50%;
   background: radial-gradient(circle at bottom left, #e6e8db, #fef07e);
 }
 
-.moon::before,
-.moon::after {
+.fullmoon::before,
+.fullmoon::after {
   content: '';
   position: absolute;
-  border-radius: 100%;
+  border-radius: 50%;
   background-color: #777777;
   box-shadow: 4rpx 4rpx 4rpx 0 #555555;
 }
 
-.moon::before {
+.fullmoon::before {
   top: 15%;
   left: 55%;
   width: 20%;
@@ -55,7 +57,7 @@
   opacity: 0.2;
 }
 
-.moon::after {
+.fullmoon::after {
   bottom: 50%;
   left: 25%;
   width: 15%;
@@ -63,68 +65,40 @@
   opacity: 0.1;
 }
 
-.star::before {
-  content: attr();
-}
-
-.meteor {
+/* 半月 */
+.halfmoon {
   position: absolute;
-  background-color: #fff;
-  opacity: 0;
-  top: 30%;
-  left: 30%;
-  width: 2rpx;
-  height: 30rpx;
-  transform: rotate(45deg);
-  will-change: transform, opacity;
-  animation: meteor 6250ms infinite ease-in;
+  top: 20%;
+  left: 20%;
+  width: 180rpx;
+  height: 180rpx;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: -40rpx -30rpx 0 10rpx #fef07e;
 }
 
-.meteor:nth-child(1) {
-  top: 30%;
-  left: 30%;
-  animation: meteor 6s infinite ease-in;
+/* 太阳 */
+.sun {
+  position: absolute;
+  top: 16%;
+  left: 10%;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle at bottom left, #ffee44, #fef07e);
+  box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 30rpx;
 }
 
-
-.meteor:nth-child(2) {
-  top: 60%;
-  left: 85%;
-  animation: meteor 12s infinite ease-in;
-}
-
-.meteor:nth-child(3) {
-  top: 70%;
-  left: 85%;
-  animation: meteor 20s infinite ease-in;
-}
-
-.meteor:nth-child(4) {
-  top: 90%;
-  left: 90%;
-  animation: meteor 3s infinite ease-in;
-}
-
-@keyframes meteor {
-  5% {
-    opacity: 1;
-  }
-
-  15% {
-    transform: translate(-500rpx, 500rpx) rotate(45deg);
-    opacity: 0;
-  }
-}
-
+/* 云 */
 .cloud {
   position: absolute;
-  top: 30%;
+  top: 25%;
   left: 40%;
-  width: 200rpx;
-  height: 70rpx;
-  border-radius: 70rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
   background-color: #fff;
-  box-shadow: 0 0 8rpx 8rpx #e6e8db inset, 0 0 8rpx -8rpx #e6e8db;
+  box-shadow: 90rpx 10rpx 0 10rpx #fff, 30rpx -40rpx 0 -15rpx #fff, 160rpx -5rpx 0 -20rpx #fff, 100rpx -40rpx 0 -15rpx #fff;
   animation: cloudmove 5s infinite ease-in-out;
 }
 
@@ -134,105 +108,71 @@
   animation: cloudmove 7s infinite linear;
 }
 
-.cloud::before,
-.cloud::after {
-  content: '';
-  position: inherit;
-  border-radius: inherit;
-  background-color: inherit;
-  box-shadow: inherit;
-  bottom: 30%;
-}
-
-.cloud::before {
-  left: 25rpx;
-  width: 100rpx;
-  height: 100rpx;
-}
-
-.cloud::after {
-  left: 100rpx;
-  width: 60rpx;
-  height: 60rpx;
-}
-
 @keyframes cloudmove {
   50% {
     transform: translateX(-200rpx);
   }
 }
 
+/* 乌云 */
+.darkcloud {
+  background-color: #cccccc;
+  box-shadow: 90rpx 10rpx 0 10rpx #cccccc, 30rpx -40rpx 0 -15rpx #cccccc, 160rpx -5rpx 0 -20rpx #cccccc, 100rpx -40rpx 0 -15rpx #cccccc;
+}
 
-/* 下雨动画 - start */
-.rain,
-.rain::before,
-.rain::after {
+/* 雨 */
+.rain {
   position: absolute;
-  width: 4rpx;
-  height: 2rpx;
+  top: 10%;
+  left: 5%;
+  width: 6rpx;
+  height: 14rpx;
   border-radius: 50%;
-  background-color: #eee;
-  opacity: 0;
-  will-change: transform, opacity;
-  animation: rain 6s infinite linear;
-  transform: rotate(60deg);
+  opacity: 0.9;
+  background-color: transparent;
+  animation: raining 0.5s infinite linear;
+  font-size: 8rpx;
 }
 
-.rain::before,
-.rain::after {
-  content: '';
-}
+@keyframes raining {
+  0% {
+    box-shadow: rgba(0, 0, 0, 0) 30em 30em, rgba(0, 0, 0, 0) 40em 40em, #eee 50em 75em, #eee 55em 50em, #eee 70em 100em,
+      #eee 80em 95em, #eee 110em 45em, #eee 90em 35em;
+  }
 
-.rain:nth-child(5n + 3)::before,
-.rain:nth-child(11n + 7)::after,
-.rain:nth-child(2n + 1) {
-  top: 30%;
-  right: 10%;
-  animation-delay: 500ms;
-}
+  25% {
+    box-shadow: #eee 30em 45em, #eee 40em 60em, #eee 50em 90em, #eee 55em 65em, rgba(0, 0, 0, 0) 70em 120em,
+      rgba(0, 0, 0, 0) 80em 120em, #eee 110em 70em, #eee 90em 60em;
+  }
 
-.rain:nth-child(3n + 2)::after,
-.rain:nth-child(7n + 5)::after,
-.rain:nth-child(3n + 2) {
-  top: 30%;
-  left: 45%;
-  animation-delay: 1250ms;
-}
-
-.rain:nth-child(2n + 1)::before,
-.rain:nth-child(5n + 3)::after,
-.rain:nth-child(7n + 5) {
-  top: 14%;
-  left: 82%;
-  animation-delay: 3s;
-}
-
-.rain:nth-child(11n + 7)::before,
-.rain:nth-child(3n + 2)::after,
-.rain:nth-child(7n + 5) {
-  top: 25%;
-  left: 45%;
-  animation-delay: 2000ms;
-}
-
-.rain:nth-child(7n + 5)::before,
-.rain:nth-child(2n + 1)::after,
-.rain:nth-child(11n + 7) {
-  top: 20%;
-  left: 43%;
-  animation-delay: 2500ms;
-}
-
-@keyframes rain {
-  10% {
-    opacity: 0.4;
+  26% {
+    box-shadow: #eee 30em 45em, #eee 40em 60em, #eee 50em 90em, #eee 55em 65em, rgba(0, 0, 0, 0) 70em 40em,
+      rgba(0, 0, 0, 0) 80em 20em, #eee 110em 70em, #eee 90em 60em;
   }
 
   50% {
-    opacity: 1;
+    box-shadow: #eee 30em 70em, #eee 40em 80em, rgba(0, 0, 0, 0) 50em 100em, #eee 55em 80em, #eee 70em 60em,
+      #eee 80em 45em, #eee 110em 95em, #eee 90em 85em;
+  }
+
+  51% {
+    box-shadow: #eee 30em 70em, #eee 40em 80em, rgba(0, 0, 0, 0) 50em 45em, #eee 55em 80em, #eee 70em 60em,
+      #eee 80em 45em, #eee 110em 95em, #eee 90em 85em;
+  }
+
+  75% {
+    box-shadow: #eee 30em 95em, #eee 40em 100em, #eee 50em 60em, rgba(0, 0, 0, 0) 55em 95em, #eee 70em 80em,
+      #eee 80em 70em, rgba(0, 0, 0, 0) 110em 120em, rgba(0, 0, 0, 0) 90em 110em;
+  }
+
+  76% {
+    box-shadow: #eee 30em 95em, #eee 40em 100em, #eee 50em 60em, rgba(0, 0, 0, 0) 55em 35em, #eee 70em 80em,
+      #eee 80em 70em, rgba(0, 0, 0, 0) 110em 25em, rgba(0, 0, 0, 0) 90em 15em;
   }
 
   100% {
-    transform: translate(-100rpx, 600rpx);
+    box-shadow: rgba(0, 0, 0, 0) 30em 120em, rgba(0, 0, 0, 0) 40em 120em, #eee 50em 75em, #eee 55em 50em,
+      #eee 70em 100em, #eee 80em 95em, #eee 110em 45em, rgba(0, 0, 0, 0) 90em 35em;
   }
+
 }
