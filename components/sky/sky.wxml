@@ -1,9 +1,0 @@
-<!-- 用于天气页面模拟天空情况 -->
-<view class="sky">
-  <view class="moon" wx:if="{{moon}}"></view>
-  <view class="sun" wx:if="{{sun}}"></view>
-  <view class="rain" wx:for="{{rain}}"></view>
-  <view class="cloud" wx:for="{{cloud}}"></view>
-  <view class="meteor" wx:for="{{meteor}}"></view>
-
-</view>
