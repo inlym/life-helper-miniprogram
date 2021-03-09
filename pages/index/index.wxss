@@ -47,128 +47,21 @@
   justify-content: space-around;
 }
 
+.condition .content .location {
+  font-size: 32rpx;
+}
+
 .condition .content .temperature {
   font-size: 200rpx;
   font-weight: 100;
   text-align: center;
 }
 
-.condition .content .wind{
+.condition .content .wind {
   font-size: 80%;
 }
 
-
-
 /* 天气实况（新版） - end */
-
-
-/* 天气实况（旧，预备删除） - start */
-.weather-condition {
-  padding-bottom: 30rpx;
-}
-
-.location {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 14rpx;
-  font-size: 28rpx;
-}
-
-.location image {
-  width: 30rpx;
-  height: 30rpx;
-  margin-right: 6rpx;
-}
-
-.location .address {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 700rpx;
-}
-
-.location .icon {
-  font-size: 16rpx;
-  color: #333;
-  margin-left: 20rpx;
-}
-
-.weather-condition .temperature {
-  position: relative;
-  height: 260rpx;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-}
-
-.temperature .temp-num {
-  font-size: 200rpx;
-  font-family: 'MingLiU', 'Microsoft YaHei';
-  color: #666;
-}
-
-.temperature .unit {
-  font-size: 40rpx;
-}
-
-.temperature image {
-  position: absolute;
-  width: 160rpx;
-  right: 90rpx;
-  top: 20rpx;
-}
-
-.temperature-feel {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-}
-
-.temperature-feel text {
-  margin: 0 30rpx;
-}
-
-.sun {
-  display: flex;
-  margin-top: 10rpx;
-  justify-content: center;
-}
-
-.sun view {
-  margin: 0 50rpx;
-}
-
-.oneword {
-  margin-top: 20rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60rpx;
-}
-
-.oneword text {
-  padding: 4rpx 30rpx;
-}
-
-.weather-other {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 30rpx;
-}
-
-.weather-other .other-item {
-  width: 120rpx;
-  text-align: center;
-}
-
-.weather-other .other-item .icon {
-  font-size: 40rpx;
-  color: #333;
-}
-
-/* 天气实况（旧，预备删除） - end */
-
 
 /* 今天和明天的天气情况 - start */
 .forecast2days {
@@ -257,11 +150,6 @@ scroll-view.fore-scroll {
 
 .fore-day .fore-item:nth-child(2) {
   background-color: #eaeaea;
-}
-
-.fore-night .fore-item:nth-child(2n+1) {
-  --abc: rgba(249, 140, 36, 0.1);
-  background-color: var(--abc);
 }
 
 .fore-item .weekday {

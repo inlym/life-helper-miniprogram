@@ -1,112 +1,37 @@
-<view class="page">
-  <!-- 天气实况（新版） -->
-  <view class="condition wgb wbg-night">
+<view class="main">
+  <!-- 天气实况（新版） - start -->
+  <view class="condition wgb {{ condition.skyElement.bgClass }}">
     <!-- 顶部预留高度 -->
     <topspace offset="0" opacity="0"></topspace>
 
     <!-- 大片背景区域 -->
     <view class="cond-background">
-      <view class="fullmoon" wx:if="{{false}}"></view>
-      <view class="halfmoon" wx:if="{{false}}"></view>
-      <view class="sun"></view>
-      <view class="cloud darkcloud"></view>
-      <view class="cloud darkcloud"></view>
-      <view class="rain"></view>
+      <view class="fullmoon" wx:if="{{ condition.skyElement.fullmoon }}"></view>
+      <view class="halfmoon" wx:if="{{ condition.skyElement.halfmoon }}"></view>
+      <view class="sun" wx:if="{{ condition.skyElement.sun }}"></view>
+      <view class="fixed-cloud {{ condition.skyElement.darkCloud ? 'darkcloud' : '' }}"
+        wx:if="{{ condition.skyElement.fixedCloud }}"></view>
+      <view class="moving-cloud {{ condition.skyElement.darkCloud ? 'darkcloud' : '' }}"
+        wx:if="{{ condition.skyElement.movingCloud }}"></view>
+      <view class="rain" wx:if="{{ condition.skyElement.rain }}"></view>
     </view>
 
     <view class="content">
       <view class="location" bindtap="chooseLocation">
-        <image src="/images/icon/location.svg" mode="widthFix" fill="green"></image>
-        <view class="address">{{ address.address }}</view>
-        <view class="myicon icon-down icon"></view>
+        <text class="address">{{ address.address }}</text>
+        <text class="myicon icon-xia"></text>
       </view>
 
-      <view class="temperature degree">{{ weatherCondition.temperature }}</view>
+      <view class="temperature">{{ condition.temperature }}</view>
 
-      <view>{{ weatherCondition.condition }}</view>
-
-      <view>日出 {{ weatherCondition.sunrise }} 日落 {{ weatherCondition.sunset }}</view>
-
-      <view class="wind">气压 {{ weatherCondition.airPressure }}hPa 湿度 {{ weatherCondition.humidity }}% 风力
-        {{ weatherCondition.windScale }}级 风速{{ weatherCondition.windSpeed }}m/s 风向 {{ weatherCondition.windDirection }}
-      </view>
-
-
-
-    </view>
-
-
-
-  </view>
-
-
-
-  <!-- 天气实况（旧，预备删除） -->
-  <view class="weather-condition" wx:if="{{false}}">
-    <!-- 顶部预留高度 -->
-    <topspace offset="0" opacity="0"></topspace>
-
-    <!-- 定位信息区域 -->
-    <view class="location" bindtap="chooseLocation">
-      <image src="/images/icon/location.svg" mode="widthFix" fill="green"></image>
-      <view class="address">{{ address.address }}</view>
-      <view class="myicon icon-down icon"></view>
-    </view>
-
-    <!-- 温度区域 -->
-    <view class="temperature">
-      <view class="temp-num">{{ weatherCondition.temperature }}</view>
-      <view class="unit">°C</view>
-      <image src="{{ weatherCondition.iconUrl }}" mode="widthFix"></image>
-    </view>
-
-    <!-- 天气和体感温度 -->
-    <view class="temperature-feel">
-      <view class="condition">{{ weatherCondition.condition }}</view>
-      <text>|</text>
-      <view class="temp-feel">体感温度 {{ weatherCondition.sensibleTemperature }}°C</view>
-    </view>
-
-    <!-- 日出和日落时间 -->
-    <view class="sun">
-      <view>日出时间 {{ weatherCondition.sunrise }}</view>
-      <view>日落时间 {{ weatherCondition.sunset }}</view>
-    </view>
-
-    <!-- 一句话提示 -->
-    <view class="oneword">
-      <text>{{ weatherCondition.tip }}</text>
-    </view>
-
-    <!-- 其他信息 -->
-    <view class="weather-other">
-      <view class="other-item">
-        <view class="item-name">气压</view>
-        <view class="myicon icon-qiya icon"></view>
-        <view class="item-num">{{ weatherCondition.airPressure }}hPa</view>
-      </view>
-      <view class="other-item">
-        <view class="item-name">湿度</view>
-        <view class="myicon icon-shidu icon"></view>
-        <view class="item-num">{{ weatherCondition.humidity }}%</view>
-      </view>
-      <view class="other-item">
-        <view class="item-name">风力</view>
-        <view class="myicon icon-fengli icon"></view>
-        <view class="item-num">{{ weatherCondition.windScale }}级</view>
-      </view>
-      <view class="other-item">
-        <view class="item-name">风速</view>
-        <view class="myicon icon-fengsu1 icon"></view>
-        <view class="item-num">{{ weatherCondition.windSpeed }}m/s</view>
-      </view>
-      <view class="other-item">
-        <view class="item-name">风向</view>
-        <view class="myicon icon-fengxiang icon"></view>
-        <view class="item-num">{{ weatherCondition.windDirection }}</view>
+      <view>{{ condition.condition }}</view>
+      <view>
+        <text wx:if="{{ forecast24Hours.maxTemperature }}"> 最高 {{ forecast24Hours.maxTemperature }}℃ </text>
+        <text wx:if="{{ forecast24Hours.minTemperature }}"> 最低 {{ forecast24Hours.minTemperature }}℃ </text>
       </view>
     </view>
   </view>
+  <!-- 天气实况（新版） - end -->
 
   <!-- 今天和明天2天的天气情况 - start -->
   <view class="forecast2days">
@@ -135,11 +60,8 @@
     <view class="head">
       <view class="title">24小时预报</view>
       <view class="right">
-        <!-- TO DO -->
-        <text wx:if="{{ forecast24Hours.maxTemperature }}">最高 {{ forecast24Hours.maxTemperature }}℃</text>
-        <text wx:if="{{ forecast24Hours.minTemperature }}">最低 {{ forecast24Hours.minTemperature }}℃</text>
-        <text wx:if="{{ weatherCondition.sunrise }}">日出 {{ weatherCondition.sunrise }}</text>
-        <text wx:if="{{ weatherCondition.sunset }}">日落 {{ weatherCondition.sunset }}</text>
+        <text wx:if="{{ condition.sunrise }}">日出 {{ condition.sunrise }}</text>
+        <text wx:if="{{ condition.sunset }}">日落 {{ condition.sunset }}</text>
       </view>
     </view>
 

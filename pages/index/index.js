@@ -10,7 +10,7 @@ CustomPage({
   /** 页面的初始数据 */
   data: {
     /** 实时天气情况 */
-    weatherCondition: {
+    condition: {
       temperature: '0',
     },
 
@@ -38,7 +38,7 @@ CustomPage({
       queries: 'qs',
     },
 
-    weatherCondition: {
+    condition: {
       url: '/weather/now',
       queries: 'qs',
       ignore: 'onLoad',
@@ -120,7 +120,7 @@ CustomPage({
 
       this.bindResponseData('address', '/location/address', this.qs())
       this.bindResponseData('forecast2Days', '/weather/forecast2days', this.qs())
-      this.bindResponseData('weatherCondition', '/weather/now', this.qs())
+      this.bindResponseData('condition', '/weather/now', this.qs())
       this.bindResponseData('liveIndex', '/weather/liveindex', this.qs())
     })
   },
@@ -211,11 +211,11 @@ CustomPage({
    */
   init(stage) {
     if (stage === 'afterChooseLocation') {
-      this.showUpdateTips('已经切换至新的地点')
+      wx.showToast({ title: '已经切换至新的地点', icon: 'none' })
     }
 
     if (stage === 'onShowGetNewLocation') {
-      this.showUpdateTips('已将定位切换成当前所在位置')
+      wx.showToast({ title: '已将定位切换成当前所在位置', icon: 'none' })
     }
   },
 
