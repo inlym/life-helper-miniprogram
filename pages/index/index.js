@@ -29,6 +29,9 @@ CustomPage({
       desc: '',
       tips: '',
     },
+
+    /** 天气图片地址前缀 */
+    iconPrefix: '/images/weather_icon/one/',
   },
 
   requested: {

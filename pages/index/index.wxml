@@ -18,7 +18,7 @@
 
     <view class="content">
       <view class="location" bindtap="chooseLocation">
-        <text class="address">{{ address.address }}</text>
+        <text class="address text-ellipsis-l1">{{ address.address }}</text>
         <text class="myicon icon-xia"></text>
       </view>
 
@@ -48,7 +48,7 @@
       <view class="secondline">
         <view class="desc">{{ item.desc }}</view>
         <view class="icon">
-          <image src="{{ item.iconUrl }}" mode="widthFix"></image>
+          <image src="{{iconPrefix}}{{ item.icon }}.svg" mode="widthFix"></image>
         </view>
       </view>
     </view>
@@ -91,7 +91,7 @@
             <view class="weekday">{{ item.weekday }}</view>
             <view class="date">{{ item.dateFormatted }}</view>
             <view>{{ item.day.condition }}</view>
-            <image src="{{ item.day.iconUrl }}"></image>
+            <image src="{{iconPrefix}}{{ item.day.icon }}.svg"></image>
             <view class="temperature">{{ item.day.temperature }}°</view>
           </view>
         </view>
@@ -105,7 +105,7 @@
         <view class="fore-night">
           <view class="fore-item" wx:for="{{ forecast15Days.list }}" wx:key="dateFormatted">
             <view class="temperature">{{ item.night.temperature }}°</view>
-            <image src=" {{ item.night.iconUrl }}"> </image>
+            <image src="{{iconPrefix}}{{ item.night.icon }}.svg"></image>
             <view>{{ item.night.condition }}</view>
             <view>{{ item.night.windDirection }}</view>
             <view>{{ item.night.windScale }}级</view>
