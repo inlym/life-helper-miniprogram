@@ -3,7 +3,6 @@
 const app = getApp()
 const { CustomPage } = app
 const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
-const drawForecast24HoursLine = require('../../app/canvas/forecast24HoursLine.js')
 const { getCanvas } = require('../../app/core/canvas.js')
 
 CustomPage({
@@ -65,6 +64,12 @@ CustomPage({
       queries: 'qs',
     },
 
+    airNow: {
+      url: '/weather/airnow',
+      ignore: 'onLoad',
+      queries: 'qs',
+    },
+
     forecast15Days: {
       url: '/weather/forecast15days',
       ignore: 'onLoad',
@@ -120,6 +125,7 @@ CustomPage({
       this.bindResponseData('forecast24Hours', '/weather/forecast24hours', this.qs())
       this.bindResponseData('condition', '/weather/now', this.qs())
       this.bindResponseData('liveIndex', '/weather/liveindex', this.qs())
+      this.bindResponseData('airNow', '/weather/airnow', this.qs())
     })
   },
 

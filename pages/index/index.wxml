@@ -117,7 +117,70 @@
     </view>
   </view>
 
-  <!-- 生活指数 -->
+  <!-- 实时空气质量 - start -->
+  <view class="airnow">
+    <view class="body flex-row">
+      <view class="left flex-column">
+        <view class="title">空气质量</view>
+        <view class="content">
+          <view class="num">{{ airNow.aqi }}</view>
+          <view class="text">{{ airNow.category }}</view>
+        </view>
+      </view>
+      <view class="right">
+        <!-- PM2.5 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.pm2p5 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.pm2p5 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">PM2.5</view>
+        </view>
+
+        <!-- PM10 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.pm10 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.pm10 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">PM10</view>
+        </view>
+
+        <!-- O3 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.pm2p5 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.pm2p5 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">O<text class="sub">3</text></view>
+        </view>
+
+        <!-- CO -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.o3 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.o3 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">CO</view>
+        </view>
+
+        <!-- SO2 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.so2 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.so2 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">SO<text class="sub">2</text></view>
+        </view>
+
+        <!-- NO2 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.no2 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.no2 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">NO<text class="sub">2</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 实时空气质量 - end -->
+
+  <!-- 生活指数 - start -->
   <view class="liveindex container-box">
     <!-- 标题文案 -->
     <view class="head">
@@ -132,6 +195,7 @@
       </view>
     </view>
   </view>
+  <!-- 生活指数 - end -->
 </view>
 
 <!--以下为非页面元素-->

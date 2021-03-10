@@ -79,3 +79,17 @@ navigator {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+/* 水平均匀分布 */
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

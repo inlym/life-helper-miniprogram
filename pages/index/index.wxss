@@ -214,6 +214,114 @@ scroll-view.fore-scroll {
   justify-content: flex-start;
 }
 
+/* 实时空气质量 - start */
+.airnow {
+  margin-top: 16rpx;
+  background-color: #fff;
+  padding: 20rpx 0;
+}
+
+.airnow .title {
+  height: 80rpx;
+  padding: 0 30rpx;
+  justify-content: flex-start;
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 100rpx;
+}
+
+.airnow .body {
+  height: 500rpx;
+}
+
+.airnow .body .left {
+  justify-content: center;
+  width: 350rpx;
+  height: inherit;
+}
+
+.airnow .body .left .content {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  background-image: conic-gradient(green 75%, #fff 75% 100%);
+}
+
+.airnow .body .left .content::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.airnow .body .left .content .num {
+  z-index: 1;
+  position: absolute;
+  left: calc(50% - 34rpx);
+  top: 40rpx;
+  font-size: 60rpx;
+  color: green;
+}
+
+.airnow .body .left .content .text {
+  z-index: 1;
+  position: absolute;
+  left: calc(50% - 15rpx);
+  top: 120rpx;
+  font-size: 30rpx;
+  color: green;
+}
+
+.airnow .body .right {
+  flex-grow: 1;
+  height: inherit;
+  padding: 30rpx 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.airnow .body .right .item {
+  width: 50%;
+  height: 26%;
+}
+
+.airnow .body .right progress {
+  height: 2rpx;
+  width: 60%;
+}
+
+.airnow .body .right .item .value {
+  margin-left: -10rpx;
+}
+
+.airnow .body .right .item .num {
+  font-size: 1.1em;
+}
+
+.airnow .body .right .item .unit {
+  color: #aaa;
+  font-size: 0.8em;
+}
+
+.airnow .body .right .item .name {
+  font-size: 0.8em;
+}
+
+.airnow .body .right .item .name .sub {
+  vertical-align: sub;
+  font-size: 0.6em;
+}
+
+/* 实时空气质量 - end */
+
+/* 生活指数 - start */
 .liveindex .body {
   display: flex;
   justify-content: space-around;
@@ -242,3 +350,4 @@ scroll-view.fore-scroll {
 .liveindex .body .item .name {
   color: #666;
 }
+/* 生活指数 - end */
