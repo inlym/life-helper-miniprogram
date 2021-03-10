@@ -28,6 +28,12 @@
   content: '\00b0';
 }
 
+/* 天气图标 */
+.wea-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
 /* 单独设置部分 */
 
 /* 天气实况（新版） - start */
@@ -115,12 +121,38 @@
   font-size: 90%;
 }
 
-.forecast2days .day .secondline image {
-  width: 50rpx;
-  height: 50rpx;
+/* 今天和明天的天气情况 - end */
+
+/* 未来 24 小时预报 - start */
+.fore24hours {
+  margin-top: 16rpx;
+  background-color: #fff;
+  overflow: hidden;
+  height: 260rpx;
+  font-size: 28rpx;
 }
 
-/* 今天和明天的天气情况 - end */
+.fore24hours .fore24scroll {
+  height: inherit;
+}
+
+.fore24hours .itemwrap {
+  display: flex;
+  justify-content: space-between;
+  width: 2500rpx;
+}
+
+.fore24hours .itemwrap .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100rpx;
+  height: 260rpx;
+  padding: 20rpx 0;
+}
+
+/* 未来 24 小时预报 - end */
 
 /* 未来 15 天的天气预报 - start */
 
@@ -171,11 +203,6 @@ scroll-view.fore-scroll {
   font-weight: bold;
 }
 
-/* .fore-line {
-  width: 100%;
-  height: 300rpx;
-} */
-
 #fore15line {
   width: 1920rpx;
 }
@@ -214,32 +241,4 @@ scroll-view.fore-scroll {
 
 .liveindex .body .item .name {
   color: #666;
-}
-
-/* 未来24小时预报部分 */
-.forecast24hours .right {
-  width: 510rpx;
-  height: 100%;
-  margin-left: 20rpx;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.forecast24hours .right image {
-  width: 46rpx;
-}
-
-.forecast24hours .right text {
-  font-size: 24rpx;
-  color: #666;
-}
-
-.forecast24hours-scroll {
-  height: 306rpx;
-}
-
-#fore24hoursline {
-  width: 2600rpx;
-  height: 300rpx;
 }

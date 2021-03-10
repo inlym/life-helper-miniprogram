@@ -26,8 +26,12 @@
 
       <view>{{ condition.condition }}</view>
       <view>
-        <text wx:if="{{ forecast24Hours.maxTemperature }}"> 最高 {{ forecast24Hours.maxTemperature }}℃ </text>
-        <text wx:if="{{ forecast24Hours.minTemperature }}"> 最低 {{ forecast24Hours.minTemperature }}℃ </text>
+        <text wx:if="{{ forecast24Hours.maxTemperature }}">
+          最高 {{ forecast24Hours.maxTemperature }}℃
+        </text>
+        <text wx:if="{{ forecast24Hours.minTemperature }}">
+          最低 {{ forecast24Hours.minTemperature }}℃
+        </text>
       </view>
     </view>
   </view>
@@ -47,32 +51,30 @@
 
       <view class="secondline">
         <view class="desc">{{ item.desc }}</view>
-        <view class="icon">
-          <image src="{{iconPrefix}}{{ item.icon }}.svg" mode="widthFix"></image>
+        <view class="wea-icon">
+          <image src="{{ iconPrefix }}{{ item.icon }}.svg" mode="widthFix"></image>
         </view>
       </view>
     </view>
   </view>
   <!-- 今天和明天2天的天气情况 - end -->
 
-  <view class="forecast24hours container-box">
-    <!-- 标题文案 -->
-    <view class="head">
-      <view class="title">24小时预报</view>
-      <view class="right">
-        <text wx:if="{{ condition.sunrise }}">日出 {{ condition.sunrise }}</text>
-        <text wx:if="{{ condition.sunset }}">日落 {{ condition.sunset }}</text>
+  <!-- 未来 24 小时预报 - start -->
+  <view class="fore24hours">
+    <scroll-view class="fore24scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
+      scroll-anchoring="{{ true }}">
+      <view class="itemwrap">
+        <view class="item" wx:for="{{ forecast24Hours.list }}" wx:key="item">
+          <view class="hour">{{ item.hour }}</view>
+          <image class="wea-icon" src="{{ iconPrefix }}{{ item.icon }}.svg"></image>
+          <view class="text">{{ item.text }}</view>
+          <view class="temp degree">{{ item.temp }}</view>
+        </view>
       </view>
-    </view>
-
-    <!-- 滚动的列表区 -->
-    <view class="body">
-      <scroll-view class="forecast24hours-scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}"
-        enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
-        <view><canvas type="2d" id="fore24hoursline" canvas-id="fore24hoursline"></canvas></view>
-      </scroll-view>
-    </view>
+    </scroll-view>
   </view>
+
+  <!-- 未来 24 小时预报 - end -->
 
   <!-- 未来 15 天的天气预报 -->
   <view class="forecast15days container-box">
@@ -91,7 +93,7 @@
             <view class="weekday">{{ item.weekday }}</view>
             <view class="date">{{ item.dateFormatted }}</view>
             <view>{{ item.day.condition }}</view>
-            <image src="{{iconPrefix}}{{ item.day.icon }}.svg"></image>
+            <image src="{{ iconPrefix }}{{ item.day.icon }}.svg"></image>
             <view class="temperature">{{ item.day.temperature }}°</view>
           </view>
         </view>
@@ -105,7 +107,7 @@
         <view class="fore-night">
           <view class="fore-item" wx:for="{{ forecast15Days.list }}" wx:key="dateFormatted">
             <view class="temperature">{{ item.night.temperature }}°</view>
-            <image src="{{iconPrefix}}{{ item.night.icon }}.svg"></image>
+            <image src="{{ iconPrefix }}{{ item.night.icon }}.svg"></image>
             <view>{{ item.night.condition }}</view>
             <view>{{ item.night.windDirection }}</view>
             <view>{{ item.night.windScale }}级</view>

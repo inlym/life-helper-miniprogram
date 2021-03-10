@@ -59,6 +59,12 @@ CustomPage({
       ignore: 'onLoad',
     },
 
+    forecast24Hours: {
+      url: '/weather/forecast24hours',
+      ignore: 'onLoad',
+      queries: 'qs',
+    },
+
     forecast15Days: {
       url: '/weather/forecast15days',
       ignore: 'onLoad',
@@ -67,18 +73,6 @@ CustomPage({
           drawForecast15DaysLine(res2.ctx, res.maxTemperature, res.minTemperature)
         })
       },
-      queries: 'qs',
-    },
-
-    forecast24Hours: {
-      url: '/weather/forecast24hours',
-      ignore: 'onLoad',
-      handler(res, _this) {
-        getCanvas.call(_this, 'fore24hoursline').then((res2) => {
-          drawForecast24HoursLine(res2.ctx, res.list)
-        })
-      },
-
       queries: 'qs',
     },
   },
@@ -123,6 +117,7 @@ CustomPage({
 
       this.bindResponseData('address', '/location/address', this.qs())
       this.bindResponseData('forecast2Days', '/weather/forecast2days', this.qs())
+      this.bindResponseData('forecast24Hours', '/weather/forecast24hours', this.qs())
       this.bindResponseData('condition', '/weather/now', this.qs())
       this.bindResponseData('liveIndex', '/weather/liveindex', this.qs())
     })
@@ -147,17 +142,6 @@ CustomPage({
         const { ctx } = res2[0]
         const { maxTemperature, minTemperature } = res2[1]
         drawForecast15DaysLine(ctx, maxTemperature, minTemperature)
-      })
-
-      const promisesFor24Hours = []
-      promisesFor24Hours.push(getCanvas.call(this, 'fore24hoursline', 2600, 300))
-      promisesFor24Hours.push(
-        this.bindResponseData('forecast24Hours', '/weather/forecast24hours', this.qs())
-      )
-      Promise.all(promisesFor24Hours).then((res3) => {
-        const { ctx } = res3[0]
-        const { list } = res3[1]
-        drawForecast24HoursLine(ctx, list)
       })
     })
   },
