@@ -19,7 +19,7 @@
     <view class="content">
       <view class="location" bindtap="chooseLocation">
         <text class="address text-ellipsis-l1">{{ address.address }}</text>
-        <text class="myicon icon-xia"></text>
+        <text class="iconfont icon-xia"></text>
       </view>
 
       <view class="temperature">{{ condition.temperature }}</view>
@@ -154,7 +154,7 @@
 
         <!-- CO -->
         <view class="item flex-column">
-          <view class="value"><text class="num">{{ airNow.o3 }} </text><text class="unit"> μg/m³</text></view>
+          <view class="value"><text class="num">{{ airNow.o3 }} </text><text class="unit"> mg/m³</text></view>
           <progress percent="{{ (airNow.o3 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
             duration="1000"></progress>
           <view class="name">CO</view>

@@ -1,0 +1,103 @@
+<view class="main">
+  <!-- 顶部 tab 栏 - start -->
+  <view class="tabs">
+    <scroll-view scroll-x="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
+      <view class="items flex-row">
+        <view class="item flex-column" wx:for="{{ fore15d.list }}" wx:key="date" id="scorll:{{ item.date }}">
+          <view class="weekday">{{ item.weekday }}</view>
+          <view class="date">{{ item.dateText }}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 顶部 tab 栏 - end -->
+
+  <!-- 天气内容区 - start -->
+  <view class="content">
+    <swiper>
+      <swiper-item item-id="swiper:{{ item.date }}" wx:for="{{ fore15d.list }}" wx:key="date"
+        id="swiper:{{ item.date }}">
+        <view class="top flex-row">
+          <!-- <image src="{{fore15d.iconUrlPrefix}}{{item.iconDay}}.png"></image> -->
+          <image src="{{ item.iconUrl }}"></image>
+          <view class="right flex-column">
+            <view class="temp">{{ item.tempMax }}° / {{ item.tempMin }}°</view>
+            <view class="desc">{{ item.desc }}</view>
+          </view>
+        </view>
+
+        <view class="wind flex-row">
+          <view class="left flex-column">
+            <image src="https://img.lh.inlym.com/resource/wind-dir.svg" mode="widthFix"></image>
+          </view>
+          <view class="right flex-column">
+            <view class="halfday flex-row">
+              <view class="title">白天</view>
+              <view class="list flex-row">
+                <view class="item flex-column">
+                  <view class="icon iconfont icon-fengxiang"></view>
+                  <view class="text">{{ item.windDirDay }}</view>
+                </view>
+
+                <view class="item">
+                  <view class="icon iconfont icon-fengli"></view>
+                  <view class="text">{{ item.windScaleDay }}级</view>
+                </view>
+                <view class="item">
+                  <view class="icon iconfont icon-fengsu1"></view>
+                  <view class="text">{{ item.windSpeedDay }}km/h</view>
+                </view>
+              </view>
+            </view>
+            <view class="halfday flex-row">
+              <view class="title">夜晚</view>
+              <view class="list flex-row">
+                <view class="item flex-column">
+                  <view class="icon iconfont icon-fengxiang"></view>
+                  <view class="text">{{ item.windDirNight }}</view>
+                </view>
+
+                <view class="item">
+                  <view class="icon iconfont icon-fengli"></view>
+                  <view class="text">{{ item.windScaleNight }}级</view>
+                </view>
+                <view class="item">
+                  <view class="icon iconfont icon-fengsu1"></view>
+                  <view class="text">{{ item.windSpeedNight }}km/h</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="common">
+          <view class="title">今日详情</view>
+          <view class="body">
+            <view class="item">
+              <view class="name">湿度</view>
+              <view class="value">{{ item.humidity }}%</view>
+            </view>
+            <view class="precip">{{ item.precip }}</view>
+            <view class="pressure">{{ item.pressure }}</view>
+            <view class="vis">{{ item.vis }}</view>
+            <view class="cloud">{{ item.cloud }}</view>
+            <view class="uvindex">{{ item.uvIndex }}</view>
+          </view>
+        </view>
+
+        <view class="day">
+          <view class="sunrise">{{ item.sunrise }}</view>
+          <view class="sunrise">{{ item.sunset }}</view>
+          <view class="text">{{ item.textDay }}</view>
+        </view>
+        <view class="night">
+          <view class="moonrise">{{ item.moonrise }}</view>
+          <view class="moonset">{{ item.moonset }}</view>
+          <view class="moon-phase">{{ item.moonPhase }}</view>
+          <view class="text">{{ item.textNight }}</view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 天气内容区 - end -->
+</view>

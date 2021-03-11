@@ -1,0 +1,99 @@
+page {
+  background-color: #fff;
+}
+
+/* 顶部 tab 栏 - start */
+.tabs {
+  background-color: #f5f5f5;
+}
+
+.tabs .items {
+  width: 1800rpx;
+}
+
+.tabs .item {
+  width: 120rpx;
+  height: 140rpx;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+}
+
+.tabs .item .weekday {
+  font-size: 1em;
+}
+
+.tabs .item .date {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* 顶部 tab 栏 - end */
+
+/* 下方内容区 - start */
+swiper {
+  height: 2000rpx;
+  background-color: #ededed;
+}
+
+.content .top {
+  padding: 0 160rpx 0 100rpx;
+
+  background-color: #edf1f4;
+}
+
+.content .top image {
+  width: 256rpx;
+  height: 256rpx;
+}
+
+.content .top .temp {
+  font-size: 54rpx;
+}
+
+.content .wind {
+  margin-top: 16rpx;
+  padding: 0 40rpx;
+  height: 300rpx;
+  background-color: #fff;
+}
+
+.content .wind .left {
+  justify-content: center;
+  margin-right: 20rpx;
+}
+
+.content .wind .left image {
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.content .wind .right {
+  flex-grow: 1;
+}
+
+.content .wind .right .halfday {
+  margin: 20rpx;
+  width: 400rpx;
+  text-align: center;
+}
+
+.content .wind .right .halfday .title {
+  text-align: left;
+  width: 30%;
+}
+
+.content .wind .right .halfday .icon {
+  font-size: 1.4em;
+}
+
+.content .wind .right .halfday .text {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 10rpx;
+}
+
+.content .wind .right .halfday .list {
+  width: 70%;
+}
+
+/* 下方内容区 - end */

@@ -7,7 +7,8 @@
     "pages/test/test",
     "pages/location/location",
     "pages/template/template",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/weather/fore15d/index"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
