@@ -29,6 +29,12 @@
           "pathName": "pages/test/test",
           "query": "id=223",
           "scene": null
+        },
+        {
+          "name": "关于页",
+          "pathName": "pages/about/about",
+          "query": "",
+          "scene": null
         }
       ]
     }

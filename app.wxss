@@ -36,26 +36,6 @@ navigator {
   z-index: 99;
 }
 
-/* 页面顶部文本描述区域 */
-.page-head {
-  padding: 80rpx;
-}
-
-/* 页面顶部文本描述区域的标题 */
-.page-head .title {
-  text-align: left;
-  font-size: 40rpx;
-  font-weight: 400;
-}
-
-/* 页面顶部文本描述区域的描述 */
-.page-head .desc {
-  margin-top: 10rpx;
-  color: var(--weui-FG-1);
-  text-align: left;
-  font-size: 28rpx;
-}
-
 /* 页面常规内容包裹区 */
 .page-conainer {
   padding: 0 30rpx 80rpx;

@@ -14,6 +14,13 @@ CustomPage({
         icon: 'https://img.lh.inlym.com/icon/keyboard.png',
       },
     ],
+    list2: [
+      {
+        name: '关于',
+        url: '/pages/about/about',
+        icon: 'https://img.lh.inlym.com/icon/keyboard.png',
+      },
+    ],
   },
 
   computed: {

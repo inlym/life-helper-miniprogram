@@ -35,5 +35,7 @@
   </view>
 
   <mpc-list list="{{ list1 }}"></mpc-list>
+  <mpc-list list="{{ list2 }}"></mpc-list>
+
   <mpc-footer title="我的个人助手" desc="Copyright 2020-2021 inlym"></mpc-footer>
 </view>

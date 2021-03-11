@@ -1,0 +1,13 @@
+<view class="main">
+  <!-- 顶部预留高度 -->
+  <topspace offset="50"></topspace>
+
+  <view class="head">
+    <view class="title">我的个人助手</view>
+    <view class="desc">你的日常生活管家</view>
+  </view>
+  <view class="container">
+    <image class="logo" src="https://img.lh.inlym.com/common/logo.png" mode="widthFix"></image>
+    <image class="logo" src="https://img.lh.inlym.com/common/logo.png" mode="widthFix"></image>
+  </view>
+</view>

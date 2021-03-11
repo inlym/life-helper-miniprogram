@@ -6,7 +6,8 @@
     "pages/system/info/info",
     "pages/test/test",
     "pages/location/location",
-    "pages/template/template"
+    "pages/template/template",
+    "pages/about/about"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
