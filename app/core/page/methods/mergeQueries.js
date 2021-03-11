@@ -1,6 +1,7 @@
 'use strict'
 
 const utils = require('../../utils.js')
+const logger = require('../../logger.js')
 
 /**
  * 合并多个查询字符串处理器的结果
@@ -29,7 +30,11 @@ module.exports = function mergeQueries(queries) {
 
     if (typeof item === 'string') {
       // 字符串，则执行同名方法
-      Object.assign(query, this[item]())
+      if (typeof this[item] === 'function') {
+        Object.assign(query, this[item]())
+      } else {
+        logger.error(`${item} 在 requested 中配置了，但是无页面同名方法！`)
+      }
     } else if (typeof item === 'function') {
       // 函数，则直接执行
       Object.assign(query, item())
