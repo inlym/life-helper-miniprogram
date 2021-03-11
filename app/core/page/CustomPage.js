@@ -4,7 +4,8 @@ const logger = require('../logger.js')
 const setData = require('./methods/setData.js')
 const showLoading = require('./methods/showLoading.js')
 const bindResponseData = require('./methods/bindResponseData.js')
-const mergeQueries = require('./methods/mergeQueries')
+const mergeQueries = require('./methods/mergeQueries.js')
+const getLoadOptions = require('./methods/getLoadOptions.js')
 const utils = require('../utils.js')
 const defaults = require('./defaults.js')
 
@@ -18,6 +19,7 @@ module.exports = function CustomPage(configuration) {
     logger,
     bindResponseData,
     mergeQueries,
+    getLoadOptions,
   }
 
   /** 最终用原生 Page 方法执行的配置内容 */
