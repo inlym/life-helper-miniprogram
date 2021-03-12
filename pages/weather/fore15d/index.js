@@ -3,7 +3,10 @@
 const { CustomPage } = getApp()
 
 CustomPage({
-  data: {},
+  data: {
+    currentIndex: 0,
+    scrollIndex: 's-0',
+  },
 
   computed: {},
 
@@ -27,13 +30,41 @@ CustomPage({
 
   onShow() {},
 
-  onHide() {},
-
-  onUnload() {},
-
-  onPullDownRefresh() {},
-
   onReachBottom() {},
 
   onShareAppMessage() {},
+
+  /** swiper 滑块滑动事件处理 */
+  handleSwiperChange(event) {
+    const { current: index } = event.detail
+    this.setData({
+      currentIndex: index,
+    })
+    if (index === 0 || index === 1) {
+      this.setData({
+        scrollIndex: 's-0',
+      })
+    } else {
+      this.setData({
+        scrollIndex: `s-${index - 2}`,
+      })
+    }
+  },
+
+  /** 处理 scroll-view 中元素点击 */
+  handleScorllItemTap(event) {
+    const { index } = event.currentTarget.dataset
+    this.setData({
+      currentIndex: index,
+    })
+    if (index === 0 || index === 1) {
+      this.setData({
+        scrollIndex: 's-0',
+      })
+    } else {
+      this.setData({
+        scrollIndex: `s-${index - 2}`,
+      })
+    }
+  },
 })

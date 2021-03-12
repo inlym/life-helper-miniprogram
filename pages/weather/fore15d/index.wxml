@@ -1,11 +1,14 @@
 <view class="main">
   <!-- 顶部 tab 栏 - start -->
   <view class="tabs">
-    <scroll-view scroll-x="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
+    <scroll-view scroll-x="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}"
+      scroll-into-view="{{ scrollIndex }}" enhanced="{{ true }}" bounces="{{ true }}" fast-deceleration="{{ true }}"
+      scroll-with-animation="{{ true }}">
       <view class="items flex-row">
-        <view class="item flex-column" wx:for="{{ fore15d.list }}" wx:key="date" id="scorll:{{ item.date }}">
+        <view class="item flex-column {{ index === currentIndex ? 'active' : '' }}" wx:for="{{ fore15d.list }}"
+          wx:key="date" id="s-{{ index }}" bindtap="handleScorllItemTap" data-index="{{ index }}">
           <view class="weekday">{{ item.weekday }}</view>
-          <view class="date">{{ item.dateText }}</view>
+          <view class="date {{ index === currentIndex ? 'active' : '' }}">{{ item.dateText }}</view>
         </view>
       </view>
     </scroll-view>
@@ -14,7 +17,7 @@
 
   <!-- 天气内容区 - start -->
   <view class="content">
-    <swiper>
+    <swiper circular="{{ true }}" bindchange="handleSwiperChange" current="{{ currentIndex }}">
       <swiper-item item-id="swiper:{{ item.date }}" wx:for="{{ fore15d.list }}" wx:key="date"
         id="swiper:{{ item.date }}">
         <view class="top flex-row">
@@ -26,7 +29,37 @@
           </view>
         </view>
 
-        <view class="wind flex-row">
+        <!-- 今日详情 - start -->
+        <view class="content-item detail flex-row">
+          <view class="text-item">
+            <view class="name">湿度</view>
+            <view class="text">{{ item.humidity }}%</view>
+          </view>
+          <view class="text-item">
+            <view class="name">降水量</view>
+            <view class="text">{{ item.precip === '0.0' ? '无降水' : item.precip + 'mm' }}</view>
+          </view>
+          <view class="text-item">
+            <view class="name">气压</view>
+            <view class="text">{{ item.pressure }}hPa</view>
+          </view>
+          <view class="text-item">
+            <view class="name">能见度</view>
+            <view class="text">{{ item.vis }}km</view>
+          </view>
+          <view class="text-item">
+            <view class="name">云量</view>
+            <view class="text">{{ item.vis }}%</view>
+          </view>
+          <view class="text-item">
+            <view class="name">紫外线指数</view>
+            <view class="text">{{ item.uvIndex }}</view>
+          </view>
+        </view>
+        <!-- 今日详情 - end -->
+
+        <!-- 风 - start -->
+        <view class="content-item flex-row">
           <view class="left flex-column">
             <image src="https://img.lh.inlym.com/resource/wind-dir.svg" mode="widthFix"></image>
           </view>
@@ -69,33 +102,47 @@
             </view>
           </view>
         </view>
+        <!-- 风 - end -->
 
-        <view class="common">
-          <view class="title">今日详情</view>
-          <view class="body">
-            <view class="item">
-              <view class="name">湿度</view>
-              <view class="value">{{ item.humidity }}%</view>
+        <!-- 太阳 - start -->
+        <view class="content-item sunitem flex-row">
+          <view class="left flex-column">
+            <image src="https://img.lh.inlym.com/resource/sunrise.svg" mode="widthFix"></image>
+          </view>
+          <view class="right flex-row">
+            <view class="text-item">
+              <view class="name">日出时间</view>
+              <view class="text">{{ item.sunrise }}</view>
             </view>
-            <view class="precip">{{ item.precip }}</view>
-            <view class="pressure">{{ item.pressure }}</view>
-            <view class="vis">{{ item.vis }}</view>
-            <view class="cloud">{{ item.cloud }}</view>
-            <view class="uvindex">{{ item.uvIndex }}</view>
+            <view class="text-item">
+              <view class="name">日落时间</view>
+              <view class="text">{{ item.sunset }}</view>
+            </view>
           </view>
         </view>
+        <!-- 太阳 - end -->
 
-        <view class="day">
-          <view class="sunrise">{{ item.sunrise }}</view>
-          <view class="sunrise">{{ item.sunset }}</view>
-          <view class="text">{{ item.textDay }}</view>
+        <!-- 月亮 - start -->
+        <view class="content-item moon flex-row">
+          <view class="left flex-column">
+            <image src="https://img.lh.inlym.com/resource/moon.svg" mode="widthFix"></image>
+          </view>
+          <view class="right flex-row">
+            <view class="text-item">
+              <view class="name">月相</view>
+              <view class="text">{{ item.moonPhase }}</view>
+            </view>
+            <view class="text-item">
+              <view class="name">月升时间</view>
+              <view class="text">{{ item.moonrise }}</view>
+            </view>
+            <view class="text-item">
+              <view class="name">月落时间</view>
+              <view class="text">{{ item.moonset }}</view>
+            </view>
+          </view>
         </view>
-        <view class="night">
-          <view class="moonrise">{{ item.moonrise }}</view>
-          <view class="moonset">{{ item.moonset }}</view>
-          <view class="moon-phase">{{ item.moonPhase }}</view>
-          <view class="text">{{ item.textNight }}</view>
-        </view>
+        <!-- 月亮 - end -->
       </swiper-item>
     </swiper>
   </view>

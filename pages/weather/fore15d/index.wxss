@@ -18,6 +18,12 @@ page {
   font-size: 30rpx;
 }
 
+.tabs .item.active {
+  color: #07c160;
+  padding: 20rpx 0;
+  font-size: 38rpx;
+}
+
 .tabs .item .weekday {
   font-size: 1em;
 }
@@ -27,11 +33,16 @@ page {
   color: #666;
 }
 
+.tabs .item .date.active {
+  font-size: 0.8em;
+  color: #07c160;
+}
+
 /* 顶部 tab 栏 - end */
 
 /* 下方内容区 - start */
 swiper {
-  height: 2000rpx;
+  height: 1600rpx;
   background-color: #ededed;
 }
 
@@ -50,50 +61,98 @@ swiper {
   font-size: 54rpx;
 }
 
-.content .wind {
+/* 纯文字项目 - start */
+.text-item {
+  text-align: center;
+}
+
+.text-item .name {
+  font-size: 0.8em;
+  color: #888;
+  margin-bottom: 10rpx;
+}
+
+/* 纯文字项目 - end */
+
+/* 今日详情 - start */
+.detail {
+  flex-wrap: wrap;
+}
+
+.detail .text-item {
+  width: 200rpx;
+}
+
+/* 今日详情 - end */
+
+.content .content-item {
   margin-top: 16rpx;
   padding: 0 40rpx;
   height: 300rpx;
   background-color: #fff;
 }
 
-.content .wind .left {
+.content .content-item .left {
   justify-content: center;
   margin-right: 20rpx;
 }
 
-.content .wind .left image {
+.left image {
   width: 180rpx;
   height: 180rpx;
 }
 
-.content .wind .right {
+.content .content-item .right {
   flex-grow: 1;
 }
 
-.content .wind .right .halfday {
+.content .content-item .right .halfday {
   margin: 20rpx;
   width: 400rpx;
   text-align: center;
 }
 
-.content .wind .right .halfday .title {
+.content .content-item .right .halfday .title {
   text-align: left;
   width: 30%;
 }
 
-.content .wind .right .halfday .icon {
+.content .content-item .right .halfday .icon {
   font-size: 1.4em;
 }
 
-.content .wind .right .halfday .text {
+.content .content-item .right .halfday .text {
   font-size: 0.8em;
   color: #666;
   margin-top: 10rpx;
 }
 
-.content .wind .right .halfday .list {
+.content .content-item .right .halfday .list {
   width: 70%;
 }
+
+/* 太阳 - start */
+.sunitem .right {
+  padding: 0 80rpx;
+}
+
+/* 太阳 - end */
+
+/* 月亮 - start */
+.moon {
+  text-align: center;
+  height: 200rpx;
+}
+
+.moon .left image {
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.moon .right {
+  padding: 0 60rpx;
+}
+
+/* 月亮 - end */
 
 /* 下方内容区 - end */
