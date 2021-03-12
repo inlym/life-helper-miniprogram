@@ -17,6 +17,12 @@ CustomPage({
     },
   },
 
+  debug: {
+    configuration: true,
+    setData: true,
+    request: true,
+  },
+
   qs() {
     const { location } = this.getLoadOptions()
     return { location }

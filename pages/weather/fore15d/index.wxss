@@ -38,6 +38,10 @@ page {
   color: #07c160;
 }
 
+.item-hover {
+  opacity: 0.3;
+}
+
 /* 顶部 tab 栏 - end */
 
 /* 下方内容区 - start */

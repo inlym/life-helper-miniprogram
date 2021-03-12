@@ -8,7 +8,7 @@ module.exports = function showLoading(content) {
   const title = content || '数据更新中 ...'
 
   setTimeout(() => {
-    if (this.data.__page_onRequesting__) {
+    if (this.data.__page_on_requesting__) {
       logger.debug(`请求任务在 ${time}ms 内未结束，弹起 loading 提示框，提示文案：${title}`)
       wx.showLoading({
         title,

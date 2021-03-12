@@ -39,7 +39,8 @@
 
   <!-- 今天和明天2天的天气情况 - start -->
   <view class="forecast2days">
-    <view class="day" wx:for="{{ forecast2Days.list }}" wx:key="daytext">
+    <view class="day" wx:for="{{ forecast2Days.list }}" wx:key="daytext" data-date="{{ item.date }}"
+      bindtap="handleDayItemTap" hover-class="item-hover">
       <view class="firstline">
         <view class="textaqi">
           <view class="text">{{ item.daytext }}</view>

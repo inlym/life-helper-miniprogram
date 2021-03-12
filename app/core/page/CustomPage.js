@@ -6,6 +6,7 @@ const showLoading = require('./methods/showLoading.js')
 const bindResponseData = require('./methods/bindResponseData.js')
 const mergeQueries = require('./methods/mergeQueries.js')
 const getLoadOptions = require('./methods/getLoadOptions.js')
+const transfer = require('./methods/transfer.js')
 const utils = require('../utils.js')
 const defaults = require('./defaults.js')
 
@@ -20,6 +21,10 @@ module.exports = function CustomPage(configuration) {
     bindResponseData,
     mergeQueries,
     getLoadOptions,
+    transferData: transfer.transferData,
+    handleTransferredData: transfer.handleTransferredData,
+    getTransferredFields: transfer.getTransferredFields,
+    handleRequestedFields: transfer.handleRequestedFields,
   }
 
   /** 最终用原生 Page 方法执行的配置内容 */
@@ -76,7 +81,7 @@ module.exports = function CustomPage(configuration) {
       if (this.requested) {
         const taskPromises = []
         this._originalSetData({
-          __page_onRequesting__: true,
+          __page_on_requesting__: true,
         })
         Object.keys(this.requested).forEach((key) => {
           const { url, queries, handler, ignore } = this.requested[key]
@@ -87,7 +92,7 @@ module.exports = function CustomPage(configuration) {
         })
         Promise.all(taskPromises).then((res) => {
           this._originalSetData({
-            __page_onRequesting__: false,
+            __page_on_requesting__: false,
           })
           resolve(res)
         })
@@ -130,8 +135,14 @@ module.exports = function CustomPage(configuration) {
 
     // 将入参存储
     this._originalSetData({
-      __page_loadOptions__: options,
+      __page_load_options__: options,
     })
+
+    // 处理传值部分逻辑
+    this.handleTransferredData()
+
+    // 处理 requested 中与传值字段相同的字段
+    this.handleRequestedFields()
 
     // 执行原有的 onLoad
     if (typeof _originalOnLoad === 'function') {

@@ -6,7 +6,8 @@
       scroll-with-animation="{{ true }}">
       <view class="items flex-row">
         <view class="item flex-column {{ index === currentIndex ? 'active' : '' }}" wx:for="{{ fore15d.list }}"
-          wx:key="date" id="s-{{ index }}" bindtap="handleScorllItemTap" data-index="{{ index }}">
+          wx:key="date" id="s-{{ index }}" bindtap="handleScorllItemTap" data-index="{{ index }}"
+          hover-class="item-hover">
           <view class="weekday">{{ item.weekday }}</view>
           <view class="date {{ index === currentIndex ? 'active' : '' }}">{{ item.dateText }}</view>
         </view>

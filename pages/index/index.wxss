@@ -34,6 +34,11 @@
   height: 50rpx;
 }
 
+/* 按下去的样式类  */
+.item-hover {
+  opacity: 0.3;
+}
+
 /* 单独设置部分 */
 
 /* 天气实况（新版） - start */

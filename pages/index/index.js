@@ -80,6 +80,10 @@ CustomPage({
       },
       queries: 'qs',
     },
+
+    fore15d: {
+      url: '/weather/15d',
+    },
   },
 
   /** 查询字符串处理函数 */
@@ -254,17 +258,11 @@ CustomPage({
     }
   },
 
-  /**
-   * 使用 toptips 显示更新提示，除了 onLoad 时不显示，其余更新操作均展示
-   */
-  showUpdateTips(content) {
-    this.setData({
-      toptips: {
-        type: 'success',
-        show: true,
-        delay: 2000,
-        msg: content,
-      },
-    })
+  /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
+  handleDayItemTap(event) {
+    console.log(event)
+    const { date } = event.currentTarget.dataset
+    this.transferData('fore15d')
+    wx.navigateTo({ url: '/pages/weather/fore15d/index?transfer=fore15d' })
   },
 })
