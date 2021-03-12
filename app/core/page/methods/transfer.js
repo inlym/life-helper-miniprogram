@@ -51,7 +51,6 @@ function handleTransferredData() {
     Object.assign(assignment, { [field]: value })
     wx.removeStorageSync(key)
   }
-  console.log('assignment', assignment)
   this.setData(assignment)
 }
 
@@ -87,12 +86,7 @@ function handleRequestedFields() {
     const key = requestedKeys[i]
     const item = this.requested[key]
 
-    console.log('key', key)
-    console.log('item', item)
-    console.log('item.ignore', item.ignore)
-
     if (transferredFields.includes(key)) {
-      console.log('进入了 transferredFields.includes(item) ')
       if (item.ignore === undefined) {
         item.ignore = ['onLoad']
       } else if (item.ignore === 'onLoad') {
@@ -105,10 +99,6 @@ function handleRequestedFields() {
         }
       }
     }
-    console.log('--------------')
-    console.log('key', key)
-    console.log('item', item)
-    console.log('item.ignore', item.ignore)
   }
 }
 

@@ -28,9 +28,7 @@ CustomPage({
     return { location }
   },
 
-  onLoad() {
-    console.log(this.getLoadOptions())
-  },
+  onLoad() {},
 
   onReady() {},
 

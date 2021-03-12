@@ -121,9 +121,6 @@ CustomPage({
         this.pushLocation(res)
       }
 
-      this.logger.debug('[onLoad] res', res)
-      this.logger.debug('[onLoad] this.qs()', this.qs())
-
       this.bindResponseData('address', '/location/address', this.qs())
       this.bindResponseData('forecast2Days', '/weather/forecast2days', this.qs())
       this.bindResponseData('forecast24Hours', '/weather/forecast24hours', this.qs())
@@ -139,9 +136,6 @@ CustomPage({
       if (res) {
         this.pushLocation(res)
       }
-
-      this.logger.debug('[onReady] res', res)
-      this.logger.debug('[onReady] this.qs()', this.qs())
 
       const promisesFor15Days = []
       promisesFor15Days.push(getCanvas.call(this, 'fore15line', 1920, 300))
