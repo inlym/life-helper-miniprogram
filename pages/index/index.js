@@ -37,37 +37,37 @@ CustomPage({
     address: {
       url: '/location/address',
       ignore: ['afterChooseLocation', 'onLoad', 'onPullDownRefresh'],
-      queries: 'qs',
+      queries: 'qs1',
     },
 
     condition: {
       url: '/weather/now',
-      queries: 'qs',
+      queries: 'qs1',
       ignore: 'onLoad',
     },
 
     forecast2Days: {
       url: '/weather/forecast2days',
-      queries: 'qs',
+      queries: 'qs1',
       ignore: 'onLoad',
     },
 
     liveIndex: {
       url: '/weather/liveindex',
-      queries: 'qs',
+      queries: 'qs1',
       ignore: 'onLoad',
     },
 
     forecast24Hours: {
       url: '/weather/forecast24hours',
       ignore: 'onLoad',
-      queries: 'qs',
+      queries: 'qs1',
     },
 
     airNow: {
       url: '/weather/airnow',
       ignore: 'onLoad',
-      queries: 'qs',
+      queries: 'qs1',
     },
 
     forecast15Days: {
@@ -78,7 +78,7 @@ CustomPage({
           drawForecast15DaysLine(res2.ctx, res.maxTemperature, res.minTemperature)
         })
       },
-      queries: 'qs',
+      queries: 'qs1',
     },
 
     fore15d: {
@@ -87,7 +87,7 @@ CustomPage({
   },
 
   /** 查询字符串处理函数 */
-  qs() {
+  qs1() {
     const locationList = this.data._location
     if (locationList.length === 0) {
       return {}
@@ -121,12 +121,12 @@ CustomPage({
         this.pushLocation(res)
       }
 
-      this.bindResponseData('address', '/location/address', this.qs())
-      this.bindResponseData('forecast2Days', '/weather/forecast2days', this.qs())
-      this.bindResponseData('forecast24Hours', '/weather/forecast24hours', this.qs())
-      this.bindResponseData('condition', '/weather/now', this.qs())
-      this.bindResponseData('liveIndex', '/weather/liveindex', this.qs())
-      this.bindResponseData('airNow', '/weather/airnow', this.qs())
+      this.pull('address')
+      this.pull('forecast2Days')
+      this.pull('forecast24Hours')
+      this.pull('condition')
+      this.pull('liveIndex')
+      this.pull('airNow')
     })
   },
 
@@ -139,9 +139,7 @@ CustomPage({
 
       const promisesFor15Days = []
       promisesFor15Days.push(getCanvas.call(this, 'fore15line', 1920, 300))
-      promisesFor15Days.push(
-        this.bindResponseData('forecast15Days', '/weather/forecast15days', this.qs())
-      )
+      promisesFor15Days.push(this.pull('forecast15Days'))
       Promise.all(promisesFor15Days).then((res2) => {
         const { ctx } = res2[0]
         const { maxTemperature, minTemperature } = res2[1]
@@ -254,9 +252,8 @@ CustomPage({
 
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
   handleDayItemTap(event) {
-    console.log(event)
     const { date } = event.currentTarget.dataset
     this.transferData('fore15d')
-    wx.navigateTo({ url: '/pages/weather/fore15d/index?transfer=fore15d' })
+    wx.navigateTo({ url: `/pages/weather/fore15d/index?transfer=fore15d&date=${date}` })
   },
 })

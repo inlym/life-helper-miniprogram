@@ -5,7 +5,6 @@ const { request } = require('./request.js')
 const wxp = require('./wxp.js')
 const storage = require('./storage.js')
 const authorize = require('../common/authorize.js')
-const keys = require('./keys.js')
 const CustomPage = require('./page/CustomPage.js')
 const logger = require('./logger.js')
 const utils = require('./utils.js')
@@ -35,8 +34,6 @@ function transformAppConfiguration(configuration) {
     location,
 
     CustomPage,
-
-    keys,
 
     logger,
 
@@ -72,39 +69,28 @@ function transformAppConfiguration(configuration) {
   const _onLaunch = output.onLaunch
   output.onLaunch = function onLaunch(options) {
     // 本地记录小程序启动时间
-    this.storage.save(this.keys.KEY_APP_LAUNCH_TIME, utils.nowMs())
+    this.storage.set('__app_launch_time__', utils.nowMs())
 
     // 执行原有的 onLaunch
     if (typeof _onLaunch === 'function') {
       _onLaunch.call(this, options)
     }
-
-    logger.info('[App - onLaunch] \n options:', options)
   }
 
   // 重写 onShow
   const _onShow = output.onShow
   output.onShow = function onShow(options) {
-    // 覆盖记录小程序 onShow 时间
-    this.storage.save(this.keys.KEY_APP_SHOW_TIME, utils.nowMs())
-
     // 执行原有的 onShow
     if (typeof _onShow === 'function') {
       _onShow.call(this, options)
     }
-
-    logger.info('[App - onShow] \n options:', options)
   }
 
   return output
 }
 
 function CustomApp(configuration) {
-  const finalConfiguration = transformAppConfiguration(configuration)
-  if (finalConfiguration.debug) {
-    console.log('App Configuration', finalConfiguration)
-  }
-  App(finalConfiguration)
+  App(transformAppConfiguration(configuration))
 }
 
 module.exports = CustomApp

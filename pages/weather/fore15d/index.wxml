@@ -3,7 +3,7 @@
   <view class="tabs">
     <scroll-view scroll-x="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}"
       scroll-into-view="{{ scrollIndex }}" enhanced="{{ true }}" bounces="{{ true }}" fast-deceleration="{{ true }}"
-      scroll-with-animation="{{ true }}">
+      scroll-with-animation="{{ true }}" show-scrollbar="{{ false }}">
       <view class="items flex-row">
         <view class="item flex-column {{ index === currentIndex ? 'active' : '' }}" wx:for="{{ fore15d.list }}"
           wx:key="date" id="s-{{ index }}" bindtap="handleScorllItemTap" data-index="{{ index }}"

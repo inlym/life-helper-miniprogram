@@ -2,15 +2,7 @@
 
 /** 存放页面默认配置，当页面配置同名设置项时，将覆盖本页内容 */
 module.exports = {
-  data: {
-    /** Toptips顶部错误提示组件 */
-    toptips: {
-      type: 'success',
-      show: false,
-      msg: '',
-      delay: 1000,
-    },
-  },
+  data: {},
 
   /** 生命周期函数 */
   lifetimes: {
@@ -18,7 +10,7 @@ module.exports = {
     onShareAppMessage(res) {
       return {
         imageUrl: 'https://img.lh.inlym.com/share/index_share.jpeg',
-        title: '[来自好友推荐] 好友评价：十分实用，页面也很好看，推荐给你',
+        title: '[来自好友推荐] 你上次问我要查天气的小程序，你看下这个怎么样',
         path: '/pages/index/index',
       }
     },

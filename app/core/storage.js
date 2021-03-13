@@ -1,24 +1,18 @@
 'use strict'
 
-const keys = require('./keys.js')
-
 /**
- * 对原生 Storage 相关操作的简单封装，然后挂载到 app 实例上
+ * 对原生 Storage 相关操作的简单封装，然后挂载到 app 实例和页面上
  * @since 2021-02-05
- * @update 2021-02-22
+ * @update 2021-02-22, 2021-03-13
  */
-
-/** 用于记录保存时间的键名前缀 */
-const TIME_PREFIX = '__time__/'
 
 module.exports = {
   set(key, value) {
     wx.setStorageSync(key, value)
-    wx.setStorageSync(`${TIME_PREFIX}${key}`, new Date().getTime())
   },
 
-  save(key, value) {
-    wx.setStorageSync(key, value)
+  get save() {
+    return this.set
   },
 
   get write() {
@@ -36,15 +30,4 @@ module.exports = {
   del(key) {
     wx.removeStorageSync(key)
   },
-
-  time(key) {
-    const res = wx.getStorageSync(`${TIME_PREFIX}${key}`)
-    if (res) {
-      return res
-    } else {
-      return 0
-    }
-  },
-
-  keys,
 }

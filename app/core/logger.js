@@ -3,7 +3,6 @@
 const { env } = require('../config/config.js')
 const { platform, enableDebug } = wx.getSystemInfoSync()
 const { now, formatMs, nowMs } = require('./utils.js')
-const keys = require('./keys.js')
 const storage = require('./storage.js')
 
 const realtimeLogger = wx.getRealtimeLogManager()
@@ -11,7 +10,7 @@ const localLogger = console
 
 /** 当前日志距小程序启动时间的时间差 */
 function diff() {
-  const key = keys.KEY_APP_LAUNCH_TIME
+  const key = '__app_launch_time__'
   let time = storage.get(key)
   if (!time) {
     time = nowMs()

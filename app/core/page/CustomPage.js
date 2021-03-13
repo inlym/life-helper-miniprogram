@@ -1,11 +1,15 @@
 'use strict'
 
 const logger = require('../logger.js')
-const setData = require('./methods/setData.js')
+const setDataMethod = require('./methods/setData.js')
 const showLoading = require('./methods/showLoading.js')
 const bindResponseData = require('./methods/bindResponseData.js')
 const mergeQueries = require('./methods/mergeQueries.js')
-const getLoadOptions = require('./methods/getLoadOptions.js')
+const urlMethods = require('./methods/url.js')
+const qs = require('../qs.js')
+const queryMethods = require('./methods/query.js')
+const pull = require('./methods/pull.js')
+const debugMethods = require('./methods/debug.js')
 const transfer = require('./methods/transfer.js')
 const utils = require('../utils.js')
 const defaults = require('./defaults.js')
@@ -18,13 +22,16 @@ module.exports = function CustomPage(configuration) {
   const customMethods = {
     showLoading,
     logger,
+    qs,
     bindResponseData,
     mergeQueries,
-    getLoadOptions,
+    pull,
     transferData: transfer.transferData,
     handleTransferredData: transfer.handleTransferredData,
     getTransferredFields: transfer.getTransferredFields,
     handleRequestedFields: transfer.handleRequestedFields,
+    getUrl: urlMethods.getUrl,
+    getQuery: queryMethods.getQuery,
   }
 
   /** 最终用原生 Page 方法执行的配置内容 */
@@ -37,13 +44,6 @@ module.exports = function CustomPage(configuration) {
   const data = {}
   Object.assign(data, defaults.data, _originalData)
   _finalConfiguration.data = data
-
-  /**
-   * CustomPage 添加的自定义调试参数：
-   * 1. setData         -  每次 setData 时打印赋值数据
-   * 2. configuration   -  打印页面初始配置和最终配置
-   */
-  _finalConfiguration._debugOptions = configuration.debug || {}
 
   /** 页面配置项，可以覆盖在 defaults.config 配置的内容 */
   const _configOptions = {}
@@ -118,7 +118,7 @@ module.exports = function CustomPage(configuration) {
         wx.showToast({
           title: '页面数据已更新',
           icon: 'none',
-          duration: 1000,
+          duration: 1500,
         })
       }
     })
@@ -127,16 +127,20 @@ module.exports = function CustomPage(configuration) {
   // 重写原生的 onLoad
   const _originalOnLoad = _finalConfiguration.onLoad
   _finalConfiguration.onLoad = function onLoad(options) {
-    // 存储原生的 setData
+    // 存储原生的 setData, 不要有放在在此之前执行
     this._originalSetData = this.setData
 
     // 重载 setData
-    this.setData = setData
+    this.setData = setDataMethod
 
-    // 将入参存储
-    this._originalSetData({
-      __page_load_options__: options,
-    })
+    // 存储当前页面的入参至 data 中
+    queryMethods.savePageQuery.call(this)
+
+    // 存储当前页面的 URL 至 data 中
+    urlMethods.savePageUrl.call(this)
+
+    // 存储调试参数至 data 中
+    debugMethods.saveDebugOptions.call(this)
 
     // 处理传值部分逻辑
     this.handleTransferredData()
@@ -162,16 +166,6 @@ module.exports = function CustomPage(configuration) {
     }
 
     this.init('onPullDownRefresh')
-  }
-
-  // 删除多余配置项
-  delete _finalConfiguration.debug
-  delete _finalConfiguration.config
-
-  // 调试日志
-  if (_finalConfiguration._debugOptions.configuration) {
-    logger.debug('[Page Configuration] - Original \n', configuration)
-    logger.debug('[Page Configuration] - Final \n', _finalConfiguration)
   }
 
   // 注册页面

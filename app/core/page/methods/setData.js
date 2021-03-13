@@ -1,6 +1,7 @@
 'use strict'
 
 const logger = require('../../logger.js')
+const debug = require('./debug.js')
 
 /**
  * 重写小程序原生的 setData 方法
@@ -28,7 +29,7 @@ module.exports = function setData(assignment) {
   this._originalSetData(assignment)
 
   // 赋值日志
-  if (this._debugOptions.setData) {
+  if (debug.check.call(this, 'setData')) {
     logger.debug('[setData - Original] \n', assignment)
   }
 
@@ -54,7 +55,7 @@ module.exports = function setData(assignment) {
 
   if (Object.keys(computedAssignment).length > 0) {
     this._originalSetData(computedAssignment)
-    if (this._debugOptions.setData) {
+    if (debug.check.call(this, 'setData')) {
       logger.debug('[setData - Computed] \n', computedAssignment)
     }
   }

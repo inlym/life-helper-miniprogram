@@ -25,7 +25,7 @@ function transferData(field, newField) {
  * @this
  */
 function handleTransferredData() {
-  const { transfer } = this.getLoadOptions()
+  const { transfer } = this.getQuery()
   if (!transfer) {
     return
   }

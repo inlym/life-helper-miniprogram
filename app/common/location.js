@@ -2,7 +2,6 @@
 
 /**
  * 获取当前定位数据
- *
  * @since 2021-02-22
  * @update 2021-02-28
  * @see https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.getLocation.html
