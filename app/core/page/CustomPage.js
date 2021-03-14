@@ -13,6 +13,7 @@ const debugMethods = require('./methods/debug.js')
 const transfer = require('./methods/transfer.js')
 const utils = require('../utils.js')
 const defaults = require('./defaults.js')
+const { request } = require('../request.js')
 
 module.exports = function CustomPage(configuration) {
   /** 在 {page}.js 的 data 中的内容 */
@@ -26,6 +27,7 @@ module.exports = function CustomPage(configuration) {
     bindResponseData,
     mergeQueries,
     pull,
+    request,
     transferData: transfer.transferData,
     handleTransferredData: transfer.handleTransferredData,
     getTransferredFields: transfer.getTransferredFields,

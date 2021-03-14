@@ -57,7 +57,7 @@ function buildURL(baseURL, url, query) {
   }
 
   /** ['name=mark', 'age=19'] 形式的数组 */
-  let qsArr = []
+  const qsArr = []
 
   // 处理 query，转化为 name=mark&age=19 的形式
   Object.getOwnPropertyNames(query).forEach((key) => {
@@ -70,7 +70,7 @@ function buildURL(baseURL, url, query) {
 
   if (serializedQueryString) {
     combinedURL =
-      combinedURL.replace(/\/+$/, '') +
+      combinedURL.replace(/\/+$/u, '') +
       (combinedURL.indexOf(QUESTION_CHAR) === -1 ? QUESTION_CHAR : SEP_CHAR) +
       serializedQueryString
   }

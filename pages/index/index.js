@@ -80,10 +80,6 @@ CustomPage({
       },
       queries: 'qs1',
     },
-
-    fore15d: {
-      url: '/weather/15d',
-    },
   },
 
   /** 查询字符串处理函数 */
@@ -236,12 +232,18 @@ CustomPage({
     if (authRes) {
       wx.chooseLocation({
         success(res) {
+          console.log('chooseLocation', res)
           if (res) {
             self.pushLocation(res, 'choose')
             self.setData({
               address: {
                 address: res.name,
               },
+            })
+            self.request({
+              method: 'post',
+              url: '/location/choose',
+              data: res,
             })
             self.init('afterChooseLocation')
           }
