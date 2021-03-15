@@ -11,9 +11,9 @@ const queryMethods = require('./methods/query.js')
 const pull = require('./methods/pull.js')
 const debugMethods = require('./methods/debug.js')
 const transfer = require('./methods/transfer.js')
-const utils = require('../utils.js')
 const defaults = require('./defaults.js')
 const request = require('../request/request.js')
+const execRequestedTask = require('./methods/execRequestedTask.js')
 
 module.exports = function CustomPage(configuration) {
   /** 在 {page}.js 的 data 中的内容 */
@@ -77,33 +77,6 @@ module.exports = function CustomPage(configuration) {
     })
   }
 
-  // 添加执行 requested 中的请求任务方法
-  _finalConfiguration._execAllRequestTask = function _execAllRequestTask(stage) {
-    return new Promise((resolve) => {
-      if (this.requested) {
-        const taskPromises = []
-        this._originalSetData({
-          __page_on_requesting__: true,
-        })
-        Object.keys(this.requested).forEach((key) => {
-          const { url, queries, handler, ignore } = this.requested[key]
-          if (!utils.matchStr(stage, ignore)) {
-            const query = this.mergeQueries(queries)
-            taskPromises.push(this.bindResponseData(key, url, query, handler))
-          }
-        })
-        Promise.all(taskPromises).then((res) => {
-          this._originalSetData({
-            __page_on_requesting__: false,
-          })
-          resolve(res)
-        })
-      } else {
-        resolve([])
-      }
-    })
-  }
-
   // 重写初始化方法
   const _originalInit = _finalConfiguration.init
   _finalConfiguration.init = function init(stage) {
@@ -112,18 +85,7 @@ module.exports = function CustomPage(configuration) {
       _originalInit.call(this, stage)
     }
 
-    this.showLoading('数据加载中 ...')
-    this._execAllRequestTask(stage).then(() => {
-      wx.hideLoading()
-      if (stage === 'onPullDownRefresh') {
-        wx.stopPullDownRefresh()
-        wx.showToast({
-          title: '页面数据已更新',
-          icon: 'none',
-          duration: 1500,
-        })
-      }
-    })
+    execRequestedTask.call(this, stage)
   }
 
   // 重写原生的 onLoad

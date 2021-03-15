@@ -25,6 +25,9 @@ const config = {
 
   /** 在小程序 storage 中用于存储最近一次登录时间的字段名 */
   STORAGE_LAST_LOGIN_TIME: '__time_last_login__',
+
+  /** 在小程序 storage 中用于存储小程序本次启动时间的字段名 */
+  STORAGE_APP_LAUNCH_TIME: '__time_app_launch__',
 }
 
 if (env === 'prod') {

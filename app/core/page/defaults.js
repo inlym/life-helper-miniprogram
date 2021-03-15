@@ -10,7 +10,7 @@ module.exports = {
     onShareAppMessage(res) {
       return {
         imageUrl: 'https://img.lh.inlym.com/share/index_share.jpeg',
-        title: '[来自好友推荐] 你上次问我要查天气的小程序，你看下这个怎么样',
+        title: '你上次问我要那个查天气的小程序，是不是这个？',
         path: '/pages/index/index',
       }
     },
@@ -32,8 +32,5 @@ module.exports = {
   },
 
   /** 内部运行相关的配置项 */
-  config: {
-    /** 保留请求等待时间：页面请求时，在该时间内（单位：ms）结束请求，则不弹 loading 提示框 */
-    ReservedNoLoadingTime: 2000,
-  },
+  config: {},
 }

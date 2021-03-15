@@ -20,8 +20,6 @@ function transformAppConfiguration(configuration) {
       return configAll
     },
 
-    /** 挂载封装好的缓存处理函数 */
-    cache: storage,
     storage,
 
     authorize,
@@ -41,7 +39,9 @@ function transformAppConfiguration(configuration) {
   const _onLaunch = output.onLaunch
   output.onLaunch = function onLaunch(options) {
     // 本地记录小程序启动时间
-    this.storage.set('__time_app_launch__', utils.nowMs())
+    const { STORAGE_APP_LAUNCH_TIME } = configAll
+
+    storage.set(STORAGE_APP_LAUNCH_TIME, utils.nowMs())
 
     // 执行原有的 onLaunch
     if (typeof _onLaunch === 'function') {

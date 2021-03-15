@@ -1,6 +1,6 @@
 'use strict'
 
-const { env } = require('../config/config.js')
+const { env, STORAGE_APP_LAUNCH_TIME } = require('../config/config.js')
 const { platform, enableDebug } = wx.getSystemInfoSync()
 const { now, formatMs, nowMs } = require('./utils.js')
 const storage = require('./storage.js')
@@ -10,7 +10,7 @@ const localLogger = console
 
 /** 当前日志距小程序启动时间的时间差 */
 function diff() {
-  const key = '__app_launch_time__'
+  const key = STORAGE_APP_LAUNCH_TIME
   let time = storage.get(key)
   if (!time) {
     time = nowMs()
