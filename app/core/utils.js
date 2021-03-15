@@ -130,6 +130,37 @@ function assignArray(target, source) {
   }
 }
 
+/**
+ * 给配置项添加项目
+ * @param {string | Array} target 配置项
+ * @param {string} item 待添加的项目
+ * @example
+ * - 配置项可能的格式：                 undefined, 'aaa', 'bbb', ['aaa'], ['aaa', 'bbb']
+ * - 给以上配置项添加 'bbb' 后需要的格式：['bbb'], ['aaa', 'bbb'], 'bbb', ['aaa', 'bbb'], ['aaa', 'bbb']
+ */
+function appendItem(target, item) {
+  if (target === undefined) {
+    return [item]
+  }
+
+  if (typeof target === 'string') {
+    if (target === item) {
+      return target
+    } else {
+      return [target, item]
+    }
+  }
+
+  if (typeof target === 'object' && target.length > 0) {
+    if (!target.includes(item)) {
+      target.push(item)
+    }
+    return target
+  }
+
+  return [item]
+}
+
 module.exports = {
   matchStr,
   zerofill,
@@ -138,4 +169,5 @@ module.exports = {
   nowMs,
   hasSameArrayElement,
   assignArray,
+  appendItem,
 }

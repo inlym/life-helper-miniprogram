@@ -13,5 +13,6 @@ const storage = require('./core/storage.js')
 const logger = require('./core/logger.js')
 const CustomApp = require('./core/CustomApp.js')
 const CustomPage = require('./core/page/CustomPage.js')
+const utils = require('./core/utils.js')
 
-module.exports = { request, login, storage, logger, CustomApp, CustomPage }
+module.exports = { request, login, storage, logger, CustomApp, CustomPage, utils }
