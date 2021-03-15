@@ -14,11 +14,17 @@ const env = 'prod'
 const config = {
   env,
 
-  /** token 在请求头中的字段名 */
-  HEADER_FIELD_TOKEN: 'X-Lh-Token',
+  /** 发送请求时用于传递 token 值的请求头字段名 */
+  HEADER_TOKEN_FIELD: 'X-Lh-Token',
 
-  /** code 在请求头中的字段名 */
-  HEADER_FIELD_CODE: 'X-Lh-Code',
+  /** 发送请求时用于传递微信小程序 wx.login 获取的 code 值的请求头字段名 */
+  HEADER_CODE_FIELD: 'X-Lh-Code',
+
+  /** 在小程序 storage 中用于存储 token 的字段名 */
+  STORAGE_TOKEN_FIELD: '__app_token__',
+
+  /** 在小程序 storage 中用于存储最近一次登录时间的字段名 */
+  STORAGE_LAST_LOGIN_TIME: '__time_last_login__',
 }
 
 if (env === 'prod') {

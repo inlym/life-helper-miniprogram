@@ -13,7 +13,7 @@ const debugMethods = require('./methods/debug.js')
 const transfer = require('./methods/transfer.js')
 const utils = require('../utils.js')
 const defaults = require('./defaults.js')
-const { request } = require('../request.js')
+const request = require('../request/request.js')
 
 module.exports = function CustomPage(configuration) {
   /** 在 {page}.js 的 data 中的内容 */

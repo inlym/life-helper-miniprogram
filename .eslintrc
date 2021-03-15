@@ -210,7 +210,6 @@
     "prefer-const": "warn",
     "prefer-rest-params": "error",
     "prefer-spread": "warn",
-    "prefer-template": "warn",
     "rest-spread-spacing": ["error", "never"],
     "symbol-description": "error",
     "spaced-comment": ["error", "always"]

@@ -1,6 +1,6 @@
 'use strict'
 
-const { request } = require('../../request.js')
+const request = require('../../request/request.js')
 
 /**
  * 将页面 data 中的变量与指定请求返回数据绑定，即打包完成以下事项：

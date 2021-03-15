@@ -1,6 +1,6 @@
 'use strict'
 
-const { request } = require('../core/request.js')
+const request = require('../core/request/request.js')
 
 /**
  * 更新用户个人信息
