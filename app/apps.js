@@ -2,6 +2,9 @@
 
 /**
  * 将所有的公共文件挂载到当前文件下，便于引用
+ *
+ * 注意：
+ * 1. [core] 文件夹内的文件不可引用此文件，否则会形成循环引用
  */
 
 const request = require('./core/request/request.js')
