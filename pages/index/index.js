@@ -30,7 +30,7 @@ CustomPage({
     },
 
     /** 天气图片地址前缀 */
-    iconPrefix: '/images/weather_icon/one/',
+    iconPrefix: '/images/weather/one/',
   },
 
   requested: {
