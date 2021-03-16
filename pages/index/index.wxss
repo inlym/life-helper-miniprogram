@@ -172,11 +172,6 @@
   width: 100%;
 }
 
-.minutelyrain .top .desc {
-  font-size: 0.8em;
-  color: rgba(0, 0, 0, 0.5);
-}
-
 .minutelyrain .itemwrap {
   height: 280rpx;
   width: 2000rpx;
@@ -205,6 +200,12 @@
 
 .minutelyrain .itemwrap .item .time {
   font-size: 24rpx;
+}
+
+.minutelyrain .desc {
+  font-size: 0.8em;
+  margin-top: 30rpx;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 /* 未来 2 小时降雨情况 - end */
