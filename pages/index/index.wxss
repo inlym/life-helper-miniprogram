@@ -159,65 +159,49 @@
 
 /* 未来 24 小时预报 - end */
 
-/* 未来 15 天的天气预报 - start */
-
-.forecast15days {
-  margin-top: 40rpx;
+/* 未来 15 天逐天天气预报 - start */
+.fore15d {
+  margin-top: 16rpx;
+  background-color: #fff;
+  overflow: hidden;
+  font-size: 28rpx;
+  padding: 30rpx 0;
 }
 
-scroll-view.fore-scroll {
-  height: 900rpx;
+.fore15d .itemwrap {
+  height: 700rpx;
+  width: 2250rpx;
 }
 
-.fore-day {
-  width: 1920rpx;
-  height: 300rpx;
-  display: flex;
-  justify-content: flex-start;
+.fore15d .itemwrap .item {
+  height: inherit;
+  width: 150rpx;
 }
 
-/** 每一天（白天或晚上）的格子 */
-.fore-item {
-  width: 120rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+.fore15d .itemwrap .item .weekday {
+  font-size: 1.1em;
 }
 
-.fore-day .fore-item:nth-child(2) {
-  background-color: #eaeaea;
+.fore15d .itemwrap .item .dateText {
+  font-size: 0.9em;
 }
 
-.fore-item .weekday {
-  font-size: 30rpx;
-}
-
-.fore-item .date {
-  font-size: 22rpx;
-}
-
-.fore-item image {
-  width: 50rpx;
-  height: 50rpx;
-}
-
-/** 15天预报中的温度 */
-.fore-item .temperature {
-  font-size: 32rpx;
+.fore15d .itemwrap .item .degree {
+  font-size: 1.2em;
   font-weight: bold;
 }
 
-#fore15line {
-  width: 1920rpx;
+.fore15d .itemwrap .item .wea-icon {
+  height: 60rpx;
+  width: 60rpx;
 }
 
-.fore-night {
-  width: 1920rpx;
-  height: 326rpx;
-  display: flex;
-  justify-content: flex-start;
+.fore15d .itemwrap .item .bg {
+  height: 200rpx;
+  width: 200rpx;
+  opacity: 0.4;
 }
+/* 未来 15 天逐天天气预报 - end */
 
 /* 实时空气质量 - start */
 .airnow {

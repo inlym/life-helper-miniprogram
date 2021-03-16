@@ -2,8 +2,6 @@
 
 const app = getApp()
 const { CustomPage } = app
-const drawForecast15DaysLine = require('../../app/canvas/forecast15DaysLine.js')
-const { getCanvas } = require('../../app/core/canvas.js')
 
 CustomPage({
   /** 页面的初始数据 */
@@ -70,15 +68,8 @@ CustomPage({
       queries: 'qs1',
     },
 
-    forecast15Days: {
-      url: '/weather/forecast15days',
-      ignore: 'onLoad',
-      handler(res, _this) {
-        getCanvas.call(_this, 'fore15line').then((res2) => {
-          drawForecast15DaysLine(res2.ctx, res.maxTemperature, res.minTemperature)
-        })
-      },
-      queries: 'qs1',
+    fore15d: {
+      url: '/weather/15d',
     },
   },
 
@@ -127,22 +118,7 @@ CustomPage({
   },
 
   /** 生命周期函数--监听页面初次渲染完成 */
-  onReady() {
-    app.location.getLocation().then((res) => {
-      if (res) {
-        this.pushLocation(res)
-      }
-
-      const promisesFor15Days = []
-      promisesFor15Days.push(getCanvas.call(this, 'fore15line', 1920, 300))
-      promisesFor15Days.push(this.pull('forecast15Days'))
-      Promise.all(promisesFor15Days).then((res2) => {
-        const { ctx } = res2[0]
-        const { maxTemperature, minTemperature } = res2[1]
-        drawForecast15DaysLine(ctx, maxTemperature, minTemperature)
-      })
-    })
-  },
+  onReady() {},
 
   /** 生命周期函数--监听页面显示 */
   onShow() {
@@ -254,6 +230,13 @@ CustomPage({
 
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
   handleDayItemTap(event) {
+    const { date } = event.currentTarget.dataset
+    this.transferData('fore15d')
+    wx.navigateTo({ url: `/pages/weather/fore15d/index?transfer=fore15d&date=${date}` })
+  },
+
+  /** 未来 15 天逐天预报，点击其中一天 */
+  handleFore15ItemTap(event) {
     const { date } = event.currentTarget.dataset
     this.transferData('fore15d')
     wx.navigateTo({ url: `/pages/weather/fore15d/index?transfer=fore15d&date=${date}` })

@@ -73,3 +73,8 @@ navigator {
   justify-content: space-between;
   align-items: center;
 }
+
+/* 通用 view 组件 按下去的样式 */
+.hover {
+  opacity: 0.3;
+}

@@ -77,46 +77,28 @@
 
   <!-- 未来 24 小时预报 - end -->
 
-  <!-- 未来 15 天的天气预报 -->
-  <view class="forecast15days container-box">
-    <!-- 标题文案 -->
-    <view class="head">
-      <view class="title">15天预报</view>
-    </view>
-
-    <!-- 滚动的列表区 -->
-    <view class="body">
-      <scroll-view class="fore-scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
-        scroll-anchoring="{{ true }}">
-        <!-- 白天的天气列表 -->
-        <view class="fore-day">
-          <view class="fore-item" wx:for="{{ forecast15Days.list }}" wx:key="date">
-            <view class="weekday">{{ item.weekday }}</view>
-            <view class="date">{{ item.dateFormatted }}</view>
-            <view>{{ item.day.condition }}</view>
-            <image src="{{ iconPrefix }}{{ item.day.icon }}.svg"></image>
-            <view class="temperature">{{ item.day.temperature }}°</view>
-          </view>
+  <!-- 未来 15 天逐天天气预报 - start -->
+  <view class="fore15d">
+    <scroll-view class="fore15dscroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
+      scroll-anchoring="{{ true }}">
+      <view class="itemwrap flex-row">
+        <view class="item flex-column" wx:for="{{ fore15d.list }}" wx:key="date" bindtap="handleFore15ItemTap"
+          data-date="{{item.date}}" hover-class="hover">
+          <view class="weekday">{{ item.weekday }}</view>
+          <view class="dateText">{{ item.dateText }}</view>
+          <view>{{ item.textDay }}</view>
+          <image class="wea-icon" src="{{ fore15d.baseURL1 + item.iconDay + '.png' }}"></image>
+          <view class="degree">{{ item.tempMax }}</view>
+          <image class="bg" src="{{ fore15d.baseURL2 + item.iconDay + '.png' }}" mode="widthFix"></image>
+          <view class="degree">{{ item.tempMin }}</view>
+          <image class="wea-icon" src="{{ fore15d.baseURL1 + item.iconNight + '.png' }}"></image>
+          <view>{{ item.textNight }}</view>
         </view>
-
-        <!-- 最高温、最低温折线图 -->
-        <view class="fore-line">
-          <canvas type="2d" id="fore15line" canvas-id="fore15line"></canvas>
-        </view>
-
-        <!-- 夜间的天气列表 -->
-        <view class="fore-night">
-          <view class="fore-item" wx:for="{{ forecast15Days.list }}" wx:key="dateFormatted">
-            <view class="temperature">{{ item.night.temperature }}°</view>
-            <image src="{{ iconPrefix }}{{ item.night.icon }}.svg"></image>
-            <view>{{ item.night.condition }}</view>
-            <view>{{ item.night.windDirection }}</view>
-            <view>{{ item.night.windScale }}级</view>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
+      </view>
+    </scroll-view>
   </view>
+
+  <!-- 未来 15 天逐天天气预报 - end -->
 
   <!-- 实时空气质量 - start -->
   <view class="airnow">
