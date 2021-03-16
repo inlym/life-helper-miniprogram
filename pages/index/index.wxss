@@ -159,6 +159,56 @@
 
 /* 未来 24 小时预报 - end */
 
+/* 未来 2 小时降雨情况 - start */
+.minutelyrain {
+  background-color: #fff;
+  padding: 40rpx 20rpx;
+  margin-top: 16rpx;
+  overflow: hidden;
+}
+
+.minutelyrain .top {
+  height: 80rpx;
+  width: 100%;
+}
+
+.minutelyrain .top .desc {
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.minutelyrain .itemwrap {
+  height: 280rpx;
+  width: 2000rpx;
+  align-items: flex-end;
+}
+
+.minutelyrain .itemwrap .item {
+  width: 50rpx;
+}
+
+.minutelyrain .itemwrap .item:nth-child(1) {
+  margin-left: 40rpx;
+}
+
+.minutelyrain .itemwrap .item .rainblock {
+  width: 100%;
+  max-height: 200rpx;
+  background-color: #a8c9f6;
+}
+
+.minutelyrain .itemwrap .item .num {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.minutelyrain .itemwrap .item .time {
+  font-size: 24rpx;
+}
+
+/* 未来 2 小时降雨情况 - end */
+
 /* 未来 15 天逐天天气预报 - start */
 .fore15d {
   margin-top: 16rpx;
@@ -197,9 +247,9 @@
 }
 
 .fore15d .itemwrap .item .bg {
-  height: 200rpx;
-  width: 200rpx;
-  opacity: 0.4;
+  height: 120rpx;
+  width: 120rpx;
+  opacity: 0.3;
 }
 /* 未来 15 天逐天天气预报 - end */
 

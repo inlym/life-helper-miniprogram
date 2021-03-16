@@ -77,13 +77,33 @@
 
   <!-- 未来 24 小时预报 - end -->
 
+  <!-- 未来 2 小时降雨情况 - start -->
+  <view class="minutelyrain">
+    <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
+      <view class="summary">{{ minutelyRain.summary }}</view>
+      <view class="desc">（未来 2 小时降雨量）</view>
+    </view>
+    <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
+      scroll-anchoring="{{ true }}">
+      <view class="itemwrap flex-row">
+        <view class="item flex-column" wx:for="{{ minutelyRain.list }}" wx:key="time">
+          <view class="num">{{ item.precip }}</view>
+          <view class="rainblock" style="height: {{ item.height }}rpx;"></view>
+          <view class="time">{{ item.time }}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 未来 2 小时降雨情况 - end -->
+
   <!-- 未来 15 天逐天天气预报 - start -->
   <view class="fore15d">
     <scroll-view class="fore15dscroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
       scroll-anchoring="{{ true }}">
       <view class="itemwrap flex-row">
         <view class="item flex-column" wx:for="{{ fore15d.list }}" wx:key="date" bindtap="handleFore15ItemTap"
-          data-date="{{item.date}}" hover-class="hover">
+          data-date="{{ item.date }}" hover-class="hover">
           <view class="weekday">{{ item.weekday }}</view>
           <view class="dateText">{{ item.dateText }}</view>
           <view>{{ item.textDay }}</view>

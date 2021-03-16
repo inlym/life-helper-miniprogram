@@ -19,7 +19,7 @@ module.exports = function buildUrl(baseURL, url, params) {
   if (params) {
     const str = qs.stringify(params)
     if (str) {
-      if (result.indexOf('?') !== -1) {
+      if (result.indexOf('?') === -1) {
         result = result.replace(/\/+$/u, '') + '?' + str
       } else {
         result = result.replace(/\/+$/u, '') + '&' + str

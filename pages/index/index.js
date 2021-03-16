@@ -62,6 +62,12 @@ CustomPage({
       queries: 'qs1',
     },
 
+    minutelyRain: {
+      url: '/weather/rain',
+      ignore: 'onLoad',
+      queries: 'qs1',
+    },
+
     airNow: {
       url: '/weather/airnow',
       ignore: 'onLoad',
@@ -70,6 +76,8 @@ CustomPage({
 
     fore15d: {
       url: '/weather/15d',
+      ignore: 'onLoad',
+      queries: 'qs1',
     },
   },
 
@@ -114,6 +122,8 @@ CustomPage({
       this.pull('condition')
       this.pull('liveIndex')
       this.pull('airNow')
+      this.pull('minutelyRain')
+      this.pull('fore15d')
     })
   },
 
@@ -240,5 +250,15 @@ CustomPage({
     const { date } = event.currentTarget.dataset
     this.transferData('fore15d')
     wx.navigateTo({ url: `/pages/weather/fore15d/index?transfer=fore15d&date=${date}` })
+  },
+
+  /** 未来 2 小时降水量区域，点击顶部标题 */
+  handleMinutelyRainTopTap() {
+    wx.showModal({
+      title: '说明',
+      content: '每一个时间节点统计值为 10 分钟累积降水量，单位：mm',
+      showCancel: false,
+      confirmText: '我知道了',
+    })
   },
 })
