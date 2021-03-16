@@ -2,7 +2,6 @@
 
 const logger = require('../logger.js')
 const setDataMethod = require('./methods/setData.js')
-const showLoading = require('./methods/showLoading.js')
 const bindResponseData = require('./methods/bindResponseData.js')
 const mergeQueries = require('./methods/mergeQueries.js')
 const urlMethods = require('./methods/url.js')
@@ -21,7 +20,6 @@ module.exports = function CustomPage(configuration) {
 
   /** 给页面添加的自定义方法 */
   const customMethods = {
-    showLoading,
     logger,
     qs,
     bindResponseData,
