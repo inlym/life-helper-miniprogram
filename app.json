@@ -33,7 +33,7 @@
       },
       {
         "pagePath": "pages/me/me",
-        "text": "我的",
+        "text": "我",
         "iconPath": "/images/tabbar/me-outline.png",
         "selectedIconPath": "/images/tabbar/me-filled.png"
       }
