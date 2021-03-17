@@ -20,7 +20,7 @@
     "enablePullDownRefresh": true
   },
   "tabBar": {
-    "color": "#7A7E83",
+    "color": "#1a1a1a",
     "selectedColor": "#07c160",
     "backgroundColor": "#F5F5F5",
     "borderStyle": "white",
@@ -28,14 +28,14 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "/images/tabbar/icon_index.png",
-        "selectedIconPath": "/images/tabbar/icon_index_HL.png"
+        "iconPath": "/images/tabbar/home-outline.png",
+        "selectedIconPath": "/images/tabbar/home-filled.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我的",
-        "iconPath": "/images/tabbar/icon_me.png",
-        "selectedIconPath": "/images/tabbar/icon_me_HL.png"
+        "iconPath": "/images/tabbar/me-outline.png",
+        "selectedIconPath": "/images/tabbar/me-filled.png"
       }
     ]
   },
