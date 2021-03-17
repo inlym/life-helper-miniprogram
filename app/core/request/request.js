@@ -3,8 +3,17 @@
 const wxRequest = require('./wxRequest.js')
 const getCode = require('./getCode.js')
 const config = require('../../config/config.js')
+const qs = require('../qs.js')
 
-const { baseURL, STORAGE_TOKEN_FIELD, HEADER_CODE_FIELD, HEADER_TOKEN_FIELD } = config
+const {
+  baseURL,
+  STORAGE_TOKEN_FIELD,
+  HEADER_CODE_FIELD,
+  HEADER_TOKEN_FIELD,
+  HEADER_MPINFO_FIELD,
+} = config
+
+const mpInfo = qs.stringify(wx.getAccountInfoSync().miniProgram).replace(/&/gu, '; ')
 
 /**
  * 封装在业务代码实际使用的请求方法（仅适用于当前小程序）
@@ -22,6 +31,8 @@ module.exports = async function request(options) {
     const code = await getCode()
     headersNew[HEADER_CODE_FIELD] = code
   }
+
+  headersNew[HEADER_MPINFO_FIELD] = mpInfo
 
   const requestOptions = { baseURL, method, url, params, data, headers: headersNew }
   const response = await wxRequest(requestOptions)

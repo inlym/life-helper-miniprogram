@@ -20,6 +20,9 @@ const config = {
   /** 发送请求时用于传递微信小程序 wx.login 获取的 code 值的请求头字段名 */
   HEADER_CODE_FIELD: 'X-Lh-Code',
 
+  /** 发送请求时用于传递微信小程序基本信息的请求头字段名 */
+  HEADER_MPINFO_FIELD: 'X-Lh-Miniprogram',
+
   /** 在小程序 storage 中用于存储 token 的字段名 */
   STORAGE_TOKEN_FIELD: '__app_token__',
 

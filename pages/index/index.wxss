@@ -162,14 +162,20 @@
 /* 未来 2 小时降雨情况 - start */
 .minutelyrain {
   background-color: #fff;
-  padding: 40rpx 20rpx;
+  padding: 40rpx 10rpx 14rpx;
   margin-top: 16rpx;
   overflow: hidden;
 }
 
 .minutelyrain .top {
-  height: 80rpx;
+  height: 60rpx;
   width: 100%;
+}
+
+.minutelyrain .top .desc {
+  font-size: 0.7em;
+  margin-top: -2rpx;
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .minutelyrain .itemwrap {
@@ -204,7 +210,7 @@
 
 .minutelyrain .desc {
   font-size: 0.8em;
-  margin-top: 30rpx;
+  margin-top: 14rpx;
   color: rgba(0, 0, 0, 0.5);
 }
 

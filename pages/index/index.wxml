@@ -79,8 +79,9 @@
 
   <!-- 未来 2 小时降雨情况 - start -->
   <view class="minutelyrain">
-    <view class="top onecenter" bindtap="handleMinutelyRainTopTap">
+    <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
       <view class="summary">{{ minutelyRain.summary }}</view>
+      <view class="desc">（更新时间 {{ minutelyRain.updateTime }}）</view>
     </view>
     <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
       scroll-anchoring="{{ true }}">
