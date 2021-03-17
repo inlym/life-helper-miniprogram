@@ -79,6 +79,12 @@ CustomPage({
       ignore: 'onLoad',
       queries: 'qs1',
     },
+
+    now: {
+      url: '/weather/now2',
+      ignore: 'onLoad',
+      queries: 'qs1',
+    },
   },
 
   /** 查询字符串处理函数 */
@@ -124,6 +130,7 @@ CustomPage({
       this.pull('airNow')
       this.pull('minutelyRain')
       this.pull('fore15d')
+      this.pull('now')
     })
   },
 

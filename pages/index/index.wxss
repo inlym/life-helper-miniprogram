@@ -49,6 +49,7 @@
 
 .condition .content {
   position: absolute;
+  padding-bottom: 40rpx;
   bottom: 0;
   height: 800rpx;
   width: 100%;
@@ -56,6 +57,7 @@
   flex-direction: column;
   text-align: center;
   justify-content: space-around;
+  align-items: center;
 }
 
 .condition .content .location {
@@ -70,6 +72,13 @@
 
 .condition .content .wind {
   font-size: 80%;
+}
+
+.condition .summary {
+  font-size: 0.8em;
+  width: 80%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 /* 天气实况（新版） - end */

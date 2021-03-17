@@ -1,19 +1,19 @@
 <view class="main">
   <!-- 天气实况（新版） - start -->
-  <view class="condition wgb {{ condition.skyElement.bgClass }}">
+  <view class="condition wgb {{ now.skyElement.bgClass }}">
     <!-- 顶部预留高度 -->
     <topspace offset="0" opacity="0"></topspace>
 
     <!-- 大片背景区域 -->
     <view class="cond-background">
-      <view class="fullmoon" wx:if="{{ condition.skyElement.fullmoon }}"></view>
-      <view class="halfmoon" wx:if="{{ condition.skyElement.halfmoon }}"></view>
-      <view class="sun" wx:if="{{ condition.skyElement.sun }}"></view>
-      <view class="fixed-cloud {{ condition.skyElement.darkCloud ? 'darkcloud' : '' }}"
-        wx:if="{{ condition.skyElement.fixedCloud }}"></view>
-      <view class="moving-cloud {{ condition.skyElement.darkCloud ? 'darkcloud' : '' }}"
-        wx:if="{{ condition.skyElement.movingCloud }}"></view>
-      <view class="rain" wx:if="{{ condition.skyElement.rain }}"></view>
+      <view class="fullmoon" wx:if="{{ now.skyElement.fullmoon }}"></view>
+      <view class="halfmoon" wx:if="{{ now.skyElement.halfmoon }}"></view>
+      <view class="sun" wx:if="{{ now.skyElement.sun }}"></view>
+      <view class="fixed-cloud {{ now.skyElement.darkCloud ? 'darkcloud' : '' }}"
+        wx:if="{{ now.skyElement.fixedCloud }}"></view>
+      <view class="moving-cloud {{ now.skyElement.darkCloud ? 'darkcloud' : '' }}"
+        wx:if="{{ now.skyElement.movingCloud }}"></view>
+      <view class="rain" wx:if="{{ now.skyElement.rain }}"></view>
     </view>
 
     <view class="content">
@@ -22,17 +22,10 @@
         <text class="iconfont icon-xia"></text>
       </view>
 
-      <view class="temperature">{{ condition.temperature }}</view>
+      <view class="temperature">{{ now.temp }}</view>
 
-      <view>{{ condition.condition }}</view>
-      <view>
-        <text wx:if="{{ forecast24Hours.maxTemperature }}">
-          最高 {{ forecast24Hours.maxTemperature }}℃
-        </text>
-        <text wx:if="{{ forecast24Hours.minTemperature }}">
-          最低 {{ forecast24Hours.minTemperature }}℃
-        </text>
-      </view>
+      <view>{{ now.text }}</view>
+      <view class="summary">{{ now.summary }}</view>
     </view>
   </view>
   <!-- 天气实况（新版） - end -->

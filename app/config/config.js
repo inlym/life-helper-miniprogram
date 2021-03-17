@@ -8,7 +8,7 @@ const configTest = require('./config.test.js')
  * 'prod' => 生产环境
  * 'test' => 测试环境
  */
-const env = 'prod'
+const env = 'test'
 
 /** 最终输出的配置 */
 const config = {

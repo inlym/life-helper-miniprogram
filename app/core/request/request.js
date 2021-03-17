@@ -42,7 +42,7 @@ module.exports = async function request(options) {
   }
 
   if (typeof retries === 'number' && retries > 0) {
-    wx.removeStorageSync(HEADER_TOKEN_FIELD)
+    wx.removeStorageSync(STORAGE_TOKEN_FIELD)
     options.retries = retries - 1
     return request(options)
   } else {
