@@ -24,7 +24,7 @@
 
       <view class="temperature">{{ now.temp }}</view>
 
-      <view>{{ now.text }}</view>
+      <view class="text">{{ now.text }}</view>
       <view class="summary">{{ now.summary }}</view>
     </view>
   </view>

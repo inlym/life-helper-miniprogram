@@ -65,7 +65,7 @@
 }
 
 .condition .content .temperature {
-  font-size: 200rpx;
+  font-size: 220rpx;
   font-weight: 100;
   text-align: center;
 }
@@ -74,11 +74,14 @@
   font-size: 80%;
 }
 
+.condition .text {
+  font-size: 1.5em;
+}
+
 .condition .summary {
   font-size: 0.8em;
   width: 80%;
   text-align: center;
-  color: rgba(0, 0, 0, 0.5);
 }
 
 /* 天气实况（新版） - end */
