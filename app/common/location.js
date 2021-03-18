@@ -1,5 +1,7 @@
 'use strict'
 
+const authorize = require('./authorize.js')
+
 /**
  * 获取当前定位数据
  * @since 2021-02-22
@@ -35,6 +37,55 @@ function getLocation() {
   })
 }
 
+function chooseLocation(options) {
+  const scope = 'scope.userLocation'
+  options = options || {}
+  const { longitude, latitude } = options
+
+  return new Promise((resolve) => {
+    authorize.get(scope).then((res) => {
+      if (!res) {
+        resolve(false)
+      }
+      wx.chooseLocation({
+        longitude,
+        latitude,
+        success(res2) {
+          if (!res2.name) {
+            wx.showModal({
+              content: '你没有选中地点，请先点击选择地点后，再点击确定！',
+              confirmText: '重新操作',
+              cancelText: '放弃',
+              cancelColor: '#fa5151',
+              success(res3) {
+                if (res3.confirm) {
+                  wx.chooseLocation({
+                    longitude: res2.longitude,
+                    latitude: res2.latitude,
+                    success(res4) {
+                      if (!res4.name) {
+                        wx.showToast({ title: '你仍然没有选中任何地点！', icon: 'none' })
+                        resolve(false)
+                      } else {
+                        resolve(res4)
+                      }
+                    },
+                  })
+                } else {
+                  resolve(false)
+                }
+              },
+            })
+          } else {
+            resolve(res2)
+          }
+        },
+      })
+    })
+  })
+}
+
 module.exports = {
   getLocation,
+  chooseLocation,
 }

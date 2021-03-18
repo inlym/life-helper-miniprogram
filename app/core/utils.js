@@ -161,6 +161,59 @@ function appendItem(target, item) {
   return [item]
 }
 
+/**
+ * 获取指定时间的“年月日”部分
+ * @since 2021-03-17
+ * @description
+ * 输出格式为 '2021-03-17'
+ */
+function getDate(time) {
+  let t = null
+  if (!time) {
+    t = new Date()
+  } else {
+    t = new Date(time)
+  }
+  return `${t.getFullYear()}-${zerofill(t.getMonth() + 1)}-${zerofill(t.getDate())}`
+}
+
+/**
+ * 将一个对象数组转变为对象
+ * @param {Array<object>} arr 对象列表，格式为：[{},{},...]
+ * @param {string} key 列表项目中
+ * @description
+ * 将 [{id:'one', ...}, {id:'two', ...}] 转变为 {'one':{...}, 'two':{...}}
+ */
+function convertArray2Object(arr, key) {
+  if (typeof arr !== 'object' || typeof key !== 'string') {
+    throw new Error('参数错误')
+  }
+
+  const result = {}
+
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i]
+    if (typeof item !== 'object') {
+      throw new Error('数组项目必须是一个对象')
+    }
+
+    if (!item[key]) {
+      throw new Error(`子项目对应的 ${key} 属性不存在`)
+    }
+
+    if (result[item[key]]) {
+      throw new Error('列表中的对象存在重复的 key 值')
+    }
+
+    const prop = item[key]
+
+    delete item[key]
+    result[prop] = item
+  }
+
+  return result
+}
+
 module.exports = {
   matchStr,
   zerofill,
@@ -170,4 +223,6 @@ module.exports = {
   hasSameArrayElement,
   assignArray,
   appendItem,
+  getDate,
+  convertArray2Object,
 }

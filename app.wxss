@@ -11,6 +11,22 @@ page {
   line-height: 1.41176471;
 }
 
+/* 常用颜色变量 */
+page {
+  --color-RED: #fa5151;
+  --color-ORANGE: #fa9d3b;
+  --color-YELLOW: #ffc300;
+  --color-GREEN: #91d300;
+  --color-LIGHTGREEN: #95ec69;
+  --color-BRAND: #07c160;
+  --color-BLUE: #10aeff;
+  --color-INDIGO: #1485ee;
+  --color-PURPLE: #6467f0;
+  --color-WHITE: #fff;
+  --color-weixin: #07c160;
+  --color-text-link: #576b95;
+}
+
 image {
   max-width: 100%;
   max-height: 100%;

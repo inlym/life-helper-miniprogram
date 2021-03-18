@@ -2,6 +2,7 @@
 
 const app = getApp()
 const { CustomPage } = app
+const { chooseLocation } = require('../../app/common/location.js')
 
 CustomPage({
   /** 页面的初始数据 */
@@ -34,61 +35,65 @@ CustomPage({
   requested: {
     address: {
       url: '/location/address',
-      ignore: ['afterChooseLocation', 'onLoad', 'onPullDownRefresh'],
-      queries: 'qs1',
-    },
-
-    condition: {
-      url: '/weather/now',
-      queries: 'qs1',
-      ignore: 'onLoad',
-    },
-
-    forecast2Days: {
-      url: '/weather/forecast2days',
-      queries: 'qs1',
-      ignore: 'onLoad',
-    },
-
-    liveIndex: {
-      url: '/weather/liveindex',
-      queries: 'qs1',
-      ignore: 'onLoad',
-    },
-
-    forecast24Hours: {
-      url: '/weather/forecast24hours',
-      ignore: 'onLoad',
-      queries: 'qs1',
-    },
-
-    minutelyRain: {
-      url: '/weather/rain',
-      ignore: 'onLoad',
-      queries: 'qs1',
-    },
-
-    airNow: {
-      url: '/weather/airnow',
-      ignore: 'onLoad',
-      queries: 'qs1',
-    },
-
-    fore15d: {
-      url: '/weather/15d',
-      ignore: 'onLoad',
+      ignore: ['afterChooseLocation', 'onPullDownRefresh'],
       queries: 'qs1',
     },
 
     now: {
       url: '/weather/now2',
-      ignore: 'onLoad',
+      queries: 'qs1',
+    },
+
+    forecast2Days: {
+      url: '/weather/forecast2days',
+      queries: 'qs1',
+    },
+
+    liveIndex: {
+      url: '/weather/liveindex',
+      queries: 'qs1',
+    },
+
+    forecast24Hours: {
+      url: '/weather/forecast24hours',
+      queries: 'qs1',
+    },
+
+    minutelyRain: {
+      url: '/weather/rain',
+      queries: 'qs1',
+    },
+
+    airNow: {
+      url: '/weather/airnow',
+      queries: 'qs1',
+    },
+
+    fore7d: {
+      url: '/weather/7d',
       queries: 'qs1',
     },
   },
 
+  computed: {
+    fore2dList(data) {
+      const { list } = data.fore7d
+      if (!list) {
+        return []
+      }
+      const result = []
+      for (let i = 0; i < list.length; i++) {
+        if (list[i]['weekday'] === '今天') {
+          result.push(list[i])
+          result.push(list[i + 1])
+        }
+      }
+      return result
+    },
+  },
+
   /** 查询字符串处理函数 */
-  qs1() {
+  qs2() {
     const locationList = this.data._location
     if (locationList.length === 0) {
       return {}
@@ -101,38 +106,18 @@ CustomPage({
     }
   },
 
-  pushLocation(location, mode = 'get') {
-    const { longitude, latitude } = location
-    const locationList = this.data._location
-    locationList.push({
-      longitude,
-      latitude,
-      mode,
-      time: app.utils.nowMs(),
-    })
-    this.setData({
-      _location: locationList,
-    })
+  qs1() {
+    const location = this.read(this.config.keys.STORAGE_WEATHER_LOCATION)
+    if (location) {
+      const { longitude, latitude } = location
+      return { location: `${longitude},${latitude}` }
+    } else {
+      return {}
+    }
   },
 
   /** 生命周期函数--监听页面加载 */
-  onLoad() {
-    app.location.getLocation().then((res) => {
-      if (res) {
-        this.pushLocation(res)
-      }
-
-      this.pull('address')
-      this.pull('forecast2Days')
-      this.pull('forecast24Hours')
-      this.pull('condition')
-      this.pull('liveIndex')
-      this.pull('airNow')
-      this.pull('minutelyRain')
-      this.pull('fore15d')
-      this.pull('now')
-    })
-  },
+  onLoad() {},
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {},
@@ -220,28 +205,11 @@ CustomPage({
 
   /** 人工选择定位 */
   async chooseLocation() {
-    const self = this
-    const authRes = await app.authorize.get('scope.userLocation')
-    if (authRes) {
-      wx.chooseLocation({
-        success(res) {
-          console.log('chooseLocation', res)
-          if (res) {
-            self.pushLocation(res, 'choose')
-            self.setData({
-              address: {
-                address: res.name,
-              },
-            })
-            self.request({
-              method: 'post',
-              url: '/location/choose',
-              data: res,
-            })
-            self.init('afterChooseLocation')
-          }
-        },
-      })
+    const res = await chooseLocation()
+    if (res) {
+      this.write(this.config.keys.STORAGE_WEATHER_LOCATION, res)
+      this.setData({ address: { address: res.name } })
+      this.init('afterChooseLocation')
     }
   },
 

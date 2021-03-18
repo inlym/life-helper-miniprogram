@@ -14,23 +14,28 @@ const env = 'prod'
 const config = {
   env,
 
-  /** 发送请求时用于传递 token 值的请求头字段名 */
-  HEADER_TOKEN_FIELD: 'X-Lh-Token',
+  keys: {
+    /** 发送请求时用于传递 token 值的请求头字段名 */
+    HEADER_TOKEN_FIELD: 'X-Lh-Token',
 
-  /** 发送请求时用于传递微信小程序 wx.login 获取的 code 值的请求头字段名 */
-  HEADER_CODE_FIELD: 'X-Lh-Code',
+    /** 发送请求时用于传递微信小程序 wx.login 获取的 code 值的请求头字段名 */
+    HEADER_CODE_FIELD: 'X-Lh-Code',
 
-  /** 发送请求时用于传递微信小程序基本信息的请求头字段名 */
-  HEADER_MPINFO_FIELD: 'X-Lh-Miniprogram',
+    /** 发送请求时用于传递微信小程序基本信息的请求头字段名 */
+    HEADER_MPINFO_FIELD: 'X-Lh-Miniprogram',
 
-  /** 在小程序 storage 中用于存储 token 的字段名 */
-  STORAGE_TOKEN_FIELD: '__app_token__',
+    /** 在小程序 storage 中用于存储 token 的字段名 */
+    STORAGE_TOKEN_FIELD: '__app_token__',
 
-  /** 在小程序 storage 中用于存储最近一次登录时间的字段名 */
-  STORAGE_LAST_LOGIN_TIME: '__time_last_login__',
+    /** 在小程序 storage 中用于存储最近一次登录时间的字段名 */
+    STORAGE_LAST_LOGIN_TIME: '__time_last_login__',
 
-  /** 在小程序 storage 中用于存储小程序本次启动时间的字段名 */
-  STORAGE_APP_LAUNCH_TIME: '__time_app_launch__',
+    /** 在小程序 storage 中用于存储小程序本次启动时间的字段名 */
+    STORAGE_APP_LAUNCH_TIME: '__time_app_launch__',
+
+    /** 在小程序 storage 中用于存储用于天气定位经纬度等数据的字段名 */
+    STORAGE_WEATHER_LOCATION: '__weather_location__',
+  },
 }
 
 if (env === 'prod') {

@@ -7,10 +7,7 @@ const qs = require('../qs.js')
 
 const {
   baseURL,
-  STORAGE_TOKEN_FIELD,
-  HEADER_CODE_FIELD,
-  HEADER_TOKEN_FIELD,
-  HEADER_MPINFO_FIELD,
+  keys: { STORAGE_TOKEN_FIELD, HEADER_CODE_FIELD, HEADER_TOKEN_FIELD, HEADER_MPINFO_FIELD },
 } = config
 
 const mpInfo = qs.stringify(wx.getAccountInfoSync().miniProgram).replace(/&/gu, '; ')

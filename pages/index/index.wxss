@@ -124,11 +124,36 @@
 }
 
 .forecast2days .day .firstline .aqi {
-  padding: 0 20rpx;
+  padding: 2rpx 20rpx 0;
   border-radius: 20rpx;
   margin-left: 16rpx;
   font-size: 90%;
   color: #fff;
+  background-color: var(--color-GREEN);
+}
+
+.aqi.bg-1 {
+  background-color: var(--color-GREEN);
+}
+
+.aqi.bg-2 {
+  background-color: var(--color-YELLOW);
+}
+
+.aqi.bg-3 {
+  background-color: var(--color-ORANGE);
+}
+
+.aqi.bg-4 {
+  background-color: var(--color-RED);
+}
+
+.aqi.bg-5 {
+  background-color: var(--color-PURPLE);
+}
+
+.aqi.bg-6 {
+  background-color: #7e0023;
 }
 
 .forecast2days .day .secondline {

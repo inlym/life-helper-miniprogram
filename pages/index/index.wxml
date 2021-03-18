@@ -32,21 +32,22 @@
 
   <!-- 今天和明天2天的天气情况 - start -->
   <view class="forecast2days">
-    <view class="day" wx:for="{{ forecast2Days.list }}" wx:key="daytext" data-date="{{ item.date }}"
-      bindtap="handleDayItemTap" hover-class="item-hover">
+    <view class="day" wx:for="{{ fore2dList }}" wx:key="date" data-date="{{ item.date }}" bindtap="handleDayItemTap"
+      hover-class="item-hover">
       <view class="firstline">
         <view class="textaqi">
-          <view class="text">{{ item.daytext }}</view>
-          <view class="aqi" style="background-color:{{ item.aqiColor }};">{{ item.aqiClass }}</view>
+          <view class="text">{{ item.weekday }}</view>
+          <view class="aqi bg-{{item.aqi.level}}">{{ item.aqi.category }}</view>
         </view>
         <!-- <view class="temp">{{ item.max }}°/{{ item.min }}°</view> -->
-        <view class="temp"><text class="degree">{{ item.max }}</text>/<text class="degree">{{ item.min }}</text></view>
+        <view class="temp"><text class="degree">{{ item.tempMax }}</text>/<text class="degree">{{ item.tempMin }}</text>
+        </view>
       </view>
 
       <view class="secondline">
         <view class="desc">{{ item.desc }}</view>
         <view class="wea-icon">
-          <image src="{{ iconPrefix }}{{ item.icon }}.svg" mode="widthFix"></image>
+          <image src="{{ item.iconDayUrl }}" mode="widthFix"></image>
         </view>
       </view>
     </view>

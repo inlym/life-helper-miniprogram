@@ -13,6 +13,9 @@ const transfer = require('./methods/transfer.js')
 const defaults = require('./defaults.js')
 const request = require('../request/request.js')
 const execRequestedTask = require('./methods/execRequestedTask.js')
+const utils = require('../utils.js')
+const storage = require('../storage.js')
+const config = require('../../config/config.js')
 
 module.exports = function CustomPage(configuration) {
   /** 在 {page}.js 的 data 中的内容 */
@@ -26,12 +29,16 @@ module.exports = function CustomPage(configuration) {
     mergeQueries,
     pull,
     request,
+    utils,
+    config,
     transferData: transfer.transferData,
     handleTransferredData: transfer.handleTransferredData,
     getTransferredFields: transfer.getTransferredFields,
     handleRequestedFields: transfer.handleRequestedFields,
     getUrl: urlMethods.getUrl,
     getQuery: queryMethods.getQuery,
+    read: storage.get,
+    write: storage.set,
   }
 
   /** 最终用原生 Page 方法执行的配置内容 */
