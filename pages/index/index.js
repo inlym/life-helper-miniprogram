@@ -16,9 +16,6 @@ CustomPage({
       address: '正在定位中 ...',
     },
 
-    /** 定位信息，每次定位 push 一个新对象 */
-    _location: [],
-
     /** 半屏弹窗组件 */
     halfScreen: {
       show: false,
@@ -27,9 +24,6 @@ CustomPage({
       desc: '',
       tips: '',
     },
-
-    /** 天气图片地址前缀 */
-    iconPrefix: '/images/weather/one/',
   },
 
   requested: {
@@ -44,18 +38,8 @@ CustomPage({
       queries: 'qs1',
     },
 
-    forecast2Days: {
-      url: '/weather/forecast2days',
-      queries: 'qs1',
-    },
-
     liveIndex: {
       url: '/weather/liveindex',
-      queries: 'qs1',
-    },
-
-    forecast24Hours: {
-      url: '/weather/forecast24hours',
       queries: 'qs1',
     },
 
@@ -71,6 +55,11 @@ CustomPage({
 
     fore7d: {
       url: '/weather/7d',
+      queries: 'qs1',
+    },
+
+    fore24h: {
+      url: '/weather/24h',
       queries: 'qs1',
     },
   },
@@ -92,20 +81,6 @@ CustomPage({
     },
   },
 
-  /** 查询字符串处理函数 */
-  qs2() {
-    const locationList = this.data._location
-    if (locationList.length === 0) {
-      return {}
-    } else {
-      const item = locationList[locationList.length - 1]
-      const { longitude, latitude } = item
-      return {
-        location: `${longitude},${latitude}`,
-      }
-    }
-  },
-
   qs1() {
     const location = this.read(this.config.keys.STORAGE_WEATHER_LOCATION)
     if (location) {
@@ -123,30 +98,7 @@ CustomPage({
   onReady() {},
 
   /** 生命周期函数--监听页面显示 */
-  onShow() {
-    /** 在该时间内（ 20 分钟）无需重新请求，单位：ms */
-    const exp = 20 * 60 * 1000
-
-    const locationList = this.data._location
-    if (locationList.length === 0) {
-      return
-    }
-
-    if (locationList.length > 0) {
-      const lastTime = locationList[locationList.length - 1]['time']
-      if (app.utils.nowMs() - lastTime < exp) {
-        return
-      }
-    }
-
-    app.location.getLocation().then((res) => {
-      if (res) {
-        this.pushLocation(res)
-      }
-
-      this.init('onShowGetNewLocation')
-    })
-  },
+  onShow() {},
 
   /** 生命周期函数--监听页面隐藏 */
   onHide() {},
@@ -215,16 +167,7 @@ CustomPage({
 
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
   handleDayItemTap(event) {
-    const { date } = event.currentTarget.dataset
-    this.transferData('fore15d')
-    wx.navigateTo({ url: `/pages/weather/fore15d/index?transfer=fore15d&date=${date}` })
-  },
-
-  /** 未来 15 天逐天预报，点击其中一天 */
-  handleFore15ItemTap(event) {
-    const { date } = event.currentTarget.dataset
-    this.transferData('fore15d')
-    wx.navigateTo({ url: `/pages/weather/fore15d/index?transfer=fore15d&date=${date}` })
+    this.forward('/pages/weather/fore15d/index', event)
   },
 
   /** 未来 2 小时降水量区域，点击顶部标题 */

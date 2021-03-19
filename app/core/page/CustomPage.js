@@ -16,6 +16,7 @@ const execRequestedTask = require('./methods/execRequestedTask.js')
 const utils = require('../utils.js')
 const storage = require('../storage.js')
 const config = require('../../config/config.js')
+const route = require('./methods/route.js')
 
 module.exports = function CustomPage(configuration) {
   /** 在 {page}.js 的 data 中的内容 */
@@ -39,6 +40,7 @@ module.exports = function CustomPage(configuration) {
     getQuery: queryMethods.getQuery,
     read: storage.get,
     write: storage.set,
+    forward: route.forward,
   }
 
   /** 最终用原生 Page 方法执行的配置内容 */

@@ -23,7 +23,7 @@
         id="swiper:{{ item.date }}">
         <view class="top flex-row">
           <!-- <image src="{{fore15d.iconUrlPrefix}}{{item.iconDay}}.png"></image> -->
-          <image src="{{ item.iconUrl }}"></image>
+          <image src="{{ item.imageUrl }}"></image>
           <view class="right flex-column">
             <view class="temp">{{ item.tempMax }}° / {{ item.tempMin }}°</view>
             <view class="desc">{{ item.desc }}</view>

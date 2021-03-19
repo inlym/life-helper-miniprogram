@@ -54,7 +54,21 @@ function stringify(obj) {
   return arr.join('&')
 }
 
+/**
+ * 生成 search 字符串
+ * @param {object} obj 查询字符串对象
+ */
+function getSearch(obj) {
+  const str = stringify(obj)
+  if (!str) {
+    return ''
+  } else {
+    return '?' + str
+  }
+}
+
 module.exports = {
   parse,
   stringify,
+  getSearch,
 }

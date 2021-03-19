@@ -15,22 +15,25 @@ CustomPage({
     fore15d: {
       url: '/weather/15d',
       queries: 'qs1',
+      handler: 'afterGetData',
     },
   },
 
-  debug: {
-    configuration: true,
-    setData: true,
-    request: true,
-  },
-
   qs1() {
-    const { location } = this.getQuery()
-    return { location }
+    const location = this.read(this.config.keys.STORAGE_WEATHER_LOCATION)
+    if (location) {
+      const { longitude, latitude } = location
+      return { location: `${longitude},${latitude}` }
+    } else {
+      return {}
+    }
   },
 
-  onLoad() {
-    const { date, transfer } = this.getQuery()
+  onLoad() {},
+
+  /** 在获取到页面数据后执行， */
+  afterGetData() {
+    const { date } = this.getQuery()
     if (date) {
       const { list } = this.data.fore15d
       for (let i = 0; i < list.length; i++) {

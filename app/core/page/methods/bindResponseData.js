@@ -35,8 +35,18 @@ module.exports = async function bindResponseData(name, url, query, handler) {
     [name]: responseData,
   })
 
-  if (handler && typeof handler === 'function') {
-    handler(responseData, this)
+  if (handler) {
+    if (typeof handler === 'function') {
+      handler.call(this, responseData)
+    } else if (typeof handler === 'string') {
+      if (this[handler] && typeof this[handler] === 'function') {
+        this[handler]()
+      } else {
+        throw new Error(`${name} 请求任务对应的 handler 不存在`)
+      }
+    } else {
+      throw new Error('暂不支持的 handler 参数')
+    }
   }
 
   return responseData

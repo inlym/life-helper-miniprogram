@@ -31,13 +31,13 @@
   <!-- 天气实况（新版） - end -->
 
   <!-- 今天和明天2天的天气情况 - start -->
-  <view class="forecast2days">
+  <view class="forecast2days" wx:if="{{ fore2dList.length }}">
     <view class="day" wx:for="{{ fore2dList }}" wx:key="date" data-date="{{ item.date }}" bindtap="handleDayItemTap"
-      hover-class="item-hover">
+      hover-class="hover">
       <view class="firstline">
         <view class="textaqi">
           <view class="text">{{ item.weekday }}</view>
-          <view class="aqi bg-{{item.aqi.level}}">{{ item.aqi.category }}</view>
+          <view class="aqi aqi-bg-{{ item.aqi.level }}">{{ item.aqi.category }}</view>
         </view>
         <!-- <view class="temp">{{ item.max }}°/{{ item.min }}°</view> -->
         <view class="temp"><text class="degree">{{ item.tempMax }}</text>/<text class="degree">{{ item.tempMin }}</text>
@@ -59,9 +59,9 @@
     <scroll-view class="fore24scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
       scroll-anchoring="{{ true }}">
       <view class="itemwrap">
-        <view class="item" wx:for="{{ forecast24Hours.list }}" wx:key="item">
-          <view class="hour">{{ item.hour }}</view>
-          <image class="wea-icon" src="{{ iconPrefix }}{{ item.icon }}.svg"></image>
+        <view class="item" wx:for="{{ fore24h.list }}" wx:key="item">
+          <view class="hour">{{ item.hourText }}</view>
+          <image class="wea-icon" src="{{ item.iconUrl }}"></image>
           <view class="text">{{ item.text }}</view>
           <view class="temp degree">{{ item.temp }}</view>
         </view>
@@ -94,28 +94,35 @@
 
   <!-- 未来 2 小时降雨情况 - end -->
 
-  <!-- 未来 15 天逐天天气预报 - start -->
-  <view class="fore15d">
-    <scroll-view class="fore15dscroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
-      scroll-anchoring="{{ true }}">
-      <view class="itemwrap flex-row">
-        <view class="item flex-column" wx:for="{{ fore15d.list }}" wx:key="date" bindtap="handleFore15ItemTap"
-          data-date="{{ item.date }}" hover-class="hover">
-          <view class="weekday">{{ item.weekday }}</view>
-          <view class="dateText">{{ item.dateText }}</view>
-          <view>{{ item.textDay }}</view>
-          <image class="wea-icon" src="{{ fore15d.baseURL1 + item.iconDay + '.png' }}"></image>
-          <view class="degree">{{ item.tempMax }}</view>
-          <image class="bg" src="{{ fore15d.baseURL2 + item.iconDay + '.png' }}" mode="widthFix"></image>
-          <view class="degree">{{ item.tempMin }}</view>
-          <image class="wea-icon" src="{{ fore15d.baseURL1 + item.iconNight + '.png' }}"></image>
-          <view>{{ item.textNight }}</view>
+  <!-- 未来 7 天逐天天气预报 - start -->
+  <view class="fore7d">
+    <view class="head">未来预报</view>
+    <view class="body">
+      <view class="item flex-row" wx:for="{{ fore7d.list }}" wx:key="date" hover-class="hover"
+        data-date="{{ item.date }}" bindtap="handleDayItemTap">
+        <view class="weekday">{{ item.weekday }}</view>
+        <view class="dateText">{{ item.dateText }}</view>
+        <image class="wea-icon" src="{{ item.iconDayUrl }}"></image>
+        <view class="text">{{ item.textDay }}</view>
+        <view class="aqi">
+          <block wx:if="{{ item.aqi }}">
+            <view class="aqi-bg-{{ item.aqi.level }}">
+              AQI {{ item.aqi.aqi }} {{ item.aqi.category }}
+            </view>
+          </block>
         </view>
+        <image class="wea-icon" src="{{ item.iconNightUrl }}"></image>
+        <view class="text">{{ item.textNight }}</view>
       </view>
-    </scroll-view>
+    </view>
+    <view class="more onecenter" hover-class="hover" bindtap="handleDayItemTap">
+      <view>
+        <text>未来 15 天预报详情</text>
+        <mp-icon icon="arrow" size="{{ 12 }}"></mp-icon>
+      </view>
+    </view>
   </view>
-
-  <!-- 未来 15 天逐天天气预报 - end -->
+  <!-- 未来 7 天逐天天气预报 - end -->
 
   <!-- 实时空气质量 - start -->
   <view class="airnow">
