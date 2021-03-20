@@ -2,46 +2,52 @@
 
 const configProd = require('./config.prod.js')
 const configTest = require('./config.test.js')
+const configLocal = require('./config.local.js')
+const keys = require('./keys.js')
 
 /**
  * 环境
- * 'prod' => 生产环境
- * 'test' => 测试环境
+ * 'prod'  => 生产环境
+ * 'test'  => 测试环境
+ * 'local' => 本地开发环境
  */
 const env = 'prod'
+
+let secretProd = null
+try {
+  secretProd = require('./secret.prod.js')
+} catch (e) {
+  console.error('未配置 secret.js 文件')
+}
+
+if (secretProd) {
+  configProd.secret = secretProd
+}
+
+let secretTest = null
+try {
+  secretTest = require('./secret.prod.js')
+} catch (e) {
+  console.error('未配置 secret.js 文件')
+}
+
+if (secretTest) {
+  configTest.secret = secretTest
+}
 
 /** 最终输出的配置 */
 const config = {
   env,
 
-  keys: {
-    /** 发送请求时用于传递 token 值的请求头字段名 */
-    HEADER_TOKEN_FIELD: 'X-Lh-Token',
-
-    /** 发送请求时用于传递微信小程序 wx.login 获取的 code 值的请求头字段名 */
-    HEADER_CODE_FIELD: 'X-Lh-Code',
-
-    /** 发送请求时用于传递微信小程序基本信息的请求头字段名 */
-    HEADER_MPINFO_FIELD: 'X-Lh-Miniprogram',
-
-    /** 在小程序 storage 中用于存储 token 的字段名 */
-    STORAGE_TOKEN_FIELD: '__app_token__',
-
-    /** 在小程序 storage 中用于存储最近一次登录时间的字段名 */
-    STORAGE_LAST_LOGIN_TIME: '__time_last_login__',
-
-    /** 在小程序 storage 中用于存储小程序本次启动时间的字段名 */
-    STORAGE_APP_LAUNCH_TIME: '__time_app_launch__',
-
-    /** 在小程序 storage 中用于存储用于天气定位经纬度等数据的字段名 */
-    STORAGE_WEATHER_LOCATION: '__weather_location__',
-  },
+  keys,
 }
 
 if (env === 'prod') {
   Object.assign(config, configProd)
 } else if (env === 'test') {
   Object.assign(config, configTest)
+} else if (env === 'local') {
+  Object.assign(config, configLocal)
 } else {
   throw new Error('环境变量 env 配置错误')
 }

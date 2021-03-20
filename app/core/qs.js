@@ -44,13 +44,15 @@ function stringify(obj) {
   }
 
   const arr = []
-  Object.keys(obj).forEach((name) => {
-    const value = obj[name].toString()
-    if (value && typeof value === 'string' && value !== '[object Object]') {
-      // 兼容数组，name=['a','b'] 会转变为 name=a,b
-      arr.push(`${name}=${value}`)
-    }
-  })
+  Object.keys(obj)
+    .sort()
+    .forEach((name) => {
+      const value = obj[name].toString()
+      if (value && typeof value === 'string' && value !== '[object Object]') {
+        // 兼容数组，name=['a','b'] 会转变为 name=a,b
+        arr.push(`${name}=${value}`)
+      }
+    })
   return arr.join('&')
 }
 
