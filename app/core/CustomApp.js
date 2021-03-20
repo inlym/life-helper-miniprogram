@@ -3,11 +3,13 @@
 const configAll = require('../config/config.js')
 const storage = require('./storage.js')
 const authorize = require('../common/authorize.js')
-const CustomPage = require('./page/CustomPage.js')
+const CustomPage = require('./CustomPage.js')
 const logger = require('./logger.js')
 const utils = require('./utils.js')
 const location = require('../common/location.js')
 const fundebug = require('../ext/fundebug.1.3.1.min.js')
+const HttpRequest = require('./HttpRequest.js')
+const httpClient = HttpRequest.create(configAll)
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法
@@ -43,6 +45,9 @@ function transformAppConfiguration(configuration) {
     const { STORAGE_APP_LAUNCH_TIME } = configAll
 
     storage.set(STORAGE_APP_LAUNCH_TIME, utils.nowMs())
+
+    // 小程序初始化时进行一次登录，从服务端获取 token，保存至缓存中
+    httpClient.login()
 
     // 引入 Fundebug
     fundebug.init({

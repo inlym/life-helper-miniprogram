@@ -11,13 +11,13 @@ const keys = require('./keys.js')
  * 'test'  => 测试环境
  * 'local' => 本地开发环境
  */
-const env = 'prod'
+const env = 'test'
 
 let secretProd = null
 try {
   secretProd = require('./secret.prod.js')
 } catch (e) {
-  console.error('未配置 secret.js 文件')
+  console.warn('未配置 secret.prod.js 文件')
 }
 
 if (secretProd) {
@@ -26,9 +26,9 @@ if (secretProd) {
 
 let secretTest = null
 try {
-  secretTest = require('./secret.prod.js')
+  secretTest = require('./secret.test.js')
 } catch (e) {
-  console.error('未配置 secret.js 文件')
+  console.warn('未配置 secret.test.js 文件')
 }
 
 if (secretTest) {
@@ -40,6 +40,8 @@ const config = {
   env,
 
   keys,
+
+  httpDebug: true,
 }
 
 if (env === 'prod') {

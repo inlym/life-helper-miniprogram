@@ -1,15 +1,24 @@
 'use strict'
 
-const CryptoJS = require('../../ext/crypto-js.min.js')
-const qs = require('../qs.js')
-const keys = require('../../config/keys.js')
+const CryptoJS = require('../ext/crypto-js.min.js')
+const qs = require('./qs.js')
+const keys = require('../config/keys.js')
 
 module.exports = class HttpRequest {
+  // 仅将一些分环境不同的配置项放置到入口配置处
   constructor(options) {
     options = options || {}
+
+    /** 所有 API 的公共 url 前缀部分 */
     this.baseURL = options.baseURL || ''
+
+    /** 是否需要签名，当前为阿里云 API 网关验证 */
     this.signed = options.signed || false
+
+    /** 线上还是预发布、测试环境等，目前预留，未用到 */
     this.stage = 'RELEASE'
+
+    /** 是否开始调试模式 */
     this.debug = options.debug || false
 
     /** 默认静态 headers */
@@ -20,15 +29,20 @@ module.exports = class HttpRequest {
     }
 
     if (this.signed) {
-      this.appKey = options.key || ''
-      this.appSecret = options.secret || ''
+      this.appKey = options.appKey
+      this.appSecret = options.appSecret
       this.defaultHeaders['x-ca-key'] = this.appKey
+
+      if (!(this.appKey && this.appSecret)) {
+        throw new Error('未配置 appKey 或 appSecret')
+      }
     }
 
     /** 参加签名的 header */
     this.signHeaderKeys = ['x-ca-nonce', 'x-ca-timestamp'].sort()
   }
 
+  /** 获取小程序版本信息，用于附在 x-lh-miniprogram 请求头中 */
   getMPInfoString() {
     return qs.stringify(wx.getAccountInfoSync().miniProgram).replace(/&/gu, '; ')
   }
@@ -42,6 +56,7 @@ module.exports = class HttpRequest {
     return CryptoJS.MD5(content).toString(CryptoJS.enc.Base64)
   }
 
+  /** 生成随机字符串，目前用于 x-ca-nonce 请求头中（备注：后续替代为 UUID） */
   randomString() {
     return CryptoJS.MD5(Date.now().toString() + Math.random() * 10000).toString(CryptoJS.enc.Hex)
   }
@@ -131,7 +146,6 @@ module.exports = class HttpRequest {
 
   async request(options) {
     const method = (options.method && options.method.toUpperCase()) || 'GET'
-
     const headers = this.buildHeaders(options.headers)
     headers['x-ca-timestamp'] = Date.now()
     headers['x-ca-nonce'] = this.randomString()
@@ -231,6 +245,43 @@ module.exports = class HttpRequest {
           reject(new Error('内部原因，获取 code 失败!'))
         },
       })
+    })
+  }
+
+  async login() {
+    const code = await this.getCode()
+    this.get({
+      url: '/login',
+      params: {
+        code,
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        const { token } = response.data
+        wx.setStorageSync(keys.STORAGE_TOKEN_FIElD, token)
+        wx.setStorageSync(keys.STORAGE_LAST_LOGIN_TIME, Date.now())
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '你当前所处位置的网络较差，你可以切换网络后重新进入小程序！',
+          showCancel: false,
+          confirmText: '我知道了',
+        })
+      }
+    })
+  }
+
+  /** 创建新的实例 */
+  static create(config) {
+    const { baseURL, signature, httpDebug } = config
+    const { appKey, appSecret } = config.secret
+    return new HttpRequest({
+      baseURL,
+      signature,
+      debug: httpDebug,
+      signed: signature,
+      appKey,
+      appSecret,
     })
   }
 }

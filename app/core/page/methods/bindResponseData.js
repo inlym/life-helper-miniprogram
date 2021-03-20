@@ -1,7 +1,5 @@
 'use strict'
 
-const request = require('../../request/request.js')
-
 /**
  * 将页面 data 中的变量与指定请求返回数据绑定，即打包完成以下事项：
  * 1. 发送请求
@@ -29,7 +27,7 @@ module.exports = async function bindResponseData(name, url, query, handler) {
     params: query,
   }
 
-  const { data: responseData } = await request(options)
+  const { data: responseData } = await this.request(options)
 
   this.setData({
     [name]: responseData,

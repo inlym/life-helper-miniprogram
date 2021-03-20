@@ -1,22 +1,24 @@
 'use strict'
 
-const logger = require('../logger.js')
-const setDataMethod = require('./methods/setData.js')
-const bindResponseData = require('./methods/bindResponseData.js')
-const mergeQueries = require('./methods/mergeQueries.js')
-const urlMethods = require('./methods/url.js')
-const qs = require('../qs.js')
-const queryMethods = require('./methods/query.js')
-const pull = require('./methods/pull.js')
-const debugMethods = require('./methods/debug.js')
-const transfer = require('./methods/transfer.js')
-const defaults = require('./defaults.js')
-const request = require('../request/request.js')
-const execRequestedTask = require('./methods/execRequestedTask.js')
-const utils = require('../utils.js')
-const storage = require('../storage.js')
-const config = require('../../config/config.js')
-const route = require('./methods/route.js')
+const logger = require('./logger.js')
+const setDataMethod = require('./page/methods/setData.js')
+const bindResponseData = require('./page/methods/bindResponseData.js')
+const mergeQueries = require('./page/methods/mergeQueries.js')
+const urlMethods = require('./page/methods/url.js')
+const qs = require('./qs.js')
+const queryMethods = require('./page/methods/query.js')
+const pull = require('./page/methods/pull.js')
+const debugMethods = require('./page/methods/debug.js')
+const transfer = require('./page/methods/transfer.js')
+const defaults = require('./page/defaults.js')
+const execRequestedTask = require('./page/methods/execRequestedTask.js')
+const utils = require('./utils.js')
+const storage = require('./storage.js')
+const config = require('../config/config.js')
+const route = require('./page/methods/route.js')
+const HttpRequest = require('./HttpRequest.js')
+
+const httpClient = HttpRequest.create(config)
 
 module.exports = function CustomPage(configuration) {
   /** 在 {page}.js 的 data 中的内容 */
@@ -29,7 +31,6 @@ module.exports = function CustomPage(configuration) {
     bindResponseData,
     mergeQueries,
     pull,
-    request,
     utils,
     config,
     transferData: transfer.transferData,
@@ -41,6 +42,10 @@ module.exports = function CustomPage(configuration) {
     read: storage.get,
     write: storage.set,
     forward: route.forward,
+    post: httpClient.post,
+    request(opt) {
+      return httpClient.request(opt)
+    },
   }
 
   /** 最终用原生 Page 方法执行的配置内容 */
