@@ -11,7 +11,7 @@ const keys = require('./keys.js')
  * 'test'  => 测试环境
  * 'local' => 本地开发环境
  */
-const env = 'test'
+const env = 'prod'
 
 let secretProd = null
 try {
