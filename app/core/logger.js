@@ -1,22 +1,25 @@
 'use strict'
 
-const { env, STORAGE_APP_LAUNCH_TIME } = require('../config/config.js')
+const config = require('../config/config.js')
 const { platform, enableDebug } = wx.getSystemInfoSync()
-const { now, formatMs, nowMs } = require('./utils.js')
+const { now, formatMs } = require('./utils.js')
 const storage = require('./storage.js')
 
 const realtimeLogger = wx.getRealtimeLogManager()
 const localLogger = console
+
+const { env } = config
+const { STORAGE_APP_LAUNCH_TIME } = config.keys
 
 /** 当前日志距小程序启动时间的时间差 */
 function diff() {
   const key = STORAGE_APP_LAUNCH_TIME
   let time = storage.get(key)
   if (!time) {
-    time = nowMs()
-    storage.save(key, time)
+    time = Date.now()
+    storage.set(key, time)
   }
-  return formatMs(nowMs() - time)
+  return formatMs(Date.now() - time)
 }
 
 /** 是否使用本地的 console 打印日志 */
@@ -37,7 +40,7 @@ function useRealtime() {
 
 /** 本地日志前缀 */
 function prefixLocal() {
-  return `[${now()}] [${diff()}] [${env.toUpperCase()}]`
+  return `[${now()}] [${diff()}]`
 }
 
 /** 实时日志前缀 */

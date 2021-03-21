@@ -4,9 +4,7 @@ const logger = require('./logger.js')
 const setDataMethod = require('./page/methods/setData.js')
 const bindResponseData = require('./page/methods/bindResponseData.js')
 const mergeQueries = require('./page/methods/mergeQueries.js')
-const urlMethods = require('./page/methods/url.js')
 const qs = require('./qs.js')
-const queryMethods = require('./page/methods/query.js')
 const pull = require('./page/methods/pull.js')
 const debugMethods = require('./page/methods/debug.js')
 const transfer = require('./page/methods/transfer.js')
@@ -37,8 +35,8 @@ module.exports = function CustomPage(configuration) {
     handleTransferredData: transfer.handleTransferredData,
     getTransferredFields: transfer.getTransferredFields,
     handleRequestedFields: transfer.handleRequestedFields,
-    getUrl: urlMethods.getUrl,
-    getQuery: queryMethods.getQuery,
+    getUrl: route.getUrl,
+    getQuery: route.getQuery,
     read: storage.get,
     write: storage.set,
     forward: route.forward,
@@ -109,11 +107,8 @@ module.exports = function CustomPage(configuration) {
     // 重载 setData
     this.setData = setDataMethod
 
-    // 存储当前页面的入参至 data 中
-    queryMethods.savePageQuery.call(this)
-
-    // 存储当前页面的 URL 至 data 中
-    urlMethods.savePageUrl.call(this)
+    // 存储页面入参
+    route.savePageUrlAndQuery.call(this)
 
     // 存储调试参数至 data 中
     debugMethods.saveDebugOptions.call(this)

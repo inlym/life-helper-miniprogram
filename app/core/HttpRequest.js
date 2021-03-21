@@ -3,6 +3,7 @@
 const CryptoJS = require('../ext/crypto-js.min.js')
 const qs = require('./qs.js')
 const keys = require('../config/keys.js')
+const logger = require('./logger.js')
 
 module.exports = class HttpRequest {
   // 仅将一些分环境不同的配置项放置到入口配置处
@@ -15,7 +16,7 @@ module.exports = class HttpRequest {
     /** 是否需要签名，当前为阿里云 API 网关验证 */
     this.signed = options.signed || false
 
-    /** 线上还是预发布、测试环境等，目前预留，未用到 */
+    /** 线上还是预发布、测试环境等 */
     this.stage = 'RELEASE'
 
     /** 是否开始调试模式 */
@@ -114,9 +115,8 @@ module.exports = class HttpRequest {
   }
 
   getPathAndParams(wholeUrl) {
-    const lastDot = wholeUrl.lastIndexOf('.')
-    const index = wholeUrl.indexOf('/', lastDot)
-    return wholeUrl.substr(index)
+    const urlRaw = wholeUrl.replace('https://', '').replace('http://', '')
+    return urlRaw.substr(urlRaw.indexOf('/'))
   }
 
   buildStringToSign(method, headers, signedHeadersString, pathAndParams) {
@@ -145,6 +145,7 @@ module.exports = class HttpRequest {
   }
 
   async request(options) {
+    const startTime = Date.now()
     const method = (options.method && options.method.toUpperCase()) || 'GET'
     const headers = this.buildHeaders(options.headers)
     headers['x-ca-timestamp'] = Date.now()
@@ -178,14 +179,7 @@ module.exports = class HttpRequest {
       headers['x-ca-signature'] = this.sign(stringToSign)
     }
 
-    if (this.debug) {
-      console.log({
-        method,
-        url,
-        headers,
-        data: options.data || '',
-      })
-    }
+    const debug = this.debug
 
     return new Promise((resolve, reject) => {
       wx.request({
@@ -194,12 +188,20 @@ module.exports = class HttpRequest {
         header: headers,
         timeout: options.timeout || 6000,
         method,
+        enableHttp2: true,
+        enableQuic: true,
         success(res) {
           resolve({
             data: res.data,
             status: res.statusCode,
             headers: res.header,
           })
+
+          if (debug) {
+            const endTime = Date.now()
+            const cost = endTime - startTime
+            logger.debug(`[Request] [${cost}ms]`, method, url)
+          }
 
           if (res.statusCode === 401) {
             wx.removeStorageSync(keys.STORAGE_TOKEN_FIElD)

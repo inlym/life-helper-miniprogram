@@ -14,11 +14,11 @@ module.exports = {
   STORAGE_TOKEN_FIElD: '__app_token__',
 
   /** 在小程序 storage 中用于存储最近一次登录时间的字段名 */
-  STORAGE_lAST_lOGIN_TIME: '__time_last_login__',
+  STORAGE_LAST_LOGIN_TIME: '__time_last_login__',
 
   /** 在小程序 storage 中用于存储小程序本次启动时间的字段名 */
-  STORAGE_APP_lAUNCH_TIME: '__time_app_launch__',
+  STORAGE_APP_LAUNCH_TIME: '__time_app_launch__',
 
   /** 在小程序 storage 中用于存储用于天气定位经纬度等数据的字段名 */
-  STORAGE_WEATHER_lOCATION: '__weather_location__',
+  STORAGE_WEATHER_LOCATION: '__weather_location__',
 }
