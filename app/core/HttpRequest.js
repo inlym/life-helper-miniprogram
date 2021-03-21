@@ -276,10 +276,9 @@ module.exports = class HttpRequest {
   /** 创建新的实例 */
   static create(config) {
     const { baseURL, signature, httpDebug } = config
-    const { appKey, appSecret } = config.secret
+    const { appKey, appSecret } = config.secret || {}
     return new HttpRequest({
       baseURL,
-      signature,
       debug: httpDebug,
       signed: signature,
       appKey,
