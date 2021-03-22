@@ -9,6 +9,9 @@ const urlField = '__page_url__'
 /** 在页面的 data 中存储 query 的字段名 */
 const queryField = '__page_query__'
 
+/** 在页面的 data 中存储传值字段的字段名 */
+const transferField = '__page_transfer__'
+
 /**
  * 从页面栈获取并存储当前页面的 URL 和 query
  * @this WechatMiniprogram.Page.Instance
@@ -109,6 +112,9 @@ function handleTransffedData() {
   if (eventChannel.on) {
     eventChannel.on('PageTransferData', (dataObj) => {
       this._originalSetData(dataObj)
+      this._originalSetData({
+        [transferField]: Object.keys(dataObj),
+      })
       logger.debug('[Route]', '页面传值字段为：', Object.keys(dataObj).toString())
     })
   }

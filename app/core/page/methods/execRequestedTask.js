@@ -15,6 +15,9 @@ const reservedNoLoadingTime = 2000
 /** loading 框的维持时间，超出时间则隐藏 */
 const keepLoadingTime = 3000
 
+/** 在页面的 data 中存储传值字段的字段名 */
+const transferField = '__page_transfer__'
+
 /**
  * 执行一次在 requested 中注册的请求任务
  * @this WechatMiniprogram.Page.Instance
@@ -31,6 +34,8 @@ module.exports = function execRequestedTask(stage) {
 
   const tasks = []
 
+  const transferList = this.data[transferField]
+
   this._originalSetData({
     // 表示正在请求中，未结束
     [DATA_ON_REQUESTING]: true,
@@ -38,7 +43,10 @@ module.exports = function execRequestedTask(stage) {
 
   Object.keys(requested).forEach((key) => {
     const { url, queries, handler, ignore } = requested[key]
-    if (!utils.matchStr(stage, ignore)) {
+    if (
+      !utils.matchStr(stage, ignore) &&
+      (stage !== 'onLoad' || !transferList || (transferList && !transferList.includes(key)))
+    ) {
       const query = this.mergeQueries(queries)
       tasks.push(this.bindResponseData(key, url, query, handler))
     }
