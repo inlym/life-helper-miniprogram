@@ -23,6 +23,22 @@
   font-weight: bold;
 }
 
+.container {
+  margin-top: 16rpx;
+  background-color: #fff;
+  overflow: hidden;
+  font-size: 28rpx;
+}
+
+.container .title {
+  padding: 10rpx 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
 /* 温度的 ° 符号 */
 .degree::after {
   content: '\00b0';
@@ -108,7 +124,6 @@
 /* 今天和明天的天气情况 - start */
 .forecast2days {
   position: relative;
-  /* margin-top: 20rpx; */
   padding: 20rpx 0;
   display: flex;
   justify-content: space-between;
@@ -162,9 +177,6 @@
 
 /* 未来 24 小时预报 - start */
 .fore24hours {
-  margin-top: 16rpx;
-  background-color: #fff;
-  overflow: hidden;
   height: 260rpx;
   font-size: 28rpx;
 }
@@ -193,10 +205,7 @@
 
 /* 未来 2 小时降雨情况 - start */
 .minutelyrain {
-  background-color: #fff;
   padding: 40rpx 10rpx 14rpx;
-  margin-top: 16rpx;
-  overflow: hidden;
 }
 
 .minutelyrain .top {
@@ -250,17 +259,7 @@
 
 /* 未来 7 天逐天天气预报 - start */
 .fore7d {
-  background-color: #fff;
-  margin-top: 16rpx;
-  overflow: hidden;
-}
-
-.fore7d .head {
-  padding: 10rpx 32rpx;
-  height: 80rpx;
-  line-height: 80rpx;
   font-size: 32rpx;
-  font-weight: bold;
 }
 
 .fore7d .body {
@@ -309,18 +308,7 @@
 
 /* 实时空气质量 - start */
 .airnow {
-  margin-top: 16rpx;
-  background-color: #fff;
-  padding: 20rpx 0;
-}
-
-.airnow .title {
-  height: 80rpx;
-  padding: 0 30rpx;
-  justify-content: flex-start;
-  font-size: 34rpx;
-  font-weight: 700;
-  margin-bottom: 100rpx;
+  padding: 0 0 20rpx;
 }
 
 .airnow .body {
@@ -338,37 +326,17 @@
   width: 200rpx;
   height: 200rpx;
   border-radius: 50%;
-  background-image: conic-gradient(green 75%, #fff 75% 100%);
-}
-
-.airnow .body .left .content::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 90%;
-  border-radius: 50%;
-  background-color: #fff;
+  padding: 30rpx 0 40rpx;
+  color: #fff;
+  text-align: center;
 }
 
 .airnow .body .left .content .num {
-  z-index: 1;
-  position: absolute;
-  left: calc(50% - 34rpx);
-  top: 40rpx;
   font-size: 60rpx;
-  color: green;
 }
 
 .airnow .body .left .content .text {
-  z-index: 1;
-  position: absolute;
-  left: calc(50% - 15rpx);
-  top: 120rpx;
   font-size: 30rpx;
-  color: green;
 }
 
 .airnow .body .right {

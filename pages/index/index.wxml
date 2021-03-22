@@ -55,7 +55,7 @@
   <!-- 今天和明天2天的天气情况 - end -->
 
   <!-- 未来 24 小时预报 - start -->
-  <view class="fore24hours">
+  <view class="container fore24hours">
     <scroll-view class="fore24scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
       scroll-anchoring="{{ true }}">
       <view class="itemwrap">
@@ -72,7 +72,7 @@
   <!-- 未来 24 小时预报 - end -->
 
   <!-- 未来 2 小时降雨情况 - start -->
-  <view class="minutelyrain">
+  <view class="container minutelyrain">
     <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
       <view class="summary">{{ minutelyRain.summary }}</view>
       <view class="desc">（更新时间 {{ minutelyRain.updateTime }}）</view>
@@ -95,8 +95,8 @@
   <!-- 未来 2 小时降雨情况 - end -->
 
   <!-- 未来 7 天逐天天气预报 - start -->
-  <view class="fore7d">
-    <view class="head">未来预报</view>
+  <view class="container fore7d">
+    <view class="title">未来预报</view>
     <view class="body">
       <view class="item flex-row" wx:for="{{ fore7d.list }}" wx:key="date" hover-class="hover"
         data-date="{{ item.date }}" bindtap="handleDayItemTap">
@@ -125,11 +125,11 @@
   <!-- 未来 7 天逐天天气预报 - end -->
 
   <!-- 实时空气质量 - start -->
-  <view class="airnow">
+  <view class="container airnow">
+    <view class="title">实时空气质量</view>
     <view class="body flex-row">
       <view class="left flex-column">
-        <view class="title">空气质量</view>
-        <view class="content">
+        <view class="content flex-column aqi-bg-{{airNow.level}}">
           <view class="num">{{ airNow.aqi }}</view>
           <view class="text">{{ airNow.category }}</view>
         </view>
@@ -188,11 +188,8 @@
   <!-- 实时空气质量 - end -->
 
   <!-- 生活指数 - start -->
-  <view class="liveindex container-box">
-    <!-- 标题文案 -->
-    <view class="head">
-      <view class="title">生活指数</view>
-    </view>
+  <view class="container liveindex">
+    <view class="title">今日生活指数</view>
     <view class="body">
       <view class="item" wx:for="{{ liveIndex.list }}" wx:key="name" data-index="{{ index }}"
         bindtap="showLiveIndexDetail">

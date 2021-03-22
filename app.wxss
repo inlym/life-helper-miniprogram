@@ -4,7 +4,7 @@
 /* 页面根元素 */
 page {
   min-height: 100%;
-  background-color: var(--weui-BG-0);
+  background-color: #ededed;
   color: var(--weui-FG-0);
   font-size: 32rpx;
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
@@ -50,6 +50,11 @@ navigator {
   padding-bottom: calc(constant(safe-area-inset-bottom));
   padding-bottom: calc(env(safe-area-inset-bottom));
   z-index: 99;
+}
+
+/* 页面可视内容区包裹 */
+.main {
+  padding-bottom: 80rpx;
 }
 
 /* 页面常规内容包裹区 */
