@@ -159,6 +159,9 @@ CustomPage({
   async chooseLocation() {
     const res = await chooseLocation()
     if (res) {
+      // 存入的经纬度保留到小数点后 5 位
+      res.longitude = res.longitude.toFixed(5)
+      res.latitude = res.latitude.toFixed(5)
       this.write(this.config.keys.STORAGE_WEATHER_LOCATION, res)
       this.setData({ address: { address: res.name } })
       this.init('afterChooseLocation')

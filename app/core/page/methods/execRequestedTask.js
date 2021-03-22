@@ -65,11 +65,17 @@ module.exports = function execRequestedTask(stage) {
             [DATA_SHOWING_LOADING]: false,
           })
         }
+        if (this.data[DATA_ON_REQUESTING]) {
+          wx.stopPullDownRefresh()
+        }
       }, keepLoadingTime)
     }
   }, reservedNoLoadingTime)
 
   Promise.all(tasks).then((resList) => {
+    if (this.data[DATA_ON_REQUESTING]) {
+      wx.stopPullDownRefresh()
+    }
     this._originalSetData({
       [DATA_ON_REQUESTING]: false,
     })
