@@ -38,7 +38,7 @@
         },
         {
           "name": "fore15d",
-          "pathName": "pages/weather/fore15d/index",
+          "pathName": "pages/weather/fore15d/fore15d",
           "query": "date=2021-03-11&location=120.111,30.222",
           "scene": null
         }

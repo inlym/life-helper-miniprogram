@@ -8,7 +8,8 @@
     "pages/location/location",
     "pages/template/template",
     "pages/about/about",
-    "pages/weather/fore15d/index"
+    "pages/weather/fore15d/fore15d",
+    "pages/weather/fore24h/fore24h"
   ],
   "entryPagePath": "pages/index/index",
   "window": {

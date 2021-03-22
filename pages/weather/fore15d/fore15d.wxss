@@ -46,7 +46,7 @@ page {
 
 /* 下方内容区 - start */
 swiper {
-  height: 1600rpx;
+  height: 1450rpx;
   background-color: #ededed;
 }
 
