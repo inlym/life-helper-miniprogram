@@ -7,7 +7,6 @@ const mergeQueries = require('./page/methods/mergeQueries.js')
 const qs = require('./qs.js')
 const pull = require('./page/methods/pull.js')
 const debugMethods = require('./page/methods/debug.js')
-const transfer = require('./page/methods/transfer.js')
 const defaults = require('./page/defaults.js')
 const execRequestedTask = require('./page/methods/execRequestedTask.js')
 const utils = require('./utils.js')
@@ -31,10 +30,6 @@ module.exports = function CustomPage(configuration) {
     pull,
     utils,
     config,
-    transferData: transfer.transferData,
-    handleTransferredData: transfer.handleTransferredData,
-    getTransferredFields: transfer.getTransferredFields,
-    handleRequestedFields: transfer.handleRequestedFields,
     getUrl: route.getUrl,
     getQuery: route.getQuery,
     read: storage.get,
@@ -113,11 +108,8 @@ module.exports = function CustomPage(configuration) {
     // 存储调试参数至 data 中
     debugMethods.saveDebugOptions.call(this)
 
-    // 处理传值部分逻辑
-    this.handleTransferredData()
-
-    // 处理 requested 中与传值字段相同的字段
-    this.handleRequestedFields()
+    // 处理传值字段
+    route.handleTransffedData.call(this)
 
     // 执行原有的 onLoad
     if (typeof _originalOnLoad === 'function') {

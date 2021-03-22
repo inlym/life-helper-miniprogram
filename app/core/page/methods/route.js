@@ -49,6 +49,7 @@ function getQuery() {
 
 /**
  * 跳转到指定页面
+ * @this
  * @param {string|object} options 配置项
  * @param {object} event 事件对象
  */
@@ -70,9 +71,47 @@ function forward(opt, event) {
     Object.assign(queryObj, dataset)
   }
 
+  const self = this
+
   wx.navigateTo({
     url: options.url + qs.getSearch(queryObj),
+    success(res) {
+      // 页面传值
+      if (options.transfer) {
+        let list = []
+        if (typeof options.transfer === 'string') {
+          list.push(options.transfer)
+        } else if (typeof options.transfer === 'object') {
+          list = options.transfer
+        }
+        const dataObj = {}
+        list.forEach((e) => {
+          if (self.data[e]) {
+            dataObj[e] = self.data[e]
+          } else {
+            throw new Error('传值数据不存在 =>', e)
+          }
+        })
+        res.eventChannel.emit('PageTransferData', dataObj)
+      }
+    },
   })
+}
+
+/**
+ * 处理页面传值，进入新页面进行赋值
+ * @this WechatMiniprogram.Page.Instance
+ * @description
+ * 执行时间应在重定义原生方法后，页面 onLoad 前（仅执行一次即可，无需绑定到页面方法）
+ */
+function handleTransffedData() {
+  const eventChannel = this.getOpenerEventChannel()
+  if (eventChannel.on) {
+    eventChannel.on('PageTransferData', (dataObj) => {
+      this._originalSetData(dataObj)
+      logger.debug('[Route]', '页面传值字段为：', Object.keys(dataObj).toString())
+    })
+  }
 }
 
 module.exports = {
@@ -80,4 +119,5 @@ module.exports = {
   forward,
   getUrl,
   getQuery,
+  handleTransffedData,
 }

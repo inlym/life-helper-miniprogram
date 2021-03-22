@@ -59,7 +59,8 @@
     <scroll-view class="fore24scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
       scroll-anchoring="{{ true }}">
       <view class="itemwrap">
-        <view class="item" wx:for="{{ fore24h.list }}" wx:key="item">
+        <view class="item" wx:for="{{ fore24h.list }}" wx:key="item" hover-class="hover" bindtap="handleHourItemTap"
+          data-index="{{ index }}">
           <view class="hour">{{ item.hourText }}</view>
           <image class="wea-icon" src="{{ item.iconUrl }}"></image>
           <view class="text">{{ item.text }}</view>
@@ -129,7 +130,7 @@
     <view class="title">实时空气质量</view>
     <view class="body flex-row">
       <view class="left flex-column">
-        <view class="content flex-column aqi-bg-{{airNow.level}}">
+        <view class="content flex-column aqi-bg-{{ airNow.level }}">
           <view class="num">{{ airNow.aqi }}</view>
           <view class="text">{{ airNow.category }}</view>
         </view>

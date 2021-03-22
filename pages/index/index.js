@@ -173,6 +173,17 @@ CustomPage({
     this.forward('/pages/weather/fore15d/fore15d', event)
   },
 
+  /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
+  handleHourItemTap(event) {
+    this.forward(
+      {
+        url: '/pages/weather/fore24h/fore24h',
+        transfer: 'fore24h',
+      },
+      event
+    )
+  },
+
   /** 未来 2 小时降水量区域，点击顶部标题 */
   handleMinutelyRainTopTap() {
     wx.showModal({
