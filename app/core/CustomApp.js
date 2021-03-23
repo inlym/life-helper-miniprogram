@@ -16,7 +16,7 @@ const httpClient = HttpRequest.create(configAll)
  * @since 2021-02-20
  * @param {App} app app 实例对象
  */
-function transformAppConfiguration(configuration) {
+function CustomApp(configuration) {
   const output = {
     /** 挂载配置信息 */
     get config() {
@@ -24,15 +24,10 @@ function transformAppConfiguration(configuration) {
     },
 
     storage,
-
     authorize,
-
     location,
-
     CustomPage,
-
     logger,
-
     utils,
   }
 
@@ -42,9 +37,9 @@ function transformAppConfiguration(configuration) {
   const _onLaunch = output.onLaunch
   output.onLaunch = function onLaunch(options) {
     // 本地记录小程序启动时间
-    const { STORAGE_APP_LAUNCH_TIME } = configAll
+    const { STORAGE_APP_LAUNCH_TIME } = configAll.keys
 
-    storage.set(STORAGE_APP_LAUNCH_TIME, utils.nowMs())
+    storage.set(STORAGE_APP_LAUNCH_TIME, Date.now())
 
     // 小程序初始化时进行一次登录，从服务端获取 token，保存至缓存中
     httpClient.login()
@@ -69,11 +64,7 @@ function transformAppConfiguration(configuration) {
     }
   }
 
-  return output
-}
-
-function CustomApp(configuration) {
-  App(transformAppConfiguration(configuration))
+  App(output)
 }
 
 module.exports = CustomApp

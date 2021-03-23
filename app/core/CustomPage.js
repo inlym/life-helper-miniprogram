@@ -58,7 +58,7 @@ module.exports = function CustomPage(configuration) {
   _finalConfiguration._configOptions = _configOptions
 
   // 处理 requested 参数，如果 data 中没有同名属性，则添加
-  if (configuration.requested) {
+  if (configuration.requested && typeof configuration.requested === 'object') {
     Object.keys(configuration.requested).forEach((key) => {
       if (
         !_finalConfiguration['data'][key] ||
@@ -70,7 +70,7 @@ module.exports = function CustomPage(configuration) {
   }
 
   // 处理 computed 参数，将值逐个加到 this.data
-  if (configuration.computed) {
+  if (configuration.computed && typeof configuration.computed === 'object') {
     Object.keys(configuration.computed).forEach((key) => {
       let value = {}
       try {
