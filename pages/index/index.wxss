@@ -408,6 +408,8 @@
 }
 
 .liveindex .body .item .name {
+  font-size: 0.9em;
+  text-align: center;
   color: #666;
 }
 /* 生活指数 - end */

@@ -192,10 +192,10 @@
   <view class="container liveindex">
     <view class="title">今日生活指数</view>
     <view class="body">
-      <view class="item" wx:for="{{ liveIndex.list }}" wx:key="name" data-index="{{ index }}"
-        bindtap="showLiveIndexDetail">
-        <image src="{{ item.icon }}" mode="widthFix"></image>
-        <view class="status">{{ item.status }}</view>
+      <view class="item" wx:for="{{ lifeindex.list }}" wx:key="type" data-index="{{ index }}"
+        bindtap="showLiveIndexDetail" hover-class="hover">
+        <image src="{{ item.iconUrl }}" mode="widthFix"></image>
+        <view class="status">{{ item.category }}</view>
         <view class="name">{{ item.name }}</view>
       </view>
     </view>

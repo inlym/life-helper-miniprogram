@@ -38,11 +38,6 @@ CustomPage({
       queries: 'qs1',
     },
 
-    liveIndex: {
-      url: '/weather/liveindex',
-      queries: 'qs1',
-    },
-
     minutelyRain: {
       url: '/weather/rain',
       queries: 'qs1',
@@ -60,6 +55,11 @@ CustomPage({
 
     fore24h: {
       url: '/weather/24h',
+      queries: 'qs1',
+    },
+
+    lifeindex: {
+      url: '/weather/index',
       queries: 'qs1',
     },
   },
@@ -142,14 +142,14 @@ CustomPage({
     /** 点击按钮的索引 */
     const { index } = e.currentTarget.dataset
 
-    const detail = this.data.liveIndex.list[index]
+    const detail = this.data.lifeindex.list[index]
     if (detail) {
       this.setData({
         halfScreen: {
           show: true,
-          title: `${detail.name}指数`,
-          desc: detail.status,
-          tips: detail.description,
+          title: detail.name,
+          desc: detail.category,
+          tips: detail.text,
         },
       })
     }
