@@ -1,0 +1,68 @@
+<view class="main">
+  <!-- 顶部 tab 栏 - start -->
+  <view class="tabs">
+    <scroll-view scroll-x="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}"
+      scroll-into-view="{{ scrollIndex }}" enhanced="{{ true }}" bounces="{{ true }}" fast-deceleration="{{ true }}"
+      scroll-with-animation="{{ true }}" show-scrollbar="{{ false }}">
+      <view class="items flex-row">
+        <view class="item flex-column {{ index === currentIndex ? 'active' : '' }}" wx:for="{{ fore24h.list }}"
+          wx:key="date" id="s-{{ index }}" bindtap="handleScorllItemTap" data-index="{{ index }}"
+          hover-class="item-hover">
+          <view class="weekday">{{ item.hourText }}</view>
+          <view class="date {{ index === currentIndex ? 'active' : '' }}">{{ item.weekday }}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 顶部 tab 栏 - end -->
+
+  <!-- 天气内容区 - start -->
+  <view class="content">
+    <swiper circular="{{ true }}" bindchange="handleSwiperChange" current="{{ currentIndex }}">
+      <swiper-item item-id="swiper:{{ item.date }}" wx:for="{{ fore24h.list }}" wx:key="date"
+        id="swiper:{{ item.date }}">
+        <view class="top flex-row">
+          <image src="{{ item.imageUrl }}"></image>
+          <view class="right flex-row">
+            <view class="temp">{{ item.temp }}°</view>
+            <view class="desc">{{ item.text }}</view>
+          </view>
+        </view>
+
+        <!-- 今日详情 - start -->
+        <view class="content-item detail flex-row">
+          <view class="text-item">
+            <view class="name">湿度</view>
+            <view class="text">{{ item.humidity }}%</view>
+          </view>
+          <view class="text-item">
+            <view class="name">降水量</view>
+            <view class="text">{{ item.precip === '0.0' ? '无降水' : item.precip + 'mm' }}</view>
+          </view>
+          <view class="text-item">
+            <view class="name">气压</view>
+            <view class="text">{{ item.pressure }}hPa</view>
+          </view>
+          <view class="text-item">
+            <view class="name">风向</view>
+            <view class="text">{{ item.windDir }}</view>
+          </view>
+          <view class="text-item">
+            <view class="name">风级</view>
+            <view class="text">{{ item.windScale }}级</view>
+          </view>
+          <view class="text-item">
+            <view class="name">风速</view>
+            <view class="text">{{ item.windSpeed }}km/h</view>
+          </view>
+
+
+        </view>
+        <!-- 今日详情 - end -->
+
+
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 天气内容区 - end -->
+</view>

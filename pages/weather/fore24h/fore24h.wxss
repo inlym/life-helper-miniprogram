@@ -1,1 +1,100 @@
-/* pages/weather/fore24h/fore24h.wxss */
+.main {
+  padding: 0;
+}
+
+/* 顶部 tab 栏 - start */
+.tabs {
+  background-color: #f5f5f5;
+}
+
+.tabs .items {
+  width: 2000rpx;
+}
+
+.tabs .item {
+  width: 140rpx;
+  height: 140rpx;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+}
+
+.tabs .item.active {
+  color: #07c160;
+  padding: 20rpx 0;
+  font-size: 36rpx;
+}
+
+.tabs .item .weekday {
+  font-size: 1em;
+}
+
+.tabs .item .date {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.tabs .item .date.active {
+  font-size: 0.8em;
+  color: #07c160;
+}
+
+/* 顶部 tab 栏 - end */
+
+/* 下方内容区 - start */
+swiper {
+  height: 1000rpx;
+  background-color: #ededed;
+}
+
+.content .top {
+  padding: 0 160rpx 0 100rpx;
+
+  background-color: #edf1f4;
+}
+
+.content .top image {
+  width: 256rpx;
+  height: 256rpx;
+}
+
+.content .top .temp {
+  font-size: 54rpx;
+  margin-right: 40rpx;
+}
+
+/* 纯文字项目 - start */
+.text-item {
+  text-align: center;
+}
+
+.text-item .name {
+  font-size: 0.8em;
+  color: #888;
+  margin-bottom: 10rpx;
+}
+
+/* 纯文字项目 - end */
+
+/* 今日详情 - start */
+.detail {
+  flex-wrap: wrap;
+}
+
+.detail .text-item {
+  width: 200rpx;
+}
+
+/* 今日详情 - end */
+
+.content .content-item {
+  margin-top: 16rpx;
+  padding: 0 40rpx;
+  height: 400rpx;
+  background-color: #fff;
+}
+
+.content-item .item {
+  align-items: center;
+}
+
+/* 下方内容区 - end */

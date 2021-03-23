@@ -163,7 +163,6 @@
   margin-left: 16rpx;
   font-size: 90%;
   color: #fff;
-  background-color: var(--color-GREEN);
 }
 
 .forecast2days .day .secondline {

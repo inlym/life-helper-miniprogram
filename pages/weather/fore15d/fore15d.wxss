@@ -1,5 +1,5 @@
-page {
-  background-color: #fff;
+.main {
+  padding: 0;
 }
 
 /* 顶部 tab 栏 - start */
@@ -46,7 +46,7 @@ page {
 
 /* 下方内容区 - start */
 swiper {
-  height: 1450rpx;
+  height: 1600rpx;
   background-color: #ededed;
 }
 
