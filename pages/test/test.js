@@ -2,23 +2,41 @@
 
 const app = getApp()
 const { CustomPage } = app
+const CryptoJS = require('../../app/ext/crypto-js.min.js')
 
 CustomPage({
   /** 页面的初始数据 */
-  data: {
-    conditionStyle: {
-      bgClass: 'bg-common',
-      rainLevel: 0,
-      decoration: ['sun', 'snowman', 'cloud', 'moon', 'rain'],
+  data: {},
+
+  requested: {
+    token: {
+      url: '/oss/token',
+      queries: 'qs1',
     },
   },
 
-  requested: {},
+  qs1() {
+    return { n: 2 }
+  },
 
   debug: {
     configuration: true,
     setData: true,
     request: true,
+  },
+
+  choose() {
+    const url = this.data.token.url
+    const ossToken = this.data.token.list[0]
+    const self = this
+
+    wx.chooseImage({
+      count: 1,
+      success(res) {
+        const filePath = res.tempFilePaths[0]
+        self.httpClient.uploadSingleImageToOss({ url, ossToken, filePath }).then(console.log)
+      },
+    })
   },
 
   /** 生命周期函数--监听页面加载 */

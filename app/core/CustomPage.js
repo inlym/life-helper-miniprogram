@@ -30,6 +30,7 @@ module.exports = function CustomPage(configuration) {
     pull,
     utils,
     config,
+    httpClient,
     getUrl: route.getUrl,
     getQuery: route.getQuery,
     read: storage.get,
@@ -60,10 +61,7 @@ module.exports = function CustomPage(configuration) {
   // 处理 requested 参数，如果 data 中没有同名属性，则添加
   if (configuration.requested && typeof configuration.requested === 'object') {
     Object.keys(configuration.requested).forEach((key) => {
-      if (
-        !_finalConfiguration['data'][key] ||
-        typeof _finalConfiguration['data'][key] !== 'object'
-      ) {
+      if (!_finalConfiguration['data'][key] || typeof _finalConfiguration['data'][key] !== 'object') {
         _finalConfiguration['data'][key] = {}
       }
     })

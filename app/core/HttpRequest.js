@@ -170,12 +170,7 @@ module.exports = class HttpRequest {
       headers['x-ca-signature-headers'] = this.signHeaderKeys.join(',')
       const pathAndParams = this.getPathAndParams(url)
       const signedHeadersString = this.getSignedHeadersString(headers)
-      const stringToSign = this.buildStringToSign(
-        method,
-        headers,
-        signedHeadersString,
-        pathAndParams
-      )
+      const stringToSign = this.buildStringToSign(method, headers, signedHeadersString, pathAndParams)
       headers['x-ca-signature'] = this.sign(stringToSign)
     }
 
@@ -209,6 +204,56 @@ module.exports = class HttpRequest {
         },
         fail() {
           reject(new Error('内部原因，发起请求失败!'))
+        },
+      })
+    })
+  }
+
+  /**
+   * 本地图片直传 OSS
+   * @param {object} opt 配置项
+   * @description
+   * 1. 调用该函数前需先获取 ossToken
+   */
+  uploadSingleImageToOss(opt) {
+    /** 有效的图片文件后缀名 */
+    const validExtname = ['jpg', 'png', 'jpeg', 'bmp', 'gif', 'tiff', 'svg']
+
+    const { filePath, ossToken } = opt
+    const { basename, policy, accessKeyId, signature, url, callback } = ossToken
+
+    if (!(filePath && url && basename && policy && accessKeyId && signature)) {
+      throw new Error('调用函数 uploadSingleImageToOss 时缺少参数')
+    }
+
+    const fileNameList = filePath.split('.')
+    const extname = fileNameList[fileNameList.length - 1]
+    if (!validExtname.includes(extname.toLowerCase())) {
+      throw new Error('不支持的图片后缀')
+    }
+
+    /** 文件名 */
+    const key = basename + '.' + extname
+
+    return new Promise((resolve) => {
+      wx.uploadFile({
+        url,
+        filePath,
+        name: 'file',
+        formData: {
+          key,
+          policy,
+          OSSAccessKeyId: accessKeyId,
+          signature,
+          success_action_status: 200,
+          callback,
+        },
+        success(res) {
+          if (res.statusCode < 300) {
+            resolve(key)
+          } else {
+            resolve(false)
+          }
         },
       })
     })

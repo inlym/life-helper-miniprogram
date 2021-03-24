@@ -14,13 +14,12 @@
     "Component": false,
     "getCurrentPages": false
   },
-  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "extends": ["eslint:recommended"],
   "parserOptions": {
     "ecmaVersion": 2019
   },
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error",
     "no-await-in-loop": "warn",
     "accessor-pairs": "error",
     "array-callback-return": "error",

@@ -1,3 +1,2 @@
-<view class="main wbg wbg-night">
-  <view class="star" diameter="10rpx" x="50" y="50" duration="10s"></view>
-</view>
+<view>测试小程序直传 OSS</view>
+<button bindtap="choose">选取文件</button>
