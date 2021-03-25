@@ -14,6 +14,7 @@ const storage = require('./storage.js')
 const config = require('../config/config.js')
 const route = require('./page/methods/route.js')
 const HttpRequest = require('./HttpRequest.js')
+const checkLogin = require('./page/methods/checkLogin.js')
 
 const httpClient = HttpRequest.create(config)
 
@@ -37,6 +38,9 @@ module.exports = function CustomPage(configuration) {
     write: storage.set,
     forward: route.forward,
     post: httpClient.post,
+    login() {
+      return httpClient.login()
+    },
     request(opt) {
       return httpClient.request(opt)
     },
@@ -108,6 +112,9 @@ module.exports = function CustomPage(configuration) {
 
     // 处理传值字段
     route.handleTransffedData.call(this)
+
+    // 未登录就登录一次，获取 token，非强制性
+    checkLogin.call(this)
 
     // 执行原有的 onLoad
     if (typeof _originalOnLoad === 'function') {

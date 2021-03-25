@@ -3,6 +3,7 @@
 const app = getApp()
 const { CustomPage } = app
 const CryptoJS = require('../../app/ext/crypto-js.min.js')
+const { base64 } = require('../../app/apps.js')
 
 CustomPage({
   /** 页面的初始数据 */
@@ -26,7 +27,6 @@ CustomPage({
   },
 
   choose() {
-    const url = this.data.token.url
     const ossToken = this.data.token.list[0]
     const self = this
 
@@ -34,7 +34,7 @@ CustomPage({
       count: 1,
       success(res) {
         const filePath = res.tempFilePaths[0]
-        self.httpClient.uploadSingleImageToOss({ url, ossToken, filePath }).then(console.log)
+        self.httpClient.uploadSingleImageToOss({ ossToken, filePath }).then(console.log)
       },
     })
   },
