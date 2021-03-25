@@ -6,4 +6,7 @@ module.exports = {
 
   /** 是否需要对请求进行签名 */
   signature: true,
+
+  /** 向 OSS 直传文件时，设定的回调地址前缀 */
+  ossCallbackUrl: 'https://api.lh.inlym.com/oss/callback',
 }

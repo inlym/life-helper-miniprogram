@@ -4,6 +4,8 @@ const CryptoJS = require('../ext/crypto-js.min.js')
 const qs = require('./qs.js')
 const keys = require('../config/keys.js')
 const logger = require('./logger.js')
+const base64 = require('../ext/base64.js')
+const config = require('../config/config.js')
 
 module.exports = class HttpRequest {
   // 仅将一些分环境不同的配置项放置到入口配置处
@@ -220,7 +222,9 @@ module.exports = class HttpRequest {
     const validExtname = ['jpg', 'png', 'jpeg', 'bmp', 'gif', 'tiff', 'svg']
 
     const { filePath, ossToken } = opt
-    const { basename, policy, accessKeyId, signature, url, callback } = ossToken
+    const { basename, policy, accessKeyId, signature, url } = ossToken
+
+    const token = wx.getStorageSync(keys.STORAGE_TOKEN_FIElD)
 
     if (!(filePath && url && basename && policy && accessKeyId && signature)) {
       throw new Error('调用函数 uploadSingleImageToOss 时缺少参数')
@@ -235,6 +239,13 @@ module.exports = class HttpRequest {
     /** 文件名 */
     const key = basename + '.' + extname
 
+    const callback = {
+      callbackUrl: config.ossCallbackUrl + '?token=' + token,
+      callbackBodyType: 'application/json',
+      callbackBody:
+        '{"bucket":${bucket},"object":${object},"etag":${etag},"size":${size},"height":${imageInfo.height},"width":${imageInfo.width},"format":${imageInfo.format}}',
+    }
+
     return new Promise((resolve) => {
       wx.uploadFile({
         url,
@@ -246,7 +257,7 @@ module.exports = class HttpRequest {
           OSSAccessKeyId: accessKeyId,
           signature,
           success_action_status: 200,
-          callback,
+          callback: base64.encode(JSON.stringify(callback)),
         },
         success(res) {
           if (res.statusCode < 300) {
