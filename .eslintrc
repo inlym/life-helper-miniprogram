@@ -12,7 +12,8 @@
     "wx": false,
     "getApp": false,
     "Component": false,
-    "getCurrentPages": false
+    "getCurrentPages": false,
+    "worker": false
   },
   "extends": ["eslint:recommended"],
   "parserOptions": {

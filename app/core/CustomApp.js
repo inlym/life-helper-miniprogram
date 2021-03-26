@@ -7,6 +7,7 @@ const CustomPage = require('./CustomPage.js')
 const logger = require('./logger.js')
 const utils = require('./utils.js')
 const location = require('../common/location.js')
+const createWorker = require('../worker/index.js')
 const fundebug = require('../ext/fundebug.1.3.1.min.js')
 const HttpRequest = require('./HttpRequest.js')
 const httpClient = HttpRequest.create(configAll)
@@ -43,6 +44,9 @@ function CustomApp(configuration) {
 
     // 小程序初始化时进行一次登录，从服务端获取 token，保存至缓存中
     httpClient.login()
+
+    // 启动 worker
+    this.worker = createWorker()
 
     // 引入 Fundebug
     fundebug.init({
