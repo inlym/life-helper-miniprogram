@@ -37,12 +37,14 @@ module.exports = function CustomPage(configuration) {
     read: storage.get,
     write: storage.set,
     forward: route.forward,
-    post: httpClient.post,
     login() {
       return httpClient.login()
     },
     request(opt) {
       return httpClient.request(opt)
+    },
+    post(opt) {
+      return httpClient.post(opt)
     },
   }
 

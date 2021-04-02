@@ -51,7 +51,6 @@
   "useExtendedLib": {
     "weui": true
   },
-  "workers": "workers",
   "plugins": {},
   "usingComponents": {
     "mp-toptips": "weui-miniprogram/toptips/toptips",
