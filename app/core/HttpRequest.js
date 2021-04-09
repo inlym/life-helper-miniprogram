@@ -161,11 +161,12 @@ module.exports = class HttpRequest {
     const url = this.buildUrl(this.baseURL, options.url, options.params)
 
     const token = wx.getStorageSync(keys.STORAGE_TOKEN_FIElD)
-    if (token) {
-      headers[keys.HEADER_TOKEN_FIElD] = token
-    } else {
+
+    if (options.url === '/login' || !token) {
       const code = await this.getCode()
-      headers[keys.HEADER_CODE_FIElD] = code
+      headers['authorization'] = `CODE ${code}`
+    } else {
+      headers['authorization'] = `TOKEN ${token}`
     }
 
     if (this.signed) {
@@ -300,19 +301,15 @@ module.exports = class HttpRequest {
           resolve(res.code)
         },
         fail() {
-          reject(new Error('内部原因，获取 code 失败!'))
+          reject(new Error('调用 wx.login 失败!'))
         },
       })
     })
   }
 
   async login() {
-    const code = await this.getCode()
     this.get({
       url: '/login',
-      params: {
-        code,
-      },
     }).then((response) => {
       if (response.status === 200) {
         const { token } = response.data
@@ -330,9 +327,9 @@ module.exports = class HttpRequest {
   }
 
   /** 创建新的实例 */
-  static create(config) {
-    const { baseURL, signature, httpDebug } = config
-    const { appKey, appSecret } = config.secret || {}
+  static create(options) {
+    const { baseURL, signature, httpDebug } = options
+    const { appKey, appSecret } = options.secret || {}
     return new HttpRequest({
       baseURL,
       debug: httpDebug,

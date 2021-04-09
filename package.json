@@ -20,7 +20,9 @@
     "url": "https://github.com/inlym/life-helper-miniprogram/issues"
   },
   "homepage": "https://github.com/inlym/life-helper-miniprogram#readme",
-  "dependencies": {},
+  "dependencies": {
+    "life-helper-miniprogram-secret": "^1.0.3"
+  },
   "devDependencies": {
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",

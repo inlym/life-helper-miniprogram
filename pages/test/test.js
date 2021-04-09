@@ -10,10 +10,10 @@ CustomPage({
   data: {},
 
   requested: {
-    token: {
-      url: '/oss/token',
-      queries: 'qs1',
-    },
+    // token: {
+    //   url: '/oss/token',
+    //   queries: 'qs1',
+    // },
   },
 
   qs1() {
@@ -39,8 +39,27 @@ CustomPage({
     })
   },
 
+  temp() {
+    this.post({
+      url: '/debug/auth',
+      data: {
+        name: 'amrk',
+      },
+    }).then((res) => {
+      console.log('userId =>', res.data.userId)
+    })
+  },
+
+  temp2() {
+    this.httpClient.login().then(console.log)
+  },
+
   /** 生命周期函数--监听页面加载 */
   onLoad() {},
+
+  temp3() {
+    this.request({ url: '/debug/temp' }).then(console.log)
+  },
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {},

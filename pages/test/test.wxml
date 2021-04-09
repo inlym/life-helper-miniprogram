@@ -1,2 +1,5 @@
 <view>测试小程序直传 OSS</view>
 <button bindtap="choose">选取文件</button>
+<button bindtap="temp">点击</button>
+<button bindtap="temp2">temp2</button>
+<button bindtap="temp3">temp3</button>

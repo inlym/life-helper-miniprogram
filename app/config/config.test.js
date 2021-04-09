@@ -1,5 +1,7 @@
 'use strict'
 
+const secret = require('life-helper-miniprogram-secret')
+
 module.exports = {
   /** 服务端域名 */
   baseURL: 'https://api-test.lh.inlym.com',
@@ -9,4 +11,6 @@ module.exports = {
 
   /** 向 OSS 直传文件时，设定的回调地址前缀 */
   ossCallbackUrl: 'https://api-test.lh.inlym.com/oss/callback',
+
+  secret: secret('test'),
 }
