@@ -1,6 +1,5 @@
 'use strict'
 
-const logger = require('./logger.js')
 const setDataMethod = require('./page/methods/setData.js')
 const bindResponseData = require('./page/methods/bindResponseData.js')
 const mergeQueries = require('./page/methods/mergeQueries.js')
@@ -15,6 +14,7 @@ const config = require('../config/config.js')
 const route = require('./page/methods/route.js')
 const HttpRequest = require('./HttpRequest.js')
 const checkLogin = require('./page/methods/checkLogin.js')
+const logger = require('../core/logger.js')
 
 const httpClient = HttpRequest.create(config)
 

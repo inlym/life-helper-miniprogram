@@ -4,11 +4,11 @@ const configAll = require('../config/config.js')
 const storage = require('./storage.js')
 const authorize = require('../common/authorize.js')
 const CustomPage = require('./CustomPage.js')
-const logger = require('./logger.js')
 const utils = require('./utils.js')
 const location = require('../common/location.js')
 const HttpRequest = require('./HttpRequest.js')
 const httpClient = HttpRequest.create(configAll)
+const logger = require('../core/logger.js')
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法

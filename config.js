@@ -18,4 +18,12 @@ module.exports = {
    * - 'local'       => 本地开发环境
    */
   stage: 'production',
+
+  /**
+   * 基础日志等级
+   *
+   * 取值：
+   * 'ALL', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'NONE'
+   */
+  loggerLevel: 'DEBUG',
 }

@@ -2,7 +2,7 @@
 
 module.exports = {
   /** 服务端域名 */
-  baseURL: 'http://api-local.lh.inlym.com',
+  baseURL: 'http://localhost:3010',
 
   /** 是否需要对请求进行签名 */
   signature: false,

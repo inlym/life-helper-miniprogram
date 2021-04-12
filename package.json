@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/inlym/life-helper-miniprogram#readme",
   "dependencies": {
-    "life-helper-miniprogram-secret": "^1.0.3"
+    "life-helper-miniprogram-secret": "^1.0.3",
+    "miniprogram-logger-plus": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^7.18.0",

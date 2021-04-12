@@ -19,6 +19,7 @@ const configuration = {
 const config = {
   env,
   keys,
+  loggerLevel: configRoot.loggerLevel,
   httpDebug: true,
 }
 Object.assign(config, configuration[env])
