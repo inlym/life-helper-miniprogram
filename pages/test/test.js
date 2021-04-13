@@ -9,22 +9,7 @@ CustomPage({
   /** 页面的初始数据 */
   data: {},
 
-  requested: {
-    // token: {
-    //   url: '/oss/token',
-    //   queries: 'qs1',
-    // },
-  },
-
-  qs1() {
-    return { n: 2 }
-  },
-
-  debug: {
-    configuration: true,
-    setData: true,
-    request: true,
-  },
+  requested: {},
 
   choose() {
     const ossToken = this.data.token.list[0]

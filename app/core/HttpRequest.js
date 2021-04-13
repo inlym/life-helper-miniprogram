@@ -198,7 +198,7 @@ module.exports = class HttpRequest {
           if (debug) {
             const endTime = Date.now()
             const cost = endTime - startTime
-            logger.debug(`[Request] [${cost}ms]`, method, url)
+            logger.debug(`[Request] [${cost}ms]`, res.statusCode, method, url)
           }
 
           if (res.statusCode === 401) {
