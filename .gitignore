@@ -1,8 +1,7 @@
-temp.js
 node_modules
 miniprogram_npm
 package-lock.json
-app/config/secret.js
-app/config/secret.prod.js
-app/config/secret.test.js
-app/config/secret.local.js
+
+# 临时测试文件
+temp.js
+temp/
