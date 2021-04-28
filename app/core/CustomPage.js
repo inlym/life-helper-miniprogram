@@ -12,11 +12,9 @@ const utils = require('./utils.js')
 const storage = require('./storage.js')
 const config = require('../config/config.js')
 const route = require('./page/methods/route.js')
-const HttpRequest = require('./HttpRequest.js')
 const checkLogin = require('./page/methods/checkLogin.js')
 const logger = require('../core/logger.js')
-
-const httpClient = HttpRequest.create(config)
+const request = require('./request.js')
 
 module.exports = function CustomPage(configuration) {
   /** 在 {page}.js 的 data 中的内容 */
@@ -31,20 +29,19 @@ module.exports = function CustomPage(configuration) {
     pull,
     utils,
     config,
-    httpClient,
     getUrl: route.getUrl,
     getQuery: route.getQuery,
     read: storage.get,
     write: storage.set,
     forward: route.forward,
     login() {
-      return httpClient.login()
+      return request('/login')
     },
     request(opt) {
-      return httpClient.request(opt)
+      return request(opt)
     },
     post(opt) {
-      return httpClient.post(opt)
+      return request.post(opt)
     },
   }
 

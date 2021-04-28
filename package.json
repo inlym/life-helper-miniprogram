@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/inlym/life-helper-miniprogram#readme",
   "dependencies": {
+    "jshttp": "^0.1.0",
     "life-helper-miniprogram-secret": "^1.1.0",
     "miniprogram-logger-plus": "^1.1.0"
   },

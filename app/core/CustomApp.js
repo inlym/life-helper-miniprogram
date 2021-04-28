@@ -6,9 +6,9 @@ const authorize = require('../common/authorize.js')
 const CustomPage = require('./CustomPage.js')
 const utils = require('./utils.js')
 const location = require('../common/location.js')
-const HttpRequest = require('./HttpRequest.js')
-const httpClient = HttpRequest.create(configAll)
 const logger = require('../core/logger.js')
+
+const request = require('./request.js')
 
 /**
  * 汇总需要挂载到 app 实例上的属性方法
@@ -40,8 +40,7 @@ function CustomApp(configuration) {
 
     storage.set(STORAGE_APP_LAUNCH_TIME, Date.now())
 
-    // 小程序初始化时进行一次登录，从服务端获取 token，保存至缓存中
-    httpClient.login()
+    request('/login')
 
     // 执行原有的 onLaunch
     if (typeof _onLaunch === 'function') {
