@@ -25,12 +25,12 @@ function getCode() {
 }
 
 /**
- * 中间件，添加授权信息
+ * 中间件：添加授权信息
  */
 async function auth(ctx, next) {
   const token = wx.getStorageSync(STORAGE_TOKEN_FIElD)
 
-  if (ctx.url.indexOf('/login') === -1 && token) {
+  if (ctx.url.indexOf('/login') === -1 && token && ctx.retries === 0) {
     ctx.setHeader('authorization', `TOKEN ${token}`)
   } else {
     const code = await getCode()
@@ -41,7 +41,7 @@ async function auth(ctx, next) {
 }
 
 /**
- * 存储登录凭证
+ * 中间件：存储登录凭证
  */
 async function saveToken(ctx, next) {
   await next()
@@ -50,10 +50,14 @@ async function saveToken(ctx, next) {
   }
 }
 
+/**
+ * 默认配置
+ */
 const defaults = {
   method: 'get',
-  baseURL: 'https://api.lh.inlym.com',
+  baseURL: config.baseURL,
   middleware: [auth, saveToken],
+  retry: 1,
   responseItems: ['status', 'headers', 'data', 'config'],
 }
 

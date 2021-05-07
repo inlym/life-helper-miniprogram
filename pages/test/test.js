@@ -2,8 +2,7 @@
 
 const app = getApp()
 const { CustomPage } = app
-const CryptoJS = require('../../app/ext/crypto-js.min.js')
-const { base64 } = require('../../app/apps.js')
+const request = require('../../app/core/request.js')
 
 CustomPage({
   /** 页面的初始数据 */
@@ -40,7 +39,14 @@ CustomPage({
   },
 
   /** 生命周期函数--监听页面加载 */
-  onLoad() {},
+  onLoad() {
+    request({
+      url: '/location/address',
+      retry: 4,
+    }).then((res) => {
+      console.log(res)
+    })
+  },
 
   temp3() {
     this.request({ url: '/debug/temp' }).then(console.log)
