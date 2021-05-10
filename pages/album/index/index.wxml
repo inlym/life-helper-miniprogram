@@ -1,0 +1,7 @@
+<view class="main">
+  <!-- 列表项非空情况 -->
+  <view wx:if="{{ albums.count && albums.count > 0 }}" class="content"> </view>
+
+  <!-- 列表项为空情况 -->
+  <view wx:else class="empty"></view>
+</view>

@@ -41,6 +41,12 @@
           "pathName": "pages/weather/fore15d/fore15d",
           "query": "date=2021-03-11&location=120.111,30.222",
           "scene": null
+        },
+        {
+          "name": "相册列表页",
+          "pathName": "pages/album/index/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
