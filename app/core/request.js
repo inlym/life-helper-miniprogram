@@ -51,12 +51,32 @@ async function saveToken(ctx, next) {
 }
 
 /**
+ * 错误提示
+ *
+ * 说明：
+ * 1. 人为控制的错误提示返回状态码 200
+ */
+async function errTips(ctx, next) {
+  await next()
+  if (ctx.response.status === 200 && ctx.response.data && ctx.response.data.code && ctx.response.data.message) {
+    const { type, options } = ctx.response.data.message
+    if (type === 'toast') {
+      wx.showToast(options)
+    } else if (type === 'modal') {
+      wx.showModal(options)
+    } else {
+      // 空
+    }
+  }
+}
+
+/**
  * 默认配置
  */
 const defaults = {
   method: 'get',
   baseURL: config.baseURL,
-  middleware: [auth, saveToken],
+  middleware: [auth, saveToken, errTips],
   retry: 1,
   responseItems: ['status', 'headers', 'data', 'config'],
 }
