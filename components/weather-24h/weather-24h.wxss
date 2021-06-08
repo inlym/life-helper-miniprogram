@@ -1,0 +1,33 @@
+/* components/weather-24h/weather-24h.wxss */
+
+.weather-24h {
+  margin-top: 20rpx;
+  height: 260rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+}
+
+.fore24scroll {
+  height: inherit;
+}
+
+.itemwrap {
+  display: flex;
+  justify-content: space-between;
+  width: 2500rpx;
+}
+
+.itemwrap .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100rpx;
+  height: 260rpx;
+  padding: 20rpx 0;
+}
+
+.wea-icon {
+  width: 50rpx;
+  height: 50rpx;
+}

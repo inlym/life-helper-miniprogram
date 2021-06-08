@@ -1,0 +1,415 @@
+/**index.wxss**/
+/* 公共复用部分 */
+.container-box {
+  margin: 25rpx 15rpx 15rpx;
+  border-radius: 16rpx;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px 10px #eaeaea;
+  border-bottom: 1rpx solid #eeeeee;
+}
+
+.container-box .head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80rpx;
+  width: 100%;
+  border-bottom: 1rpx solid #eeeeee;
+}
+
+.container-box .head .title {
+  font-size: 32rpx;
+  margin-left: 20rpx;
+  font-weight: bold;
+}
+
+.container {
+  margin-top: 16rpx;
+  background-color: #fff;
+  overflow: hidden;
+  font-size: 28rpx;
+}
+
+.container .title {
+  padding: 10rpx 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+/* 温度的 ° 符号 */
+.degree::after {
+  content: '\00b0';
+}
+
+/* 天气图标 */
+.wea-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.aqi-bg-1 {
+  background-color: var(--color-GREEN);
+}
+
+.aqi-bg-2 {
+  background-color: var(--color-YELLOW);
+}
+
+.aqi-bg-3 {
+  background-color: var(--color-ORANGE);
+}
+
+.aqi-bg-4 {
+  background-color: var(--color-RED);
+}
+
+.aqi-bg-5 {
+  background-color: var(--color-PURPLE);
+}
+
+.aqi-bg-6 {
+  background-color: #7e0023;
+}
+
+/* 单独设置部分 */
+
+/* 天气实况（新版） - start */
+.condition {
+  height: 1250rpx;
+  position: relative;
+}
+
+.condition .content {
+  position: absolute;
+  padding-bottom: 40rpx;
+  bottom: 0;
+  height: 800rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.condition .content .location {
+  font-size: 32rpx;
+}
+
+.condition .content .temperature {
+  font-size: 220rpx;
+  font-weight: 100;
+  text-align: center;
+}
+
+.condition .content .wind {
+  font-size: 80%;
+}
+
+.condition .text {
+  font-size: 1.5em;
+}
+
+.condition .summary {
+  font-size: 0.8em;
+  width: 80%;
+  text-align: center;
+}
+
+/* 天气实况（新版） - end */
+
+/* 今天和明天的天气情况 - start */
+.forecast2days {
+  position: relative;
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+  height: 160rpx;
+  background-color: #fff;
+}
+
+.forecast2days .day {
+  width: 50%;
+  padding: 10rpx 20rpx 0;
+}
+
+.forecast2days .day:first-child {
+  border-right: 2rpx solid #ededed;
+}
+
+.forecast2days .day {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.forecast2days .day .firstline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forecast2days .day .firstline .textaqi {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.forecast2days .day .firstline .aqi {
+  padding: 2rpx 20rpx 0;
+  border-radius: 20rpx;
+  margin-left: 16rpx;
+  font-size: 90%;
+  color: #fff;
+}
+
+.forecast2days .day .secondline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 90%;
+}
+
+/* 今天和明天的天气情况 - end */
+
+/* 未来 24 小时预报 - start */
+.fore24hours {
+  height: 260rpx;
+  font-size: 28rpx;
+}
+
+.fore24hours .fore24scroll {
+  height: inherit;
+}
+
+.fore24hours .itemwrap {
+  display: flex;
+  justify-content: space-between;
+  width: 2500rpx;
+}
+
+.fore24hours .itemwrap .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100rpx;
+  height: 260rpx;
+  padding: 20rpx 0;
+}
+
+/* 未来 24 小时预报 - end */
+
+/* 未来 2 小时降雨情况 - start */
+.minutelyrain {
+  padding: 40rpx 10rpx 14rpx;
+}
+
+.minutelyrain .top {
+  height: 60rpx;
+  width: 100%;
+}
+
+.minutelyrain .top .desc {
+  font-size: 0.7em;
+  margin-top: -2rpx;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.minutelyrain .itemwrap {
+  height: 280rpx;
+  width: 2000rpx;
+  align-items: flex-end;
+}
+
+.minutelyrain .itemwrap .item {
+  width: 50rpx;
+}
+
+.minutelyrain .itemwrap .item:nth-child(1) {
+  margin-left: 40rpx;
+}
+
+.minutelyrain .itemwrap .item .rainblock {
+  width: 100%;
+  max-height: 200rpx;
+  background-color: #a8c9f6;
+}
+
+.minutelyrain .itemwrap .item .num {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.minutelyrain .itemwrap .item .time {
+  font-size: 24rpx;
+}
+
+.minutelyrain .desc {
+  font-size: 0.8em;
+  margin-top: 14rpx;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* 未来 2 小时降雨情况 - end */
+
+/* 未来 7 天逐天天气预报 - start */
+.fore7d {
+  font-size: 32rpx;
+}
+
+.fore7d .body {
+  font-size: 32rpx;
+}
+
+.fore7d .body .item {
+  padding: 0 22rpx;
+  height: 100rpx;
+}
+
+.fore7d .body .item .weekday {
+  font-size: 0.9em;
+}
+
+.fore7d .body .item .dateText {
+  font-size: 0.8em;
+  color: #7e8081;
+}
+
+.fore7d .body .item .text {
+  width: 120rpx;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.fore7d .body .aqi {
+  width: 160rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  border-radius: 6rpx;
+}
+
+.fore7d .more {
+  height: 80rpx;
+  text-align: center;
+}
+
+.fore7d .more text {
+  margin-right: 20rpx;
+  font-size: 0.9em;
+}
+
+/* 未来 7 天逐天天气预报 - end */
+
+/* 实时空气质量 - start */
+.airnow {
+  padding: 0 0 20rpx;
+}
+
+.airnow .body {
+  height: 500rpx;
+}
+
+.airnow .body .left {
+  justify-content: center;
+  width: 350rpx;
+  height: inherit;
+}
+
+.airnow .body .left .content {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  padding: 30rpx 0 40rpx;
+  color: #fff;
+  text-align: center;
+}
+
+.airnow .body .left .content .num {
+  font-size: 60rpx;
+}
+
+.airnow .body .left .content .text {
+  font-size: 30rpx;
+}
+
+.airnow .body .right {
+  flex-grow: 1;
+  height: inherit;
+  padding: 30rpx 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.airnow .body .right .item {
+  width: 50%;
+  height: 26%;
+}
+
+.airnow .body .right progress {
+  height: 2rpx;
+  width: 60%;
+}
+
+.airnow .body .right .item .value {
+  margin-left: -10rpx;
+}
+
+.airnow .body .right .item .num {
+  font-size: 1.1em;
+}
+
+.airnow .body .right .item .unit {
+  color: #aaa;
+  font-size: 0.8em;
+}
+
+.airnow .body .right .item .name {
+  font-size: 0.8em;
+}
+
+.airnow .body .right .item .name .sub {
+  vertical-align: sub;
+  font-size: 0.6em;
+}
+
+/* 实时空气质量 - end */
+
+/* 生活指数 - start */
+.liveindex .body {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.liveindex .body .item {
+  width: 25%;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20rpx 0;
+}
+
+.liveindex .body .item image {
+  width: 70rpx;
+}
+
+.liveindex .body .item .status {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.liveindex .body .item .name {
+  font-size: 0.9em;
+  text-align: center;
+  color: #666;
+}
+/* 生活指数 - end */

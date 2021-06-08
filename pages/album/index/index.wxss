@@ -1,1 +1,21 @@
 /* pages/album/index/index.wxss */
+page {
+  background-color: #fff;
+}
+
+.main {
+  background-color: #fff;
+}
+
+/* 空页面情况 */
+.empty {
+  height: 600rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty button {
+  margin-top: 30rpx;
+}

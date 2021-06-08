@@ -40,4 +40,11 @@ CustomPage({
 
   /** 页面上拉触底事件的处理函数 */
   onReachBottom() {},
+
+  /**
+   * 点击 “创建相册” 按钮
+   */
+  createAlbum() {
+    wx.navigateTo({ url: '/pages/album/edit/edit' })
+  },
 })

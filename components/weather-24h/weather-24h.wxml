@@ -1,0 +1,20 @@
+<!--components/weather-24h/weather-24h.wxml-->
+
+<view class="weather-24h">
+  <scroll-view
+    class="fore24scroll"
+    scroll-x="{{ true }}"
+    scroll-with-animation="{{ true }}"
+    enable-flex="{{ true }}"
+    scroll-anchoring="{{ true }}"
+  >
+    <view class="itemwrap">
+      <view class="item" wx:for="{{ data }}" wx:key="item" hover-class="hover" bindtap="handleHourItemTap" data-index="{{ index }}">
+        <view class="hour">{{ item.time }}</view>
+        <image class="wea-icon" src="{{ item.iconUrl }}"></image>
+        <view class="text">{{ item.text }}</view>
+        <view class="temp degree">{{ item.temp }}</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

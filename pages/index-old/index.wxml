@@ -1,0 +1,215 @@
+<view class="main">
+  <!-- 天气实况（新版） - start -->
+  <view class="condition wgb {{ now.skyElement.bgClass }}">
+    <!-- 顶部预留高度 -->
+    <topspace offset="0" opacity="0"></topspace>
+
+    <!-- 大片背景区域 -->
+    <view class="cond-background">
+      <view class="fullmoon" wx:if="{{ now.skyElement.fullmoon }}"></view>
+      <view class="halfmoon" wx:if="{{ now.skyElement.halfmoon }}"></view>
+      <view class="sun" wx:if="{{ now.skyElement.sun }}"></view>
+      <view class="fixed-cloud {{ now.skyElement.darkCloud ? 'darkcloud' : '' }}"
+        wx:if="{{ now.skyElement.fixedCloud }}"></view>
+      <view class="moving-cloud {{ now.skyElement.darkCloud ? 'darkcloud' : '' }}"
+        wx:if="{{ now.skyElement.movingCloud }}"></view>
+      <view class="rain" wx:if="{{ now.skyElement.rain }}"></view>
+    </view>
+
+    <view class="content">
+      <view class="location" bindtap="chooseLocation">
+        <text class="address text-ellipsis-l1">{{ address.address }}</text>
+        <text class="iconfont icon-xia"></text>
+      </view>
+
+      <view class="temperature">{{ now.temp }}</view>
+
+      <view class="text">{{ now.text }}</view>
+      <view class="summary">{{ now.summary }}</view>
+    </view>
+  </view>
+  <!-- 天气实况（新版） - end -->
+
+  <!-- 今天和明天2天的天气情况 - start -->
+  <view class="forecast2days" wx:if="{{ fore2dList.length }}">
+    <view class="day" wx:for="{{ fore2dList }}" wx:key="date" data-date="{{ item.date }}" bindtap="handleDayItemTap"
+      hover-class="hover">
+      <view class="firstline">
+        <view class="textaqi">
+          <view class="text">{{ item.weekday }}</view>
+          <view class="aqi aqi-bg-{{ item.aqi.level }}">{{ item.aqi.category }}</view>
+        </view>
+        <!-- <view class="temp">{{ item.max }}°/{{ item.min }}°</view> -->
+        <view class="temp"><text class="degree">{{ item.tempMax }}</text>/<text class="degree">{{ item.tempMin }}</text>
+        </view>
+      </view>
+
+      <view class="secondline">
+        <view class="desc">{{ item.desc }}</view>
+        <view class="wea-icon">
+          <image src="{{ item.iconDayUrl }}" mode="widthFix"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 今天和明天2天的天气情况 - end -->
+
+  <!-- 未来 24 小时预报 - start -->
+  <view class="container fore24hours">
+    <scroll-view class="fore24scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
+      scroll-anchoring="{{ true }}">
+      <view class="itemwrap">
+        <view class="item" wx:for="{{ fore24h.list }}" wx:key="item" hover-class="hover" bindtap="handleHourItemTap"
+          data-index="{{ index }}">
+          <view class="hour">{{ item.hourText }}</view>
+          <image class="wea-icon" src="{{ item.iconUrl }}"></image>
+          <view class="text">{{ item.text }}</view>
+          <view class="temp degree">{{ item.temp }}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 未来 24 小时预报 - end -->
+
+  <!-- 未来 2 小时降雨情况 - start -->
+  <view class="container minutelyrain">
+    <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
+      <view class="summary">{{ minutelyRain.summary }}</view>
+      <view class="desc">（更新时间 {{ minutelyRain.updateTime }}）</view>
+    </view>
+    <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
+      scroll-anchoring="{{ true }}">
+      <view class="itemwrap flex-row">
+        <view class="item flex-column" wx:for="{{ minutelyRain.list }}" wx:key="time">
+          <view class="num">{{ item.precip }}</view>
+          <view class="rainblock" style="height: {{ item.height }}rpx;"></view>
+          <view class="time">{{ item.time }}</view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="bottom onecenter">
+      <view class="desc">未来 2 小时降雨量（单位：mm）</view>
+    </view>
+  </view>
+
+  <!-- 未来 2 小时降雨情况 - end -->
+
+  <!-- 未来 7 天逐天天气预报 - start -->
+  <view class="container fore7d">
+    <view class="title">未来预报</view>
+    <view class="body">
+      <view class="item flex-row" wx:for="{{ fore7d.list }}" wx:key="date" hover-class="hover"
+        data-date="{{ item.date }}" bindtap="handleDayItemTap">
+        <view class="weekday">{{ item.weekday }}</view>
+        <view class="dateText">{{ item.dateText }}</view>
+        <image class="wea-icon" src="{{ item.iconDayUrl }}"></image>
+        <view class="text">{{ item.textDay }}</view>
+        <view class="aqi">
+          <block wx:if="{{ item.aqi }}">
+            <view class="aqi-bg-{{ item.aqi.level }}">
+              AQI {{ item.aqi.aqi }} {{ item.aqi.category }}
+            </view>
+          </block>
+        </view>
+        <image class="wea-icon" src="{{ item.iconNightUrl }}"></image>
+        <view class="text">{{ item.textNight }}</view>
+      </view>
+    </view>
+    <view class="more onecenter" hover-class="hover" bindtap="handleDayItemTap">
+      <view>
+        <text>未来 15 天预报详情</text>
+        <mp-icon icon="arrow" size="{{ 12 }}"></mp-icon>
+      </view>
+    </view>
+  </view>
+  <!-- 未来 7 天逐天天气预报 - end -->
+
+  <!-- 实时空气质量 - start -->
+  <view class="container airnow">
+    <view class="title">实时空气质量</view>
+    <view class="body flex-row">
+      <view class="left flex-column">
+        <view class="content flex-column aqi-bg-{{ airNow.level }}">
+          <view class="num">{{ airNow.aqi }}</view>
+          <view class="text">{{ airNow.category }}</view>
+        </view>
+      </view>
+      <view class="right">
+        <!-- PM2.5 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.pm2p5 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.pm2p5 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">PM2.5</view>
+        </view>
+
+        <!-- PM10 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.pm10 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.pm10 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">PM10</view>
+        </view>
+
+        <!-- O3 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.pm2p5 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.pm2p5 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">O<text class="sub">3</text></view>
+        </view>
+
+        <!-- CO -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.o3 }} </text><text class="unit"> mg/m³</text></view>
+          <progress percent="{{ (airNow.o3 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">CO</view>
+        </view>
+
+        <!-- SO2 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.so2 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.so2 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">SO<text class="sub">2</text></view>
+        </view>
+
+        <!-- NO2 -->
+        <view class="item flex-column">
+          <view class="value"><text class="num">{{ airNow.no2 }} </text><text class="unit"> μg/m³</text></view>
+          <progress percent="{{ (airNow.no2 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
+            duration="1000"></progress>
+          <view class="name">NO<text class="sub">2</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 实时空气质量 - end -->
+
+  <!-- 生活指数 - start -->
+  <view class="container liveindex">
+    <view class="title">今日生活指数</view>
+    <view class="body">
+      <view class="item" wx:for="{{ lifeindex.list }}" wx:key="type" data-index="{{ index }}"
+        bindtap="showLiveIndexDetail" hover-class="hover">
+        <image src="{{ item.iconUrl }}" mode="widthFix"></image>
+        <view class="status">{{ item.category }}</view>
+        <view class="name">{{ item.name }}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 生活指数 - end -->
+</view>
+
+<!--以下为非页面元素-->
+
+<!--Toptips顶部错误提示组件-->
+<mp-toptips type="{{ toptips.type }}" show="{{ toptips.show }}" msg="{{ toptips.msg }}" delay="{{ toptips.delay }}">
+</mp-toptips>
+
+<!-- 半屏弹窗组件 -->
+<mp-half-screen-dialog bindbuttontap="buttontap" show="{{ halfScreen.show }}" title="{{ halfScreen.title }}"
+  subTitle="{{ halfScreen.subTitle }}" desc="{{ halfScreen.desc }}" tips="{{ halfScreen.tips }}">
+</mp-half-screen-dialog>
