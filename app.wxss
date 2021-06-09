@@ -100,3 +100,8 @@ navigator {
   opacity: 0.3;
   background-color: #f7f7f7;
 }
+
+/* 温度的 ° 符号 */
+.degree::after {
+  content: '\00b0';
+}

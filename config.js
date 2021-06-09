@@ -17,7 +17,7 @@ module.exports = {
    * - 'develop'     => 开发环境，1 台带公网的小机子，可随意销毁和重建资源
    * - 'local'       => 本地开发环境
    */
-  stage: 'production',
+  stage: 'local',
 
   /**
    * 基础日志等级

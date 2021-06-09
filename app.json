@@ -10,7 +10,8 @@
     "pages/about/about",
     "pages/weather/fore15d/fore15d",
     "pages/weather/fore24h/fore24h",
-    "pages/album/index/index"
+    "pages/album/index/index",
+    "pages/album/edit/edit"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
@@ -59,6 +60,7 @@
     "mp-icon": "weui-miniprogram/icon/icon",
     "mpc-list": "/components/list/list",
     "mpc-footer": "/components/footer/footer",
-    "topspace": "/components/topspace/topspace"
+    "topspace": "/components/topspace/topspace",
+    "mp-form": "weui-miniprogram/form/form"
   }
 }

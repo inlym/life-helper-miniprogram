@@ -1,5 +1,6 @@
 {
-  "usingComponents": {
-    "weather-24h": "/components/weather-24h/weather-24h"
-  }
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "我的个人助手",
+  "navigationStyle": "custom",
+  "usingComponents": {}
 }

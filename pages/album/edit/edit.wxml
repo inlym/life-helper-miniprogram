@@ -1,0 +1,18 @@
+<!--pages/album/edit/edit.wxml-->
+<mp-form>
+  <view class="weui-cells__title">相册名称</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <input
+        class="weui-input"
+        auto-focus
+        placeholder="请输入相册名称"
+        maxlength="10"
+        bindinput="handleInputChange"
+        value="{{ albumName }}"
+      />
+    </view>
+  </view>
+
+  <button bindtap="submit">创建</button>
+</mp-form>

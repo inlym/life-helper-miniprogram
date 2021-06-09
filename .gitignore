@@ -5,3 +5,7 @@ package-lock.json
 # 临时测试文件
 temp.js
 temp/
+
+
+# .wxss 文件
+**/*.wxss
