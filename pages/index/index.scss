@@ -6,21 +6,21 @@
   background-color: #ffffff;
   box-shadow: 0px 0px 10px 10px #eaeaea;
   border-bottom: 1rpx solid #eeeeee;
-}
 
-.container-box .head {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 80rpx;
-  width: 100%;
-  border-bottom: 1rpx solid #eeeeee;
-}
+  .head {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 80rpx;
+    width: 100%;
+    border-bottom: 1rpx solid #eeeeee;
 
-.container-box .head .title {
-  font-size: 32rpx;
-  margin-left: 20rpx;
-  font-weight: bold;
+    .title {
+      font-size: 32rpx;
+      margin-left: 20rpx;
+      font-weight: bold;
+    }
+  }
 }
 
 .container {
@@ -28,15 +28,15 @@
   background-color: #fff;
   overflow: hidden;
   font-size: 28rpx;
-}
 
-.container .title {
-  padding: 10rpx 32rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 16rpx;
+  .title {
+    padding: 10rpx 32rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 32rpx;
+    font-weight: bold;
+    margin-bottom: 16rpx;
+  }
 }
 
 /* 温度的 ° 符号 */
@@ -80,33 +80,33 @@
 .condition {
   height: 1250rpx;
   position: relative;
-}
 
-.condition .content {
-  position: absolute;
-  padding-bottom: 40rpx;
-  bottom: 0;
-  height: 800rpx;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: space-around;
-  align-items: center;
-}
+  .content {
+    position: absolute;
+    padding-bottom: 40rpx;
+    bottom: 0;
+    height: 800rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
 
-.condition .content .location {
-  font-size: 32rpx;
-}
+    .location {
+      font-size: 32rpx;
+    }
 
-.condition .content .temperature {
-  font-size: 220rpx;
-  font-weight: 100;
-  text-align: center;
-}
+    .temperature {
+      font-size: 220rpx;
+      font-weight: 100;
+      text-align: center;
+    }
 
-.condition .content .wind {
-  font-size: 80%;
+    .wind {
+      font-size: 80%;
+    }
+  }
 }
 
 .condition .text {
@@ -256,54 +256,57 @@
 
 /* 未来 2 小时降雨情况 - end */
 
-/* 未来 7 天逐天天气预报 - start */
-.fore7d {
+// 未来 15 天天气预报
+.f15d {
   font-size: 32rpx;
-}
-
-.fore7d .body {
-  font-size: 32rpx;
-}
-
-.fore7d .body .item {
-  padding: 0 22rpx;
-  height: 100rpx;
-}
-
-.fore7d .body .item .weekday {
-  font-size: 0.9em;
-}
-
-.fore7d .body .item .dateText {
-  font-size: 0.8em;
-  color: #7e8081;
-}
-
-.fore7d .body .item .text {
-  width: 120rpx;
-  font-size: 0.9em;
   text-align: center;
-}
 
-.fore7d .body .aqi {
-  width: 160rpx;
-  text-align: center;
-  font-size: 28rpx;
-  color: #fff;
-  border-radius: 6rpx;
-}
+  .body {
+    .item {
+      padding: 0 22rpx;
+      height: 100rpx;
+      display: flex;
+      justify-content: space-between;
 
-.fore7d .more {
-  height: 80rpx;
-  text-align: center;
-}
+      .weekday {
+        font-size: 0.9em;
+        width: 100rpx;
+      }
 
-.fore7d .more text {
-  margin-right: 20rpx;
-  font-size: 0.9em;
-}
+      .dateText {
+        font-size: 0.8em;
+        color: #7e8081;
+        width: 100rpx;
+      }
 
-/* 未来 7 天逐天天气预报 - end */
+      .temp {
+        width: 80rpx;
+        font-size: 0.8em;
+      }
+
+      .text {
+        width: 120rpx;
+        font-size: 0.8em;
+      }
+
+      .sep {
+        width: 80rpx;
+        height: 2rpx;
+        background-color: #333333;
+      }
+    }
+  }
+
+  .more {
+    height: 80rpx;
+    text-align: center;
+
+    text {
+      margin-right: 20rpx;
+      font-size: 0.9em;
+    }
+  }
+}
 
 /* 实时空气质量 - start */
 .airnow {

@@ -30,7 +30,6 @@
       "outputPath": ""
     },
     "enableEngineNative": false,
-    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
@@ -52,7 +51,7 @@
     "hidedInDevtools": []
   },
   "scripts": {
-    "beforeCompile": "",
+    "beforeCompile": "npm run build:scss",
     "beforePreview": "",
     "beforeUpload": ""
   },
