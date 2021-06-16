@@ -32,33 +32,6 @@ CustomPage({
     },
   },
 
-  computed: {
-    fore2dList(data) {
-      const { list } = data.fore7d
-      if (!list) {
-        return []
-      }
-      const result = []
-      for (let i = 0; i < list.length; i++) {
-        if (list[i]['weekday'] === '今天') {
-          result.push(list[i])
-          result.push(list[i + 1])
-        }
-      }
-      return result
-    },
-  },
-
-  qs1() {
-    const location = this.read(this.config.keys.STORAGE_WEATHER_LOCATION)
-    if (location) {
-      const { longitude, latitude } = location
-      return { location: `${longitude},${latitude}` }
-    } else {
-      return {}
-    }
-  },
-
   /** 生命周期函数--监听页面加载 */
   onLoad() {},
 

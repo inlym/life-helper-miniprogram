@@ -44,7 +44,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.17.0",
+  "libVersion": "2.17.3",
   "appid": "wx09c0a1ea5251c75a",
   "projectname": "life-helper-miniprogram",
   "debugOptions": {

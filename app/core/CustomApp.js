@@ -1,7 +1,6 @@
 'use strict'
 
 const configAll = require('../config/config.js')
-const storage = require('./storage.js')
 const authorize = require('../common/authorize.js')
 const CustomPage = require('./CustomPage.js')
 const utils = require('./utils.js')
@@ -22,7 +21,6 @@ function CustomApp(configuration) {
       return configAll
     },
 
-    storage,
     authorize,
     location,
     CustomPage,
@@ -38,7 +36,7 @@ function CustomApp(configuration) {
     // 本地记录小程序启动时间
     const { STORAGE_APP_LAUNCH_TIME } = configAll.keys
 
-    storage.set(STORAGE_APP_LAUNCH_TIME, Date.now())
+    wx.setStorageSync(STORAGE_APP_LAUNCH_TIME, Date.now())
 
     request('/login')
 

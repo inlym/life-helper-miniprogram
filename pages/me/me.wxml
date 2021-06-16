@@ -5,7 +5,7 @@
   <!-- 顶部个人信息区域 -->
   <view class="profile">
     <!-- 用户个人信息（非空情况） -->
-    <block wx:if="{{ hasUserInfo }}">
+    <block wx:if="{{ userInfo.avatarUrl}}">
       <!-- 头像 -->
       <view class="avatar">
         <image src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
@@ -13,7 +13,7 @@
 
       <!-- 昵称、按钮 -->
       <view class="info">
-        <view class="nickname"> {{ userInfo.nickname }} </view>
+        <view class="nickname"> {{ userInfo.nickName }} </view>
         <view class="desc">欢迎使用我的个人助手</view>
       </view>
     </block>

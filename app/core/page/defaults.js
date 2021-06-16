@@ -7,10 +7,10 @@ module.exports = {
   /** 生命周期函数 */
   lifetimes: {
     /** 用户点击右上角转发 */
-    onShareAppMessage(res) {
+    onShareAppMessage() {
       return {
         imageUrl: 'https://img.lh.inlym.com/share/index_share.jpeg',
-        title: '你上次问我要那个查天气的小程序，是不是这个？',
+        title: '你上次问我要那个查天气的小程序，我发给你了哦',
         path: '/pages/index/index',
       }
     },

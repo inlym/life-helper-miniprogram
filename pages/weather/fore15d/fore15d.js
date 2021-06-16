@@ -20,7 +20,7 @@ CustomPage({
   },
 
   qs1() {
-    const location = this.read(this.config.keys.STORAGE_WEATHER_LOCATION)
+    const location = wx.getStorageSync(this.config.keys.STORAGE_WEATHER_LOCATION)
     if (location) {
       const { longitude, latitude } = location
       return { location: `${longitude},${latitude}` }

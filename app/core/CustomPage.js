@@ -9,7 +9,6 @@ const debugMethods = require('./page/methods/debug.js')
 const defaults = require('./page/defaults.js')
 const execRequestedTask = require('./page/methods/execRequestedTask.js')
 const utils = require('./utils.js')
-const storage = require('./storage.js')
 const config = require('../config/config.js')
 const route = require('./page/methods/route.js')
 const checkLogin = require('./page/methods/checkLogin.js')
@@ -31,8 +30,6 @@ module.exports = function CustomPage(configuration) {
     config,
     getUrl: route.getUrl,
     getQuery: route.getQuery,
-    read: storage.get,
-    write: storage.set,
     forward: route.forward,
     login() {
       return request('/login')

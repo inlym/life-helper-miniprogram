@@ -1,8 +1,7 @@
 'use strict'
 
-const app = getApp()
-const { CustomPage } = app
-const { updateUserInfo } = require('../../app/common/user.js')
+const { CustomPage } = getApp()
+const { updateUserInfo } = require('../../app/service/userinfo')
 
 CustomPage({
   /** 页面的初始数据 */
@@ -23,15 +22,9 @@ CustomPage({
     ],
   },
 
-  computed: {
-    hasUserInfo(data) {
-      return Boolean(data.userInfo.nickname)
-    },
-  },
-
   requested: {
     userInfo: {
-      url: '/user/info',
+      url: '/userinfo',
     },
   },
 
@@ -44,7 +37,7 @@ CustomPage({
   config: {},
 
   /** 生命周期函数--监听页面加载 */
-  onLoad(options) {},
+  onLoad() {},
 
   /** 生命周期函数--监听页面初次渲染完成 */
   onReady() {},
@@ -71,16 +64,6 @@ CustomPage({
   init() {},
 
   onUpdateButtonTap() {
-    updateUserInfo().then((res) => {
-      if (res) {
-        const { avatarUrl, nickName: nickname } = res
-        this.setData({
-          userInfo: {
-            avatarUrl,
-            nickname,
-          },
-        })
-      }
-    })
+    updateUserInfo()
   },
 })
