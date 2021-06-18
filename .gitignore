@@ -13,3 +13,4 @@ temp/
 # 编译出的 .js 文件
 src/**/*.js
 *.js
+yarn-error.log

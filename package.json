@@ -19,15 +19,15 @@
   },
   "homepage": "https://github.com/inlym/life-helper-miniprogram#readme",
   "dependencies": {
-    "jshttp": "^0.5.0",
+    "jshttp": "^0.5.3",
     "life-helper-miniprogram-secret": "^1.2.0",
-    "miniprogram-api-typings": "^3.3.2",
     "miniprogram-logger-plus": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "miniprogram-api-typings": "^3.3.2",
     "sass": "^1.34.1",
     "typescript": "^4.3.4"
   }
