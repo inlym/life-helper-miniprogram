@@ -9,3 +9,7 @@ temp/
 
 # .wxss 文件
 **/*.wxss
+
+# 编译出的 .js 文件
+src/**/*.js
+*.js

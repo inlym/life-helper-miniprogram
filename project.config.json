@@ -51,7 +51,7 @@
     "hidedInDevtools": []
   },
   "scripts": {
-    "beforeCompile": "npm run build:scss",
+    "beforeCompile": "npm run build:scss && tsc",
     "beforePreview": "",
     "beforeUpload": ""
   },

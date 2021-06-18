@@ -1,5 +1,3 @@
-'use strict'
-
 const { CustomApp } = require('./app/apps.js')
 
 CustomApp({
