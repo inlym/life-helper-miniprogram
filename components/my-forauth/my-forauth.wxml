@@ -1,0 +1,14 @@
+<view bindtap="viewTap">
+  <slot></slot>
+</view>
+<mp-dialog
+  show="{{ showDialog }}"
+  title="{{ dialog.title }}"
+  mask-closable="{{ false }}"
+  buttons="{{ dialog.buttons }}"
+  bindbuttontap="dialogButtonTap"
+>
+  <view>
+    {{ dialog.content }}
+  </view>
+</mp-dialog>

@@ -52,14 +52,14 @@
   "useExtendedLib": {
     "weui": true
   },
-  "plugins": {},
   "usingComponents": {
-    "mp-toptips": "weui-miniprogram/toptips/toptips",
+    "mp-dialog": "weui-miniprogram/dialog/dialog",
+    "mp-form": "weui-miniprogram/form/form",
     "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
     "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-toptips": "weui-miniprogram/toptips/toptips",
     "mpc-list": "/components/list/list",
     "mpc-footer": "/components/footer/footer",
-    "topspace": "/components/topspace/topspace",
-    "mp-form": "weui-miniprogram/form/form"
+    "topspace": "/components/topspace/topspace"
   }
 }
