@@ -2,7 +2,8 @@
 
 const request = require('./request')
 const logger = require('./logger')
-
+const makeUrl = require('./page-make-url')
+const defaults = require('./page-defaults')
 const execRequestedTasks = require('./page-requested-task')
 
 /** 在 `data` 中存储页面 `onLoad` 的 `query` 的字段名 */
@@ -55,6 +56,14 @@ module.exports = function CustomPage(options) {
 
   options.request = request
   options.logger = logger
+  options.makeUrl = makeUrl
+
+  // 添加 defaults
+  Object.keys(defaults).forEach((key) => {
+    if (!options[key]) {
+      options[key] = defaults[key]
+    }
+  })
 
   return Page(options)
 }
