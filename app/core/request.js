@@ -1,91 +1,46 @@
 'use strict'
 
 const jshttp = require('jshttp')
-const config = require('../config/config.js')
-
-const { appKey, appSecret } = config.secret || {}
+const { getCode } = require('./wxp')
+const configuration = require('../config')
 
 /** 在小程序 storage 中用于存储 token 的字段名 */
-const STORAGE_TOKEN_FIElD = '__app_token__'
+const TOKEN_FIELD = '__app_token__'
 
 /**
- * 封装获取 code 方法
+ * 添加鉴权信息中间件
  */
-function getCode() {
-  return new Promise((resolve, reject) => {
-    wx.login({
-      success(res) {
-        resolve(res.code)
-      },
-      fail() {
-        reject(new Error('调用 wx.login 失败!'))
-      },
-    })
-  })
-}
-
-/**
- * 中间件：添加授权信息
- */
-async function auth(ctx, next) {
-  const token = wx.getStorageSync(STORAGE_TOKEN_FIElD)
-
-  if (ctx.url.indexOf('/login') === -1 && token && ctx.retries === 0) {
-    ctx.setHeader('authorization', `TOKEN ${token}`)
+async function authInterceptor(config) {
+  const token = wx.getStorageSync(TOKEN_FIELD)
+  if (token && typeof config.url === 'string' && config.url.indexOf('/login') === -1) {
+    config.headers['authorization'] = `TOKEN ${token}`
   } else {
     const code = await getCode()
-    ctx.setHeader('authorization', `CODE ${code}`)
+    config.headers['authorization'] = `CODE ${code}`
   }
 
-  await next()
+  return config
 }
 
 /**
- * 中间件：存储登录凭证
+ * 存储 token
  */
-async function saveToken(ctx, next) {
-  await next()
-  if (ctx.response.data && ctx.response.data.token) {
-    wx.setStorageSync(STORAGE_TOKEN_FIElD, ctx.response.data.token)
+function saveTokenInterceptor(response) {
+  if (response.data && response.data.token) {
+    wx.setStorageSync(TOKEN_FIELD, response.data.token)
   }
+
+  return response
 }
 
-/**
- * 错误提示
- *
- * 说明：
- * 1. 人为控制的错误提示返回状态码 200
- */
-async function errTips(ctx, next) {
-  await next()
-  if (ctx.response.status === 200 && ctx.response.data && ctx.response.data.code && ctx.response.data.message) {
-    const { type, options } = ctx.response.data.message
-    if (type === 'toast') {
-      wx.showToast(options)
-    } else if (type === 'modal') {
-      wx.showModal(options)
-    } else {
-      // 空
-    }
-  }
+const defaultConfig = {
+  baseURL: configuration.baseURL,
+  signature: configuration.signature,
 }
 
-/**
- * 默认配置
- */
-const defaults = {
-  method: 'get',
-  baseURL: config.baseURL,
-  middleware: [auth, saveToken, errTips],
-  retry: 1,
-  responseItems: ['status', 'headers', 'data', 'config'],
-}
+const request = jshttp.create(defaultConfig)
 
-if (appKey && appSecret) {
-  defaults.sign = {
-    key: appKey,
-    secret: appSecret,
-  }
-}
+request.interceptors.request.use(authInterceptor)
+request.interceptors.response.use(saveTokenInterceptor)
 
-module.exports = jshttp.create(defaults)
+module.exports = request

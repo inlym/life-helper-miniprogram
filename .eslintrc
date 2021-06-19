@@ -194,7 +194,7 @@
     "semi": ["error", "never"],
     "space-infix-ops": "error",
     "wrap-regex": "error",
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": ["error", "as-needed"],
     "arrow-parens": ["error", "always"],
     "arrow-spacing": [
       "error",

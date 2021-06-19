@@ -6,11 +6,8 @@ package-lock.json
 temp.js
 temp/
 
-
 # .wxss 文件
-**/*.wxss
+pages/**/*.wxss
 
-# 编译出的 .js 文件
-src/**/*.js
-*.js
+# 其他文件
 yarn-error.log

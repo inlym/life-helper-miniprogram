@@ -7,7 +7,7 @@
  * @param {string}} id canvas id
  * @returns {Promise<{ctx:CanvasRenderingContext2D;canvas:canvas;}>}
  */
-function getCanvas(id, width = 300, height = 150) {
+exports.getCanvas = function getCanvas(id, width = 300, height = 150) {
   return new Promise((resolve) => {
     /** 在 data 中存储的 ctx 变量名 */
     const ctxName = `__ctx_${id}__`
@@ -42,8 +42,4 @@ function getCanvas(id, width = 300, height = 150) {
         })
     }
   })
-}
-
-module.exports = {
-  getCanvas,
 }

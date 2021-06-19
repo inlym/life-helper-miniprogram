@@ -20,7 +20,7 @@
     "checkInvalidKey": true,
     "checkSiteMap": false,
     "uploadWithSourceMap": true,
-    "compileHotReLoad": true,
+    "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
     "useApiHostProcess": false,
@@ -51,7 +51,7 @@
     "hidedInDevtools": []
   },
   "scripts": {
-    "beforeCompile": "npm run build:scss && tsc",
+    "beforeCompile": "npm run build:scss",
     "beforePreview": "",
     "beforeUpload": ""
   },

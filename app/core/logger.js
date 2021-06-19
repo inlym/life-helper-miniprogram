@@ -1,6 +1,19 @@
 'use strict'
 
-const Logger = require('miniprogram-logger-plus')
-const config = require('../config/config.js')
+module.exports = {
+  debug(msg) {
+    console.log(msg)
+  },
 
-module.exports = new Logger({ level: config.loggerLevel })
+  info(msg) {
+    console.info(msg)
+  },
+
+  warn(msg) {
+    console.warn(msg)
+  },
+
+  error(msg) {
+    console.error(msg)
+  },
+}

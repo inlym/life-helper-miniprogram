@@ -1,6 +1,6 @@
-/**
- * 全局性的配置文件，优先级最高
- */
+'use strict'
+
+const getSecret = require('life-helper-miniprogram-secret')
 
 /**
  * 环境名称
@@ -14,7 +14,7 @@
  * - 'develop'     => 开发环境，1 台带公网的小机子，可随意销毁和重建资源
  * - 'local'       => 本地开发环境
  */
-export const stage = 'local'
+const stage = 'develop'
 
 /**
  * 基础日志等级
@@ -22,4 +22,35 @@ export const stage = 'local'
  * 取值：
  * 'ALL', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'NONE'
  */
-export const loggerLevel = 'DEBUG'
+const loggerLevel = 'DEBUG'
+
+/**
+ * 私密配置文件，包含密钥等信息
+ */
+const secret = getSecret(stage)
+
+/**
+ * 公共配置，不区分环境的配置项
+ */
+const defaultConfig = { stage, loggerLevel }
+
+/**
+ * 开发环境特有配置项
+ */
+const deveConfig = {
+  baseURL: 'http://localhost:3000',
+}
+
+/**
+ * 生产环境特有配置项
+ */
+const prodConfig = {
+  baseURL: 'https://api.lh.inlym.com',
+}
+
+const configs = {
+  production: prodConfig,
+  develop: deveConfig,
+}
+
+module.exports = Object.assign({}, defaultConfig, secret, configs[stage])
