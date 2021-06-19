@@ -1,8 +1,7 @@
 'use strict'
 
-const app = getApp()
-const { CustomPage } = app
-const { chooseLocation } = require('../../app/common/location.js')
+const { CustomPage } = getApp()
+const { chooseLocation } = require('../../app/services/location.js')
 
 CustomPage({
   /** 页面的初始数据 */

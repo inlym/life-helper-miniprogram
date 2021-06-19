@@ -1,9 +1,11 @@
 'use strict'
 
+const request = require('../core/request')
+
 /**
  * 弹窗授权获取并更新用户信息
  */
-export function updateUserInfo(): void {
+exports.updateUserInfo = function updateUserInfo() {
   wx.getUserProfile({
     lang: 'zh_CN',
     desc: '这是配置项的 `desc`',

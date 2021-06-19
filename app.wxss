@@ -1,5 +1,5 @@
-@import '/app/static/css/iconfont.wxss';
-@import '/app/static/css/weather.wxss';
+@import '/assets/styles/iconfont.wxss';
+@import '/assets/styles/weather.wxss';
 
 /* 页面根元素 */
 page {

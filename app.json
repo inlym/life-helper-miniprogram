@@ -1,16 +1,16 @@
 {
   "pages": [
+    "pages/about/about",
+    "pages/album/index/index",
     "pages/index/index",
-    "pages/tools/tools",
+    "pages/location/location",
     "pages/me/me",
     "pages/system/info/info",
-    "pages/test/test",
-    "pages/location/location",
     "pages/template/template",
-    "pages/about/about",
+    "pages/test/test",
+    "pages/tools/tools",
     "pages/weather/fore15d/fore15d",
-    "pages/weather/fore24h/fore24h",
-    "pages/album/index/index"
+    "pages/weather/fore24h/fore24h"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
@@ -31,14 +31,14 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "/images/tabbar/home-outline.png",
-        "selectedIconPath": "/images/tabbar/home-filled.png"
+        "iconPath": "/assets/images/tabbar/home-outline.png",
+        "selectedIconPath": "/assets/images/tabbar/home-filled.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我",
-        "iconPath": "/images/tabbar/me-outline.png",
-        "selectedIconPath": "/images/tabbar/me-filled.png"
+        "iconPath": "/assets/images/tabbar/me-outline.png",
+        "selectedIconPath": "/assets/images/tabbar/me-filled.png"
       }
     ]
   },
