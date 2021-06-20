@@ -1,4 +1,6 @@
 {
   "navigationStyle": "default",
-  "usingComponents": {}
+  "usingComponents": {
+    "my-forauth": "../../components/my-forauth/my-forauth"
+  }
 }

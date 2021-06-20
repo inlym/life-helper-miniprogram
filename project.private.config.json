@@ -27,7 +27,7 @@
         {
           "name": "测试页",
           "pathName": "pages/test/test",
-          "query": "id=223",
+          "query": "id=223&name=tttoaaa",
           "scene": null
         },
         {

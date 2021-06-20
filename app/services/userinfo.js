@@ -15,13 +15,6 @@ exports.updateUserInfo = function updateUserInfo() {
         method: 'POST',
         url: 'userinfo',
         data: res.userInfo,
-      }).then((response) => {
-        if (!response.data.code) {
-          wx.showToast({
-            title: '操作成功！',
-            icon: 'none',
-          })
-        }
       })
     },
     fail() {

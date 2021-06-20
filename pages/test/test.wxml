@@ -1,5 +1,13 @@
-<view>测试小程序直传 OSS</view>
-<button bindtap="choose">选取文件</button>
-<button bindtap="temp">点击</button>
-<button bindtap="temp2">temp2</button>
-<button bindtap="temp3">temp3</button>
+<view> 测试页面 </view>
+<button bindtap="one">Click</button>
+
+<button bindtap="two">two</button>
+
+<button bindtap="three">openSetting</button>
+
+<my-forauth scope="scope.userLocation" bindsuccess="four" bindfail="five">
+  <view class="one"></view>
+</my-forauth>
+
+<button bindtap="six">addWeatherCity</button>
+<button bindtap="seven">MockRequest</button>
