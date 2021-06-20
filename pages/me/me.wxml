@@ -5,7 +5,7 @@
   <!-- 顶部个人信息区域 -->
   <view class="profile">
     <!-- 用户个人信息（非空情况） -->
-    <block wx:if="{{ userInfo.avatarUrl}}">
+    <block wx:if="{{ userInfo.avatarUrl }}">
       <!-- 头像 -->
       <view class="avatar">
         <image src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
@@ -33,9 +33,6 @@
     </block>
     <view class="onecenter"><button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button></view>
   </view>
-
-  <mpc-list list="{{ list1 }}"></mpc-list>
-  <mpc-list list="{{ list2 }}"></mpc-list>
 
   <mpc-footer title="我的个人助手" desc="Copyright 2020-2021 inlym" url="/pages/about/about"></mpc-footer>
 </view>
