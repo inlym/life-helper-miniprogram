@@ -18,7 +18,7 @@ module.exports = function CustomPage(options) {
   const optInit = options.init
   options.init = function init(eventName) {
     if (typeof optInit === 'function') {
-      optInit()
+      optInit.call(this)
     }
     execRequestedTasks.call(this, eventName)
   }
@@ -31,7 +31,7 @@ module.exports = function CustomPage(options) {
 
     // 执行在页面中配置的 `onLoad`
     if (typeof optOnLoad === 'function') {
-      optOnLoad()
+      optOnLoad.call(this)
     }
 
     this.init('onLoad')
@@ -41,22 +41,23 @@ module.exports = function CustomPage(options) {
   const optOnPullDownRefresh = options.onPullDownRefresh
   options.onPullDownRefresh = function onPullDownRefresh() {
     if (typeof optOnPullDownRefresh === 'function') {
-      optOnPullDownRefresh()
+      optOnPullDownRefresh.call(this)
     }
 
     this.init('onPullDownRefresh')
   }
 
-  // 添加 `query` getter，通过 `this.query` 方式获取页面入参
-  Object.defineProperty(options, 'query', {
-    get: function getter() {
-      return this.data[DATA_QUERY]
-    },
-  })
-
   options.request = request
   options.logger = logger
   options.makeUrl = makeUrl
+  options.query = function query(field) {
+    const q = this.data[DATA_QUERY]
+    if (field === undefined) {
+      return q
+    } else {
+      return q[field]
+    }
+  }
 
   // 添加 defaults
   Object.keys(defaults).forEach((key) => {

@@ -107,7 +107,12 @@ module.exports = function execRequestedTasks(eventName) {
       if (typeof params === 'object') {
         finalParams = params
       } else if (typeof params === 'function') {
-        finalParams = params()
+        finalParams = params(this.query())
+      }
+
+      // 对 `finalParams` 再次做个检验
+      if (typeof finalParams !== 'object') {
+        throw new Error('在 `requested` 中配置对象的 `params` 应返回一个对象！')
       }
 
       // 发起请求
