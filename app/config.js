@@ -11,7 +11,7 @@ const secrets = require('life-helper-miniprogram-secret')
  * - `development`  => 开发环境
  * - `local`        => 本地开发环境
  */
-const stage = 'development'
+const stage = 'production'
 
 /**
  * 基础日志等级

@@ -1,6 +1,6 @@
 {
   "name": "life-helper-miniprogram",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "「我的个人助手」小程序端部分代码",
   "main": "app.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/inlym/life-helper-miniprogram#readme",
   "dependencies": {
     "jshttp": "^0.5.4",
-    "life-helper-miniprogram-secret": "^1.4.0",
+    "life-helper-miniprogram-secret": "^1.5.0",
     "miniprogram-logger-plus": "^1.1.0"
   },
   "devDependencies": {
