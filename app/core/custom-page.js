@@ -5,9 +5,10 @@ const logger = require('./logger')
 const makeUrl = require('./page-make-url')
 const defaults = require('./page-defaults')
 const execRequestedTasks = require('./page-requested-task')
+const login = require('./login')
+const constants = require('./constants')
 
-/** 在 `data` 中存储页面 `onLoad` 的 `query` 的字段名 */
-const DATA_QUERY = '__query__'
+const { STO_TOKEN, DATA_QUERY } = constants
 
 /**
  * `CustomPage` 实现以下功能：
@@ -16,10 +17,18 @@ const DATA_QUERY = '__query__'
 module.exports = function CustomPage(options) {
   // `init` 为自定义页面初始化方法
   const optInit = options.init
-  options.init = function init(eventName) {
+  options.init = async function init(eventName) {
+    // 先执行自定义的初始化方法
     if (typeof optInit === 'function') {
       optInit.call(this)
     }
+
+    if (!wx.getStorageSync(STO_TOKEN)) {
+      // 未登录就先等登录完毕再进行后续流程
+      await login()
+    }
+
+    // 发送页面注册请求
     execRequestedTasks.call(this, eventName)
   }
 

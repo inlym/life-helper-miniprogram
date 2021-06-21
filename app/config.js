@@ -1,6 +1,6 @@
 'use strict'
 
-const getSecret = require('life-helper-miniprogram-secret')
+const secrets = require('life-helper-miniprogram-secret')
 
 /**
  * 环境名称
@@ -20,11 +20,6 @@ const stage = 'development'
  * 'ALL', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'NONE'
  */
 const loggerLevel = 'DEBUG'
-
-/**
- * 私密配置文件，包含密钥等信息
- */
-const secret = getSecret(stage)
 
 /**
  * 公共配置，不区分环境的配置项
@@ -50,4 +45,4 @@ const configs = {
   development: deveConfig,
 }
 
-module.exports = Object.assign({}, defaultConfig, secret, configs[stage])
+module.exports = Object.assign({}, defaultConfig, secrets[stage], configs[stage])

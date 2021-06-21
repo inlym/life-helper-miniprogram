@@ -3,15 +3,15 @@
 const jshttp = require('jshttp')
 const { getCode } = require('./wxp')
 const configuration = require('../config')
+const constants = require('./constants')
 
-/** 在小程序 storage 中用于存储 token 的字段名 */
-const TOKEN_FIELD = '__app_token__'
+const { STO_TOKEN } = constants
 
 /**
  * 添加鉴权信息中间件
  */
 async function authInterceptor(config) {
-  const token = wx.getStorageSync(TOKEN_FIELD)
+  const token = wx.getStorageSync(STO_TOKEN)
   if (token && typeof config.url === 'string' && config.url.indexOf('/login') === -1) {
     config.headers['authorization'] = `TOKEN ${token}`
   } else {
@@ -20,17 +20,6 @@ async function authInterceptor(config) {
   }
 
   return config
-}
-
-/**
- * 存储 token
- */
-function saveTokenInterceptor(response) {
-  if (response.data && response.data.token) {
-    wx.setStorageSync(TOKEN_FIELD, response.data.token)
-  }
-
-  return response
 }
 
 /**
@@ -76,7 +65,6 @@ const defaultConfig = {
 const request = jshttp.create(defaultConfig)
 
 request.interceptors.request.use(authInterceptor)
-request.interceptors.response.use(saveTokenInterceptor)
 request.interceptors.response.use(messageInterceptor)
 
 module.exports = request
