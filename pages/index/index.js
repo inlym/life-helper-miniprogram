@@ -1,6 +1,7 @@
 'use strict'
 
 const { CustomPage } = getApp()
+const { addWeatherCity } = require('../../app/services/weather')
 
 CustomPage({
   /** 页面的初始数据 */
@@ -62,6 +63,13 @@ CustomPage({
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
   handleHourItemTap(event) {
     console.log(event)
+  },
+
+  async addCity() {
+    const result = await addWeatherCity()
+    if (result) {
+      this.init('afterAddWeatherCity')
+    }
   },
 
   /** 未来 2 小时降水量区域，点击顶部标题 */

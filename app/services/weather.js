@@ -4,6 +4,7 @@ const request = require('../core/request')
 
 /**
  * 添加新的关注天气地点
+ * @return {boolean} 是否成功
  *
  * 说明：
  * 1. 需在已获取 `scope.userLocation` 授权后调用
@@ -19,11 +20,13 @@ exports.addWeatherCity = async function addWeatherCity() {
       showCancel: false,
       confirmText: '我知道了',
     })
+    return false
   } else {
-    request({
+    await request({
       url: '/weather/city',
       method: 'post',
       data: location,
     })
+    return true
   }
 }

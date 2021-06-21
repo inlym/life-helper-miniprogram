@@ -9,18 +9,16 @@
       <view class="fullmoon" wx:if="{{ main.skyClass.fullmoon }}"></view>
       <view class="halfmoon" wx:if="{{ main.skyClass.halfmoon }}"></view>
       <view class="sun" wx:if="{{ main.skyClass.sun }}"></view>
-      <view class="fixed-cloud {{ main.skyClass.darkCloud ? 'darkcloud' : '' }}" wx:if="{{ main.skyClass.fixedCloud }}">
-      </view>
-      <view class="moving-cloud {{ main.skyClass.darkCloud ? 'darkcloud' : '' }}"
-        wx:if="{{ main.skyClass.movingCloud }}"></view>
+      <view class="fixed-cloud {{ main.skyClass.darkCloud ? 'darkcloud' : '' }}" wx:if="{{ main.skyClass.fixedCloud }}"> </view>
+      <view class="moving-cloud {{ main.skyClass.darkCloud ? 'darkcloud' : '' }}" wx:if="{{ main.skyClass.movingCloud }}"></view>
       <view class="rain" wx:if="{{ main.skyClass.rain }}"></view>
     </view>
 
     <view class="content">
-      <view class="location" bindtap="chooseLocation">
+      <my-forauth scope="scope.userLocation" bindsuccess="addCity">
         <text class="address text-ellipsis-l1">{{ main.address }}</text>
         <text class="iconfont icon-xia"></text>
-      </view>
+      </my-forauth>
 
       <view class="temperature">{{ main.now.temp }}</view>
 
@@ -32,15 +30,16 @@
 
   <!-- 今天和明天2天的天气情况 - start -->
   <view class="forecast2days" wx:if="{{ fore2dList.length }}">
-    <view class="day" wx:for="{{ fore2dList }}" wx:key="date" data-date="{{ item.date }}" bindtap="handleDayItemTap"
-      hover-class="hover">
+    <view class="day" wx:for="{{ fore2dList }}" wx:key="date" data-date="{{ item.date }}" bindtap="handleDayItemTap" hover-class="hover">
       <view class="firstline">
         <view class="textaqi">
           <view class="text">{{ item.weekday }}</view>
           <view class="aqi aqi-bg-{{ item.aqi.level }}">{{ item.aqi.category }}</view>
         </view>
         <!-- <view class="temp">{{ item.max }}°/{{ item.min }}°</view> -->
-        <view class="temp"><text class="degree">{{ item.tempMax }}</text>/<text class="degree">{{ item.tempMin }}</text>
+        <view class="temp"
+          ><text class="degree">{{ item.tempMax }}</text
+          >/<text class="degree">{{ item.tempMin }}</text>
         </view>
       </view>
 
@@ -56,11 +55,15 @@
 
   <!-- 未来 24 小时预报 - start -->
   <view class="container fore24hours">
-    <scroll-view class="fore24scroll" scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
-      scroll-anchoring="{{ true }}">
+    <scroll-view
+      class="fore24scroll"
+      scroll-x="{{ true }}"
+      scroll-with-animation="{{ true }}"
+      enable-flex="{{ true }}"
+      scroll-anchoring="{{ true }}"
+    >
       <view class="itemwrap">
-        <view class="item" wx:for="{{ main.f24h }}" wx:key="time" hover-class="hover" bindtap="handleHourItemTap"
-          data-index="{{ index }}">
+        <view class="item" wx:for="{{ main.f24h }}" wx:key="time" hover-class="hover" bindtap="handleHourItemTap" data-index="{{ index }}">
           <view class="hour">{{ item.time }}</view>
           <image class="wea-icon" src="{{ item.iconUrl }}"></image>
           <view class="text">{{ item.text }}</view>
@@ -78,8 +81,7 @@
       <view class="summary">{{ main.rain.summary }}</view>
       <view class="desc">（更新时间 {{ main.rain.updateTime }}）</view>
     </view>
-    <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}"
-      scroll-anchoring="{{ true }}">
+    <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
       <view class="itemwrap flex-row">
         <view class="item flex-column" wx:for="{{ main.rain.list }}" wx:key="time">
           <view class="num">{{ item.precip }}</view>
@@ -99,8 +101,14 @@
   <view class="container f15d">
     <view class="title">未来预报</view>
     <view class="body">
-      <view class="item flex-row" wx:for="{{ main.f15d }}" wx:key="date" hover-class="hover" data-date="{{ item.date }}"
-        bindtap="handleDayItemTap">
+      <view
+        class="item flex-row"
+        wx:for="{{ main.f15d }}"
+        wx:key="date"
+        hover-class="hover"
+        data-date="{{ item.date }}"
+        bindtap="handleDayItemTap"
+      >
         <view class="weekday">{{ item.dayText }}</view>
         <view class="dateText">{{ item.dateText }}</view>
         <view class="text">{{ item.textDay }}</view>
@@ -134,49 +142,91 @@
       <view class="right">
         <!-- PM2.5 -->
         <view class="item flex-column">
-          <view class="value"><text class="num">{{ main.airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view>
-          <progress percent="{{ (main.airnow.pm2p5 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
-            duration="1000"></progress>
+          <view class="value"
+            ><text class="num">{{ main.airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view
+          >
+          <progress
+            percent="{{ (main.airnow.pm2p5 * 1) / 5 }}"
+            activeColor="#333"
+            border-radius="10"
+            stroke-width="4"
+            duration="1000"
+          ></progress>
           <view class="name">PM2.5</view>
         </view>
 
         <!-- PM10 -->
         <view class="item flex-column">
-          <view class="value"><text class="num">{{ main.airnow.pm10 }} </text><text class="unit"> μg/m³</text></view>
-          <progress percent="{{ (main.airnow.pm10 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
-            duration="1000"></progress>
+          <view class="value"
+            ><text class="num">{{ main.airnow.pm10 }} </text><text class="unit"> μg/m³</text></view
+          >
+          <progress
+            percent="{{ (main.airnow.pm10 * 1) / 5 }}"
+            activeColor="#333"
+            border-radius="10"
+            stroke-width="4"
+            duration="1000"
+          ></progress>
           <view class="name">PM10</view>
         </view>
 
         <!-- O3 -->
         <view class="item flex-column">
-          <view class="value"><text class="num">{{ main.airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view>
-          <progress percent="{{ (main.airnow.pm2p5 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
-            duration="1000"></progress>
+          <view class="value"
+            ><text class="num">{{ main.airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view
+          >
+          <progress
+            percent="{{ (main.airnow.pm2p5 * 1) / 5 }}"
+            activeColor="#333"
+            border-radius="10"
+            stroke-width="4"
+            duration="1000"
+          ></progress>
           <view class="name">O<text class="sub">3</text></view>
         </view>
 
         <!-- CO -->
         <view class="item flex-column">
-          <view class="value"><text class="num">{{ main.airnow.o3 }} </text><text class="unit"> mg/m³</text></view>
-          <progress percent="{{ (main.airnow.o3 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
-            duration="1000"></progress>
+          <view class="value"
+            ><text class="num">{{ main.airnow.o3 }} </text><text class="unit"> mg/m³</text></view
+          >
+          <progress
+            percent="{{ (main.airnow.o3 * 1) / 5 }}"
+            activeColor="#333"
+            border-radius="10"
+            stroke-width="4"
+            duration="1000"
+          ></progress>
           <view class="name">CO</view>
         </view>
 
         <!-- SO2 -->
         <view class="item flex-column">
-          <view class="value"><text class="num">{{ main.airnow.so2 }} </text><text class="unit"> μg/m³</text></view>
-          <progress percent="{{ (main.airnow.so2 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
-            duration="1000"></progress>
+          <view class="value"
+            ><text class="num">{{ main.airnow.so2 }} </text><text class="unit"> μg/m³</text></view
+          >
+          <progress
+            percent="{{ (main.airnow.so2 * 1) / 5 }}"
+            activeColor="#333"
+            border-radius="10"
+            stroke-width="4"
+            duration="1000"
+          ></progress>
           <view class="name">SO<text class="sub">2</text></view>
         </view>
 
         <!-- NO2 -->
         <view class="item flex-column">
-          <view class="value"><text class="num">{{ main.airnow.no2 }} </text><text class="unit"> μg/m³</text></view>
-          <progress percent="{{ (main.airnow.no2 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4"
-            duration="1000"></progress>
+          <view class="value"
+            ><text class="num">{{ main.airnow.no2 }} </text><text class="unit"> μg/m³</text></view
+          >
+          <progress
+            percent="{{ (main.airnow.no2 * 1) / 5 }}"
+            activeColor="#333"
+            border-radius="10"
+            stroke-width="4"
+            duration="1000"
+          ></progress>
           <view class="name">NO<text class="sub">2</text></view>
         </view>
       </view>
@@ -188,8 +238,14 @@
   <view class="container liveindex">
     <view class="title">今日生活指数</view>
     <view class="body">
-      <view class="item" wx:for="{{ main.liveIndex }}" wx:key="type" data-index="{{ index }}"
-        bindtap="showLiveIndexDetail" hover-class="hover">
+      <view
+        class="item"
+        wx:for="{{ main.liveIndex }}"
+        wx:key="type"
+        data-index="{{ index }}"
+        bindtap="showLiveIndexDetail"
+        hover-class="hover"
+      >
         <image src="{{ item.iconUrl }}" mode="widthFix"></image>
         <view class="status">{{ item.category }}</view>
         <view class="name">{{ item.name }}</view>
@@ -202,10 +258,15 @@
 <!--以下为非页面元素-->
 
 <!--Toptips顶部错误提示组件-->
-<mp-toptips type="{{ toptips.type }}" show="{{ toptips.show }}" msg="{{ toptips.msg }}" delay="{{ toptips.delay }}">
-</mp-toptips>
+<mp-toptips type="{{ toptips.type }}" show="{{ toptips.show }}" msg="{{ toptips.msg }}" delay="{{ toptips.delay }}"> </mp-toptips>
 
 <!-- 半屏弹窗组件 -->
-<mp-half-screen-dialog bindbuttontap="buttontap" show="{{ halfScreen.show }}" title="{{ halfScreen.title }}"
-  subTitle="{{ halfScreen.subTitle }}" desc="{{ halfScreen.desc }}" tips="{{ halfScreen.tips }}">
+<mp-half-screen-dialog
+  bindbuttontap="buttontap"
+  show="{{ halfScreen.show }}"
+  title="{{ halfScreen.title }}"
+  subTitle="{{ halfScreen.subTitle }}"
+  desc="{{ halfScreen.desc }}"
+  tips="{{ halfScreen.tips }}"
+>
 </mp-half-screen-dialog>
