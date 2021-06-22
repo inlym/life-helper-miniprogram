@@ -6,15 +6,6 @@ const { addWeatherCity } = require('../../app/services/weather')
 CustomPage({
   /** 页面的初始数据 */
   data: {
-    /** 实时天气情况 */
-    condition: {
-      temperature: '0',
-    },
-
-    address: {
-      address: '正在定位中 ...',
-    },
-
     /** 半屏弹窗组件 */
     halfScreen: {
       show: false,
@@ -23,11 +14,18 @@ CustomPage({
       desc: '',
       tips: '',
     },
+
+    f2d: [],
   },
 
   requested: {
     main: {
       url: '/weather',
+      handler(data) {
+        console.log(data)
+        const f2d = ['今天', '明天'].map((item) => data.f15d.find((day) => day.dayText === item))
+        this.setData({ f2d })
+      },
     },
   },
 

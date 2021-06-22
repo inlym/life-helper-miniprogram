@@ -74,6 +74,17 @@
   background-color: #7e0023;
 }
 
+// 模块顶部标题区域
+.module-title {
+  height: 90rpx;
+  padding: 0 26rpx;
+  font-size: 34rpx;
+  line-height: 90rpx;
+  font-weight: bold;
+  border: 2rpx solid #eeeeee;
+  text-align: left;
+}
+
 /* 单独设置部分 */
 
 /* 天气实况（新版） - start */
@@ -121,90 +132,81 @@
 
 /* 天气实况（新版） - end */
 
-/* 今天和明天的天气情况 - start */
-.forecast2days {
-  position: relative;
-  padding: 20rpx 0;
+// 今天和明天两天的天气情况
+.f2d {
+  height: 150rpx;
+  padding: 28rpx 0;
+  font-size: 30rpx;
   display: flex;
   justify-content: space-between;
-  height: 160rpx;
   background-color: #fff;
-}
 
-.forecast2days .day {
-  width: 50%;
-  padding: 10rpx 20rpx 0;
-}
+  .item {
+    width: 50%;
+    height: 100%;
+    padding: 0 26rpx;
 
-.forecast2days .day:first-child {
-  border-right: 2rpx solid #ededed;
-}
+    &:first-child {
+      border-right: 4rpx solid #ebebeb;
+    }
 
-.forecast2days .day {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    .line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10rpx;
 
-.forecast2days .day .firstline {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+      .temp {
+        font-weight: bold;
+      }
 
-.forecast2days .day .firstline .textaqi {
-  display: flex;
-  justify-content: flex-start;
+      .aqi {
+        padding: 4rpx 24rpx;
+        border-radius: 32rpx;
+        font-size: 24rpx;
+        text-align: center;
+      }
+    }
+  }
 }
-
-.forecast2days .day .firstline .aqi {
-  padding: 2rpx 20rpx 0;
-  border-radius: 20rpx;
-  margin-left: 16rpx;
-  font-size: 90%;
-  color: #fff;
-}
-
-.forecast2days .day .secondline {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 90%;
-}
-
-/* 今天和明天的天气情况 - end */
 
 /* 未来 24 小时预报 - start */
 .fore24hours {
-  height: 260rpx;
+  height: 350rpx;
   font-size: 28rpx;
-}
 
-.fore24hours .fore24scroll {
-  height: inherit;
-}
+  .fore24scroll {
+    height: inherit;
+  }
 
-.fore24hours .itemwrap {
-  display: flex;
-  justify-content: space-between;
-  width: 2500rpx;
-}
+  .itemwrap {
+    display: flex;
+    justify-content: space-between;
+    width: 2500rpx;
 
-.fore24hours .itemwrap .item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 100rpx;
-  height: 260rpx;
-  padding: 20rpx 0;
+    .item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 100rpx;
+      height: 260rpx;
+      padding: 20rpx 0;
+
+      .temp {
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 /* 未来 24 小时预报 - end */
 
 /* 未来 2 小时降雨情况 - start */
 .minutelyrain {
-  padding: 40rpx 10rpx 14rpx;
+  .main {
+    padding: 40rpx 10rpx 14rpx;
+  }
 }
 
 .minutelyrain .top {

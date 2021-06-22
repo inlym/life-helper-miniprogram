@@ -135,7 +135,7 @@ module.exports = function execRequestedTasks(eventName) {
 
         // 处理 `handler`
         if (typeof handler === 'function') {
-          handler(key, response.data)
+          handler.call(this, response.data, key)
         }
       })
     })

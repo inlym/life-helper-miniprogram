@@ -4,6 +4,7 @@ const jshttp = require('jshttp')
 const { getCode } = require('./wxp')
 const configuration = require('../config')
 const constants = require('./constants')
+const logger = require('./logger')
 
 const { STO_TOKEN } = constants
 
@@ -57,6 +58,17 @@ function messageInterceptor(response) {
   return response
 }
 
+/**
+ * 将错误请求打日志
+ */
+function errorLoggerInterceptor(response) {
+  if (response.status >= 400) {
+    logger.error(`请求发生错误，status => ${response.status}，baseURL => ${response.config.baseURL}，url => ${response.config.url}`)
+  }
+
+  return response
+}
+
 const defaultConfig = {
   baseURL: configuration.baseURL,
   signature: configuration.signature,
@@ -66,5 +78,6 @@ const request = jshttp.create(defaultConfig)
 
 request.interceptors.request.use(authInterceptor)
 request.interceptors.response.use(messageInterceptor)
+request.interceptors.response.use(errorLoggerInterceptor)
 
 module.exports = request

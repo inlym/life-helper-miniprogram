@@ -34,5 +34,5 @@
     <view class="onecenter"><button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button></view>
   </view>
 
-  <mpc-footer title="我的个人助手" desc="Copyright 2020-2021 inlym" url="/pages/about/about"></mpc-footer>
+  <mpc-footer title="我的个人助手" desc="Copyright 2020-2021 v0.2.2" url="/pages/about/about"></mpc-footer>
 </view>

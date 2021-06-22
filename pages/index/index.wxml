@@ -28,33 +28,22 @@
   </view>
   <!-- 天气实况（新版） - end -->
 
-  <!-- 今天和明天2天的天气情况 - start -->
-  <view class="forecast2days" wx:if="{{ fore2dList.length }}">
-    <view class="day" wx:for="{{ fore2dList }}" wx:key="date" data-date="{{ item.date }}" bindtap="handleDayItemTap" hover-class="hover">
-      <view class="firstline">
-        <view class="textaqi">
-          <view class="text">{{ item.weekday }}</view>
-          <view class="aqi aqi-bg-{{ item.aqi.level }}">{{ item.aqi.category }}</view>
-        </view>
-        <!-- <view class="temp">{{ item.max }}°/{{ item.min }}°</view> -->
-        <view class="temp"
-          ><text class="degree">{{ item.tempMax }}</text
-          >/<text class="degree">{{ item.tempMin }}</text>
-        </view>
+  <view class="f2d" wx:if="{{ f2d.length }}">
+    <view class="item" wx:for="{{ f2d }}" wx:key="date" data-date="item.date" hover-class="hover">
+      <view class="line">
+        <view>{{ item.dayText }}</view>
+        <view>{{ item.text }}</view>
       </view>
-
-      <view class="secondline">
-        <view class="desc">{{ item.desc }}</view>
-        <view class="wea-icon">
-          <image src="{{ item.iconDayUrl }}" mode="widthFix"></image>
-        </view>
+      <view class="line">
+        <view class="temp">{{ item.tempMax }}/{{ item.tempMin }}℃</view>
+        <view class="aqi aqi-bg-{{ item.aqi.level }}">{{ item.aqi.category }}</view>
       </view>
     </view>
   </view>
-  <!-- 今天和明天2天的天气情况 - end -->
 
   <!-- 未来 24 小时预报 - start -->
   <view class="container fore24hours">
+    <view class="module-title">24小时预报</view>
     <scroll-view
       class="fore24scroll"
       scroll-x="{{ true }}"
@@ -77,29 +66,32 @@
 
   <!-- 未来 2 小时降雨情况 - start -->
   <view class="container minutelyrain">
-    <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
-      <view class="summary">{{ main.rain.summary }}</view>
-      <view class="desc">（更新时间 {{ main.rain.updateTime }}）</view>
-    </view>
-    <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
-      <view class="itemwrap flex-row">
-        <view class="item flex-column" wx:for="{{ main.rain.list }}" wx:key="time">
-          <view class="num">{{ item.precip }}</view>
-          <view class="rainblock" style="height: {{ item.height }}rpx;"></view>
-          <view class="time">{{ item.time }}</view>
-        </view>
+    <view class="module-title">2小时降雨</view>
+    <div class="main">
+      <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
+        <view class="summary">{{ main.rain.summary }}</view>
+        <view class="desc">（更新时间 {{ main.rain.updateTime }}）</view>
       </view>
-    </scroll-view>
-    <view class="bottom onecenter">
-      <view class="desc">未来 2 小时降雨量（单位：mm）</view>
-    </view>
+      <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
+        <view class="itemwrap flex-row">
+          <view class="item flex-column" wx:for="{{ main.rain.list }}" wx:key="time">
+            <view class="num">{{ item.precip }}</view>
+            <view class="rainblock" style="height: {{ item.height }}rpx;"></view>
+            <view class="time">{{ item.time }}</view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="bottom onecenter">
+        <view class="desc">未来 2 小时降雨量（单位：mm）</view>
+      </view>
+    </div>
   </view>
 
   <!-- 未来 2 小时降雨情况 - end -->
 
   <!-- 未来 15 天逐天天气预报 - start -->
   <view class="container f15d">
-    <view class="title">未来预报</view>
+    <view class="module-title">15天预报</view>
     <view class="body">
       <view
         class="item flex-row"
@@ -131,7 +123,7 @@
 
   <!-- 实时空气质量 - start -->
   <view class="container airnow">
-    <view class="title">实时空气质量</view>
+    <view class="module-title">实时空气质量</view>
     <view class="body flex-row">
       <view class="left flex-column">
         <view class="content flex-column aqi-bg-{{ main.airnow.level }}">
@@ -236,7 +228,7 @@
 
   <!-- 生活指数 - start -->
   <view class="container liveindex">
-    <view class="title">今日生活指数</view>
+    <view class="module-title">今日生活指数</view>
     <view class="body">
       <view
         class="item"

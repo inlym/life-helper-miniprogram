@@ -16,6 +16,10 @@ CustomPage({
   onLoad() {},
 
   onUpdateButtonTap() {
-    updateUserInfo()
+    updateUserInfo().then((res) => {
+      this.setData({
+        userInfo: res,
+      })
+    })
   },
 })
