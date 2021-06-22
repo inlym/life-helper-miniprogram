@@ -24,6 +24,32 @@ async function authInterceptor(config) {
 }
 
 /**
+ * 用于添加设备信息
+ */
+async function attachSystemInfoInterceptor(config) {
+  const { appId, envVersion, version } = wx.getAccountInfoSync().miniProgram
+
+  const [battery, network, screen] = await Promise.all([wx.getBatteryInfo(), wx.getNetworkType(), wx.getScreenBrightness()])
+  const systemInfo = {
+    batteryCharging: battery.isCharging,
+    batteryLevel: battery.level,
+    networkType: network.networkType,
+    signalStrength: network.signalStrength || 'unknown',
+    screenValue: screen.value,
+  }
+
+  if (!config.headers['x-mp-info']) {
+    config.headers['x-mp-info'] = `appId=${appId};envVersion=${envVersion};version=${version};`
+  }
+
+  if (!config.headers['x-mp-system']) {
+    config.headers['x-mp-system'] = JSON.stringify(systemInfo)
+  }
+
+  return config
+}
+
+/**
  * 消息提示拦截器
  *
  * 说明：
@@ -76,6 +102,7 @@ const defaultConfig = {
 
 const request = jshttp.create(defaultConfig)
 
+request.interceptors.request.use(attachSystemInfoInterceptor)
 request.interceptors.request.use(authInterceptor)
 request.interceptors.response.use(messageInterceptor)
 request.interceptors.response.use(errorLoggerInterceptor)
