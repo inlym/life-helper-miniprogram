@@ -55,7 +55,6 @@ CustomPage({
 
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
   handleDayItemTap(event) {
-    console.log(event)
     const { date } = event.currentTarget.dataset
     const id = this.data.currentLocationId
     this.goTo('/pages/weather/f15d/f15d', { id, date }, { myData: { name: 'mark', age: 19 } })

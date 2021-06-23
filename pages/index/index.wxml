@@ -29,7 +29,7 @@
   <!-- 天气实况（新版） - end -->
 
   <view class="f2d" wx:if="{{ f2d.length }}">
-    <view class="item" wx:for="{{ f2d }}" wx:key="date" data-date="item.date" hover-class="hover">
+    <view class="item" wx:for="{{ f2d }}" wx:key="date" data-date="{{ item.date }}" hover-class="hover" bindtap="handleDayItemTap">
       <view class="line">
         <view>{{ item.dayText }}</view>
         <view>{{ item.text }}</view>

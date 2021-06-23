@@ -10,6 +10,7 @@ CustomPage({
     /** scroll-view 的当前居首项 ID */
     scrollIndex: 's-0',
 
+    // 静态图片地址
     imageUrl4Wind: getResUrl('f15d-wind'),
     imageUrl4Sunrise: getResUrl('f15d-sunrise'),
     imageUrl4Moon: getResUrl('f15d-moon'),
@@ -24,26 +25,11 @@ CustomPage({
       handler(data) {
         const { date } = this.query()
         if (date) {
-          this.setData({ currentIndex: data.list.findIndex((item) => item.date === date) || 0 })
+          const index = data.list.findIndex((item) => item.date === date) || 0
+          this.show(index)
         }
       },
     },
-  },
-
-  onLoad() {},
-
-  /** 在获取到页面数据后执行， */
-  afterGetData() {
-    const { date } = this.getQuery()
-    if (date) {
-      const { list } = this.data.fore15d
-      for (let i = 0; i < list.length; i++) {
-        if (list[i]['date'] === date) {
-          this.show(i)
-          break
-        }
-      }
-    }
   },
 
   /** 展示指定索引的项目 */
