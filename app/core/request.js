@@ -85,11 +85,17 @@ function messageInterceptor(response) {
 }
 
 /**
- * 将错误请求打日志
+ * 日志拦截器
  */
-function errorLoggerInterceptor(response) {
+function loggerInterceptor(response) {
+  const { status, config } = response
+  const message = `[HTTP] [${status}] [${config.method.toUpperCase()}] ${jshttp.getUrl(config)}`
+  if (status >= 200 && status < 300) {
+    logger.debug(message)
+  }
+
   if (response.status >= 400) {
-    logger.error(`请求发生错误，status => ${response.status}，baseURL => ${response.config.baseURL}，url => ${response.config.url}`)
+    logger.error(message)
   }
 
   return response
@@ -105,6 +111,6 @@ const request = jshttp.create(defaultConfig)
 request.interceptors.request.use(attachSystemInfoInterceptor)
 request.interceptors.request.use(authInterceptor)
 request.interceptors.response.use(messageInterceptor)
-request.interceptors.response.use(errorLoggerInterceptor)
+request.interceptors.response.use(loggerInterceptor)
 
 module.exports = request
