@@ -12,6 +12,9 @@ module.exports = {
   /** 对于 `requested` 任务，是否开启调试 */
   STO_DEBUG_REQUESTED: '__debugRequested__',
 
+  /** 上一次获取的 `code` 信息 */
+  STO_CODE: '__code__',
+
   // ----  第二部分：在页面的 `data` 中存储的字段  ----
 
   /** 从 `onLoad` 中获取的 `query` */
@@ -22,6 +25,9 @@ module.exports = {
 
   /** 是否正在展示请求等待框 */
   DATA_ON_SHOWING_LOADING: '__onShowingLoading__',
+
+  /** 记录哪些字段值是从上个页面传值过来的 */
+  DATA_TRANSFERRED_FIELDS: '__transferredFileds__',
 
   // ----  第三部分：作为配置项  ----
 

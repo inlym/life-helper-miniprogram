@@ -2,6 +2,7 @@
 
 const { CustomPage } = getApp()
 const { updateUserInfo } = require('../../app/services/userinfo')
+const { reset } = require('../../app/services/system')
 
 CustomPage({
   data: {},
@@ -21,5 +22,12 @@ CustomPage({
         userInfo: res,
       })
     })
+  },
+
+  /**
+   * 点击 “一键修复” 按钮
+   */
+  async recover() {
+    reset()
   },
 })

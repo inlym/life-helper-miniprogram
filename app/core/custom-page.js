@@ -2,11 +2,12 @@
 
 const request = require('./request')
 const logger = require('./logger')
-const makeUrl = require('./page-make-url')
 const defaults = require('./page-defaults')
 const execRequestedTasks = require('./page-requested-task')
 const login = require('./login')
 const constants = require('./constants')
+const route = require('./page-route')
+const makeUrl = require('./make-url')
 
 const { STO_TOKEN, DATA_QUERY } = constants
 
@@ -38,6 +39,8 @@ module.exports = function CustomPage(options) {
     // 存储 `query`
     this.setData({ [DATA_QUERY]: query })
 
+    logger.debug(`[Route] ${makeUrl(this.route, query)}`)
+
     // 执行在页面中配置的 `onLoad`
     if (typeof optOnLoad === 'function') {
       optOnLoad.call(this)
@@ -58,7 +61,7 @@ module.exports = function CustomPage(options) {
 
   options.request = request
   options.logger = logger
-  options.makeUrl = makeUrl
+  options.goTo = route.goTo
   options.query = function query(field) {
     const q = this.data[DATA_QUERY]
     if (field === undefined) {

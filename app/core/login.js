@@ -1,10 +1,9 @@
 'use strict'
 
-const { getCode } = require('./wxp')
 const request = require('./request')
-const constants = require('./constants')
-
-const { STO_TOKEN } = constants
+const logger = require('./logger')
+const { getCode } = require('./wxp')
+const { STO_TOKEN } = require('./constants')
 
 module.exports = async function login() {
   const code = await getCode()
@@ -14,6 +13,7 @@ module.exports = async function login() {
   })
 
   const { token } = response.data
+  logger.info(`[登录成功] code=${code}, token=${token}`)
   if (token) {
     wx.setStorageSync(STO_TOKEN, token)
     return token

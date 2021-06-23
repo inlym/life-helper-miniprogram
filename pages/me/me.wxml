@@ -34,5 +34,14 @@
     <view class="onecenter"><button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button></view>
   </view>
 
+  <!-- 列表栏 - start -->
+  <mp-cells>
+    <mp-cell link hover bindtap="recover">
+      <view slot="title" class="list-title">一键恢复</view>
+    </mp-cell>
+  </mp-cells>
+
+  <!-- 列表栏 - end -->
+
   <mpc-footer title="我的个人助手" desc="Copyright 2020-2021 v0.2.2" url="/pages/about/about"></mpc-footer>
 </view>

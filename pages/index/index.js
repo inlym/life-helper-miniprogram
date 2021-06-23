@@ -22,9 +22,9 @@ CustomPage({
     main: {
       url: '/weather',
       handler(data) {
-        console.log(data)
         const f2d = ['今天', '明天'].map((item) => data.f15d.find((day) => day.dayText === item))
-        this.setData({ f2d })
+        const currentLocationId = data.cities[0].locationId
+        this.setData({ f2d, currentLocationId })
       },
     },
   },
@@ -56,12 +56,12 @@ CustomPage({
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
   handleDayItemTap(event) {
     console.log(event)
+    const { date } = event.currentTarget.dataset
+    const id = this.data.currentLocationId
+    this.goTo('/pages/weather/f15d/f15d', { id, date }, { myData: { name: 'mark', age: 19 } })
   },
 
-  /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
-  handleHourItemTap(event) {
-    console.log(event)
-  },
+  handleHourItemTap() {},
 
   async addCity() {
     const result = await addWeatherCity()

@@ -1,14 +1,28 @@
 <view class="main">
   <!-- 顶部 tab 栏 - start -->
   <view class="tabs">
-    <scroll-view scroll-x="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}"
-      scroll-into-view="{{ scrollIndex }}" enhanced="{{ true }}" bounces="{{ true }}" fast-deceleration="{{ true }}"
-      scroll-with-animation="{{ true }}" show-scrollbar="{{ false }}">
+    <scroll-view
+      scroll-x="{{ true }}"
+      enable-flex="{{ true }}"
+      scroll-anchoring="{{ true }}"
+      scroll-into-view="{{ scrollIndex }}"
+      enhanced="{{ true }}"
+      bounces="{{ true }}"
+      fast-deceleration="{{ true }}"
+      scroll-with-animation="{{ true }}"
+      show-scrollbar="{{ false }}"
+    >
       <view class="items flex-row">
-        <view class="item flex-column {{ index === currentIndex ? 'active' : '' }}" wx:for="{{ fore15d.list }}"
-          wx:key="date" id="s-{{ index }}" bindtap="handleScorllItemTap" data-index="{{ index }}"
-          hover-class="item-hover">
-          <view class="weekday">{{ item.weekday }}</view>
+        <view
+          class="item flex-column {{ index === currentIndex ? 'active' : '' }}"
+          wx:for="{{ fore15d.list }}"
+          wx:key="date"
+          id="s-{{ index }}"
+          bindtap="handleScorllItemTap"
+          data-index="{{ index }}"
+          hover-class="item-hover"
+        >
+          <view class="weekday">{{ item.dayText }}</view>
           <view class="date {{ index === currentIndex ? 'active' : '' }}">{{ item.dateText }}</view>
         </view>
       </view>
@@ -19,14 +33,12 @@
   <!-- 天气内容区 - start -->
   <view class="content">
     <swiper circular="{{ true }}" bindchange="handleSwiperChange" current="{{ currentIndex }}">
-      <swiper-item item-id="swiper:{{ item.date }}" wx:for="{{ fore15d.list }}" wx:key="date"
-        id="swiper:{{ item.date }}">
+      <swiper-item item-id="swiper:{{ item.date }}" wx:for="{{ fore15d.list }}" wx:key="date" id="swiper:{{ item.date }}">
         <view class="top flex-row">
-          <!-- <image src="{{fore15d.iconUrlPrefix}}{{item.iconDay}}.png"></image> -->
           <image src="{{ item.imageUrl }}"></image>
           <view class="right flex-column">
             <view class="temp">{{ item.tempMax }}° / {{ item.tempMin }}°</view>
-            <view class="desc">{{ item.desc }}</view>
+            <view class="desc">{{ item.text }}</view>
           </view>
         </view>
 
@@ -62,7 +74,7 @@
         <!-- 风 - start -->
         <view class="content-item flex-row">
           <view class="left flex-column">
-            <image src="https://img.lh.inlym.com/resource/wind-dir.svg" mode="widthFix"></image>
+            <image src="{{ imageUrl4Wind }}" mode="widthFix"></image>
           </view>
           <view class="right flex-column">
             <view class="halfday flex-row">
@@ -108,7 +120,7 @@
         <!-- 太阳 - start -->
         <view class="content-item sunitem flex-row">
           <view class="left flex-column">
-            <image src="https://img.lh.inlym.com/resource/sunrise.svg" mode="widthFix"></image>
+            <image src="{{ imageUrl4Sunrise }}" mode="widthFix"></image>
           </view>
           <view class="right flex-row">
             <view class="text-item">
@@ -126,7 +138,7 @@
         <!-- 月亮 - start -->
         <view class="content-item moon flex-row">
           <view class="left flex-column">
-            <image src="https://img.lh.inlym.com/resource/moon.svg" mode="widthFix"></image>
+            <image src="{{ imageUrl4Moon }}" mode="widthFix"></image>
           </view>
           <view class="right flex-row">
             <view class="text-item">

@@ -1,6 +1,6 @@
 'use strict'
 
-const { CustomPage } = getApp()
+const { CustomPage, getResUrl } = getApp()
 
 CustomPage({
   data: {
@@ -9,24 +9,25 @@ CustomPage({
 
     /** scroll-view 的当前居首项 ID */
     scrollIndex: 's-0',
+
+    imageUrl4Wind: getResUrl('f15d-wind'),
+    imageUrl4Sunrise: getResUrl('f15d-sunrise'),
+    imageUrl4Moon: getResUrl('f15d-moon'),
   },
 
   requested: {
     fore15d: {
       url: '/weather/15d',
-      queries: 'qs1',
-      handler: 'afterGetData',
+      params(query) {
+        return { id: query.id }
+      },
+      handler(data) {
+        const { date } = this.query()
+        if (date) {
+          this.setData({ currentIndex: data.list.findIndex((item) => item.date === date) || 0 })
+        }
+      },
     },
-  },
-
-  qs1() {
-    const location = wx.getStorageSync(this.config.keys.STORAGE_WEATHER_LOCATION)
-    if (location) {
-      const { longitude, latitude } = location
-      return { location: `${longitude},${latitude}` }
-    } else {
-      return {}
-    }
   },
 
   onLoad() {},
