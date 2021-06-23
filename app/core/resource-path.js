@@ -3,7 +3,7 @@
 /**
  * 图片分类 3 类：
  * 1. 存储于服务器，图片地址由 API 接口返回
- * 2. 存储于服务器，图片地址写死在客户端
+ * 2. *存储于服务器，图片地址写死在客户端*
  * 3. 存储于客户端，图片地址写死在客户端
  *
  * 当前文件主要用于处理以上第 [2] 种情况对应的图片路径，由当前文件统一管理，避免零散分布在各处不方便维护
@@ -12,6 +12,16 @@
 const baseURL = 'https://img.lh.inlym.com'
 
 const paths = {
+  /**
+   * logo 图标
+   */
+  logo: '/static/project/logo.png',
+
+  /**
+   * 主分享图
+   */
+  'share-main': '/static/project/share.jpeg',
+
   /**
    * 含义：风向
    * page: `pages/weather/f15d/f15d`
