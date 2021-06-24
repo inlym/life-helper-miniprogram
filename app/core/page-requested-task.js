@@ -28,7 +28,7 @@ module.exports = function execRequestedTasks(eventName) {
   const requested = this.requested
 
   // 未定义则直接跳过
-  if (requested === undefined) {
+  if (requested === undefined || (typeof requested === 'object' && Object.keys(requested).length === 0)) {
     return
   }
 
