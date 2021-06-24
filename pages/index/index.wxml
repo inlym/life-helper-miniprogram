@@ -89,37 +89,42 @@
 
   <!-- 未来 2 小时降雨情况 - end -->
 
-  <!-- 未来 15 天逐天天气预报 - start -->
-  <view class="container f15d">
+  <view class="item" wx:for="{{ f2d }}" wx:key="date" data-date="{{ item.date }}" hover-class="hover" bindtap="handleDayItemTap"></view>
+
+  <!-- 新版 15 天预报 - 开始 -->
+  <view class="f15d-new">
     <view class="module-title">15天预报</view>
-    <view class="body">
-      <view
-        class="item flex-row"
-        wx:for="{{ f15d }}"
-        wx:key="date"
-        hover-class="hover"
-        data-date="{{ item.date }}"
-        bindtap="handleDayItemTap"
-      >
-        <view class="weekday">{{ item.dayText }}</view>
-        <view class="dateText">{{ item.dateText }}</view>
-        <view class="text">{{ item.textDay }}</view>
-        <image class="wea-icon" src="{{ item.iconDayUrl }}"></image>
-        <view class="temp degree">{{ item.tempMax }}</view>
-        <view class="sep"></view>
-        <view class="temp degree">{{ item.tempMin }}</view>
-        <image class="wea-icon" src="{{ item.iconNightUrl }}"></image>
-        <view class="text">{{ item.textNight }}</view>
+    <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
+      <view class="items">
+        <view
+          class="item {{ item.dayText === '今天' ? 'active' : '' }}"
+          wx:for="{{ f15d }}"
+          wx:key="date"
+          hover-class="hover"
+          bindtap="handleDayItemTap"
+          data-date="{{ item.date }}"
+        >
+          <view class="day-text">{{ item.dayText }}</view>
+          <view class="date-text">{{ item.dateText }}</view>
+          <view class="text text-{{ item.textDay.length >= 4 ? '4' : 'lt4' }}">{{ item.textDay }}</view>
+          <image class="wea-icon" src="{{ item.iconDayUrl }}"></image>
+          <view class="temp degree">{{ item.tempMax }}</view>
+
+          <view class="separator"></view>
+
+          <view class="temp degree">{{ item.tempMin }}</view>
+          <image class="wea-icon" src="{{ item.iconNightUrl }}"></image>
+          <view class="text text-{{ item.textNight.length >= 4 ? '4' : 'lt4' }}">{{ item.textNight }}</view>
+          <view class="wind wind-dir">{{ item.windDirDay }}</view>
+          <view class="wind wind-scale">{{ item.windScaleDay }}级</view>
+
+          <view class="aqi aqi-bg-{{ item.aqi.level || 0 }}">{{ (item.aqi && item.aqi.category) || ' ' }}</view>
+        </view>
       </view>
-    </view>
-    <view class="more onecenter" hover-class="hover" bindtap="handleDayItemTap">
-      <view>
-        <text>未来 15 天预报详情</text>
-        <mp-icon icon="arrow" size="{{ 10 }}"></mp-icon>
-      </view>
-    </view>
+    </scroll-view>
   </view>
-  <!-- 未来 15 天逐天天气预报 - end -->
+
+  <!-- 新版 15 天预报 - 结束 -->
 
   <!-- 实时空气质量 - start -->
   <view class="container airnow">

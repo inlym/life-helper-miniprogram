@@ -28,15 +28,6 @@
   background-color: #fff;
   overflow: hidden;
   font-size: 28rpx;
-
-  .title {
-    padding: 10rpx 32rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    font-size: 32rpx;
-    font-weight: bold;
-    margin-bottom: 16rpx;
-  }
 }
 
 /* 温度的 ° 符号 */
@@ -48,6 +39,10 @@
 .wea-icon {
   width: 50rpx;
   height: 50rpx;
+}
+
+.aqi-bg-0 {
+  background-color: transparent;
 }
 
 .aqi-bg-1 {
@@ -161,10 +156,11 @@
       }
 
       .aqi {
-        padding: 4rpx 24rpx;
+        padding: 4rpx 22rpx;
         border-radius: 32rpx;
-        font-size: 24rpx;
+        font-size: 22rpx;
         text-align: center;
+        color: #ffffff;
       }
     }
   }
@@ -207,105 +203,125 @@
   .main {
     padding: 40rpx 10rpx 14rpx;
   }
-}
 
-.minutelyrain .top {
-  height: 60rpx;
-  width: 100%;
-}
+  .top {
+    height: 60rpx;
+    width: 100%;
 
-.minutelyrain .top .desc {
-  font-size: 0.7em;
-  margin-top: -2rpx;
-  color: rgba(0, 0, 0, 0.4);
-}
+    .desc {
+      font-size: 0.7em;
+      margin-top: -2rpx;
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
 
-.minutelyrain .itemwrap {
-  height: 280rpx;
-  width: 2000rpx;
-  align-items: flex-end;
-}
+  .itemwrap {
+    height: 280rpx;
+    width: 2000rpx;
+    align-items: flex-end;
 
-.minutelyrain .itemwrap .item {
-  width: 50rpx;
-}
+    .item {
+      width: 50rpx;
 
-.minutelyrain .itemwrap .item:nth-child(1) {
-  margin-left: 40rpx;
-}
+      .rainblock {
+        width: 100%;
+        max-height: 200rpx;
+        background-color: #a8c9f6;
+      }
 
-.minutelyrain .itemwrap .item .rainblock {
-  width: 100%;
-  max-height: 200rpx;
-  background-color: #a8c9f6;
-}
+      .num {
+        font-size: 30rpx;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.8);
+      }
 
-.minutelyrain .itemwrap .item .num {
-  font-size: 30rpx;
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.8);
-}
+      .time {
+        font-size: 24rpx;
+      }
+    }
 
-.minutelyrain .itemwrap .item .time {
-  font-size: 24rpx;
-}
+    .item:nth-child(1) {
+      margin-left: 40rpx;
+    }
+  }
 
-.minutelyrain .desc {
-  font-size: 0.8em;
-  margin-top: 14rpx;
-  color: rgba(0, 0, 0, 0.5);
+  .desc {
+    font-size: 0.8em;
+    margin-top: 14rpx;
+    color: rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* 未来 2 小时降雨情况 - end */
 
-// 未来 15 天天气预报
-.f15d {
-  font-size: 32rpx;
-  text-align: center;
+.f15d-new {
+  margin-top: 16rpx;
+  background-color: #fff;
 
-  .body {
+  .items {
+    padding: 20rpx 0 26rpx;
+    display: flex;
+    justify-content: space-between;
+    height: 800rpx;
+    width: 1875rpx;
+    font-size: 32rpx;
+    text-align: center;
+
     .item {
-      padding: 0 22rpx;
-      height: 100rpx;
+      width: 125rpx;
+      padding: 16rpx 0 34rpx;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
+      align-items: center;
 
-      .weekday {
-        font-size: 0.9em;
-        width: 100rpx;
+      .day-text {
+        font-weight: bold;
       }
 
-      .dateText {
-        font-size: 0.8em;
+      .date-text {
+        font-size: 28rpx;
         color: #7e8081;
-        width: 100rpx;
       }
 
       .temp {
-        width: 80rpx;
-        font-size: 0.8em;
+        font-weight: bold;
       }
 
       .text {
-        width: 120rpx;
-        font-size: 0.8em;
+        height: 34rpx;
+        line-height: 34rpx;
       }
 
-      .sep {
-        width: 80rpx;
-        height: 2rpx;
-        background-color: #333333;
+      .text-lt4 {
+        font-size: 32rpx;
+      }
+
+      .text-4 {
+        font-size: 26rpx;
+      }
+
+      .wind {
+        font-size: 24rpx;
+      }
+
+      .wind-scale {
+        margin-top: -22rpx;
+      }
+
+      .aqi {
+        height: 34rpx;
+        padding: 4rpx 20rpx;
+        border-radius: 32rpx;
+        font-size: 20rpx;
+        text-align: center;
+        color: #ffffff;
       }
     }
-  }
 
-  .more {
-    height: 80rpx;
-    text-align: center;
-
-    text {
-      margin-right: 20rpx;
-      font-size: 0.9em;
+    .active {
+      box-shadow: 0px 0px 10px #ededed;
+      border-radius: 20rpx;
     }
   }
 }

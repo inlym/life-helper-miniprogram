@@ -40,7 +40,7 @@ CustomPage({
     /** 点击按钮的索引 */
     const { index } = e.currentTarget.dataset
 
-    const detail = this.data.main.liveIndex[index]
+    const detail = this.data.liveIndex[index]
     if (detail) {
       this.setData({
         halfScreen: {
