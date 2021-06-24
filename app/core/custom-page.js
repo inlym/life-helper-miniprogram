@@ -8,6 +8,7 @@ const login = require('./login')
 const constants = require('./constants')
 const route = require('./page-route')
 const makeUrl = require('./make-url')
+const newSetData = require('./computed')
 
 const { STO_TOKEN, DATA_QUERY } = constants
 
@@ -40,6 +41,10 @@ module.exports = function CustomPage(options) {
     this.setData({ [DATA_QUERY]: query })
 
     logger.debug(`[Route] ${makeUrl(this.route, query)}`)
+
+    // 替换原有的 `setData`
+    this.originalSetData = this.setData
+    this.setData = newSetData
 
     // 执行在页面中配置的 `onLoad`
     if (typeof optOnLoad === 'function') {
