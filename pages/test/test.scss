@@ -1,10 +1,7 @@
-.main {
-  height: 1200rpx;
-  position: relative;
-}
-
 .one {
-  height: 300rpx;
-  width: 90%;
-  background-color: aqua;
+  $height: 200rpx;
+  height: $height;
+  line-height: $height;
+  border: 2rpx solid red;
+  text-align: center;
 }

@@ -1,13 +1,1 @@
-<view> 测试页面 </view>
-<button bindtap="one">Click</button>
-
-<button bindtap="two">two</button>
-
-<button bindtap="three">openSetting</button>
-
-<my-forauth scope="scope.userLocation" bindsuccess="four" bindfail="five">
-  <view class="one"></view>
-</my-forauth>
-
-<button bindtap="six">addWeatherCity</button>
-<button bindtap="seven">MockRequest</button>
+<view class="one">测试页面</view>
