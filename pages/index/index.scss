@@ -307,6 +307,7 @@
 
       .wind-scale {
         margin-top: -22rpx;
+        color: #ccc;
       }
 
       .aqi {
@@ -407,30 +408,93 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+
+  .item {
+    width: 25%;
+    height: 180rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20rpx 0;
+
+    image {
+      width: 70rpx;
+    }
+
+    .status {
+      font-size: 30rpx;
+      font-weight: bold;
+    }
+
+    .name {
+      font-size: 0.9em;
+      text-align: center;
+      color: #666;
+    }
+  }
 }
 
-.liveindex .body .item {
-  width: 25%;
-  height: 180rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20rpx 0;
-}
-
-.liveindex .body .item image {
-  width: 70rpx;
-}
-
-.liveindex .body .item .status {
-  font-size: 30rpx;
-  font-weight: bold;
-}
-
-.liveindex .body .item .name {
-  font-size: 0.9em;
-  text-align: center;
-  color: #666;
-}
 /* 生活指数 - end */
+
+// 选择天气城市模块
+.cities {
+  height: 80vh;
+
+  .head {
+    $head-height: 100rpx;
+
+    position: relative;
+    height: $head-height;
+    font-size: 32rpx;
+    border-bottom: 1rpx solid #ccc;
+    padding: 18rpx 0 0;
+
+    .title {
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 20rpx;
+      color: #ccc;
+    }
+
+    .right-button {
+      position: absolute;
+      right: 40rpx;
+      bottom: 24rpx;
+      color: #3f72ea;
+    }
+  }
+
+  .body {
+    .items {
+      .item {
+        height: 140rpx;
+        padding: 34rpx 26rpx 26rpx;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .name {
+          font-size: 34rpx;
+        }
+
+        .city {
+          font-size: 22rpx;
+          color: #a9a9a9;
+        }
+      }
+
+      .active {
+        background-color: #f3f3f3;
+      }
+    }
+
+    .bottom {
+      margin-top: 80rpx;
+    }
+  }
+}

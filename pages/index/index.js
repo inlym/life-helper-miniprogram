@@ -16,11 +16,25 @@ CustomPage({
     },
 
     f2d: [],
+    cities: [],
+
+    /** 是否展示页面容器 */
+    isShowPageContainer: false,
+
+    /** 临时数据，存储从城市列表选中的城市ID，以便发起请求 */
+    selectedCityId: 0,
   },
 
   requested: {
     page: {
       url: '/weather',
+      params() {
+        const cityId = this.data.selectedCityId
+        if (cityId > 0) {
+          return { id: cityId }
+        }
+        return {}
+      },
       handler(data) {
         const f2d = ['今天', '明天'].map((item) => data.f15d.find((day) => day.dayText === item))
         const currentLocationId = data.cities[0].locationId
@@ -64,6 +78,11 @@ CustomPage({
 
   async addCity() {
     const result = await addWeatherCity()
+    this.setData({
+      selectedCityId: result.id,
+      isShowPageContainer: false,
+    })
+
     if (result) {
       this.init('afterAddWeatherCity')
     }
@@ -77,5 +96,36 @@ CustomPage({
       showCancel: false,
       confirmText: '我知道了',
     })
+  },
+
+  /** 页面容器离开后触发 */
+  handlerContainerLeave() {
+    this.setData({
+      isShowPageContainer: false,
+    })
+  },
+
+  /** 打开页面容器 */
+  showPageContainer() {
+    this.setData({
+      isShowPageContainer: true,
+    })
+  },
+
+  /** 关闭页面容器 */
+  closePageContainer() {
+    this.setData({
+      isShowPageContainer: false,
+    })
+  },
+
+  /** 选择城市后触发，以新的城市初始化 */
+  selectCity(event) {
+    const { id } = event.currentTarget.dataset
+    this.setData({
+      selectedCityId: id,
+      isShowPageContainer: false,
+    })
+    this.init('afterSelectCity')
   },
 })

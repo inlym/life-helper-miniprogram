@@ -3,7 +3,9 @@
 const { CustomPage } = getApp()
 
 CustomPage({
-  onLoad() {},
+  data: {},
 
   requested: {},
+
+  onLoad() {},
 })

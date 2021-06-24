@@ -29,7 +29,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
+        "text": "天气",
         "iconPath": "/assets/images/tabbar/home-outline.png",
         "selectedIconPath": "/assets/images/tabbar/home-filled.png"
       },

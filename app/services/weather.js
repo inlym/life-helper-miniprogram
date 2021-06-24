@@ -22,11 +22,11 @@ exports.addWeatherCity = async function addWeatherCity() {
     })
     return false
   } else {
-    await request({
+    const response = await request({
       url: '/weather/city',
       method: 'post',
       data: location,
     })
-    return true
+    return response.data
   }
 }

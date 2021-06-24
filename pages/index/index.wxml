@@ -15,10 +15,18 @@
     </view>
 
     <view class="content">
-      <my-forauth scope="scope.userLocation" bindsuccess="addCity">
-        <text class="address text-ellipsis-l1">{{ address }}</text>
-        <text class="iconfont icon-xia"></text>
-      </my-forauth>
+      <view wx:if="{{ cities.length > 0 }}" bindtap="showPageContainer">
+        <view class="address-wrapper">
+          <text class="address text-ellipsis-l1">{{ address }}</text>
+          <text class="iconfont icon-xia"></text>
+        </view>
+      </view>
+      <block wx:else>
+        <my-forauth scope="scope.userLocation" bindsuccess="addCity">
+          <text class="address text-ellipsis-l1">{{ address }}</text>
+          <text class="iconfont icon-xia"></text>
+        </my-forauth>
+      </block>
 
       <view class="temperature">{{ now.temp }}</view>
 
@@ -221,7 +229,43 @@
   <!-- 生活指数 - end -->
 </view>
 
-<!--以下为非页面元素-->
+<!--以下为非页面常规布局元素-->
+
+<!-- 弹出层，用于切换天气城市 -->
+<page-container show="{{ isShowPageContainer }}" bind:afterleave="handlerContainerLeave" round="{{ true }}">
+  <view class="cities">
+    <!-- 顶部元素 -->
+    <view class="head">
+      <view class="title">切换城市</view>
+      <view class="subtitle">只展示最近选择的 5 个城市</view>
+      <view class="right-button" bindtap="closePageContainer">完成</view>
+    </view>
+
+    <!-- 主体元素 -->
+    <view class="body">
+      <view class="items">
+        <!-- 单个城市卡片 -->
+        <view
+          class="item {{ item.id === activeCityId ? 'active' : '' }}"
+          wx:for="{{ cities }}"
+          wx:key="id"
+          hover-class="hover"
+          data-id="{{ item.id }}"
+          bindtap="selectCity"
+        >
+          <view class="name text-ellipsis-l1">{{ item.name }}</view>
+          <view class="city">{{ item.city === item.district ? item.city : item.city + item.district }}</view>
+        </view>
+      </view>
+
+      <view class="bottom">
+        <my-forauth scope="scope.userLocation" bindsuccess="addCity">
+          <button size="default" type="primary">添加地区</button>
+        </my-forauth>
+      </view>
+    </view>
+  </view>
+</page-container>
 
 <!--Toptips顶部错误提示组件-->
 <mp-toptips type="{{ toptips.type }}" show="{{ toptips.show }}" msg="{{ toptips.msg }}" delay="{{ toptips.delay }}"> </mp-toptips>
