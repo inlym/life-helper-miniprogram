@@ -95,7 +95,7 @@ module.exports = function execRequestedTasks(eventName) {
       if (typeof params === 'object') {
         finalParams = params
       } else if (typeof params === 'function') {
-        finalParams = params(this.query())
+        finalParams = params.call(this, this.query())
       }
 
       // 对 `finalParams` 再次做个检验
