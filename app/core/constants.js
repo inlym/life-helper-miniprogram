@@ -7,7 +7,7 @@ module.exports = {
   // ----  第一部分：在 `Storage` 中存储的字段  ----
 
   /** 登录凭证 `token` */
-  STO_TOKEN: '__app_token__',
+  STO_TOKEN: '__appToken__',
 
   /** 对于 `requested` 任务，是否开启调试 */
   STO_DEBUG_REQUESTED: '__debugRequested__',

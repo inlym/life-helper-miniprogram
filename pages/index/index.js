@@ -19,7 +19,7 @@ CustomPage({
   },
 
   requested: {
-    main: {
+    page: {
       url: '/weather',
       handler(data) {
         const f2d = ['今天', '明天'].map((item) => data.f15d.find((day) => day.dayText === item))

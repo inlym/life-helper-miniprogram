@@ -1,29 +1,29 @@
 <view class="main">
   <!-- 天气实况（新版） - start -->
-  <view class="condition wgb {{ main.skyClass.bgClass }}">
+  <view class="condition wgb {{ skyClass.bgClass }}">
     <!-- 顶部预留高度 -->
     <topspace offset="0" opacity="0"></topspace>
 
     <!-- 大片背景区域 -->
     <view class="cond-background">
-      <view class="fullmoon" wx:if="{{ main.skyClass.fullmoon }}"></view>
-      <view class="halfmoon" wx:if="{{ main.skyClass.halfmoon }}"></view>
-      <view class="sun" wx:if="{{ main.skyClass.sun }}"></view>
-      <view class="fixed-cloud {{ main.skyClass.darkCloud ? 'darkcloud' : '' }}" wx:if="{{ main.skyClass.fixedCloud }}"> </view>
-      <view class="moving-cloud {{ main.skyClass.darkCloud ? 'darkcloud' : '' }}" wx:if="{{ main.skyClass.movingCloud }}"></view>
-      <view class="rain" wx:if="{{ main.skyClass.rain }}"></view>
+      <view class="fullmoon" wx:if="{{ skyClass.fullmoon }}"></view>
+      <view class="halfmoon" wx:if="{{ skyClass.halfmoon }}"></view>
+      <view class="sun" wx:if="{{ skyClass.sun }}"></view>
+      <view class="fixed-cloud {{ skyClass.darkCloud ? 'darkcloud' : '' }}" wx:if="{{ skyClass.fixedCloud }}"> </view>
+      <view class="moving-cloud {{ skyClass.darkCloud ? 'darkcloud' : '' }}" wx:if="{{ skyClass.movingCloud }}"></view>
+      <view class="rain" wx:if="{{ skyClass.rain }}"></view>
     </view>
 
     <view class="content">
       <my-forauth scope="scope.userLocation" bindsuccess="addCity">
-        <text class="address text-ellipsis-l1">{{ main.address }}</text>
+        <text class="address text-ellipsis-l1">{{ address }}</text>
         <text class="iconfont icon-xia"></text>
       </my-forauth>
 
-      <view class="temperature">{{ main.now.temp }}</view>
+      <view class="temperature">{{ now.temp }}</view>
 
-      <view class="text">{{ main.now.text }}</view>
-      <!-- <view class="summary">{{ main.now.summary }}</view> -->
+      <view class="text">{{ now.text }}</view>
+      <!-- <view class="summary">{{ now.summary }}</view> -->
     </view>
   </view>
   <!-- 天气实况（新版） - end -->
@@ -52,7 +52,7 @@
       scroll-anchoring="{{ true }}"
     >
       <view class="itemwrap">
-        <view class="item" wx:for="{{ main.f24h }}" wx:key="time" hover-class="hover" bindtap="handleHourItemTap" data-index="{{ index }}">
+        <view class="item" wx:for="{{ f24h }}" wx:key="time" hover-class="hover" bindtap="handleHourItemTap" data-index="{{ index }}">
           <view class="hour">{{ item.time }}</view>
           <image class="wea-icon" src="{{ item.iconUrl }}"></image>
           <view class="text">{{ item.text }}</view>
@@ -69,12 +69,12 @@
     <view class="module-title">2小时降雨</view>
     <div class="main">
       <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
-        <view class="summary">{{ main.rain.summary }}</view>
-        <view class="desc">（更新时间 {{ main.rain.updateTime }}）</view>
+        <view class="summary">{{ rain.summary }}</view>
+        <view class="desc">（更新时间 {{ rain.updateTime }}）</view>
       </view>
       <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
         <view class="itemwrap flex-row">
-          <view class="item flex-column" wx:for="{{ main.rain.list }}" wx:key="time">
+          <view class="item flex-column" wx:for="{{ rain.list }}" wx:key="time">
             <view class="num">{{ item.precip }}</view>
             <view class="rainblock" style="height: {{ item.height }}rpx;"></view>
             <view class="time">{{ item.time }}</view>
@@ -95,7 +95,7 @@
     <view class="body">
       <view
         class="item flex-row"
-        wx:for="{{ main.f15d }}"
+        wx:for="{{ f15d }}"
         wx:key="date"
         hover-class="hover"
         data-date="{{ item.date }}"
@@ -126,19 +126,19 @@
     <view class="module-title">实时空气质量</view>
     <view class="body flex-row">
       <view class="left flex-column">
-        <view class="content flex-column aqi-bg-{{ main.airnow.level }}">
-          <view class="num">{{ main.airnow.aqi }}</view>
-          <view class="text">{{ main.airnow.category }}</view>
+        <view class="content flex-column aqi-bg-{{ airnow.level }}">
+          <view class="num">{{ airnow.aqi }}</view>
+          <view class="text">{{ airnow.category }}</view>
         </view>
       </view>
       <view class="right">
         <!-- PM2.5 -->
         <view class="item flex-column">
           <view class="value"
-            ><text class="num">{{ main.airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view
+            ><text class="num">{{ airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view
           >
           <progress
-            percent="{{ (main.airnow.pm2p5 * 1) / 5 }}"
+            percent="{{ (airnow.pm2p5 * 1) / 5 }}"
             activeColor="#333"
             border-radius="10"
             stroke-width="4"
@@ -150,25 +150,19 @@
         <!-- PM10 -->
         <view class="item flex-column">
           <view class="value"
-            ><text class="num">{{ main.airnow.pm10 }} </text><text class="unit"> μg/m³</text></view
+            ><text class="num">{{ airnow.pm10 }} </text><text class="unit"> μg/m³</text></view
           >
-          <progress
-            percent="{{ (main.airnow.pm10 * 1) / 5 }}"
-            activeColor="#333"
-            border-radius="10"
-            stroke-width="4"
-            duration="1000"
-          ></progress>
+          <progress percent="{{ (airnow.pm10 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4" duration="1000"></progress>
           <view class="name">PM10</view>
         </view>
 
         <!-- O3 -->
         <view class="item flex-column">
           <view class="value"
-            ><text class="num">{{ main.airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view
+            ><text class="num">{{ airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view
           >
           <progress
-            percent="{{ (main.airnow.pm2p5 * 1) / 5 }}"
+            percent="{{ (airnow.pm2p5 * 1) / 5 }}"
             activeColor="#333"
             border-radius="10"
             stroke-width="4"
@@ -180,45 +174,27 @@
         <!-- CO -->
         <view class="item flex-column">
           <view class="value"
-            ><text class="num">{{ main.airnow.o3 }} </text><text class="unit"> mg/m³</text></view
+            ><text class="num">{{ airnow.o3 }} </text><text class="unit"> mg/m³</text></view
           >
-          <progress
-            percent="{{ (main.airnow.o3 * 1) / 5 }}"
-            activeColor="#333"
-            border-radius="10"
-            stroke-width="4"
-            duration="1000"
-          ></progress>
+          <progress percent="{{ (airnow.o3 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4" duration="1000"></progress>
           <view class="name">CO</view>
         </view>
 
         <!-- SO2 -->
         <view class="item flex-column">
           <view class="value"
-            ><text class="num">{{ main.airnow.so2 }} </text><text class="unit"> μg/m³</text></view
+            ><text class="num">{{ airnow.so2 }} </text><text class="unit"> μg/m³</text></view
           >
-          <progress
-            percent="{{ (main.airnow.so2 * 1) / 5 }}"
-            activeColor="#333"
-            border-radius="10"
-            stroke-width="4"
-            duration="1000"
-          ></progress>
+          <progress percent="{{ (airnow.so2 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4" duration="1000"></progress>
           <view class="name">SO<text class="sub">2</text></view>
         </view>
 
         <!-- NO2 -->
         <view class="item flex-column">
           <view class="value"
-            ><text class="num">{{ main.airnow.no2 }} </text><text class="unit"> μg/m³</text></view
+            ><text class="num">{{ airnow.no2 }} </text><text class="unit"> μg/m³</text></view
           >
-          <progress
-            percent="{{ (main.airnow.no2 * 1) / 5 }}"
-            activeColor="#333"
-            border-radius="10"
-            stroke-width="4"
-            duration="1000"
-          ></progress>
+          <progress percent="{{ (airnow.no2 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4" duration="1000"></progress>
           <view class="name">NO<text class="sub">2</text></view>
         </view>
       </view>
@@ -230,14 +206,7 @@
   <view class="container liveindex">
     <view class="module-title">今日生活指数</view>
     <view class="body">
-      <view
-        class="item"
-        wx:for="{{ main.liveIndex }}"
-        wx:key="type"
-        data-index="{{ index }}"
-        bindtap="showLiveIndexDetail"
-        hover-class="hover"
-      >
+      <view class="item" wx:for="{{ liveIndex }}" wx:key="type" data-index="{{ index }}" bindtap="showLiveIndexDetail" hover-class="hover">
         <image src="{{ item.iconUrl }}" mode="widthFix"></image>
         <view class="status">{{ item.category }}</view>
         <view class="name">{{ item.name }}</view>

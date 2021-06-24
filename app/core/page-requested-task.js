@@ -109,9 +109,16 @@ module.exports = function execRequestedTasks(eventName) {
         url: url,
         params: finalParams,
       }).then((response) => {
-        this.setData({
-          [key]: response.data,
-        })
+        /**
+         * `key` 名为 `page` 则直接将整个响应数据赋值，其他则对 `key` 赋值
+         */
+        if (key === 'page') {
+          this.setData(response.data)
+        } else {
+          this.setData({
+            [key]: response.data,
+          })
+        }
 
         finished++
         if (finished >= taskNum) {
