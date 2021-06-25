@@ -232,7 +232,13 @@
 <!--以下为非页面常规布局元素-->
 
 <!-- 弹出层，用于切换天气城市 -->
-<page-container show="{{ isShowPageContainer }}" bind:afterleave="handlerContainerLeave" round="{{ true }}">
+<page-container
+  show="{{ isShowPageContainer }}"
+  duration="600"
+  bind:enter="handleContainerEnter"
+  bind:afterleave="handlerContainerLeave"
+  round="{{ true }}"
+>
   <view class="cities">
     <!-- 顶部元素 -->
     <view class="head">

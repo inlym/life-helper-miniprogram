@@ -98,6 +98,11 @@ CustomPage({
     })
   },
 
+  /** 页面容器进入前触发 */
+  handleContainerEnter() {
+    // 这个函数没有任何用途，但是这个事件不绑定方法，那么弹出容器时将无过渡效果
+  },
+
   /** 页面容器离开后触发 */
   handlerContainerLeave() {
     this.setData({
