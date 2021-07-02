@@ -37,7 +37,7 @@ const deveConfig = {
  * 生产环境特有配置项
  */
 const prodConfig = {
-  baseURL: 'https://api.lh.inlym.com',
+  baseURL: 'https://api.lifehelper.com.cn',
 }
 
 const configs = {
