@@ -10,6 +10,10 @@ const { STO_TOKEN } = constants
 
 /**
  * 添加鉴权信息中间件
+ *
+ * 说明：
+ * 1. 存在 `token` 则在请求头 `authorization` 附加 `TOKEN ${token}` 格式内容
+ * 2. 意外处理：无 `token` 则获取 `code` 在请求头 `authorization` 附加 `CODE ${code}` 格式内容
  */
 async function authInterceptor(config) {
   const token = wx.getStorageSync(STO_TOKEN)
@@ -25,6 +29,9 @@ async function authInterceptor(config) {
 
 /**
  * 用于添加设备信息
+ *
+ * 说明：
+ * 1. 附加了 2 个请求头 `x-mp-info` 和 `x-mp-system` 用于传输设备信息
  */
 async function attachSystemInfoInterceptor(config) {
   const { appId, envVersion, version } = wx.getAccountInfoSync().miniProgram
@@ -91,11 +98,15 @@ function loggerInterceptor(response) {
   const { status, config } = response
   const message = `[HTTP] [${status}] [${config.method.toUpperCase()}] ${jshttp.getUrl(config)}`
   if (status >= 200 && status < 300) {
-    logger.debug(message)
+    // logger.debug(message)
+
+    // 临时改为 `info`，用于调试查看是否日志正常（2021.07.05）
+    logger.info(message)
   }
 
   if (response.status >= 400) {
-    logger.error(message)
+    const authorization = config.headers.authorization || config.headers.Authorization
+    logger.error(message + ` authorization=${authorization}`)
   }
 
   return response
