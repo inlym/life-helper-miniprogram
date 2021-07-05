@@ -47,6 +47,12 @@
           "pathName": "pages/album/index/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "日程页",
+          "pathName": "pages/calendar/index/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

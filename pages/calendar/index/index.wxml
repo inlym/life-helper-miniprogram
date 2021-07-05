@@ -1,0 +1,21 @@
+<view class="page">
+  <!-- 任务列表区 -->
+  <view class="tasks-area">
+    <!-- 列表不为空情况 -->
+    <view wx:if="{{ list.length > 0 }}" class="lists">
+      <mp-slideview
+        wx:for="{{ list }}"
+        wx:key="id"
+        data-id="{{ item.id }}"
+        buttons="{{ slideButtons }}"
+        bindbuttontap="handleSlideButtonTap"
+        bindtap="handleSlideTap"
+      >
+        <mp-cell value="{{ item.title }}" footer="{{ item.content }}"></mp-cell>
+      </mp-slideview>
+    </view>
+
+    <!-- 列表为空情况 -->
+    <view wx:else class="empty"></view>
+  </view>
+</view>

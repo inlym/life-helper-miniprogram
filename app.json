@@ -10,7 +10,7 @@
     "pages/tools/tools",
     "pages/weather/f15d/f15d",
     "pages/weather/fore24h/fore24h",
-    "pages/calendar/calendar"
+    "pages/calendar/index/index"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
@@ -35,7 +35,7 @@
         "selectedIconPath": "/assets/images/tabbar/home-filled.png"
       },
       {
-        "pagePath": "pages/calendar/calendar",
+        "pagePath": "pages/calendar/index/index",
         "text": "日程",
         "iconPath": "/assets/images/tabbar/tag-outline.png",
         "selectedIconPath": "/assets/images/tabbar/tag-filled.png"
@@ -65,6 +65,7 @@
     "mp-form": "weui-miniprogram/form/form",
     "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
     "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-slideview": "weui-miniprogram/slideview/slideview",
     "mp-toptips": "weui-miniprogram/toptips/toptips",
     "mpc-list": "/components/list/list",
     "mpc-footer": "/components/footer/footer",
