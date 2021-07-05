@@ -22,7 +22,7 @@
     <block wx:else>
       <!-- 头像 -->
       <view class="avatar">
-        <image src="https://img.lh.inlym.com/common/logo.png" mode="widthFix"></image>
+        <image src="{{ logoUrl }}" mode="widthFix"></image>
       </view>
 
       <!-- 昵称、按钮 -->

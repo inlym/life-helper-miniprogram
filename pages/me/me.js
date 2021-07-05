@@ -1,11 +1,13 @@
 'use strict'
 
-const { CustomPage } = getApp()
+const { CustomPage, getResUrl } = getApp()
 const { updateUserInfo } = require('../../app/services/userinfo')
 const { reset } = require('../../app/services/system')
 
 CustomPage({
-  data: {},
+  data: {
+    logoUrl: getResUrl('logo'),
+  },
 
   requested: {
     userInfo: {
