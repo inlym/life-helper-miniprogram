@@ -8,7 +8,7 @@ const secrets = require('life-helper-miniprogram-secret')
  *
  * 取值：
  * - `production`   => 生产环境
- * - `development`  => 开发环境
+ * - `development`  => 测试环境
  * - `local`        => 本地开发环境
  */
 const stage = 'production'
@@ -27,10 +27,17 @@ const loggerLevel = 'DEBUG'
 const defaultConfig = { stage, loggerLevel }
 
 /**
- * 开发环境特有配置项
+ * 本地开发环境特有配置
+ */
+const localConfig = {
+  baseURL: 'https://api-local.lifehelper.com.cn',
+}
+
+/**
+ * 测试环境特有配置项
  */
 const deveConfig = {
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://api-test.lifehelper.com.cn',
 }
 
 /**
@@ -41,6 +48,7 @@ const prodConfig = {
 }
 
 const configs = {
+  local: localConfig,
   production: prodConfig,
   development: deveConfig,
 }
