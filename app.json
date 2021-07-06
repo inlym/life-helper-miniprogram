@@ -11,7 +11,8 @@
     "pages/weather/f15d/f15d",
     "pages/weather/fore24h/fore24h",
     "pages/calendar/index/index",
-    "pages/calendar/task-edit/task-edit"
+    "pages/calendar/task-edit/task-edit",
+    "pages/debug/debug"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
@@ -34,12 +35,6 @@
         "text": "天气",
         "iconPath": "/assets/images/tabbar/home-outline.png",
         "selectedIconPath": "/assets/images/tabbar/home-filled.png"
-      },
-      {
-        "pagePath": "pages/calendar/index/index",
-        "text": "日程",
-        "iconPath": "/assets/images/tabbar/tag-outline.png",
-        "selectedIconPath": "/assets/images/tabbar/tag-filled.png"
       },
       {
         "pagePath": "pages/me/me",

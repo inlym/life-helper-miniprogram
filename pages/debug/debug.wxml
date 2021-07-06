@@ -1,0 +1,37 @@
+<view class="page">
+  <view class="head">
+    <view class="title">调试页</view>
+    <view class="desc">用于内部调试</view>
+  </view>
+
+  <view class="body">
+    <mp-cells title="调试模式">
+      <mp-cell>
+        <view>调试状态</view>
+        <view slot="footer">
+          <block wx:if="{{ debugStatus }}">
+            <text>已开启</text>
+            <button bindtap="disableDebug" size="mini" type="warn" style="display: inline-block">关闭</button>
+          </block>
+          <block wx:else>
+            <text>已关闭</text>
+            <button bindtap="enableDebug" size="mini" type="primary" style="display: inline-block">开启</button>
+          </block>
+        </view>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells title="配置信息">
+      <mp-cell value="环境名称" footer="{{ config.stage }}"></mp-cell>
+      <mp-cell value="日志等级" footer="{{ config.loggerLevel }}"></mp-cell>
+      <mp-cell value="请求域名" footer="{{ config.baseURL }}"></mp-cell>
+    </mp-cells>
+
+    <mp-cells title="账户信息">
+      <mp-cell link hover bindtap="copyToken">
+        <view>登录凭证</view>
+        <view slot="footer" class="text-ellipsis-l1" style="width: 450rpx">{{ token }}</view>
+      </mp-cell>
+    </mp-cells>
+  </view>
+</view>

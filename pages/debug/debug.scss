@@ -1,0 +1,23 @@
+page {
+  background-color: #fff;
+}
+
+/* 页面顶部文本描述区域 */
+.head {
+  padding: 80rpx;
+
+  /* 页面顶部文本描述区域的标题 */
+  .title {
+    text-align: left;
+    font-size: 40rpx;
+    font-weight: 400;
+  }
+
+  /* 页面顶部文本描述区域的描述 */
+  .desc {
+    margin-top: 10rpx;
+    color: var(--weui-FG-1);
+    text-align: left;
+    font-size: 28rpx;
+  }
+}

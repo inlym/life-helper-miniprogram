@@ -53,6 +53,12 @@
           "pathName": "pages/calendar/index/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "调试页",
+          "pathName": "pages/debug/debug",
+          "query": "",
+          "scene": null
         }
       ]
     }

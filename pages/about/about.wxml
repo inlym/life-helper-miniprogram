@@ -3,7 +3,7 @@
     <view class="title">我的个人助手</view>
     <view class="desc">你的日常生活管家</view>
   </view>
-  <view class="container">
+  <view class="container" bindtap="handleTap">
     <image class="logo" src="{{ logoUrl }}" mode="widthFix"></image>
   </view>
 </view>
