@@ -39,3 +39,22 @@ exports.getCode = function getCode() {
     })
   })
 }
+
+/**
+ * 选择图片
+ */
+exports.chooseImage = function chooseImage(options) {
+  return new Promise((resolve) => {
+    wx.chooseImage({
+      ...options,
+
+      success(res) {
+        resolve(res.tempFiles)
+      },
+
+      fail() {
+        resolve([])
+      },
+    })
+  })
+}
