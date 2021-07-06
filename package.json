@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:scss": "node scripts/scss.js",
+    "build:version": "node scripts/version.js",
     "push": "git push && git push --tag"
   },
   "repository": {

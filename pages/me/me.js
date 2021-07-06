@@ -3,10 +3,12 @@
 const { CustomPage, getResUrl } = getApp()
 const { updateUserInfo } = require('../../app/services/userinfo')
 const { reset } = require('../../app/services/system')
+const version = require('../../app/core/version')
 
 CustomPage({
   data: {
     logoUrl: getResUrl('logo'),
+    version,
   },
 
   requested: {

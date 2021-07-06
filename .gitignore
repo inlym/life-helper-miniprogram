@@ -6,8 +6,9 @@ package-lock.json
 temp.js
 temp/
 
-# .wxss 文件
-pages/**/*.wxss
-
 # 其他文件
 yarn-error.log
+
+# 由脚本自动生成的文件
+app/core/version.js
+pages/**/*.wxss
