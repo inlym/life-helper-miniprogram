@@ -59,6 +59,12 @@
           "pathName": "pages/debug/debug",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "登录确认页",
+          "pathName": "pages/login/login-confirm/login-confirm",
+          "query": "",
+          "scene": null
         }
       ]
     }

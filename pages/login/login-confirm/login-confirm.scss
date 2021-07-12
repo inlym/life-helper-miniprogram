@@ -1,0 +1,24 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 200rpx 0 150rpx;
+}
+
+.title {
+  margin-top: 100rpx;
+  font-size: 46rpx;
+  font-weight: bold;
+}
+
+.desc {
+  margin-top: 30rpx;
+  font-size: 34rpx;
+  color: #1a1a1a;
+}
+
+.btn {
+  margin-top: 200rpx;
+}
