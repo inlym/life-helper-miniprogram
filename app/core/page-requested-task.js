@@ -86,6 +86,14 @@ module.exports = function execRequestedTasks(eventName) {
     /** 已完成的任务数 */
     let finished = 0
 
+    /**
+     * 逐个发送请求时，要各管各处理请求，不能使用以下方法，会导致所有请求都返回结果了才处理。
+     * ```js
+     * const promises = validKeys.map((key)=>{...})
+     * const result = await Promise.all(promises)
+     * ...
+     * ```
+     */
     validKeys.forEach((key) => {
       const { url, params, handler } = requested[key]
 
@@ -96,6 +104,14 @@ module.exports = function execRequestedTasks(eventName) {
         finalParams = params
       } else if (typeof params === 'function') {
         finalParams = params.call(this, this.query())
+      }
+
+      /**
+       * `finalParams` 的结果为 `false` 时，则不发送请求，即到此为止，不继续了
+       * (常用于编辑页，进入页面带 `id` 则发送请求获取该数据，不带 `id` 则无需发送请求获取数据)
+       */
+      if (finalParams === false) {
+        return
       }
 
       // 对 `finalParams` 再次做个检验
@@ -109,15 +125,23 @@ module.exports = function execRequestedTasks(eventName) {
         url: url,
         params: finalParams,
       }).then((response) => {
-        /**
-         * `key` 名为 `page` 则直接将整个响应数据赋值，其他则对 `key` 赋值
-         */
-        if (key === 'page') {
-          this.setData(response.data)
-        } else {
-          this.setData({
-            [key]: response.data,
-          })
+        // 仅请求成功才处理赋值逻辑
+        if (response.status >= 200 && response.status < 300) {
+          /**
+           * `key` 名为 `page` 则直接将整个响应数据赋值，其他则对 `key` 赋值
+           */
+          if (key === 'page') {
+            this.setData(response.data)
+          } else {
+            this.setData({
+              [key]: response.data,
+            })
+          }
+
+          // 处理 `handler`
+          if (typeof handler === 'function') {
+            handler.call(this, response.data, key)
+          }
         }
 
         finished++
@@ -138,11 +162,6 @@ module.exports = function execRequestedTasks(eventName) {
               duration: 1500,
             })
           }
-        }
-
-        // 处理 `handler`
-        if (typeof handler === 'function') {
-          handler.call(this, response.data, key)
         }
       })
     })

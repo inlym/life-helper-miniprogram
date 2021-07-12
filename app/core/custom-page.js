@@ -48,7 +48,7 @@ module.exports = function CustomPage(options) {
 
     // 执行在页面中配置的 `onLoad`
     if (typeof optOnLoad === 'function') {
-      optOnLoad.call(this)
+      optOnLoad.call(this, query)
     }
 
     this.init('onLoad')

@@ -112,9 +112,24 @@ function loggerInterceptor(response) {
   return response
 }
 
+/**
+ * 无效鉴权信息拦截器（处理策略：清除本地鉴权信息）
+ */
+function invalidAuthInterceptor(response) {
+  if (response.status === 401) {
+    wx.removeStorageSync(STO_TOKEN)
+  }
+
+  return response
+}
+
 const defaultConfig = {
   baseURL: configuration.baseURL,
   signature: configuration.signature,
+  validateStatus(status) {
+    // 相当于始终返回 `true`，由拦截器处理错误
+    return status >= 200 && status < 600
+  },
 }
 
 const request = jshttp.create(defaultConfig)
@@ -123,5 +138,6 @@ request.interceptors.request.use(attachSystemInfoInterceptor)
 request.interceptors.request.use(authInterceptor)
 request.interceptors.response.use(messageInterceptor)
 request.interceptors.response.use(loggerInterceptor)
+request.interceptors.response.use(invalidAuthInterceptor)
 
 module.exports = request
