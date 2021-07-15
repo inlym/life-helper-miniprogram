@@ -1,20 +1,25 @@
 'use strict'
 
 const { CustomPage } = getApp()
-const { confirmCheckCode } = require('../../../app/services/login')
+const { scanQrcode, confirmQrcode } = require('../../../app/services/login')
 
 CustomPage({
   data: {
     /** 是否已登录 */
     hasLogined: false,
+
+    /** 按钮是否带 loading 图标 */
+    loading: false,
   },
 
-  computed: {},
-
-  requested: {},
-
   onLoad() {
-    this.logger.debug(`CheckCode => \`${this.query('scene')}\``)
+    this.logger.debug(`code => \`${this.query('scene')}\``)
+    this.scan()
+  },
+
+  scan() {
+    const code = this.query('scene')
+    scanQrcode(code)
   },
 
   /**
@@ -22,8 +27,9 @@ CustomPage({
    */
   async confirm() {
     const code = this.query('scene')
-    await confirmCheckCode(code)
-    this.setData({ hasLogined: true })
+    this.setData({ loading: true })
+    await confirmQrcode(code)
+    this.setData({ hasLogined: true, loading: false })
   },
 
   /**

@@ -3,16 +3,24 @@
 const request = require('../core/request')
 
 /**
- * 扫码登录确认
+ * 扫描二维码后发送
  */
-async function confirmCheckCode(code) {
-  const response = await request({
+function scanQrcode(code) {
+  request({
+    method: 'POST',
     url: '/login/confirm',
-    method: 'post',
+    params: { type: 'scan' },
     data: { code },
   })
-
-  return response.data
 }
 
-module.exports = { confirmCheckCode }
+function confirmQrcode(code) {
+  request({
+    method: 'POST',
+    url: '/login/confirm',
+    params: { type: 'confirm' },
+    data: { code },
+  })
+}
+
+module.exports = { scanQrcode, confirmQrcode }
