@@ -12,3 +12,5 @@ yarn-error.log
 # 由脚本自动生成的文件
 app/core/version.js
 pages/**/*.wxss
+
+app/**/*.js
