@@ -1,0 +1,20 @@
+/**
+ * 生成路径地址
+ *
+ * @param path 路径
+ * @param params 查询参数
+ */
+export function makeUrl(path: string, params?: Record<string, string | number | boolean>): string {
+  if (typeof params === undefined) {
+    return path
+  }
+
+  const querystring = Object.keys(params!)
+    .map((key: string): string => `${key}=${params![key]}`)
+    .sort()
+    .join('&')
+
+  const search = querystring ? '?' + querystring : ''
+
+  return path + search
+}

@@ -24,7 +24,7 @@
   "dependencies": {
     "jshttp": "^0.5.5",
     "life-helper-miniprogram-secret": "^1.5.0",
-    "miniprogram-logger-plus": "^1.1.0"
+    "miniprogram-logger-plus": "^1.2.0"
   },
   "devDependencies": {
     "eslint": "^7.18.0",

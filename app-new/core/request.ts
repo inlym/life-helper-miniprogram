@@ -8,6 +8,8 @@
 import { config } from '../config'
 import { STO_TOKEN } from './contants'
 import { getCode } from './wxp'
+import { logger } from './logger'
+import { makeUrl } from './utils'
 
 const baseURL = config.baseURL
 
@@ -16,19 +18,19 @@ const baseURL = config.baseURL
  */
 export interface RequestOptions {
   /** 请求方法 */
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
 
   /** URL 地址 */
-  url: string
+  url?: string
 
   /** 请求头 */
-  headers: Record<string, string>
+  headers?: Record<string, string>
 
   /** 请求参数 */
-  params: Record<string, any>
+  params?: Record<string, any>
 
   /** 请求数据 */
-  data: any
+  data?: any
 }
 
 export interface Response<T = any> {
@@ -37,16 +39,11 @@ export interface Response<T = any> {
   data: T
 }
 
-export function wxRequest(options: RequestOptions) {
+export function wxRequest<T>(options: RequestOptions): Promise<Response<T>> {
   const params = options.params || {}
   const headers = options.headers || {}
 
-  const querystring: string = Object.keys(params)
-    .map((key: string) => `${key}=${params[key]}`)
-    .sort()
-    .join('&')
-
-  const url: string = baseURL + options.url + (querystring ? '?' + querystring : '')
+  const url: string = makeUrl(baseURL + options.url, options.params)
 
   return new Promise((resolve) => {
     wx.request({
@@ -77,10 +74,22 @@ export async function request<T = any>(options: RequestOptions) {
     options.headers['authorization'] = `CODE ${code}`
   }
 
-  const response: Response<T> = await wxRequest(options)
+  const response = await wxRequest<T>(options)
 
   if (response.status === 401) {
     wx.removeStorageSync(STO_TOKEN)
+  }
+
+  const url: string = makeUrl(baseURL + options.url, options.params)
+
+  const message: string = `[HTTP] [${response.status}] [${options.method}] ${url}`
+
+  if (response.status >= 200 && response.status < 300) {
+    logger.info(message)
+  }
+
+  if (response.status >= 400) {
+    logger.error(message)
   }
 
   return response
