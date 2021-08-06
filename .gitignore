@@ -13,4 +13,5 @@ yarn-error.log
 app/core/version.js
 pages/**/*.wxss
 
-app/**/*.js
+# 由 ts 编译的 js 文件
+app-new/**/*.js
