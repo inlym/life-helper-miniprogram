@@ -31,10 +31,10 @@ export interface RequestOptions {
   data: any
 }
 
-export interface Response {
+export interface Response<T = any> {
   status: number
   headers: Record<string, string>
-  data: any
+  data: T
 }
 
 export function wxRequest(options: RequestOptions) {
@@ -66,7 +66,7 @@ export function wxRequest(options: RequestOptions) {
   })
 }
 
-export async function request(options: RequestOptions) {
+export async function request<T = any>(options: RequestOptions) {
   options.headers = options.headers || {}
 
   const token = wx.getStorageSync(STO_TOKEN)
@@ -77,7 +77,7 @@ export async function request(options: RequestOptions) {
     options.headers['authorization'] = `CODE ${code}`
   }
 
-  const response: Response = await wxRequest(options)
+  const response: Response<T> = await wxRequest(options)
 
   if (response.status === 401) {
     wx.removeStorageSync(STO_TOKEN)
