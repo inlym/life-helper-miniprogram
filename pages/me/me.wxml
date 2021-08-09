@@ -43,5 +43,5 @@
 
   <!-- 列表栏 - end -->
 
-  <mpc-footer title="我的个人助手" desc="Copyright 2018-2021 v{{ version }}" url="/pages/about/about"></mpc-footer>
+  <mpc-footer title="我的个人助手" desc="Copyright 2018-2021 v{{ version }}" url="/pages/public/about/about"></mpc-footer>
 </view>

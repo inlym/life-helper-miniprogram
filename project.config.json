@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -43,14 +43,14 @@
     "showES6CompileOption": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.17.3",
+  "libVersion": "2.19.0",
   "appid": "wx09c0a1ea5251c75a",
   "projectname": "life-helper-miniprogram",
   "debugOptions": {
     "hidedInDevtools": []
   },
   "scripts": {
-    "beforeCompile": "npm run build:scss && npm run build:version",
+    "beforeCompile": "npm run build:ts && npm run build:scss && npm run build:version",
     "beforePreview": "",
     "beforeUpload": ""
   },

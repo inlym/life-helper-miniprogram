@@ -1,48 +1,32 @@
-'use strict'
-
-const { CustomPage } = getApp()
-
-CustomPage({
-  /** 页面的初始数据 */
+Page({
   data: {
-    fore24h: {
-      list: [],
-    },
-
     /** 当前展示列表的索引 */
     currentIndex: 0,
 
     /** scroll-view 的当前居首项 ID */
     scrollIndex: 's-0',
+
+    // 静态图片地址
+    imageUrl4Wind: getResUrl('f15d-wind'),
+    imageUrl4Sunrise: getResUrl('f15d-sunrise'),
+    imageUrl4Moon: getResUrl('f15d-moon'),
   },
 
-  computed: {},
-
-  requested: {},
-
-  /** 生命周期函数--监听页面加载 */
-  onLoad() {},
-
-  /** 生命周期函数--监听页面初次渲染完成 */
-  onReady() {
-    const { index } = this.getQuery()
-    this.show(parseFloat(index, 10))
+  requested: {
+    fore15d: {
+      url: '/weather/15d',
+      params(query) {
+        return { id: query.id }
+      },
+      handler(data) {
+        const { date } = this.query()
+        if (date) {
+          const index = data.list.findIndex((item) => item.date === date) || 0
+          this.show(index)
+        }
+      },
+    },
   },
-
-  /** 生命周期函数--监听页面显示 */
-  onShow() {},
-
-  /** 生命周期函数--监听页面隐藏 */
-  onHide() {},
-
-  /** 生命周期函数--监听页面卸载 */
-  onUnload() {},
-
-  /** 页面相关事件处理函数--监听用户下拉动作 */
-  onPullDownRefresh() {},
-
-  /** 页面上拉触底事件的处理函数 */
-  onReachBottom() {},
 
   /** 展示指定索引的项目 */
   show(index) {

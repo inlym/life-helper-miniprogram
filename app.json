@@ -1,19 +1,12 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/about/about",
-    "pages/album/index/index",
-    "pages/location/location",
+    "pages/public/about/about",
     "pages/me/me",
     "pages/system/info/info",
-    "pages/test/test",
-    "pages/tools/tools",
     "pages/weather/f15d/f15d",
     "pages/weather/fore24h/fore24h",
-    "pages/calendar/index/index",
-    "pages/calendar/task-edit/task-edit",
-    "pages/debug/debug",
-    "pages/login/login-confirm/login-confirm"
+    "pages/auth/login-confirm/login-confirm"
   ],
   "entryPagePath": "pages/index/index",
   "window": {

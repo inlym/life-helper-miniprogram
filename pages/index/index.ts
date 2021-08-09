@@ -1,9 +1,8 @@
-'use strict'
+import { addWeatherCity } from '../../app-new/services/weather-city.service'
+import { getWeather } from '../../app-new/services/weather.service'
+import { goTo } from '../../app-new/core/route'
 
-const { CustomPage } = getApp()
-const { addWeatherCity } = require('../../app/services/weather')
-
-CustomPage({
+Page({
   /** 页面的初始数据 */
   data: {
     /** 半屏弹窗组件 */
@@ -15,51 +14,49 @@ CustomPage({
       tips: '',
     },
 
+    f15d: [],
+
     f2d: [],
+
     cities: [],
+
+    liveIndex: [],
 
     /** 是否展示页面容器 */
     isShowPageContainer: false,
+
+    currentLocationId: 0,
 
     /** 临时数据，存储从城市列表选中的城市ID，以便发起请求 */
     selectedCityId: 0,
   },
 
-  requested: {
-    page: {
-      url: '/weather',
-      params() {
-        const cityId = this.data.selectedCityId
-        if (cityId > 0) {
-          return { id: cityId }
-        }
-        return {}
-      },
-      handler(data) {
-        const f2d = ['今天', '明天'].map((item) => data.f15d.find((day) => day.dayText === item))
-        const currentLocationId = data.cities[0].locationId
-        this.setData({ f2d, currentLocationId })
-      },
-    },
+  onLoad() {
+    this.init()
   },
 
-  /** 生命周期函数--监听页面加载 */
-  onLoad() {},
+  /** 页面初始化 */
+  async init(eventName?: string) {
+    console.log(eventName)
+    const data = await getWeather()
+    this.setData(data)
+  },
 
   /**
    * 点击「生活指数」模块单个按钮，使用半屏弹窗组件显示细节
    * @since 2021-02-19
    */
-  showLiveIndexDetail(e) {
+  showLiveIndexDetail(e: any) {
     /** 点击按钮的索引 */
     const { index } = e.currentTarget.dataset
 
-    const detail = this.data.liveIndex[index]
+    const detail: any = this.data.liveIndex[index]
     if (detail) {
       this.setData({
         halfScreen: {
           show: true,
           title: detail.name,
+          subTitle: '',
           desc: detail.category,
           tips: detail.text,
         },
@@ -68,18 +65,16 @@ CustomPage({
   },
 
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
-  handleDayItemTap(event) {
+  handleDayItemTap(event: any) {
     const { date } = event.currentTarget.dataset
     const id = this.data.currentLocationId
-    this.goTo('/pages/weather/f15d/f15d', { id, date }, { myData: { name: 'mark', age: 19 } })
+    goTo('/pages/weather/f15d/f15d', { id, date })
   },
-
-  handleHourItemTap() {},
 
   async addCity() {
     const result = await addWeatherCity()
     this.setData({
-      selectedCityId: result.id,
+      selectedCityId: result!.id,
       isShowPageContainer: false,
     })
 
@@ -125,7 +120,7 @@ CustomPage({
   },
 
   /** 选择城市后触发，以新的城市初始化 */
-  selectCity(event) {
+  selectCity(event: any) {
     const { id } = event.currentTarget.dataset
     this.setData({
       selectedCityId: id,

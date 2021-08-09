@@ -1,14 +1,12 @@
-'use strict'
+import { ResourceUrl } from '../../../app-new/core/resources'
 
-const { CustomPage, getResUrl } = getApp()
-
-CustomPage({
+Page({
   data: {
-    logoUrl: getResUrl('logo'),
-
+    logoUrl: ResourceUrl.logo,
     count: 0,
   },
 
+  /** 点击图片区域 */
   handleTap() {
     const count = this.data.count
     this.setData({
@@ -20,7 +18,7 @@ CustomPage({
         content: '是否进入调试模式？',
         success(res) {
           if (res.confirm) {
-            wx.navigateTo({ url: '/pages/debug/debug' })
+            console.log('进入调试模式')
           }
         },
       })
