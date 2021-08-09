@@ -1,6 +1,7 @@
 import { addWeatherCity } from '../../app-new/services/weather-city.service'
 import { getWeather } from '../../app-new/services/weather.service'
 import { goTo } from '../../app-new/core/route'
+import { TapEvent } from '../../app-new/core/wx.interface'
 
 Page({
   /** 页面的初始数据 */
@@ -46,7 +47,7 @@ Page({
    * 点击「生活指数」模块单个按钮，使用半屏弹窗组件显示细节
    * @since 2021-02-19
    */
-  showLiveIndexDetail(e: any) {
+  showLiveIndexDetail(e: TapEvent) {
     /** 点击按钮的索引 */
     const { index } = e.currentTarget.dataset
 
@@ -65,7 +66,7 @@ Page({
   },
 
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
-  handleDayItemTap(event: any) {
+  handleDayItemTap(event: TapEvent) {
     const { date } = event.currentTarget.dataset
     const id = this.data.currentLocationId
     goTo('/pages/weather/f15d/f15d', { id, date })
@@ -120,7 +121,7 @@ Page({
   },
 
   /** 选择城市后触发，以新的城市初始化 */
-  selectCity(event: any) {
+  selectCity(event: TapEvent) {
     const { id } = event.currentTarget.dataset
     this.setData({
       selectedCityId: id,

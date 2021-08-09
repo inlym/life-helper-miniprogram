@@ -21,10 +21,10 @@ Page({
   onLoad() {},
 
   /** 生命周期函数--监听页面初次渲染完成 */
-  onReady() {
-    const { index } = this.getQuery()
-    this.show(parseFloat(index, 10))
-  },
+  // onReady() {
+  //   const { index } = this.getQuery()
+  //   this.show(parseFloat(index, 10))
+  // },
 
   /** 生命周期函数--监听页面显示 */
   onShow() {},
@@ -42,7 +42,7 @@ Page({
   onReachBottom() {},
 
   /** 展示指定索引的项目 */
-  show(index) {
+  show(index: any) {
     if (index === 0 || index === 1) {
       this.setData({
         scrollIndex: 's-0',
@@ -57,7 +57,7 @@ Page({
   },
 
   /** swiper 滑块滑动事件处理 */
-  handleSwiperChange(event) {
+  handleSwiperChange(event: any) {
     const { current: index, source } = event.detail
     if (source === 'touch') {
       this.show(index)
@@ -65,7 +65,7 @@ Page({
   },
 
   /** 处理 scroll-view 中元素点击 */
-  handleScorllItemTap(event) {
+  handleScorllItemTap(event: any) {
     const { index } = event.currentTarget.dataset
     this.show(index)
   },

@@ -1,14 +1,7 @@
 import { scanQrcode, confirmQrcode } from '../../../app-new/services/scan.service'
 
 export interface Query {
-  scene: string
-}
-
-function isQuery(query: Query): query is Query {
-  if (query.scene) {
-    return true
-  }
-  return false
+  scene?: string
 }
 
 Page({
@@ -26,9 +19,7 @@ Page({
   },
 
   onLoad(query: Query) {
-    if (isQuery(query)) {
-      this.setData({ query })
-    }
+    this.setData({ query: { scene: query.scene || '' } })
   },
 
   scan() {
