@@ -36,7 +36,7 @@ export interface RequestedTasks {
  *
  * @param eventName 触发事件名称
  */
-export function execRequestedTasks(this: CustomPageOptions, eventName: EventName) {
+export function execRequestedTasks(this: CustomPageOptions, eventName: EventName): void | undefined {
   const tasks = this.requested
 
   /** 是否开启调试模式 */
@@ -105,7 +105,7 @@ export function execRequestedTasks(this: CustomPageOptions, eventName: EventName
 
     let finalParams: Record<string, string | number | boolean> = {}
     if (paramsFn) {
-      finalParams = paramsFn.call(this, this.query())
+      finalParams = paramsFn.call(this, this.query!())
     } else if (params) {
       finalParams = params
     }

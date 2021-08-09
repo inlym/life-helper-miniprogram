@@ -13,28 +13,28 @@ export interface CustomPageOptions extends PageOptions {
   requested?: RequestedTasks
 
   /** 页面入参 */
-  query?: (field?: string) => Record<string, string> | string
+  query?: () => Record<string, string>
 
   /** 页面初始化 */
-  init?: (eventName?: EventName) => void
+  init?: (eventName: EventName) => void
 
   originalSetData?: (data: Record<string, any>) => void
 
-  logger?: (...args: any[]) => void
+  logger?: any
 }
 
 export function CustomPage(options: CustomPageOptions): void {
   const optInit = options.init
-  options.init = async function init(eventName?: EventName) {
+  options.init = async function init(eventName: EventName) {
     if (typeof optInit === 'function') {
-      optInit.call(this)
+      optInit.call(this, 'init')
     }
 
     if (!wx.getStorageSync(STO_TOKEN)) {
       await login()
     }
 
-    execRequestedTasks(this, eventName)
+    execRequestedTasks.call(this, eventName)
   }
 
   const optOnLoad = options.onLoad
@@ -54,7 +54,7 @@ export function CustomPage(options: CustomPageOptions): void {
       optOnLoad.call(this, query)
     }
 
-    this.init('onLoad')
+    this.init!('onLoad')
   }
 
   const optOnPullDownRefresh = options.onPullDownRefresh
@@ -63,17 +63,12 @@ export function CustomPage(options: CustomPageOptions): void {
       optOnPullDownRefresh.call(this)
     }
 
-    this.init('onPullDownRefresh')
+    this.init!('onPullDownRefresh')
   }
 
   options.logger = logger
-  options.query = function query(field?: string): Record<string, string> | string {
-    const q = this.data[DATA_QUERY]
-    if (field === undefined) {
-      return q
-    } else {
-      return q[field]
-    }
+  options.query = function query(): Record<string, string> {
+    return this.data[DATA_QUERY] || {}
   }
 
   Page(options)
