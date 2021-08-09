@@ -10,6 +10,7 @@ export function makeUrl(path: string, params?: Record<string, string | number | 
   }
 
   const querystring = Object.keys(params!)
+    .filter((key: string): boolean => params![key] !== undefined && params![key] !== null)
     .map((key: string): string => `${key}=${params![key]}`)
     .sort()
     .join('&')

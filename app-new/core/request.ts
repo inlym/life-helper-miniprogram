@@ -43,7 +43,7 @@ export function wxRequest<T>(options: RequestOptions): Promise<Response<T>> {
   const params = options.params || {}
   const headers = options.headers || {}
 
-  const url: string = makeUrl(baseURL + options.url, options.params)
+  const url: string = makeUrl(baseURL + options.url, params)
 
   return new Promise((resolve) => {
     wx.request({
@@ -63,7 +63,7 @@ export function wxRequest<T>(options: RequestOptions): Promise<Response<T>> {
   })
 }
 
-export async function request<T = any>(options: RequestOptions) {
+export async function request<T = any>(options: RequestOptions): Promise<Response<T>> {
   options.headers = options.headers || {}
 
   const token = wx.getStorageSync(STO_TOKEN)
@@ -82,7 +82,7 @@ export async function request<T = any>(options: RequestOptions) {
 
   const url: string = makeUrl(baseURL + options.url, options.params)
 
-  const message: string = `[HTTP] [${response.status}] [${options.method}] ${url}`
+  const message = `[HTTP] [${response.status}] [${options.method}] ${url}`
 
   if (response.status >= 200 && response.status < 300) {
     logger.info(message)
