@@ -3,6 +3,8 @@ import { request } from '../core/request'
 export interface AddWeatherCityResponse {
   name: string
 
+  id: number
+
   // todo
 }
 

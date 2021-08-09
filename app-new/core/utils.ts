@@ -5,7 +5,7 @@
  * @param params 查询参数
  */
 export function makeUrl(path: string, params?: Record<string, string | number | boolean>): string {
-  if (typeof params === undefined) {
+  if (typeof params !== 'object' || Object.keys(params).length === 0) {
     return path
   }
 

@@ -1,5 +1,23 @@
 import { request } from '../core/request'
 
+export interface UserInfo {
+  /** 头像 URL */
+  avatarUrl: string
+
+  /** 昵称 */
+  nickName: string
+}
+
+/**
+ * 获取用户个人信息
+ */
+export async function getUserInfo(): Promise<UserInfo> {
+  const response = await request<UserInfo>({
+    url: '/userinfo',
+  })
+  return response.data
+}
+
 export interface UpdateUserInfoResponse {
   avatarUrl: string
   city: string
