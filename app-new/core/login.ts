@@ -1,12 +1,17 @@
+import { STO_TOKEN } from './contants'
 import { request } from './request'
 import { getCode } from './wxp'
-import { STO_TOKEN } from './contants'
 
 export interface LoginResponse {
   token: string
 }
 
-export async function login() {
+/**
+ * 登录
+ *
+ * @returns 登录凭证
+ */
+export async function login(): Promise<string> {
   const code: string = await getCode()
   const response = await request<LoginResponse>({
     url: '/login',

@@ -106,4 +106,6 @@ export interface PageOptions {
   onAddToFavorites(options: IAddToFavoritesOption): IAddToFavoritesContent
 
   setData(data: Record<string, any>): void
+
+  route: string
 }
