@@ -4,6 +4,7 @@ import { login } from './login'
 import { EventName, execRequestedTasks, RequestedTasks } from './page-requested-task'
 import { makeUrl } from './utils'
 import { PageOptions } from './wx.interface'
+import { getResUrl } from './resources'
 
 export interface CustomPageOptions extends PageOptions {
   /** 页面数据 */
@@ -19,6 +20,8 @@ export interface CustomPageOptions extends PageOptions {
   init?: (eventName: EventName) => void
 
   originalSetData?: (data: Record<string, any>) => void
+
+  getResUrl?: (name: string) => string
 
   logger?: any
 }
@@ -67,6 +70,7 @@ export function CustomPage(options: CustomPageOptions): void {
   }
 
   options.logger = logger
+  options.getResUrl = getResUrl
   options.query = function query(): Record<string, string> {
     return this.data[DATA_QUERY] || {}
   }
