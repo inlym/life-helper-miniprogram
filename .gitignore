@@ -14,6 +14,6 @@ app/core/version.js
 pages/**/*.wxss
 
 # 由 ts 编译的 js 文件
-app-new/**/*.js
+app/**/*.js
 pages/**/*.js
 app.js

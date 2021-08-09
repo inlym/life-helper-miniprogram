@@ -1,6 +1,6 @@
-import { ResourceUrl } from '../../app-new/core/resources'
-import { getUserInfo, updateUserInfo } from '../../app-new/services/user-info.service'
-import { reset } from '../../app-new/services/system.service'
+import { ResourceUrl } from '../../app/core/resources'
+import { getUserInfo, updateUserInfo } from '../../app/services/user-info.service'
+import { reset } from '../../app/services/system.service'
 
 Page({
   data: {

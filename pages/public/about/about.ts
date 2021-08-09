@@ -1,4 +1,4 @@
-import { ResourceUrl } from '../../../app-new/core/resources'
+import { ResourceUrl } from '../../../app/core/resources'
 
 Page({
   data: {

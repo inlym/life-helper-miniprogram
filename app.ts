@@ -1,5 +1,5 @@
-import { logger } from './app-new/core/logger'
-import { ResourceUrl } from './app-new/core/resources'
+import { logger } from './app/core/logger'
+import { ResourceUrl } from './app/core/resources'
 
 App({
   onLaunch() {

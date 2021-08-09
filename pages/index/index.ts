@@ -1,7 +1,7 @@
-import { addWeatherCity } from '../../app-new/services/weather-city.service'
-import { getWeather } from '../../app-new/services/weather.service'
-import { goTo } from '../../app-new/core/route'
-import { TapEvent } from '../../app-new/core/wx.interface'
+import { addWeatherCity } from '../../app/services/weather-city.service'
+import { getWeather } from '../../app/services/weather.service'
+import { goTo } from '../../app/core/route'
+import { TapEvent } from '../../app/core/wx.interface'
 
 Page({
   /** 页面的初始数据 */

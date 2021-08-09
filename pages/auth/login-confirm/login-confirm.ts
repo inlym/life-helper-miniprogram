@@ -1,4 +1,4 @@
-import { scanQrcode, confirmQrcode } from '../../../app-new/services/scan.service'
+import { scanQrcode, confirmQrcode } from '../../../app/services/scan.service'
 
 export interface Query {
   scene?: string
