@@ -2,7 +2,10 @@ import { STO_CODE } from './contants'
 
 /** 存入 Storage 的 code 信息 */
 export interface CodeInfo {
+  /** code 内容 */
   code: string
+
+  /** 保存时刻的时间戳 */
   timestamp: number
 }
 

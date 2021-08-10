@@ -6,10 +6,11 @@
  */
 
 import { config } from '../config'
+import { getToken } from './auth'
 import { STO_TOKEN } from './contants'
-import { getCode } from './wxp'
 import { logger } from './logger'
 import { makeUrl } from './utils'
+import { getCode } from './wxp'
 
 const baseURL = config.baseURL
 
@@ -66,7 +67,7 @@ export function wxRequest<T>(options: RequestOptions): Promise<Response<T>> {
 export async function request<T = any>(options: RequestOptions): Promise<Response<T>> {
   options.headers = options.headers || {}
 
-  const token = wx.getStorageSync(STO_TOKEN)
+  const token = getToken()
   if (token && options.url !== '/login') {
     options.headers['authorization'] = `TOKEN ${token}`
   } else {

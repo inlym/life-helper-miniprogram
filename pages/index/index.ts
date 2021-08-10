@@ -2,6 +2,7 @@ import { addWeatherCity } from '../../app/services/weather-city.service'
 import { getWeather } from '../../app/services/weather.service'
 import { goTo } from '../../app/core/route'
 import { TapEvent } from '../../app/core/wx.interface'
+import { sharedInit } from '../../app/core/shared-init'
 
 Page({
   /** 页面的初始数据 */
@@ -32,15 +33,15 @@ Page({
     selectedCityId: 0,
   },
 
-  onLoad() {
-    this.init()
-  },
-
   /** 页面初始化 */
   async init(eventName?: string) {
-    console.log(eventName)
+    await sharedInit()
     const data = await getWeather()
     this.setData(data)
+  },
+
+  onLoad() {
+    this.init()
   },
 
   /**
