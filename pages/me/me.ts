@@ -1,11 +1,12 @@
 import { ResourceUrl } from '../../app/core/resources'
 import { getUserInfo, updateUserInfo } from '../../app/services/user-info.service'
 import { reset } from '../../app/services/system.service'
+import { version } from '../../app/core/version'
 
 Page({
   data: {
     logoUrl: ResourceUrl.logo,
-    version: '0.3.0',
+    version: version,
   },
 
   async init() {
@@ -13,6 +14,7 @@ Page({
     this.setData({ userInfo: data })
   },
 
+  /** 点击 “更新” 按钮 */
   async onUpdateButtonTap() {
     const res = await updateUserInfo()
     this.setData({ userInfo: res })

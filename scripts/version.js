@@ -13,9 +13,8 @@
 const fs = require('fs')
 const path = require('path')
 const { version } = require('../package.json')
-const url = path.resolve(__dirname, '..', 'app/core/version.js')
-const content = `'use strict'
-module.exports = '${version}'
+const url = path.resolve(__dirname, '..', 'app/core/version.ts')
+const content = `export const version = '${version}'
 `
 
 fs.writeFileSync(url, content)

@@ -50,7 +50,7 @@
     "hidedInDevtools": []
   },
   "scripts": {
-    "beforeCompile": "npm run build:ts && npm run build:scss && npm run build:version",
+    "beforeCompile": "npm run build:version && npm run build:ts && npm run build:scss",
     "beforePreview": "",
     "beforeUpload": ""
   },
