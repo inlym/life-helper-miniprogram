@@ -1,7 +1,27 @@
 import { ResourceUrl } from '../../../app/core/resources'
+import { sharedInit } from '../../../app/core/shared-init'
+import { TapEvent } from '../../../app/core/wx.interface'
+import { getWeather15d } from '../../../app/services/weather.service'
+
+/** 页面入参 */
+interface PageQuery {
+  /** 和风天气的 LocationId */
+  id?: string
+
+  /** `2021-08-10` 格式的日期 */
+  date?: string
+}
 
 Page({
   data: {
+    /** 和风天气的 LocationId */
+    id: '',
+
+    /** 入参日期 */
+    date: '',
+
+    list: [],
+
     /** 当前展示列表的索引 */
     currentIndex: 0,
 
@@ -15,21 +35,34 @@ Page({
     imageUrl4Moon: ResourceUrl['f15d-moon'],
   },
 
-  // requested: {
-  //   fore15d: {
-  //     url: '/weather/15d',
-  //     params(query) {
-  //       return { id: query.id }
-  //     },
-  //     handler(data) {
-  //       const { date } = this.query()
-  //       if (date) {
-  //         const index = data.list.findIndex((item) => item.date === date) || 0
-  //         this.show(index)
-  //       }
-  //     },
-  //   },
-  // },
+  /** 页面初始化 */
+  async init(eventName?: string) {
+    await sharedInit(eventName)
+
+    // 2021-08-10 13:47:20
+    // 临时测试代码 --- start ---
+    console.log(getCurrentPages())
+    // 临时测试代码  --- end ---
+
+    const data = await getWeather15d(this.data.id)
+    this.setData(data)
+
+    if (eventName === 'onLoad' && this.data.date) {
+      const index = this.data.list.findIndex((item: any) => item.date === this.data.date)
+      if (index !== undefined) {
+        this.show(index)
+      }
+    }
+  },
+
+  onLoad(query: PageQuery) {
+    this.setData(query)
+    this.init('onLoad')
+  },
+
+  onPullDownRefresh() {
+    this.init('onPullDownRefresh')
+  },
 
   /** 展示指定索引的项目 */
   show(index: number) {
@@ -55,7 +88,7 @@ Page({
   },
 
   /** 处理 scroll-view 中元素点击 */
-  handleScorllItemTap(event: any) {
+  handleScorllItemTap(event: TapEvent) {
     const { index } = event.currentTarget.dataset
     this.show(index)
   },

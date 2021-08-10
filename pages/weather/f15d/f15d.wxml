@@ -15,7 +15,7 @@
       <view class="items flex-row">
         <view
           class="item flex-column {{ index === currentIndex ? 'active' : '' }}"
-          wx:for="{{ fore15d.list }}"
+          wx:for="{{ list }}"
           wx:key="date"
           id="s-{{ index }}"
           bindtap="handleScorllItemTap"
@@ -33,7 +33,7 @@
   <!-- 天气内容区 - start -->
   <view class="content">
     <swiper circular="{{ true }}" bindchange="handleSwiperChange" current="{{ currentIndex }}">
-      <swiper-item item-id="swiper:{{ item.date }}" wx:for="{{ fore15d.list }}" wx:key="date" id="swiper:{{ item.date }}">
+      <swiper-item item-id="swiper:{{ item.date }}" wx:for="{{ list }}" wx:key="date" id="swiper:{{ item.date }}">
         <view class="top flex-row">
           <image src="{{ item.imageUrl }}"></image>
           <view class="right flex-column">
