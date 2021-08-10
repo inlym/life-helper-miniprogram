@@ -50,7 +50,7 @@ export interface Session {
  */
 export function getToken(): string {
   const session: Session = wx.getStorageSync(STO_TOKEN)
-  if (session && session.expiration < Date.now()) {
+  if (session && session.expiration > Date.now()) {
     return session.token
   }
   return ''

@@ -4,6 +4,11 @@ import { goTo } from '../../app/core/route'
 import { TapEvent } from '../../app/core/wx.interface'
 import { sharedInit } from '../../app/core/shared-init'
 
+/** 缩略的天气逐天预报单天数据 */
+interface BriefDailyItem {
+  dayText: string
+}
+
 Page({
   /** 页面的初始数据 */
   data: {
@@ -17,8 +22,6 @@ Page({
     },
 
     f15d: [],
-
-    f2d: [],
 
     cities: [],
 
@@ -35,13 +38,31 @@ Page({
 
   /** 页面初始化 */
   async init(eventName?: string) {
-    await sharedInit()
+    await sharedInit(eventName)
+
     const data = await getWeather()
     this.setData(data)
+    this.setF2d(data.f15d)
   },
 
   onLoad() {
-    this.init()
+    this.init('onLoad')
+  },
+
+  onPullDownRefresh() {
+    this.init('onPullDownRefresh')
+  },
+
+  /**
+   * 获取未来 2 天预报数据
+   *
+   * @param f15d 未来 15 天预报数据
+   */
+  setF2d(f15d: BriefDailyItem[]): void {
+    const today = f15d.find((item: BriefDailyItem) => item.dayText === '今天')
+    const tomorrow = f15d.find((item: BriefDailyItem) => item.dayText === '明天')
+    const f2d = [today, tomorrow]
+    this.setData({ f2d: f2d })
   },
 
   /**

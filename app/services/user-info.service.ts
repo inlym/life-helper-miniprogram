@@ -1,4 +1,5 @@
 import { request } from '../core/request'
+import { logger } from '../core/logger'
 
 export interface UserInfo {
   /** 头像 URL */
@@ -13,6 +14,7 @@ export interface UserInfo {
  */
 export async function getUserInfo(): Promise<UserInfo> {
   const response = await request<UserInfo>({
+    method: 'GET',
     url: '/userinfo',
   })
   return response.data
@@ -34,8 +36,9 @@ export async function updateUserInfo(): Promise<UpdateUserInfoResponse | null> {
   return new Promise((resolve) => {
     wx.getUserProfile({
       lang: 'zh_CN',
-      desc: '这是配置项的 `desc`',
+      desc: '获取你的头像和昵称',
       success(res) {
+        logger.info('获取到的个人信息数据', res)
         request<UpdateUserInfoResponse>({
           method: 'PUT',
           url: '/userinfo',
