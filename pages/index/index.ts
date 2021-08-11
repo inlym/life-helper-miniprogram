@@ -1,8 +1,8 @@
+import { sharedInit } from '../../app/core/shared-init'
+import { makeUrl } from '../../app/core/utils'
+import { TapEvent } from '../../app/core/wx.interface'
 import { addWeatherCity } from '../../app/services/weather-city.service'
 import { getWeather } from '../../app/services/weather.service'
-import { goTo } from '../../app/core/route'
-import { TapEvent } from '../../app/core/wx.interface'
-import { sharedInit } from '../../app/core/shared-init'
 
 /** 缩略的天气逐天预报单天数据 */
 interface BriefDailyItem {
@@ -21,11 +21,13 @@ Page({
       tips: '',
     },
 
+    cityId: 0,
+
     f15d: [],
 
     cities: [],
 
-    liveIndex: [],
+    livingIndex: [],
 
     /** 是否展示页面容器 */
     isShowPageContainer: false,
@@ -40,9 +42,10 @@ Page({
   async init(eventName?: string) {
     await sharedInit(eventName)
 
-    const data = await getWeather()
+    const cityId = this.data.cityId !== 0 ? this.data.cityId : undefined
+    const data = await getWeather(cityId)
     this.setData(data)
-    this.setF2d(data.f15d)
+    this.setF2d(this.data.f15d)
   },
 
   onLoad() {
@@ -73,7 +76,7 @@ Page({
     /** 点击按钮的索引 */
     const { index } = e.currentTarget.dataset
 
-    const detail: any = this.data.liveIndex[index]
+    const detail: any = this.data.livingIndex[index]
     if (detail) {
       this.setData({
         halfScreen: {
@@ -90,14 +93,19 @@ Page({
   /** 点击某一天的卡片，跳转 fore15d 页面对应日期 */
   handleDayItemTap(event: TapEvent) {
     const { date } = event.currentTarget.dataset
-    const id = this.data.currentLocationId
-    goTo('/pages/weather/f15d/f15d', { id, date })
+    const f15d = this.data.f15d
+    wx.navigateTo({
+      url: makeUrl('/pages/weather/f15d/f15d', { date }),
+      success(res) {
+        res.eventChannel.emit('data', f15d)
+      },
+    })
   },
 
   async addCity() {
     const result = await addWeatherCity()
     this.setData({
-      selectedCityId: result!.id,
+      cityId: result!.id,
       isShowPageContainer: false,
     })
 
@@ -146,7 +154,7 @@ Page({
   selectCity(event: TapEvent) {
     const { id } = event.currentTarget.dataset
     this.setData({
-      selectedCityId: id,
+      cityId: id,
       isShowPageContainer: false,
     })
     this.init('afterSelectCity')

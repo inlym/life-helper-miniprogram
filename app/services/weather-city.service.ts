@@ -24,8 +24,8 @@ export async function addWeatherCity(): Promise<AddWeatherCityResponse | undefin
     return
   } else {
     const response = await request<AddWeatherCityResponse>({
-      url: '/weather/city',
       method: 'POST',
+      url: '/weather/city',
       data: location,
     })
 

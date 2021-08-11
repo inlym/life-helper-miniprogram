@@ -17,13 +17,13 @@
     <view class="content">
       <view wx:if="{{ cities.length > 0 }}" bindtap="showPageContainer">
         <view class="address-wrapper">
-          <text class="address text-ellipsis-l1">{{ address }}</text>
+          <text class="address text-ellipsis-l1">{{ location.address }}</text>
           <text class="iconfont icon-xia"></text>
         </view>
       </view>
       <block wx:else>
         <my-forauth scope="scope.userLocation" bindsuccess="addCity">
-          <text class="address text-ellipsis-l1">{{ address }}</text>
+          <text class="address text-ellipsis-l1">{{ location.address }}</text>
           <text class="iconfont icon-xia"></text>
         </my-forauth>
       </block>
@@ -73,7 +73,7 @@
   <!-- 未来 24 小时预报 - end -->
 
   <!-- 未来 2 小时降雨情况 - start -->
-  <view class="container minutelyrain">
+  <view class="container minutelyrain" wx:if="{{ rain.list && rain.list.length }}">
     <view class="module-title">2小时降雨</view>
     <div class="main">
       <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
@@ -84,7 +84,7 @@
         <view class="itemwrap flex-row">
           <view class="item flex-column" wx:for="{{ rain.list }}" wx:key="time">
             <view class="num">{{ item.precip }}</view>
-            <view class="rainblock" style="height: {{ item.height }}rpx;"></view>
+            <view class="rainblock" style="height: {{ item.height }}rpx"></view>
             <view class="time">{{ item.time }}</view>
           </view>
         </view>
@@ -96,8 +96,6 @@
   </view>
 
   <!-- 未来 2 小时降雨情况 - end -->
-
-  <view class="item" wx:for="{{ f2d }}" wx:key="date" data-date="{{ item.date }}" hover-class="hover" bindtap="handleDayItemTap"></view>
 
   <!-- 新版 15 天预报 - 开始 -->
   <view class="f15d-new">
@@ -219,7 +217,14 @@
   <view class="container liveindex">
     <view class="module-title">今日生活指数</view>
     <view class="body">
-      <view class="item" wx:for="{{ liveIndex }}" wx:key="type" data-index="{{ index }}" bindtap="showLiveIndexDetail" hover-class="hover">
+      <view
+        class="item"
+        wx:for="{{ livingIndex }}"
+        wx:key="type"
+        data-index="{{ index }}"
+        bindtap="showLiveIndexDetail"
+        hover-class="hover"
+      >
         <image src="{{ item.iconUrl }}" mode="widthFix"></image>
         <view class="status">{{ item.category }}</view>
         <view class="name">{{ item.name }}</view>

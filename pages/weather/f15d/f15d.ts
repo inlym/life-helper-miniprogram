@@ -1,7 +1,6 @@
 import { ResourceUrl } from '../../../app/core/resources'
 import { sharedInit } from '../../../app/core/shared-init'
 import { TapEvent } from '../../../app/core/wx.interface'
-import { getWeather15d } from '../../../app/services/weather.service'
 
 /** 页面入参 */
 interface PageQuery {
@@ -14,9 +13,6 @@ interface PageQuery {
 
 Page({
   data: {
-    /** 和风天气的 LocationId */
-    id: '',
-
     /** 入参日期 */
     date: '',
 
@@ -39,14 +35,6 @@ Page({
   async init(eventName?: string) {
     await sharedInit(eventName)
 
-    // 2021-08-10 13:47:20
-    // 临时测试代码 --- start ---
-    console.log(getCurrentPages())
-    // 临时测试代码  --- end ---
-
-    const data = await getWeather15d(this.data.id)
-    this.setData(data)
-
     if (eventName === 'onLoad' && this.data.date) {
       const index = this.data.list.findIndex((item: any) => item.date === this.data.date)
       if (index !== undefined) {
@@ -57,6 +45,12 @@ Page({
 
   onLoad(query: PageQuery) {
     this.setData(query)
+
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.on('data', (data) => {
+      this.setData({ list: data })
+    })
+
     this.init('onLoad')
   },
 
