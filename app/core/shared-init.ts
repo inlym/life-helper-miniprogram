@@ -1,6 +1,6 @@
 import { ensureLogined } from './auth'
-import { makeUrl } from './utils'
 import { logger } from './logger'
+import { makeUrl } from './utils'
 
 export type EventName = 'onLoad' | 'onPullDownRefresh' | string
 
@@ -18,5 +18,15 @@ export async function sharedInit(eventName?: EventName): Promise<void> {
     const current = pages[pages.length - 1]
     const url = makeUrl(current.route, current.options)
     logger.debug(`[Route] ${url}`)
+  }
+
+  if (eventName === 'onPullDownRefresh') {
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+      wx.showToast({
+        title: '更新成功！',
+        icon: 'none',
+      })
+    }, 1000)
   }
 }

@@ -1,5 +1,5 @@
-import { request } from '../core/request'
 import { logger } from '../core/logger'
+import { request } from '../core/request'
 
 export interface UserInfo {
   /** 头像 URL */
@@ -32,7 +32,7 @@ export interface UpdateUserInfoResponse {
 /**
  * 弹窗授权获取并更新用户信息
  */
-export async function updateUserInfo(): Promise<UpdateUserInfoResponse | null> {
+export async function updateUserInfo(): Promise<UserInfo | null> {
   return new Promise((resolve) => {
     wx.getUserProfile({
       lang: 'zh_CN',
@@ -43,8 +43,11 @@ export async function updateUserInfo(): Promise<UpdateUserInfoResponse | null> {
           method: 'PUT',
           url: '/userinfo',
           data: res.userInfo,
-        }).then((response) => {
-          resolve(response.data)
+        })
+
+        resolve({
+          avatarUrl: res.userInfo.avatarUrl,
+          nickName: res.userInfo.nickName,
         })
       },
       fail() {

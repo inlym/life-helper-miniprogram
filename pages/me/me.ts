@@ -1,8 +1,8 @@
 import { ResourceUrl } from '../../app/core/resources'
-import { getUserInfo, updateUserInfo } from '../../app/services/user-info.service'
-import { reset } from '../../app/services/system.service'
-import { version } from '../../app/core/version'
 import { sharedInit } from '../../app/core/shared-init'
+import { version } from '../../app/core/version'
+import { reset } from '../../app/services/system.service'
+import { getUserInfo, updateUserInfo } from '../../app/services/user-info.service'
 
 Page({
   data: {
@@ -29,7 +29,9 @@ Page({
   /** 点击 “更新” 按钮 */
   async onUpdateButtonTap() {
     const res = await updateUserInfo()
-    this.setData({ userInfo: res })
+    if (res) {
+      this.setData({ userInfo: res })
+    }
   },
 
   /** 点击一键恢复 */
