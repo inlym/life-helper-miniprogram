@@ -20,6 +20,8 @@ Page({
 
   onLoad(query: Query) {
     this.setData({ query: { scene: query.scene || '' } })
+
+    this.scan()
   },
 
   scan() {
