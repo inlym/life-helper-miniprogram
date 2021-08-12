@@ -1,6 +1,6 @@
 {
   "name": "life-helper-miniprogram",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "「我的个人助手」小程序端部分代码",
   "main": "app.js",
   "scripts": {
