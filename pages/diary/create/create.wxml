@@ -1,0 +1,43 @@
+<view class="page">
+  <view class="content">
+    <!-- 输入框部分 -->
+    <textarea class="textarea" bindinput="onTextChange" confirm-type="done" auto-focus adjust-position placeholder="这一刻想说什么..." />
+    <!-- 视频和图片列表区 -->
+    <view class="list">
+      <view wx:for="{{ list }}" wx:key="path" data-index="{{ index }}">
+        <!-- 新增按钮 -->
+        <view class="item icon onecenter" wx:if="{{ item.type === 'add' }}" bindtap="add">
+          <mp-icon icon="add" color="#aaaaaa" size="50"></mp-icon>
+        </view>
+
+        <!-- 删除按钮（开启删除模式） -->
+        <view class="item icon onecenter" wx:if="{{ item.type === 'delete' }}" bindtap="enableDeleteMode">
+          <mp-icon icon="delete" color="#aaaaaa" size="40"></mp-icon>
+        </view>
+
+        <!-- 完成按钮（退出删除模式） -->
+        <view class="item icon onecenter" wx:if="{{ item.type === 'done' }}" bindtap="disableDeleteMode">
+          <mp-icon icon="done" color="#aaaaaa" size="40"></mp-icon>
+        </view>
+
+        <!-- 图片 -->
+        <view class="item image" wx:if="{{ item.type === 'image' }}" data-index="{{ index }}">
+          <image mode="aspectFill" src="{{ item.tempFilePath }}"></image>
+        </view>
+
+        <!-- 视频 -->
+        <view class="item video" wx:if="{{ item.type === 'video' }}" data-index="{{ index }}">
+          <image mode="aspectFill" src="{{ item.thumbTempFilePath }}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="button-area">
+    <button type="primary" bindtap="submit">发表</button>
+  </view>
+</view>
+
+
+<!-- 非页面文档流元素 -->
+<mp-toptips msg="请点击需要删除的图片或视频！" type="error" show="{{deleteMode}}" delay="100000"></mp-toptips>

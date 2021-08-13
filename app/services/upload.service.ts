@@ -1,5 +1,7 @@
 import { request } from '../core/request'
 
+export type UploadTokenType = 'video' | 'image'
+
 export interface UploadToken {
   key: string
   policy: string
@@ -9,19 +11,19 @@ export interface UploadToken {
 }
 
 export interface UploadSuccessResult extends UploadToken {
-  path: string
+  tempFilePath: string
 }
 
 /**
  * 获取直传 OSS 的上传凭证
  *
  * @param type 凭证类型
- * @param n 凭证数量
  */
-export async function getUploadToken(type = 'picture', n = 1): Promise<UploadToken[]> {
-  const response = await request<UploadToken[]>({
-    url: '/oss/token',
-    params: { type, n },
+export async function getUploadToken(type: UploadTokenType): Promise<UploadToken> {
+  const response = await request<UploadToken>({
+    method: 'GET',
+    url: '/upload/token',
+    params: { type },
   })
 
   return response.data
@@ -30,14 +32,16 @@ export async function getUploadToken(type = 'picture', n = 1): Promise<UploadTok
 /**
  * 上传资源到 OSS
  *
- * @param path 文件临时路径
- * @param token 上传凭证
+ * @param type 上传资源类型
+ * @param tempFilePath 本地临时文件路径 (本地路径)
  */
-export function uploadToOss(path: string, token: UploadToken): Promise<UploadSuccessResult> {
+export async function uploadToOss(type: UploadTokenType, tempFilePath: string): Promise<UploadSuccessResult> {
+  const token = await getUploadToken(type)
+
   return new Promise((resolve) => {
     wx.uploadFile({
       url: token.url,
-      filePath: path,
+      filePath: tempFilePath,
       name: 'file',
       formData: {
         key: token.key,
@@ -46,7 +50,7 @@ export function uploadToOss(path: string, token: UploadToken): Promise<UploadSuc
         signature: token.signature,
       },
       success: () => {
-        resolve({ path, ...token })
+        resolve({ tempFilePath, ...token })
       },
     })
   })

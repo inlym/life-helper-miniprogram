@@ -65,6 +65,12 @@
           "pathName": "pages/login/login-confirm/login-confirm",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "新增生活记录页",
+          "pathName": "pages/diary/create/create",
+          "query": "",
+          "scene": null
         }
       ]
     }
