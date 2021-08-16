@@ -1,4 +1,6 @@
 import { sharedInit } from '../../../app/core/shared-init'
+import { TapEvent } from '../../../app/core/wx.interface'
+import { addDiary } from '../../../app/services/diary.service'
 import { UploadSuccessResult, uploadToOss } from '../../../app/services/upload.service'
 
 interface MediaFile {
@@ -127,24 +129,6 @@ Page({
   },
 
   /**
-   * 预览图片和视频
-   * todo
-   */
-  preview() {
-    const sources = this.data.list
-      .filter((item: MediaFile) => item.type !== 'add')
-      .map((item: MediaFile) => {
-        const url = item.tempFilePath!
-        const type = item.type! as 'video' | 'image'
-        const poster = item.thumbTempFilePath!
-
-        return { url, type, poster }
-      })
-
-    wx.previewMedia({ sources })
-  },
-
-  /**
    * 重新计算完整列表数据
    *
    * @description
@@ -180,6 +164,68 @@ Page({
   },
 
   /**
+   * 处理点击图片或视频事件
+   *
+   * @description
+   * 1. 主要需要鉴别是否是删除模式
+   */
+  handleItemTap(event: TapEvent<{ tempPath: string }>) {
+    const tempPath = event.currentTarget.dataset.tempPath
+    if (this.data.deleteMode) {
+      this.delete(tempPath)
+    } else {
+      this.preview(tempPath)
+    }
+  },
+
+  /**
+   * 预览图片和视频
+   */
+  preview(tempPath: string) {
+    const list = this.data.videos.concat(this.data.images)
+
+    const sources = list.map((item: MediaFile) => {
+      const url = item.tempFilePath!
+      const type = item.type! as 'video' | 'image'
+      const poster = item.thumbTempFilePath!
+
+      return { url, type, poster }
+    })
+
+    const current = sources.findIndex((item) => item.url === tempPath)
+
+    wx.previewMedia({ sources, current, showmenu: true })
+  },
+
+  /**
+   * 删除图片或视频
+   */
+  async delete(tempPath: string) {
+    const result = await wx.showModal({
+      title: '提示',
+      content: '是否删除？',
+      confirmText: '删除',
+      confirmColor: '#fa5151',
+    })
+
+    if (result.confirm) {
+      const videoIndex = this.data.videos.findIndex((item: MediaFile) => item.tempFilePath === tempPath)
+      if (videoIndex >= 0) {
+        const newVideos = this.data.videos.slice(0, videoIndex).concat(this.data.videos.slice(videoIndex + 1))
+        this.setData({ videos: newVideos })
+      }
+
+      const imageIndex = this.data.images.findIndex((item: MediaFile) => item.tempFilePath === tempPath)
+      if (imageIndex >= 0) {
+        const newImages = this.data.images.slice(0, imageIndex).concat(this.data.images.slice(imageIndex + 1))
+        this.setData({ images: newImages })
+      }
+
+      this.reComputeList()
+    }
+  },
+
+  /**
    * 开启删除模式
    */
   enableDeleteMode() {
@@ -198,25 +244,36 @@ Page({
       deleteMode: false,
     })
 
-    wx.showToast({
-      title: '已退出删除模式！',
-      icon: 'none',
-    })
-
     this.reComputeList()
+  },
+
+  /** 能否提交 */
+  canSubmit(): boolean {
+    if (this.data.content && this.data.videos.length === 0 && this.data.images.length === 0) {
+      return false
+    }
+    return true
   },
 
   /**
    * 点击“发表”按钮
    */
-  submit() {
+  async submit() {
     const content = this.data.content
-    const images = this.data.images.map((item: MediaFile) => item.path)
-    const videos = this.data.videos.map((item: MediaFile) => item.path)
+    const images = this.data.images.map((item: MediaFile) => item.path!)
+    const videos = this.data.videos.map((item: MediaFile) => item.path!)
     const location = this.data.hasLocated ? this.data.location : undefined
 
     const data = { content, images, videos, location }
 
-    console.log(data)
+    await addDiary(data)
+
+    wx.showToast({
+      title: '发表成功',
+    })
+
+    setTimeout(() => {
+      wx.navigateBack()
+    }, 1000)
   },
 })

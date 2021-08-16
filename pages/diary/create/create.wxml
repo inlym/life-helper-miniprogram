@@ -21,13 +21,14 @@
         </view>
 
         <!-- 图片 -->
-        <view class="item image" wx:if="{{ item.type === 'image' }}" data-index="{{ index }}">
+        <view class="item image" wx:if="{{ item.type === 'image' }}" data-temp-path="{{ item.tempFilePath }}" bindtap="handleItemTap">
           <image mode="aspectFill" src="{{ item.tempFilePath }}"></image>
         </view>
 
         <!-- 视频 -->
-        <view class="item video" wx:if="{{ item.type === 'video' }}" data-index="{{ index }}">
+        <view class="item video" wx:if="{{ item.type === 'video' }}" data-temp-path="{{ item.tempFilePath }}" bindtap="handleItemTap">
           <image mode="aspectFill" src="{{ item.thumbTempFilePath }}"></image>
+          <mp-icon class="play-icon" icon="play2" type="field" size="60" color="#ffffff"></mp-icon>
         </view>
       </view>
     </view>
@@ -38,6 +39,5 @@
   </view>
 </view>
 
-
 <!-- 非页面文档流元素 -->
-<mp-toptips msg="请点击需要删除的图片或视频！" type="error" show="{{deleteMode}}" delay="100000"></mp-toptips>
+<mp-toptips msg="请点击需要删除的图片或视频！" type="error" show="{{ deleteMode }}" delay="100000"></mp-toptips>

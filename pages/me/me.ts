@@ -38,4 +38,8 @@ Page({
   recover() {
     reset()
   },
+
+  goToDiary() {
+    wx.navigateTo({ url: '/pages/diary/create/create' })
+  },
 })

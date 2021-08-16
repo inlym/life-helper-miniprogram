@@ -20,6 +20,13 @@
       height: 200rpx;
       width: 200rpx;
       margin: 10rpx 10rpx 0 0;
+      position: relative;
+
+      .play-icon {
+        position: absolute;
+        left: calc(50% - 30px);
+        top: calc(50% - 30px);
+      }
     }
 
     .icon {

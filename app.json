@@ -5,7 +5,8 @@
     "pages/me/me",
     "pages/weather/f15d/f15d",
     "pages/weather/fore24h/fore24h",
-    "pages/auth/login-confirm/login-confirm"
+    "pages/auth/login-confirm/login-confirm",
+    "pages/diary/create/create"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
