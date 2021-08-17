@@ -67,8 +67,14 @@
           "scene": null
         },
         {
-          "name": "新增生活记录页",
-          "pathName": "pages/diary/create/create",
+          "name": "生活记录 - 列表页",
+          "pathName": "pages/diary/list/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我的生活页",
+          "pathName": "pages/diary/list/list",
           "query": "",
           "scene": null
         }
