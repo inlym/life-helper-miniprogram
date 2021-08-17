@@ -42,4 +42,8 @@ Page({
   goToDiary() {
     wx.navigateTo({ url: '/pages/diary/create/create' })
   },
+
+  goToDiaryList() {
+    wx.navigateTo({ url: '/pages/diary/list/list' })
+  },
 })

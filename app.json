@@ -6,7 +6,8 @@
     "pages/weather/f15d/f15d",
     "pages/weather/fore24h/fore24h",
     "pages/auth/login-confirm/login-confirm",
-    "pages/diary/create/create"
+    "pages/diary/create/create",
+    "pages/diary/list/list"
   ],
   "entryPagePath": "pages/index/index",
   "window": {

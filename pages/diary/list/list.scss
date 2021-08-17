@@ -1,0 +1,47 @@
+.list {
+  .item {
+    margin-top: 50rpx;
+    background-color: #fff;
+
+    .date {
+      width: 20%;
+      text-align: center;
+
+      .monthday {
+        font-size: 32rpx;
+      }
+
+      .year {
+        font-size: 24rpx;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .content {
+      width: 80%;
+      padding: 20rpx 32rpx 0 0;
+
+      .text {
+        background-color: #f8f8f8;
+        margin-bottom: 20rpx;
+      }
+
+      font-size: 30rpx;
+
+      image {
+        width: 170rpx;
+        height: 170rpx;
+      }
+
+      .video {
+        position: relative;
+
+        .play-icon {
+          position: absolute;
+          left: calc(50% - 30px);
+          top: calc(50% - 30px);
+        }
+      }
+    }
+  }
+}
