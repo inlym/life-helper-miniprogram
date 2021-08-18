@@ -1,11 +1,14 @@
 <view class="page">
   <mp-icon class="icon" icon="imac" size="200"></mp-icon>
 
+  <!-- 已确认登录情况 -->
   <block wx:if="{{ hasLogined }}">
     <view class="title">登录成功</view>
     <view class="desc">你可以在网页上继续操作了</view>
     <button class="btn" bindtap="backToHome">返回首页</button>
   </block>
+
+  <!-- 未确认登录情况 -->
   <block wx:else>
     <view class="title">我的个人助手 网页版</view>
     <view class="desc">登录确认</view>

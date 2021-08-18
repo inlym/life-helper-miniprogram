@@ -16,7 +16,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "我的个人助手",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true,
     "backgroundColorBottom": "#fff"
   },
   "tabBar": {
