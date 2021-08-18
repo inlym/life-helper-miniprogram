@@ -61,9 +61,9 @@
           "scene": null
         },
         {
-          "name": "登录确认页",
-          "pathName": "pages/login/login-confirm/login-confirm",
-          "query": "",
+          "name": "扫码确认页",
+          "pathName": "pages/auth/login-confirm/login-confirm",
+          "query": "scene=08896731915544919d08678afb8af656",
           "scene": null
         },
         {

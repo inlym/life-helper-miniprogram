@@ -12,6 +12,6 @@
   <block wx:else>
     <view class="title">我的个人助手 网页版</view>
     <view class="desc">登录确认</view>
-    <button class="btn" type="primary" bindtap="confirm" loading="{{ loading }}">登 录</button>
+    <button class="btn" type="primary" bindtap="handleConfirmButtonTap" loading="{{ loading }}">登 录</button>
   </block>
 </view>

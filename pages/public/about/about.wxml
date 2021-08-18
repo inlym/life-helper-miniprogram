@@ -1,7 +1,7 @@
 <view class="main">
   <view class="head">
     <view class="title">我的个人助手</view>
-    <view class="desc">你的日常生活管家</view>
+    <view class="desc">为生活赋能</view>
   </view>
   <view class="container" bindtap="handleTap">
     <image class="logo" src="{{ logoUrl }}" mode="widthFix"></image>
