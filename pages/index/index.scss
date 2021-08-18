@@ -335,75 +335,76 @@ page {
 /* 实时空气质量 - start */
 .airnow {
   padding: 0 0 20rpx;
-}
 
-.airnow .body {
-  height: 500rpx;
-}
+  .body {
+    height: 500rpx;
+    display: flex;
 
-.airnow .body .left {
-  justify-content: center;
-  width: 350rpx;
-  height: inherit;
-}
+    .left {
+      justify-content: center;
+      width: 350rpx;
+      height: inherit;
 
-.airnow .body .left .content {
-  position: relative;
-  width: 200rpx;
-  height: 200rpx;
-  border-radius: 50%;
-  padding: 30rpx 0 40rpx;
-  color: #fff;
-  text-align: center;
-}
+      .content {
+        position: relative;
+        width: 200rpx;
+        height: 200rpx;
+        border-radius: 50%;
+        padding: 30rpx 0 40rpx;
+        color: #fff;
+        text-align: center;
 
-.airnow .body .left .content .num {
-  font-size: 60rpx;
-}
+        .num {
+          font-size: 60rpx;
+        }
 
-.airnow .body .left .content .text {
-  font-size: 30rpx;
-}
+        .text {
+          font-size: 30rpx;
+        }
+      }
+    }
 
-.airnow .body .right {
-  flex-grow: 1;
-  height: inherit;
-  padding: 30rpx 10rpx;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-}
+    .right {
+      flex-grow: 1;
+      height: inherit;
+      padding: 30rpx 10rpx;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-between;
 
-.airnow .body .right .item {
-  width: 50%;
-  height: 26%;
-}
+      .item {
+        width: 50%;
+        height: 26%;
 
-.airnow .body .right progress {
-  height: 2rpx;
-  width: 60%;
-}
+        .value {
+          margin-left: -10rpx;
+        }
 
-.airnow .body .right .item .value {
-  margin-left: -10rpx;
-}
+        .num {
+          font-size: 1.1em;
+        }
 
-.airnow .body .right .item .num {
-  font-size: 1.1em;
-}
+        .unit {
+          color: #aaa;
+          font-size: 0.8em;
+        }
 
-.airnow .body .right .item .unit {
-  color: #aaa;
-  font-size: 0.8em;
-}
+        .name {
+          font-size: 0.8em;
 
-.airnow .body .right .item .name {
-  font-size: 0.8em;
-}
+          .sub {
+            vertical-align: sub;
+            font-size: 0.6em;
+          }
+        }
+      }
 
-.airnow .body .right .item .name .sub {
-  vertical-align: sub;
-  font-size: 0.6em;
+      progress {
+        height: 2rpx;
+        width: 60%;
+      }
+    }
+  }
 }
 
 /* 实时空气质量 - end */

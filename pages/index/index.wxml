@@ -135,7 +135,7 @@
   <!-- 实时空气质量 - start -->
   <view class="container airnow">
     <view class="module-title">实时空气质量</view>
-    <view class="body flex-row">
+    <view class="body">
       <view class="left flex-column">
         <view class="content flex-column aqi-bg-{{ airnow.level }}">
           <view class="num">{{ airnow.aqi }}</view>
@@ -145,9 +145,9 @@
       <view class="right">
         <!-- PM2.5 -->
         <view class="item flex-column">
-          <view class="value"
-            ><text class="num">{{ airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view
-          >
+          <view class="value">
+            <text class="num">{{ airnow.pm2p5 }} </text><text class="unit"> μg/m³</text>
+          </view>
           <progress
             percent="{{ (airnow.pm2p5 * 1) / 5 }}"
             activeColor="#333"
@@ -160,18 +160,18 @@
 
         <!-- PM10 -->
         <view class="item flex-column">
-          <view class="value"
-            ><text class="num">{{ airnow.pm10 }} </text><text class="unit"> μg/m³</text></view
-          >
+          <view class="value">
+            <text class="num">{{ airnow.pm10 }} </text><text class="unit"> μg/m³</text>
+          </view>
           <progress percent="{{ (airnow.pm10 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4" duration="1000"></progress>
           <view class="name">PM10</view>
         </view>
 
         <!-- O3 -->
         <view class="item flex-column">
-          <view class="value"
-            ><text class="num">{{ airnow.pm2p5 }} </text><text class="unit"> μg/m³</text></view
-          >
+          <view class="value">
+            <text class="num">{{ airnow.pm2p5 }} </text><text class="unit"> μg/m³</text>
+          </view>
           <progress
             percent="{{ (airnow.pm2p5 * 1) / 5 }}"
             activeColor="#333"
@@ -184,9 +184,9 @@
 
         <!-- CO -->
         <view class="item flex-column">
-          <view class="value"
-            ><text class="num">{{ airnow.o3 }} </text><text class="unit"> mg/m³</text></view
-          >
+          <view class="value">
+            <text class="num">{{ airnow.o3 }} </text><text class="unit"> mg/m³</text>
+          </view>
           <progress percent="{{ (airnow.o3 * 1) / 5 }}" activeColor="#333" border-radius="10" stroke-width="4" duration="1000"></progress>
           <view class="name">CO</view>
         </view>

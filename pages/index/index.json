@@ -4,5 +4,7 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "my-forauth": "../../components/my-forauth/my-forauth"
-  }
+  },
+  "backgroundColor": "#ededed",
+  "backgroundColorBottom": "#ededed"
 }
