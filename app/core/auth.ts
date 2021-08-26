@@ -19,6 +19,7 @@ export interface LoginResponse {
 export async function login(): Promise<string> {
   const code: string = await getCode()
   const response = await request<LoginResponse>({
+    method: 'GET',
     url: '/login',
     headers: { authorization: `CODE ${code}` },
   })
