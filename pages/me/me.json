@@ -4,5 +4,6 @@
     "topspace": "/components/topspace/topspace"
   },
   "backgroundColor": "#ededed",
-  "backgroundColorTop": "#fff"
+  "backgroundColorTop": "#fff",
+  "backgroundColorBottom": "#ededed"
 }

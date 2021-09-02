@@ -41,13 +41,13 @@
     </mp-cell>
   </mp-cells>
 
-  <mp-cells>
+  <mp-cells wx:if="{{ false }}">
     <mp-cell link hover bindtap="goToDiary">
       <view slot="title" class="list-title">记录这一刻</view>
     </mp-cell>
   </mp-cells>
 
-  <mp-cells>
+  <mp-cells wx:if="{{ false }}">
     <mp-cell link hover bindtap="goToDiaryList">
       <view slot="title" class="list-title">我的生活</view>
     </mp-cell>

@@ -17,13 +17,13 @@
     <view class="content">
       <view wx:if="{{ cities.length > 0 }}" bindtap="showPageContainer">
         <view class="address-wrapper">
-          <text class="address text-ellipsis-l1">{{ location.address }}</text>
+          <text class="address text-ellipsis-l1">{{ locationName }}</text>
           <text class="iconfont icon-xia"></text>
         </view>
       </view>
       <block wx:else>
         <my-forauth scope="scope.userLocation" bindsuccess="addCity">
-          <text class="address text-ellipsis-l1">{{ location.address }}</text>
+          <text class="address text-ellipsis-l1">{{ locationName }}</text>
           <text class="iconfont icon-xia"></text>
         </my-forauth>
       </block>
@@ -73,12 +73,12 @@
   <!-- 未来 24 小时预报 - end -->
 
   <!-- 未来 2 小时降雨情况 - start -->
-  <view class="container minutelyrain" wx:if="{{ rain.list && rain.list.length }}">
+  <view class="container minutelyrain" wx:if="{{ rain && rain.list && rain.list.length }}">
     <view class="module-title">2小时降雨</view>
     <div class="main">
       <view class="top flex-column" bindtap="handleMinutelyRainTopTap">
         <view class="summary">{{ rain.summary }}</view>
-        <view class="desc">（更新时间 {{ rain.updateTime }}）</view>
+        <view class="desc">（ {{ rain.updateTimeDiff }} 分钟前更新）</view>
       </view>
       <scroll-view scroll-x="{{ true }}" scroll-with-animation="{{ true }}" enable-flex="{{ true }}" scroll-anchoring="{{ true }}">
         <view class="itemwrap flex-row">

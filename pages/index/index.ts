@@ -1,33 +1,31 @@
 import { sharedInit } from '../../app/core/shared-init'
 import { makeUrl } from '../../app/core/utils'
 import { TapEvent } from '../../app/core/wx.interface'
+import { ExtAirDailyForecastItem, ExtDailyForecastItem, ExtLivingIndexItem, ExtWeatherNow } from '../../app/models/weather.model'
 import { addWeatherCity } from '../../app/services/weather-city.service'
 import { getWeather } from '../../app/services/weather.service'
-
-/** 缩略的天气逐天预报单天数据 */
-interface BriefDailyItem {
-  dayText: string
-}
 
 Page({
   /** 页面的初始数据 */
   data: {
-    /** 半屏弹窗组件 */
-    halfScreen: {
-      show: false,
-      title: '',
-      subTitle: '',
-      desc: '',
-      tips: '',
-    },
+    // 页面数据
+
+    now: {} as ExtWeatherNow,
+
+    /** 地点名称 */
+    locationName: '',
 
     cityId: 0,
 
-    f15d: [],
+    f15d: [] as ExtDailyForecastItem[],
 
     cities: [],
 
-    livingIndex: [],
+    livingIndex: [] as ExtLivingIndexItem[],
+
+    air5d: [] as ExtAirDailyForecastItem[],
+
+    // 页面交互相关数据
 
     /** 是否展示页面容器 */
     isShowPageContainer: false,
@@ -36,6 +34,15 @@ Page({
 
     /** 临时数据，存储从城市列表选中的城市ID，以便发起请求 */
     selectedCityId: 0,
+
+    /** 半屏弹窗组件 */
+    halfScreen: {
+      show: false,
+      title: '',
+      subTitle: '',
+      desc: '',
+      tips: '',
+    },
   },
 
   /** 页面初始化 */
@@ -45,6 +52,8 @@ Page({
     const cityId = this.data.cityId !== 0 ? this.data.cityId : undefined
     const data = await getWeather(cityId)
     this.setData(data)
+
+    this.bindAqi()
     this.setF2d(this.data.f15d)
   },
 
@@ -61,11 +70,26 @@ Page({
    *
    * @param f15d 未来 15 天预报数据
    */
-  setF2d(f15d: BriefDailyItem[]): void {
-    const today = f15d.find((item: BriefDailyItem) => item.dayText === '今天')
-    const tomorrow = f15d.find((item: BriefDailyItem) => item.dayText === '明天')
+  setF2d(f15d: ExtDailyForecastItem[]): void {
+    const today = f15d.find((item: ExtDailyForecastItem) => item.dayText === '今天')
+    const tomorrow = f15d.find((item: ExtDailyForecastItem) => item.dayText === '明天')
     const f2d = [today, tomorrow]
     this.setData({ f2d: f2d })
+  },
+
+  /**
+   * 将未来 5 天空气质量预报绑定到未来 15 天天气预报中
+   */
+  bindAqi(): void {
+    const f15d = this.data.f15d
+    const air5d = this.data.air5d
+
+    const list = f15d.map((item: ExtDailyForecastItem) => {
+      item.aqi = air5d.find((airItem: ExtAirDailyForecastItem) => item.date === airItem.date)
+      return item
+    })
+
+    this.setData({ f15d: list })
   },
 
   /**
