@@ -30,7 +30,7 @@ export interface RequestOptions {
   headers?: Record<string, string>
 
   /** 请求参数 */
-  params?: Record<string, any>
+  params?: Record<string, string | number | boolean | undefined>
 
   /** 请求数据 */
   data?: any

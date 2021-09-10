@@ -15,6 +15,7 @@ Page({
     /** 地点名称 */
     locationName: '',
 
+    /** 当前选中的要查看天气的城市 */
     cityId: 0,
 
     f15d: [] as ExtDailyForecastItem[],
@@ -126,14 +127,16 @@ Page({
     })
   },
 
+  /** 添加天气城市 */
   async addCity() {
     const result = await addWeatherCity()
-    this.setData({
-      cityId: result!.id,
-      isShowPageContainer: false,
-    })
 
-    if (result) {
+    if (typeof result !== 'undefined') {
+      this.setData({
+        cityId: result.id,
+        isShowPageContainer: false,
+      })
+
       this.init('afterAddWeatherCity')
     }
   },
@@ -181,6 +184,16 @@ Page({
       cityId: id,
       isShowPageContainer: false,
     })
+
     this.init('afterSelectCity')
+  },
+
+  /** 监听用户点击页面内转发按钮 */
+  onShareAppMessage() {
+    return {
+      title: '这个小程序很好用，推荐给你！',
+      path: '/pages/index/index',
+      imageUrl: 'https://static.lifehelper.com.cn/static/project/share.jpeg',
+    }
   },
 })

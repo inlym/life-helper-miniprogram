@@ -1,17 +1,15 @@
 import { request } from '../core/request'
 
+/** 添加新的天气城市 - 响应数据 */
 export interface AddWeatherCityResponse {
-  name: string
-
+  /** 新增的城市 ID */
   id: number
-
-  // todo
 }
 
 /**
- * 添加新的关注天气地点
+ * 添加新的关注天气城市
  */
-export async function addWeatherCity(): Promise<AddWeatherCityResponse | undefined> {
+export async function addWeatherCity(): Promise<AddWeatherCityResponse | void> {
   const location = await wx.chooseLocation({})
 
   if (!location.name || !location.address) {
@@ -21,6 +19,7 @@ export async function addWeatherCity(): Promise<AddWeatherCityResponse | undefin
       showCancel: false,
       confirmText: '我知道了',
     })
+
     return
   } else {
     const response = await request<AddWeatherCityResponse>({
