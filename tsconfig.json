@@ -18,7 +18,9 @@
     "removeComments": true,
     "pretty": true,
     "strictPropertyInitialization": true,
-    "lib": ["es6"],
+    "lib": [
+      "es6"
+    ],
     "typeRoots": [
       "./typings"
     ]
@@ -27,6 +29,7 @@
     "./**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "old-files"
   ]
 }

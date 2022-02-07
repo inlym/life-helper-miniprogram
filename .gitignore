@@ -1,5 +1,13 @@
+### 依赖文件 ###
 node_modules
 miniprogram_npm
 package-lock.json
 
+### 构建后的 Javascript 文件 ###
 *.js
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
