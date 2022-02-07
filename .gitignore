@@ -1,0 +1,5 @@
+node_modules
+miniprogram_npm
+package-lock.json
+
+*.js
