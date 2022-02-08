@@ -1,11 +1,14 @@
 import axios, { AxiosPromise } from 'axios'
 import { config } from '../config'
 import { Method, miniprogramAdapter } from './miniprogram-adatper'
+import { aliyunApigwSignatureInterceptorBuilder } from './aliyun-apigw-signature-interceptor'
 
 const instance = axios.create({
   baseURL: config.baseURL,
   adapter: miniprogramAdapter,
 })
+
+instance.interceptors.request.use(aliyunApigwSignatureInterceptorBuilder('204032881', 'Ba3aSmGiqx6bFOuCRTaHUDGf9HI40jOV', true))
 
 /** 内部调用可配置的参数 */
 export interface RequestConfig {

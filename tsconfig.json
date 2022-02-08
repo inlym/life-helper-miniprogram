@@ -19,11 +19,13 @@
     "pretty": true,
     "strictPropertyInitialization": true,
     "lib": [
-      "ES6"
+      "ES6",
+      "ES2016.Array.Include"
     ],
     "typeRoots": [
       "./typings"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "./**/*.ts"
