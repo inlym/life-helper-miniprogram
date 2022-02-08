@@ -3,10 +3,12 @@
   "version": "0.3.6",
   "description": "「我的个人助手」小程序端部分代码",
   "scripts": {
-    "compile": "./node_modules/typescript/bin/tsc",
     "tsc": "node ./node_modules/typescript/lib/tsc.js"
   },
-  "keywords": [],
+  "keywords": [
+    "life-helper",
+    "miniprogram"
+  ],
   "author": "inlym",
   "license": "MIT",
   "bugs": {
@@ -20,5 +22,8 @@
     "miniprogram-api-typings": "^2.8.3-1",
     "prettier": "^2.5.1",
     "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "axios": "^0.21.4"
   }
 }
