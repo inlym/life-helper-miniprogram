@@ -2,7 +2,7 @@
  * 查询字符串工具
  */
 export class ParamsUtils {
-  public static encode(obj: Record<string, any>): string {
+  public static encode(obj?: Record<string, string | number | boolean>): string {
     if (obj === null || obj === undefined) {
       return ''
     }
@@ -10,11 +10,7 @@ export class ParamsUtils {
     const parts: string[] = []
     Object.keys(obj).forEach(key => {
       const value = obj[key]
-      if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string') {
-        parts.push(`${key}=${String(value)}`)
-      } else {
-        console.error('出现未支持的查询字符串')
-      }
+      parts.push(`${key}=${String(value)}`)
     })
 
     parts.sort()
