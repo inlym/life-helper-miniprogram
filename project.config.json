@@ -53,7 +53,9 @@
     "disableUseStrict": false,
     "minifyWXML": true,
     "showES6CompileOption": false,
-    "useCompilerPlugins": false
+    "useCompilerPlugins": [
+      "typescript"
+    ]
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},

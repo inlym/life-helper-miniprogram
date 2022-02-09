@@ -11,7 +11,7 @@ const instance = axios.create({
 instance.interceptors.request.use(aliyunApigwSignatureInterceptorBuilder('204032881', 'Ba3aSmGiqx6bFOuCRTaHUDGf9HI40jOV', true))
 
 /** 内部调用可配置的参数 */
-export interface RequestConfig {
+export interface RequestOptions {
   /** 请求方法 */
   method?: Method
 
@@ -28,7 +28,7 @@ export interface RequestConfig {
 /**
  * 封装内部使用的 HTTP 请求客户端
  */
-export function request<T = any>(config: RequestConfig): AxiosPromise<T> {
+export function request<T = any>(config: RequestOptions): AxiosPromise<T> {
   return instance({
     method: config.method || 'GET',
     url: config.url,
