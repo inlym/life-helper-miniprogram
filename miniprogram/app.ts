@@ -1,8 +1,8 @@
 // app.ts
-import {logger} from "./app/core/logger"
+import { logger } from './app/core/logger'
 
 App({
   onLaunch() {
-    logger.debug("项目启动 ...")
+    logger.debug('项目启动 ...')
   },
 })

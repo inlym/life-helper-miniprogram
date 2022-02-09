@@ -63,6 +63,7 @@ export function miniprogramAdapter<T>(config: AxiosRequestConfig): Promise<Axios
       url: wholeUrl,
       header: config.headers,
       timeout: config.timeout,
+      data: config.data,
       success(res) {
         const response: AxiosResponse = {
           data: res.data,
