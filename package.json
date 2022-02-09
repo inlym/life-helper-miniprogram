@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "axios": "^0.21.4",
-    "crypto-js": "^4.1.1"
+    "crypto-js": "^4.1.1",
+    "miniprogram-logger-plus": "^1.2.1"
   }
 }
