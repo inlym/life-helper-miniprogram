@@ -22,8 +22,8 @@
       "ES6",
       "ES2016.Array.Include"
     ],
-    "typeRoots": [
-      "./typings"
+    "types": [
+      "miniprogram-api-typings"
     ],
     "allowSyntheticDefaultImports": true
   },
