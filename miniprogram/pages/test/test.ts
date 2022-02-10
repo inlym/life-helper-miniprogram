@@ -1,5 +1,6 @@
 // pages/test/test.ts
-import {logger} from "../../app/core/logger";
+import { logger } from '../../app/core/logger'
+import { http } from '../../app/core/http'
 
 Page({
   /**
@@ -13,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    logger.debug("测试页启动 ...")
+    logger.debug('测试页启动 ...')
+    http.get('/debug/auth/user').then(console.log)
   },
 })

@@ -10,7 +10,8 @@ import * as CryptoJS from 'crypto-js'
  * 1. 将字段名统一变为小写
  * 2. 去除重复的请求头
  * @param {Record<string, string>} headers
- */ function normalizeHeaders(headers: Record<string, string>): Record<string, string> {
+ */
+function normalizeHeaders(headers: Record<string, string>): Record<string, string> {
   if (typeof headers !== 'object') {
     return {}
   }
@@ -38,10 +39,10 @@ function getSignHeaderKeys(headers: Record<string, string>): string[] {
   const EXCLUDE_SIGN_HEADERS = ['x-ca-signature', 'x-xa-signature-headers', 'accept', 'content-md5', 'content-type', 'date']
 
   return Object.keys(headers)
-    .filter((name: string) => {
-      return !EXCLUDE_SIGN_HEADERS.includes(name)
-    })
-    .sort()
+               .filter((name: string) => {
+                 return !EXCLUDE_SIGN_HEADERS.includes(name)
+               })
+               .sort()
 }
 
 function getSignedHeadersString(signHeaderKeys: string[], headers: Record<string, string>): string {
@@ -88,7 +89,7 @@ function buildStringToSign(method: Method, headers: Record<string, string>, sign
 }
 
 /**
- * 阿里云 API 网关签名加密
+ * 阿里云 API 网关签名拦截器
  * @see https://help.aliyun.com/document_detail/29475.html
  */
 export function aliyunApigwSignatureInterceptorBuilder(appKey: string, appSecret: string, debug = true) {

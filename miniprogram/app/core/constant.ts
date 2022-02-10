@@ -6,3 +6,8 @@ export const StorageField = {
   /** 登录凭证 `token` */
   TOKEN: 'token',
 }
+
+/** 自定义请求头字段名 */
+export const HeaderField = {
+  JWT: 'x-auth-jwt',
+}
