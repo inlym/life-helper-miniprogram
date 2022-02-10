@@ -53,13 +53,14 @@ export class AxiosError extends Error {
 export function miniprogramAdapter<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
   config.params = config.params || {}
   config.headers = config.headers || {}
+  config.method = handleMethod(config.method)
 
   const querystring = ParamsUtils.encode(config.params)
   const wholeUrl = (config.baseURL || '') + (config.url || '') + (querystring ? '?' + querystring : '')
 
   return new Promise((resolve, reject) => {
     const request = wx.request({
-      method: handleMethod(config.method),
+      method: <Method>config.method,
       url: wholeUrl,
       header: config.headers,
       timeout: config.timeout,

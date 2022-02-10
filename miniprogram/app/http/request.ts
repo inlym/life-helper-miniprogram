@@ -4,11 +4,12 @@ import { Method, miniprogramAdapter } from './miniprogram-adatper'
 import { aliyunApigwSignatureInterceptorBuilder } from './aliyun-apigw-signature-interceptor'
 import { accessTokenInterceptor } from './access-token-interceptor'
 import { invalidTokenInterceptor } from './invalid-token-interceptor'
+import { requestLogInterceptor } from './request-log-interceptor'
 
 const instance = axios.create({
   baseURL: config.baseURL,
   adapter: miniprogramAdapter,
-  validateStatus: function (status: number): boolean {
+  validateStatus: function(status: number): boolean {
     return status >= 200 && status <= 599
   },
 })
@@ -16,6 +17,7 @@ const instance = axios.create({
 instance.interceptors.request.use(aliyunApigwSignatureInterceptorBuilder('204032881', 'Ba3aSmGiqx6bFOuCRTaHUDGf9HI40jOV', false))
 instance.interceptors.request.use(accessTokenInterceptor)
 instance.interceptors.response.use(invalidTokenInterceptor)
+instance.interceptors.response.use(requestLogInterceptor)
 
 /** 内部调用可配置的参数 */
 export interface RequestOptions {
