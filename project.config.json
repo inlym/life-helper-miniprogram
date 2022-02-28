@@ -7,11 +7,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.20.1",
   "projectname": "life-helper-miniprogram",
-  "scripts": {
-    "beforeCompile": "npm run tsc",
-    "beforePreview": "npm run tsc",
-    "beforeUpload": "npm run tsc"
-  },
+  "scripts": {},
   "setting": {
     "urlCheck": false,
     "es6": false,
@@ -53,10 +49,7 @@
     "disableUseStrict": false,
     "minifyWXML": true,
     "showES6CompileOption": false,
-    "useCompilerPlugins": [
-      "typescript",
-      "sass"
-    ]
+    "useCompilerPlugins": ["typescript", "sass"]
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},

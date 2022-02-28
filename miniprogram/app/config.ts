@@ -13,7 +13,7 @@
  */
 export type Stage = 'production' | 'development' | 'local'
 
-export const stage: Stage = 'production'
+export const stage: Stage = 'local'
 
 /** 配置项数据类型 */
 export interface Config {
@@ -26,7 +26,7 @@ export interface Config {
 
 const localConfig: Config = {
   stage: 'local',
-  baseURL: 'http://127.0.0.1:8080',
+  baseURL: 'http://127.0.0.1:23010',
 }
 
 const devConfig: Config = {

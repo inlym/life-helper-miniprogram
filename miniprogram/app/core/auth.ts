@@ -1,11 +1,39 @@
 /**
  * 权限相关方法
- * @date 2022-02-09 23:33
+ * @date 2022-02-09
  */
 
-import { getCode } from './wxp'
 import { http } from './http'
 import { StorageField } from './constant'
+import { cache } from './cache'
+import { Duration } from '../utils/duration'
+
+/**
+ * 获取微信 code
+ *
+ * 说明：
+ * 1. 由于微信新增的特色机制，无法按需获取 `code`，因此对获取的 `code` 增加了一层缓存机制（服务端也配套做了缓存）
+ * 2. [接口调用频率规范](https://developers.weixin.qq.com/miniprogram/dev/framework/performance/api-frequency.html)
+ */
+export function getCode(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const code = cache.get<string>(StorageField.CODE)
+    if (code) {
+      resolve(code)
+      return
+    }
+
+    wx.login({
+      success(res) {
+        resolve(res.code)
+        cache.set(StorageField.CODE, res.code, Duration.ofMinutes(5))
+      },
+      fail(res) {
+        reject(new Error(res.errMsg))
+      },
+    })
+  })
+}
 
 /** 登录接口响应数据 */
 export interface TokenInfo {
@@ -22,7 +50,7 @@ export interface TokenInfo {
 export async function login(): Promise<string> {
   const code = await getCode()
   const data = await http.post<TokenInfo>('/login/weixin', { code })
-  wx.setStorageSync(StorageField.TOKEN, data)
+  cache.set(StorageField.TOKEN, data.token, data.expiration)
 
   return data.token
 }
@@ -31,10 +59,10 @@ export async function login(): Promise<string> {
  * 获取登录凭证
  */
 export async function getToken(): Promise<string> {
-  const tokenInfo = wx.getStorageSync<TokenInfo>(StorageField.TOKEN)
-  if (tokenInfo && tokenInfo.token) {
-    return tokenInfo.token
+  const token = cache.get<string>(StorageField.TOKEN)
+  if (token) {
+    return token
   }
 
-  return ''
+  return login()
 }
