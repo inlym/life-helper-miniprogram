@@ -1,4 +1,4 @@
-import axios, { AxiosPromise } from 'axios'
+import axios, { AxiosPromise, AxiosRequestConfig } from 'axios'
 import { config } from '../config'
 import { Method, miniprogramAdapter } from './miniprogram-adatper'
 import { aliyunApigwSignatureInterceptorBuilder } from './aliyun-apigw-signature-interceptor'
@@ -6,10 +6,16 @@ import { accessTokenInterceptor } from './access-token-interceptor'
 import { invalidTokenInterceptor } from './invalid-token-interceptor'
 import { requestLogInterceptor } from './request-log-interceptor'
 
+/** 加强版 Axios 请求配置项 */
+export interface EnhancedAxiosRequestConfig extends AxiosRequestConfig {
+  /** 是否需要登录 */
+  needLogin?: boolean
+}
+
 const instance = axios.create({
   baseURL: config.baseURL,
   adapter: miniprogramAdapter,
-  validateStatus: function(status: number): boolean {
+  validateStatus: function (status: number): boolean {
     return status >= 200 && status <= 599
   },
 })
@@ -22,7 +28,7 @@ instance.interceptors.response.use(requestLogInterceptor)
 /** 内部调用可配置的参数 */
 export interface RequestOptions {
   /** 请求方法 */
-  method?: Method
+  method: Method
 
   /** 请求路径 */
   url: string
@@ -32,6 +38,9 @@ export interface RequestOptions {
 
   /** 请求数据 */
   data?: any
+
+  /** 是否需要登录 */
+  needLogin?: boolean
 }
 
 /**
@@ -39,9 +48,10 @@ export interface RequestOptions {
  */
 export function request<T = any>(config: RequestOptions): AxiosPromise<T> {
   return instance({
-    method: config.method || 'GET',
+    method: config.method,
     url: config.url,
     params: config.params,
     data: config.data,
-  })
+    needLogin: config.needLogin || false,
+  } as EnhancedAxiosRequestConfig)
 }
