@@ -64,5 +64,5 @@ export async function getToken(): Promise<string> {
     return token
   }
 
-  return login()
+  return ''
 }
