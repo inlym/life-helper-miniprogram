@@ -11,3 +11,5 @@ package-lock.json
 *.iws
 *.iml
 *.ipr
+!.idea/codeStyles/
+!.idea/dictionaries/lym.xml

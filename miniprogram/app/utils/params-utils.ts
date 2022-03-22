@@ -8,7 +8,7 @@ export class ParamsUtils {
     }
 
     const parts: string[] = []
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj).forEach((key) => {
       const value = obj[key]
       parts.push(`${key}=${String(value)}`)
     })

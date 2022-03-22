@@ -19,5 +19,4 @@ export function accessTokenInterceptor(config: AxiosRequestConfig): AxiosRequest
 
   config.headers = headers
   return config
-
 }

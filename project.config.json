@@ -49,7 +49,10 @@
     "disableUseStrict": false,
     "minifyWXML": true,
     "showES6CompileOption": false,
-    "useCompilerPlugins": ["typescript", "sass"]
+    "useCompilerPlugins": [
+      "typescript",
+      "sass"
+    ]
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},

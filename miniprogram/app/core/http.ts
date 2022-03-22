@@ -1,4 +1,4 @@
-import { request } from "../http/request";
+import { request } from '../http/request'
 
 /**
  * 封装内部使用的 HTTP 客户端

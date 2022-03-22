@@ -39,10 +39,10 @@ function getSignHeaderKeys(headers: Record<string, string>): string[] {
   const EXCLUDE_SIGN_HEADERS = ['x-ca-signature', 'x-xa-signature-headers', 'accept', 'content-md5', 'content-type', 'date']
 
   return Object.keys(headers)
-               .filter((name: string) => {
-                 return !EXCLUDE_SIGN_HEADERS.includes(name)
-               })
-               .sort()
+    .filter((name: string) => {
+      return !EXCLUDE_SIGN_HEADERS.includes(name)
+    })
+    .sort()
 }
 
 function getSignedHeadersString(signHeaderKeys: string[], headers: Record<string, string>): string {

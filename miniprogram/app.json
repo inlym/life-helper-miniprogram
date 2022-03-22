@@ -1,14 +1,11 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/test/test"
-  ],
+  "pages": ["pages/index/index", "pages/test/test", "pages/scan/login"],
   "sitemapLocation": "sitemap.json",
   "style": "v2",
   "window": {
     "navigationBarBackgroundColor": "#fff",
     "backgroundTextStyle": "light",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "小鸣助手",
     "navigationBarTextStyle": "black"
   }
 }

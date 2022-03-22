@@ -1,6 +1,6 @@
 // pages/test/test.ts
 import { logger } from '../../app/core/logger'
-import { http } from '../../app/core/http'
+import { login } from '../../app/core/auth'
 
 Page({
   /**
@@ -15,6 +15,6 @@ Page({
    */
   onLoad() {
     logger.debug('测试页启动 ...')
-    http.get('/debug/auth/user').then(console.log)
+    login().then(console.log)
   },
 })
