@@ -4,10 +4,12 @@
  * ## 说明
  * 1. 增加了到期时间处理。
  */
+
 import { Duration } from '../utils/duration'
 
 /**
  * 获取指定键名的缓存值
+ *
  * @param {string} key 键名
  */
 function get<T = any>(key: string): T | null {
@@ -34,8 +36,8 @@ function set<T = any>(key: string, data: T, expireParam?: unknown): void {
   // 创建时间
   const createTime = Date.now()
 
-  // 默认有效期10天
-  let expireTime = createTime + 10 * Duration.HOURS_PER_DAY * Duration.MINUTES_PER_HOUR * Duration.SECONDS_PER_MINUTE * 1000
+  // 默认有效期 30 天
+  let expireTime = createTime + 30 * Duration.HOURS_PER_DAY * Duration.MINUTES_PER_HOUR * Duration.SECONDS_PER_MINUTE * 1000
 
   if (typeof expireParam === 'number') {
     expireTime = expireParam

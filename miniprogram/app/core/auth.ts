@@ -58,7 +58,7 @@ export async function login(): Promise<string> {
 /**
  * 获取登录凭证
  */
-export async function getToken(): Promise<string> {
+export function getToken(): string {
   const token = cache.get<string>(StorageField.TOKEN)
   if (token) {
     return token
