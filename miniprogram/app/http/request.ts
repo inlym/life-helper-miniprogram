@@ -1,16 +1,10 @@
-import axios, { AxiosPromise, AxiosRequestConfig } from 'axios'
+import axios, { AxiosPromise } from 'axios'
 import { config } from '../config'
-import { Method, miniprogramAdapter } from './miniprogram-adatper'
-import { aliyunApigwSignatureInterceptorBuilder } from './aliyun-apigw-signature-interceptor'
 import { accessTokenInterceptor } from './access-token-interceptor'
+import { aliyunApigwSignatureInterceptorBuilder } from './aliyun-apigw-signature-interceptor'
 import { invalidTokenInterceptor } from './invalid-token-interceptor'
+import { Method, miniprogramAdapter } from './miniprogram-adatper'
 import { requestLogInterceptor } from './request-log-interceptor'
-
-/** 加强版 Axios 请求配置项 */
-export interface EnhancedAxiosRequestConfig extends AxiosRequestConfig {
-  /** 是否需要登录 */
-  needLogin?: boolean
-}
 
 const instance = axios.create({
   baseURL: config.baseURL,
@@ -38,9 +32,6 @@ export interface RequestOptions {
 
   /** 请求数据 */
   data?: any
-
-  /** 是否需要登录 */
-  needLogin?: boolean
 }
 
 /**
@@ -52,6 +43,5 @@ export function request<T = any>(config: RequestOptions): AxiosPromise<T> {
     url: config.url,
     params: config.params,
     data: config.data,
-    needLogin: config.needLogin || false,
-  } as EnhancedAxiosRequestConfig)
+  })
 }

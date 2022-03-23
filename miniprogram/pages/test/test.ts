@@ -1,6 +1,6 @@
 // pages/test/test.ts
-import { logger } from '../../app/core/logger'
-import { login } from '../../app/core/auth'
+import { ensureLogined } from '../../app/core/auth'
+import { getUserInfo } from '../../app/services/userinfo'
 
 Page({
   /**
@@ -13,8 +13,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
-    logger.debug('测试页启动 ...')
-    login().then(console.log)
+  async onLoad() {
+    await ensureLogined()
+    await this.init()
+  },
+
+  async init() {
+    const data = await getUserInfo()
+    console.log(data)
   },
 })
