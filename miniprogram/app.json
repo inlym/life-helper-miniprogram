@@ -1,11 +1,49 @@
 {
-  "pages": ["pages/index/index", "pages/test/test", "pages/scan/login"],
+  "pages": [
+    "pages/index/index",
+    "pages/test/test",
+    "pages/scan/login",
+    "pages/me/me"
+  ],
   "sitemapLocation": "sitemap.json",
-  "style": "v2",
   "window": {
     "navigationBarBackgroundColor": "#fff",
     "backgroundTextStyle": "light",
     "navigationBarTitleText": "小鸣助手",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#1a1a1a",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#F5F5F5",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "天气",
+        "iconPath": "/assets/images/tabbar/home-outline.png",
+        "selectedIconPath": "/assets/images/tabbar/home-filled.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我",
+        "iconPath": "/assets/images/tabbar/me-outline.png",
+        "selectedIconPath": "/assets/images/tabbar/me-filled.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "useExtendedLib": {
+    "weui": true
+  },
+  "usingComponents": {
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-dialog": "weui-miniprogram/dialog/dialog",
+    "mp-form": "weui-miniprogram/form/form",
+    "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-slideview": "weui-miniprogram/slideview/slideview",
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
   }
 }
