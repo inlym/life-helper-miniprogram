@@ -1,5 +1,5 @@
 // pages/test/test.ts
-import { http } from '../../app/core/http'
+import { getUserInfo } from '../../app/services/userinfo'
 
 Page({
   /**
@@ -13,7 +13,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    // login().then(console.log)
-    http.get('/userinfo').then(console.log)
+    getUserInfo().then(console.log)
   },
 })

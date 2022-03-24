@@ -3,10 +3,10 @@
  * @date 2022-02-09
  */
 
-import { http } from './http'
-import { StorageField } from './constant'
-import { cache } from './cache'
 import { Duration } from '../utils/duration'
+import { cache } from './cache'
+import { StorageField } from './constant'
+import { requestForData } from './http'
 
 /**
  * 获取微信 code
@@ -49,7 +49,13 @@ export interface TokenInfo {
  */
 export async function login(): Promise<string> {
   const code = await getCode()
-  const data = await http.post<TokenInfo>('/login/weixin', { code })
+  const data = await requestForData<TokenInfo>({
+    method: 'POST',
+    url: '/login/weixin',
+    data: { code },
+    auth: false,
+  })
+
   cache.set(StorageField.TOKEN, data.token, data.expiration)
 
   return data.token

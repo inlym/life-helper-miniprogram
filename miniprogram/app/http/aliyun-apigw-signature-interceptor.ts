@@ -1,7 +1,7 @@
-import { handleMethod, Method } from './miniprogram-adatper'
 import { AxiosRequestConfig } from 'axios'
-import { ParamsUtils } from '../utils/params-utils'
 import * as CryptoJS from 'crypto-js'
+import { ParamsUtils } from '../utils/params-utils'
+import { handleMethod, Method } from './miniprogram-adatper'
 
 /**
  * 规格化请求头
