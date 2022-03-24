@@ -1,0 +1,2 @@
+<!--components/top-space/top-space.wxml-->
+<view class="top-space" style="height:{{ reservedHeight + offset }}px;"></view>

@@ -1,4 +1,5 @@
 <!--pages/test/test.wxml-->
+<top-space offset="{{0}}"></top-space>
 <text>pages/test/test.wxml</text>
 <view>
   {{name}}
