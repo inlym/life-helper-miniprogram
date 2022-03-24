@@ -1,8 +1,0 @@
-{
-  "files.exclude": {
-    "app.js": true,
-    "app/**/*.js": true,
-    "pages/**/*.js": true,
-    "pages/**/*.wxss": true
-  }
-}
