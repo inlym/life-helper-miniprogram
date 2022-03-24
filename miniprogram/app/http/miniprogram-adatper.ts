@@ -50,7 +50,7 @@ export class AxiosError extends Error {
  * 微信小程序请求适配器
  * @param {AxiosRequestConfig} config
  */
-export function miniprogramAdapter<T = any>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+export function miniprogramAdapter<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
   config.params = config.params || {}
   config.headers = config.headers || {}
   config.method = handleMethod(config.method)

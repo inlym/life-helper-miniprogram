@@ -1,6 +1,5 @@
 // pages/test/test.ts
-import { ensureLogined } from '../../app/core/auth'
-import { getUserInfo } from '../../app/services/userinfo'
+import { http } from '../../app/core/http'
 
 Page({
   /**
@@ -13,13 +12,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  async onLoad() {
-    await ensureLogined()
-    await this.init()
-  },
-
-  async init() {
-    const data = await getUserInfo()
-    console.log(data)
+  onLoad() {
+    // login().then(console.log)
+    http.get('/userinfo').then(console.log)
   },
 })

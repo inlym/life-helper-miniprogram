@@ -13,7 +13,7 @@ export function accessTokenInterceptor(config: AxiosRequestConfig): AxiosRequest
 
   if (token) {
     const headers = config.headers || {}
-    headers[HeaderField.JWT] = headers
+    headers[HeaderField.JWT] = token
     config.headers = headers
   }
 
