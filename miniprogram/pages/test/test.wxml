@@ -3,3 +3,5 @@
 <view>
   {{name}}
 </view>
+
+<button open-type="getUserInfo" bind:tap="one">获取用户信息</button>

@@ -1,5 +1,6 @@
 // pages/test/test.ts
-import { getUserInfo } from '../../app/services/userinfo'
+
+import { getUserInfo, updateUserInfo } from '../../app/services/userinfo'
 
 Page({
   /**
@@ -14,5 +15,15 @@ Page({
    */
   onLoad() {
     getUserInfo().then(console.log)
+  },
+
+  one() {
+    wx.getUserProfile({
+      desc: '自定义文字提示',
+    }).then(res => {
+      const nickName = res.userInfo.nickName
+      const avatarUrl = res.userInfo.avatarUrl
+      updateUserInfo({ nickName, avatarUrl }).then(console.log)
+    })
   },
 })

@@ -19,3 +19,12 @@ export function getUserInfo(): Promise<UserInfo> {
     auth: true,
   })
 }
+
+export function updateUserInfo(userInfo: UserInfo): Promise<UserInfo> {
+  return requestForData({
+    method: 'PUT',
+    url: '/userinfo',
+    data: userInfo,
+    auth: true,
+  })
+}
