@@ -7,7 +7,7 @@ export interface RequestOptionsInternal {
   url: string
 
   /** 请求参数 */
-  params?: Record<string, string | number>
+  params?: Record<string, string | number | undefined>
 
   /** 请求数据 */
   data?: Record<string, any>

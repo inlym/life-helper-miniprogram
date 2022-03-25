@@ -1,9 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "topspace": "/components/topspace/topspace"
-  },
-  "backgroundColor": "#ededed",
-  "backgroundColorTop": "#fff",
-  "backgroundColorBottom": "#ededed"
-}

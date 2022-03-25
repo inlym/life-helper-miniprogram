@@ -5,4 +5,4 @@
   {{name}}
 </view>
 
-<button open-type="getUserInfo" bind:tap="one">获取用户信息</button>
+<button open-type="getUserInfo" bind:tap="one">点击</button>

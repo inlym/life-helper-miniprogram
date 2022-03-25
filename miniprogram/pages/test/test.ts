@@ -1,6 +1,6 @@
 // pages/test/test.ts
 
-import { getUserInfo, updateUserInfo } from '../../app/services/userinfo'
+import { getMixedWeatherData } from '../../app/services/weather'
 
 Page({
   /**
@@ -14,16 +14,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    getUserInfo().then(console.log)
+    //
   },
 
   one() {
-    wx.getUserProfile({
-      desc: '自定义文字提示',
-    }).then(res => {
-      const nickName = res.userInfo.nickName
-      const avatarUrl = res.userInfo.avatarUrl
-      updateUserInfo({ nickName, avatarUrl }).then(console.log)
-    })
+    getMixedWeatherData({ longitude: 120, latitude: 30 }).then(console.log)
   },
 })
