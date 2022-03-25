@@ -1,1 +1,39 @@
 /* pages/me/me.scss */
+.userinfo {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 40rpx;
+  padding-left: 50rpx;
+  background-color: #fff;
+
+  .avatar image {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 10rpx;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 360rpx;
+    margin-left: 30rpx;
+
+    .nickname {
+      font-size: 38rpx;
+      font-weight: bold;
+    }
+
+    .desc {
+      font-size: 30rpx;
+      color: #7c7c7c;
+    }
+  }
+
+  .operator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20rpx;
+  }
+}
