@@ -209,7 +209,7 @@ export interface MinutelyRain {
 }
 
 /** 天气生活指数中的单天详情 */
-export interface IndicesDaily {
+export interface IndicesItem {
   /** 图片 URL */
   imageUrl: string
 
@@ -288,6 +288,7 @@ export interface MixedWeatherData {
   airNow: AirNow
   f15d: WeatherDaily[]
   f24h: WeatherHourly[]
+  indices3d: IndicesItem[]
   now: WeatherNow
   rain: MinutelyRain
 }

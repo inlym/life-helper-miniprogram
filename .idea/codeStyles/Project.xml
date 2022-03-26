@@ -6,6 +6,8 @@
     </HTMLCodeStyleSettings>
     <ScssCodeStyleSettings>
       <option name="HEX_COLOR_LOWER_CASE" value="true" />
+      <option name="KEEP_SINGLE_LINE_BLOCKS" value="true" />
+      <option name="ENFORCE_QUOTES_ON_FORMAT" value="true" />
     </ScssCodeStyleSettings>
     <TypeScriptCodeStyleSettings version="0">
       <option name="USE_SEMICOLON_AFTER_STATEMENT" value="false" />
@@ -23,7 +25,7 @@
     <codeStyleSettings language="SCSS">
       <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
       <indentOptions>
-        <option name="CONTINUATION_INDENT_SIZE" value="4" />
+        <option name="CONTINUATION_INDENT_SIZE" value="2" />
         <option name="TAB_SIZE" value="2" />
       </indentOptions>
       <arrangement>

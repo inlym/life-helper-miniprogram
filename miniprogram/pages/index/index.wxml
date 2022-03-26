@@ -1,3 +1,10 @@
-<view class="container">
-  {{name}}
+<!-- 最外层的包裹容器 -->
+<view class="page {{clock}}">
+  <!-- 实时天气 -->
+  <view class="weather-now {{type}}">
+    <view class="weather-bg">
+      <!-- 地理位置条 -->
+      <view class="location-bar"></view>
+    </view>
+  </view>
 </view>

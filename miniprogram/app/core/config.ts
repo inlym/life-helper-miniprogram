@@ -13,7 +13,7 @@
  */
 export type Stage = 'production' | 'development' | 'local'
 
-export const stage: Stage = 'local'
+export const stage: Stage = 'development'
 
 /** 配置项数据类型 */
 export interface Config {
