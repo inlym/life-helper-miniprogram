@@ -1,6 +1,6 @@
 // 实时天气
 .weather-now {
-  padding-bottom: 200rpx;
+  padding-bottom: 100rpx;
 
   .weather-bg {
     background-repeat: no-repeat;
@@ -25,6 +25,7 @@
         .update-text {
           font-size: 18rpx;
           margin-top: 6rpx;
+          opacity: 50%;
         }
       }
 
@@ -107,12 +108,12 @@
           padding: 0 10rpx;
 
           .value {
-            font-size: 120%;
+            font-size: 34rpx;
             font-weight: bold;
           }
 
           .name {
-            font-size: 70%;
+            font-size: 20rpx;
           }
         }
       }

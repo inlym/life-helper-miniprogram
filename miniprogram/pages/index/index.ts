@@ -3,6 +3,7 @@ import {
   AirNow,
   getMixedWeatherData,
   IndicesItem,
+  Location,
   MinutelyRain,
   WeatherDaily,
   WeatherHourly,
@@ -17,16 +18,11 @@ Page({
     f15d: [] as WeatherDaily[],
     f24h: [] as WeatherHourly[],
     indices3d: [] as IndicesItem[],
+    location: {} as Location,
     now: {} as WeatherNow,
     rain: {} as MinutelyRain,
 
     // 页面描述数据
-
-    /** 白天还是夜晚( 'day' | 'night' ) */
-    clock: 'day',
-
-    /** 天气类型: 'sun', 'cloudy', 'rain', 'snow', 'haze' */
-    type: 'snow',
 
     /** 地理位置栏与顶部的闲置高度，单位：px */
     reservedHeight: 80,

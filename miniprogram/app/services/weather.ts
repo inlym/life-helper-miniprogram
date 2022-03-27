@@ -283,12 +283,18 @@ export interface AirDaily {
   primary: string
 }
 
+export interface Location {
+  name: string
+  desc: string
+}
+
 export interface MixedWeatherData {
   air5d: AirDaily[]
   airNow: AirNow
   f15d: WeatherDaily[]
   f24h: WeatherHourly[]
   indices3d: IndicesItem[]
+  location: Location
   now: WeatherNow
   rain: MinutelyRain
 }

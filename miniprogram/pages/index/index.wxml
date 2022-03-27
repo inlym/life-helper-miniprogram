@@ -5,9 +5,9 @@
     <view class="weather-bg" style="padding-top: {{reservedHeight}}px;">
       <!-- 地理位置条 -->
       <view class="location-bar">
-        <mp-icon icon="add" style="field" color="{{now.clock==='day'?'#000':'#fff'}}"></mp-icon>
+        <mp-icon icon="location" size="26" color="{{now.clock==='day'?'#000':'#fff'}}"></mp-icon>
         <view class="content">
-          <view class="location">西湖区，杭州市</view>
+          <view class="location">{{location.name}}</view>
           <view class="update-text">{{now.updateMinutesDiff}}分钟前更新</view>
         </view>
       </view>
@@ -17,7 +17,7 @@
         <image src="{{now.iconUrl}}" mode="widthFix" class="weather-icon"></image>
         <view class="temp">{{now.temp}}</view>
         <view class="right">
-          <view class="degree"></view>
+          <view class="degree" style="border-color: {{now.clock==='day'?'#000':'#fff'}};"></view>
           <view class="text">{{now.text}}</view>
         </view>
       </view>
