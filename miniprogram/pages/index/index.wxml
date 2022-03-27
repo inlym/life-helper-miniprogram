@@ -1,10 +1,53 @@
 <!-- 最外层的包裹容器 -->
-<view class="page {{clock}}">
+<view class="page {{now.clock}}">
   <!-- 实时天气 -->
-  <view class="weather-now {{type}}">
-    <view class="weather-bg">
+  <view class="weather-now {{now.type}}">
+    <view class="weather-bg" style="padding-top: {{reservedHeight}}px;">
       <!-- 地理位置条 -->
-      <view class="location-bar"></view>
+      <view class="location-bar">
+        <mp-icon icon="add" style="field" color="{{now.clock==='day'?'#000':'#fff'}}"></mp-icon>
+        <view class="content">
+          <view class="location">西湖区，杭州市</view>
+          <view class="update-text">{{now.updateMinutesDiff}}分钟前更新</view>
+        </view>
+      </view>
+
+      <!-- 天气核心信息区 -->
+      <view class="weather-detail">
+        <image src="{{now.iconUrl}}" mode="widthFix" class="weather-icon"></image>
+        <view class="temp">{{now.temp}}</view>
+        <view class="right">
+          <view class="degree"></view>
+          <view class="text">{{now.text}}</view>
+        </view>
+      </view>
+
+      <!-- 空气质量 -->
+      <view class="aqi">
+        <view class="content level-{{airNow.level}}">AQI {{airNow.aqi}} {{airNow.category}}</view>
+      </view>
+
+      <!-- 其他信息 -->
+      <view class="other">
+        <view class="list">
+          <view class="item">
+            <view class="value">{{now.windScale}}级</view>
+            <view class="name">{{now.windDir}}</view>
+          </view>
+          <view class="item">
+            <view class="value">{{now.humidity}}%</view>
+            <view class="name">相对湿度</view>
+          </view>
+          <view class="item">
+            <view class="value">{{now.vis}}km</view>
+            <view class="name">能见度</view>
+          </view>
+          <view class="item">
+            <view class="value">{{now.precip}}mm</view>
+            <view class="name">降水量</view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

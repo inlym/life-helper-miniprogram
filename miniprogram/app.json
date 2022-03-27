@@ -35,16 +35,5 @@
   "style": "v2",
   "useExtendedLib": {
     "weui": true
-  },
-  "usingComponents": {
-    "mp-cell": "weui-miniprogram/cell/cell",
-    "mp-cells": "weui-miniprogram/cells/cells",
-    "mp-dialog": "weui-miniprogram/dialog/dialog",
-    "mp-form": "weui-miniprogram/form/form",
-    "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
-    "mp-icon": "weui-miniprogram/icon/icon",
-    "mp-slideview": "weui-miniprogram/slideview/slideview",
-    "mp-toptips": "weui-miniprogram/toptips/toptips",
-    "top-space": "/components/top-space/top-space"
   }
 }

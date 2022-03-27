@@ -23,18 +23,28 @@ Page({
     // 页面描述数据
 
     /** 白天还是夜晚( 'day' | 'night' ) */
-    clock: 'night',
+    clock: 'day',
 
     /** 天气类型: 'sun', 'cloudy', 'rain', 'snow', 'haze' */
     type: 'snow',
+
+    /** 地理位置栏与顶部的闲置高度，单位：px */
+    reservedHeight: 80,
   },
 
   onLoad() {
-    // this.init()
+    this.calcReservedHeight()
+    this.init()
   },
 
   async init() {
     const data = await getMixedWeatherData()
     this.setData(data)
+  },
+
+  /** 计算预留高度 */
+  calcReservedHeight() {
+    const rect = wx.getMenuButtonBoundingClientRect()
+    this.setData({ reservedHeight: rect.top - 4 })
   },
 })

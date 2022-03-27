@@ -1,23 +1,129 @@
 // 实时天气
 .weather-now {
-  height: 1200rpx;
+  padding-bottom: 200rpx;
 
   .weather-bg {
-    height: 1200rpx;
-    padding-top: 84rpx;
     background-repeat: no-repeat;
     background-position: 0 5%;
     background-size: 100% auto;
 
+    // 位置条
     .location-bar {
-      height: 60rpx;
-      background-color: #07c160;
+      display: flex;
+      align-items: center;
+      height: 40px; // 备忘：此处确实是使用 px，非手误
+      padding-left: 20rpx;
+
+      .content {
+        margin-left: 10rpx;
+
+        .location {
+          font-size: 32rpx;
+          line-height: 30rpx;
+        }
+
+        .update-text {
+          font-size: 18rpx;
+          margin-top: 6rpx;
+        }
+      }
+
+    }
+
+    .weather-detail {
+      display: flex;
+      justify-content: center;
+      margin-top: 200rpx;
+      --height: 160rpx;
+
+      .weather-icon {
+        width: var(--height);
+        height: var(--height);
+      }
+
+      .temp {
+        font-size: 140rpx;
+        line-height: var(--height);
+        height: var(--height);
+        margin-left: 24rpx;
+      }
+
+      .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-right: 40rpx;
+        margin-left: 16rpx;
+        padding: 30rpx 0 24rpx;
+
+        .degree {
+          width: 24rpx;
+          height: 24rpx;
+          border: 6rpx solid #000;
+          border-radius: 50%;
+        }
+
+        .text {
+          font-size: 36rpx;
+        }
+      }
+    }
+
+    .aqi {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80rpx;
+      margin-top: 40rpx;
+
+      .content {
+        font-size: 30rpx;
+        line-height: 50rpx;
+        height: 50rpx;
+        padding: 0 26rpx;
+        color: #fff;
+        border-radius: 25rpx;
+      }
+    }
+
+    .other {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80rpx;
+      margin-top: 200rpx;
+
+      .list {
+        display: flex;
+        justify-content: space-between;
+        border-radius: 20rpx;
+        background-color: rgba(0, 0, 0, 5%);
+
+        .item {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          margin: 20rpx;
+          padding: 0 10rpx;
+
+          .value {
+            font-size: 120%;
+            font-weight: bold;
+          }
+
+          .name {
+            font-size: 70%;
+          }
+        }
+      }
     }
   }
 }
 
 // 白天
 .day {
+  color: #000;
+
   .sun {
     background-image: linear-gradient(225deg, #fee5ca, #e9f0ff 55%, #dce3fb);
 
@@ -61,6 +167,8 @@
 
 // 夜晚
 .night {
+  color: #fff;
+
   .sun {
     background-image: linear-gradient(225deg, #2a427f, #1b2751);
   }
@@ -95,5 +203,31 @@
     .weather-bg {
       background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_night.png");
     }
+  }
+}
+
+.aqi {
+  .level-1 {
+    background-color: #95b359;
+  }
+
+  .level-2 {
+    background-color: #a9a538;
+  }
+
+  .level-3 {
+    background-color: #e0991d;
+  }
+
+  .level-4 {
+    background-color: #d96161;
+  }
+
+  .level-5 {
+    background-color: #a257d0;
+  }
+
+  .level-6 {
+    background-color: #d94371;
   }
 }
