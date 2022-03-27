@@ -1,5 +1,6 @@
 /** 经纬度坐标组合 */
 import { requestForData } from '../core/http'
+import { calcWeekdayText } from '../utils/time'
 
 export interface LocationCoordinate {
   /** 经度 */
@@ -62,6 +63,10 @@ export interface WeatherNow {
 
 /** 逐天天气预报中单天的数据详情 */
 export interface WeatherDaily {
+  // 处理后增加的字段
+  weekday: string
+
+  // 接口返回的数据
   /** 预报日期 */
   date: string
 
@@ -94,6 +99,9 @@ export interface WeatherDaily {
 
   /** 预报当天最低温度 */
   tempMin: string
+
+  /** 文字描述 */
+  text: string
 
   /** 预报白天天气状况文字描述 */
   textDay: string
@@ -306,10 +314,16 @@ export interface MixedWeatherData {
  */
 export async function getMixedWeatherData(coordinate?: LocationCoordinate): Promise<MixedWeatherData> {
   const location = coordinate ? coordinate.longitude + ',' + coordinate.latitude : undefined
-  return requestForData({
+  const data = await requestForData({
     method: 'GET',
     url: '/weather',
     params: { location },
     auth: false,
   })
+
+  data.f15d.forEach((item: WeatherDaily) => {
+    item.weekday = calcWeekdayText(item.date)
+  })
+
+  return data
 }

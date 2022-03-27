@@ -5,7 +5,7 @@
     <view class="weather-bg" style="padding-top: {{reservedHeight}}px;">
       <!-- 地理位置条 -->
       <view class="location-bar">
-        <mp-icon icon="location" size="26" color="{{now.clock==='day'?'#000':'#fff'}}"></mp-icon>
+        <mp-icon icon="location" size="28" color="{{now.clock==='day'?'#000':'#fff'}}"></mp-icon>
         <view class="content">
           <view class="location">{{location.name}}</view>
           <view class="update-text">{{now.updateMinutesDiff}}分钟前更新</view>
@@ -24,7 +24,7 @@
 
       <!-- 空气质量 -->
       <view class="aqi">
-        <view class="content level-{{airNow.level}}">AQI {{airNow.aqi}} {{airNow.category}}</view>
+        <view class="content aqi-level-{{airNow.level}}">AQI {{airNow.aqi}} {{airNow.category}}</view>
       </view>
 
       <!-- 其他信息 -->
@@ -49,5 +49,31 @@
         </view>
       </view>
     </view>
+  </view>
+
+  <!-- 今明两天预报 -->
+  <view class="forecast-2days">
+    <view class="item">
+      <view class="line">
+        <view class="weekday">{{f2d[0].weekday}}</view>
+        <view class="text">{{f2d[0].text}}</view>
+      </view>
+      <view class="line">
+        <view class="temp">{{f2d[0].tempMax}}/{{f2d[0].tempMin}}℃</view>
+        <view class="aqi aqi-level-{{f2d[0].aqiLevel}}">{{f2d[0].aqiCategory}}</view>
+      </view>
+    </view>
+    <view class="item">
+      <view class="line">
+        <view class="weekday">{{f2d[1].weekday}}</view>
+        <view class="text">{{f2d[1].text}}</view>
+      </view>
+      <view class="line">
+        <view class="temp">{{f2d[1].tempMax}}/{{f2d[1].tempMin}}℃</view>
+        <view class="aqi aqi-level-{{f2d[1].aqiLevel}}">{{f2d[1].aqiCategory}}</view>
+      </view>
+    </view>
+
+
   </view>
 </view>

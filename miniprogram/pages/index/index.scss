@@ -1,3 +1,7 @@
+page {
+  background-color: #eee;
+}
+
 // 实时天气
 .weather-now {
   padding-bottom: 100rpx;
@@ -121,6 +125,50 @@
   }
 }
 
+// 今明两天天气
+.forecast-2days {
+  font-size: 32rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 26rpx 0;
+  color: #000;
+  background-color: #fff;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 375rpx;
+    padding: 0 30rpx;
+
+    .line {
+      display: flex;
+      justify-content: space-between;
+
+      .text {
+        font-size: 30rpx;
+      }
+
+      .aqi {
+        font-size: 26rpx;
+        line-height: 40rpx;
+        height: 40rpx;
+        padding: 0 30rpx;
+        color: #fff;
+        border-radius: 20rpx;
+      }
+    }
+
+    .line:first-child {
+      margin-bottom: 14rpx;
+    }
+  }
+
+  .item:first-child {
+    border-right: 4rpx solid #eee;
+  }
+}
+
 // 白天
 .day {
   color: #000;
@@ -207,28 +255,27 @@
   }
 }
 
-.aqi {
-  .level-1 {
-    background-color: #95b359;
-  }
-
-  .level-2 {
-    background-color: #a9a538;
-  }
-
-  .level-3 {
-    background-color: #e0991d;
-  }
-
-  .level-4 {
-    background-color: #d96161;
-  }
-
-  .level-5 {
-    background-color: #a257d0;
-  }
-
-  .level-6 {
-    background-color: #d94371;
-  }
+.aqi-level-1 {
+  background-color: #95b359;
 }
+
+.aqi-level-2 {
+  background-color: #a9a538;
+}
+
+.aqi-level-3 {
+  background-color: #e0991d;
+}
+
+.aqi-level-4 {
+  background-color: #d96161;
+}
+
+.aqi-level-5 {
+  background-color: #a257d0;
+}
+
+.aqi-level-6 {
+  background-color: #d94371;
+}
+
