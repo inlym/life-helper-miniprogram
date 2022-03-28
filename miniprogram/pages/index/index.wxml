@@ -73,7 +73,51 @@
         <view class="aqi aqi-level-{{f2d[1].aqiLevel}}">{{f2d[1].aqiCategory}}</view>
       </view>
     </view>
+  </view>
 
+  <!-- 24小时预报 -->
+  <view class="weather-hourly">
+    <view class="title">24小时预报</view>
+    <view class="content">
+      <scroll-view class="scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}"
+                   enable-flex="{{true}}" scroll-anchoring="{{true}}" enhanced="{{true}}"
+                   fast-deceleration="{{true}}">
+        <view class="list">
+          <view class="item" wx:for="{{f24h}}" wx:key="time">
+            <view class="time-text">{{item.timeText}}</view>
+            <image class="icon" src="{{item.iconUrl}}" mode="widthFix"></image>
+            <view class="text">{{item.text}}</view>
+            <view class="temp">{{item.temp}}°</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 15天预报 -->
+  <view class="weather-daily">
+    <view class="title">15天预报</view>
+    <view class="content">
+      <scroll-view class="scroll" scroll-x="{{true}}" scroll-with-animation="{{true}}"
+                   enable-flex="{{true}}" scroll-anchoring="{{true}}" enhanced="{{true}}"
+                   fast-deceleration="{{true}}">
+        <view class="list">
+          <view class="item" wx:for="{{f15d}}" wx:key="date">
+            <view class="weekday">{{item.weekday}}</view>
+            <view class="date">{{item.simpleDate}}</view>
+            <view class="text">{{item.textDay}}</view>
+            <image class="icon" src="{{item.iconDayUrl}}"></image>
+            <view class="temp">{{item.tempMax}}°</view>
+            <view class="sep"></view>
+            <view class="temp">{{item.tempMin}}°</view>
+            <image class="icon" src="{{item.iconNightUrl}}"></image>
+            <view class="text">{{item.textNight}}</view>
+
+
+          </view>
+        </view>
+      </scroll-view>
+    </view>
 
   </view>
 </view>

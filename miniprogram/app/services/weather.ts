@@ -1,4 +1,5 @@
 /** 经纬度坐标组合 */
+import dayjs from 'dayjs'
 import { requestForData } from '../core/http'
 import { calcWeekdayText } from '../utils/time'
 
@@ -65,6 +66,9 @@ export interface WeatherNow {
 export interface WeatherDaily {
   // 处理后增加的字段
   weekday: string
+
+  /** 03/19 格式的日期 */
+  simpleDate: string
 
   // 接口返回的数据
   /** 预报日期 */
@@ -151,6 +155,11 @@ export interface WeatherDaily {
 
 /** 逐小时天气预报中的单小时数据详情 */
 export interface WeatherHourly {
+  // 处理后增加的字段
+  timeText: string
+
+  // 接口返回的数据
+
   /** 预报时间 */
   time: string
 
@@ -323,7 +332,32 @@ export async function getMixedWeatherData(coordinate?: LocationCoordinate): Prom
 
   data.f15d.forEach((item: WeatherDaily) => {
     item.weekday = calcWeekdayText(item.date)
+    const d = dayjs(item.date)
+    item.simpleDate = `${d.month()}/${d.date()}`
   })
 
+  processWeatherHourlyTime(data.f24h)
+
   return data
+}
+
+/**
+ * 将逐小时天气预报中的时间字段做处理
+ */
+export function processWeatherHourlyTime(list: WeatherHourly[]): void {
+  list.forEach((item: WeatherHourly, index: number) => {
+    const t = dayjs(item.time)
+    const now = dayjs()
+
+    if (now.isSame(t, 'hour')) {
+      item.timeText = '现在'
+    } else if (t.hour() === 0 && index > 0) {
+      const month = t.month() + 1
+      const day = t.date()
+      item.timeText = `${month}/${day}`
+    } else {
+      const hour = t.hour()
+      item.timeText = `${hour}时`
+    }
+  })
 }

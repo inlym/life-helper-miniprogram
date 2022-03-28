@@ -1,4 +1,5 @@
 page {
+  padding-bottom: 80rpx;
   background-color: #eee;
 }
 
@@ -32,7 +33,6 @@ page {
           opacity: 50%;
         }
       }
-
     }
 
     .weather-detail {
@@ -279,3 +279,109 @@ page {
   background-color: #d94371;
 }
 
+// 标题头
+.title {
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 80rpx;
+  height: 80rpx;
+  padding: 0 26rpx;
+  border-bottom: 2rpx solid #eee;
+}
+
+.weather-hourly {
+  margin-top: 16rpx;
+  color: #000;
+  background-color: #fff;
+
+  .content {
+    .scroll {
+      .list {
+        display: flex;
+        width: 2400rpx;
+        padding: 10rpx;
+
+        .item {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          width: 200rpx;
+
+          .time-text {
+            font-size: 28rpx;
+            color: #999;
+          }
+
+          .icon {
+            width: 50rpx;
+            height: 50rpx;
+            margin-top: 14rpx;
+          }
+
+          .text {
+            font-size: 28rpx;
+            margin-top: 20rpx;
+          }
+
+          .temp {
+            font-size: 34rpx;
+            margin-top: 24rpx;
+            margin-bottom: 16rpx;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 15天预报
+.weather-daily {
+  margin-top: 16rpx;
+  color: #000;
+  background-color: #fff;
+
+  .scroll {
+    .list {
+      display: flex;
+      width: 2000rpx;
+      padding: 10rpx;
+
+      .item {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 200rpx;
+
+        .weekday {
+          font-size: 30rpx;
+          margin-top: 10rpx;
+        }
+
+        .date {
+          font-size: 24rpx;
+          margin-top: 12rpx;
+          color: #888;
+        }
+
+        .text {
+          font-size: 28rpx;
+          margin-top: 10rpx;
+        }
+
+        .icon {
+          width: 50rpx;
+          height: 50rpx;
+          margin-top: 14rpx;
+        }
+
+        .temp {
+          font-size: 32rpx;
+        }
+
+        .sep {
+          height: 60rpx;
+        }
+      }
+    }
+  }
+}
