@@ -9,6 +9,8 @@ import {
   WeatherHourly,
   WeatherNow,
 } from '../../app/services/weather'
+import { drawWeatherDailyLineChart } from '../../app/services/weather-canvas'
+import { createCanvasContext } from '../../app/utils/canvas'
 
 interface F2dItem {
   weekday: string
@@ -42,13 +44,20 @@ Page({
 
   onLoad() {
     this.calcReservedHeight()
-    this.init()
+
+    // 原来各种事件要放在这里处理的，现在放到 onReady 处理了
+  },
+
+  async onReady() {
+    await this.init()
   },
 
   async init() {
     const data = await getMixedWeatherData()
     this.setData(data)
     this.setF2d()
+    const ctx = await createCanvasContext('#f15d')
+    drawWeatherDailyLineChart(ctx, this.data.f15d)
   },
 
   /** 计算预留高度 */

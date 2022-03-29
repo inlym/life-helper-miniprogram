@@ -102,18 +102,21 @@
                          enable-flex="{{true}}" scroll-anchoring="{{true}}" enhanced="{{true}}"
                          fast-deceleration="{{true}}">
                 <view class="list">
+                    <canvas type="2d" id="f15d" class="f15d-canvas"></canvas>
                     <view class="item" wx:for="{{f15d}}" wx:key="date">
-                        <view class="weekday">{{item.weekday}}</view>
-                        <view class="date">{{item.simpleDate}}</view>
-                        <view class="text">{{item.textDay}}</view>
-                        <image class="icon" src="{{item.iconDayUrl}}"></image>
-                        <view class="temp">{{item.tempMax}}°</view>
-                        <view class="sep"></view>
-                        <view class="temp">{{item.tempMin}}°</view>
-                        <image class="icon" src="{{item.iconNightUrl}}"></image>
-                        <view class="text">{{item.textNight}}</view>
-
-
+                        <view class="top-area">
+                            <view class="weekday">{{item.weekday}}</view>
+                            <view class="date">{{item.simpleDate}}</view>
+                            <view class="text">{{item.textDay}}</view>
+                            <image class="icon" src="{{item.iconDayUrl}}"></image>
+                            <view class="temp">{{item.tempMax}}°</view>
+                        </view>
+                        <view class="free-space"></view>
+                        <view class="bottom-area">
+                            <view class="temp">{{item.tempMin}}°</view>
+                            <image class="icon" src="{{item.iconNightUrl}}"></image>
+                            <view class="text">{{item.textNight}}</view>
+                        </view>
                     </view>
                 </view>
             </scroll-view>

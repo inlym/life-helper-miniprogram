@@ -342,15 +342,48 @@ page {
 
   .scroll {
     .list {
+      position: relative;
       display: flex;
       width: 2000rpx;
-      padding: 10rpx;
+      padding: 10rpx 0;
+
+      --canvas-height: 260rpx;
+      --top-area-height: 300rpx;
+
+      .f15d-canvas {
+        position: absolute;
+        top: var(--top-area-height);
+        width: 2000rpx;
+        height: var(--canvas-height);
+      }
 
       .item {
         display: flex;
         align-items: center;
         flex-direction: column;
         width: 200rpx;
+
+        .top-area {
+          position: relative;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: space-between;
+          height: var(--top-area-height);
+        }
+
+        .free-space {
+          height: var(--canvas-height);
+        }
+
+        .bottom-area {
+          position: relative;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 200rpx;
+        }
 
         .weekday {
           font-size: 30rpx;
@@ -375,11 +408,9 @@ page {
         }
 
         .temp {
-          font-size: 32rpx;
-        }
-
-        .sep {
-          height: 60rpx;
+          font-size: 34rpx;
+          position: relative;
+          left: 4rpx;
         }
       }
     }
