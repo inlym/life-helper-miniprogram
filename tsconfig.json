@@ -20,7 +20,8 @@
     "strictPropertyInitialization": true,
     "lib": [
       "ES6",
-      "ES2016.Array.Include"
+      "ES2016.Array.Include",
+      "DOM"
     ],
     "types": [
       "miniprogram-api-typings"
