@@ -1,0 +1,17 @@
+<view bindtap="viewTap">
+    <!-- 内部嵌入实际的元素 -->
+    <slot></slot>
+</view>
+
+    <!-- weui 的弹窗组件 -->
+<mp-dialog
+    show="{{ showDialog }}"
+    title="{{ dialog.title }}"
+    mask-closable="{{ false }}"
+    buttons="{{ dialog.buttons }}"
+    bindbuttontap="dialogButtonTap"
+>
+    <view>
+        {{ dialog.content }}
+    </view>
+</mp-dialog>
