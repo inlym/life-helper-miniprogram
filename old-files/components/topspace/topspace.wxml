@@ -1,1 +1,0 @@
-<view class="topspace" style="height:{{ reservedHeight + offset }}px;opacity:{{ opacity }};"></view>

@@ -1,4 +1,4 @@
-@import '/assets/styles/iconfont.wxss';
+@import "/assets/styles/iconfont.wxss";
 
 /* 页面根元素 */
 page {
@@ -43,4 +43,10 @@ navigator {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+/* 通用 view 组件 按下去的样式 */
+.hover {
+  opacity: 0.3;
+  background-color: #f7f7f7;
 }

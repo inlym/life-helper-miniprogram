@@ -1,6 +1,0 @@
-<view class="weui-footer {{ fixed ? 'weui-footer_fixed-bottom' : '' }}">
-  <view class="weui-footer__links">
-    <navigator class="weui-footer__link" url="{{ url }}">{{ title }}</navigator>
-  </view>
-  <view class="weui-footer__text">{{ desc }}</view>
-</view>
