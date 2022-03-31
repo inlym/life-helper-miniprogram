@@ -1,7 +1,7 @@
 /** 经纬度坐标组合 */
 import dayjs from 'dayjs'
-import { requestForData } from '../core/http'
-import { calcWeekdayText } from '../utils/time'
+import {requestForData} from '../core/http'
+import {calcWeekdayText} from '../utils/time'
 
 export interface LocationCoordinate {
   /** 经度 */
@@ -326,7 +326,7 @@ export async function getMixedWeatherData(coordinate?: LocationCoordinate): Prom
   const data = await requestForData({
     method: 'GET',
     url: '/weather',
-    params: { location },
+    params: {location},
     auth: false,
   })
 

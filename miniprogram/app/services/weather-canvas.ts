@@ -1,7 +1,7 @@
 /**
  * 在 canvas 中画逐日温度折线图
  */
-import { WeatherDaily } from './weather'
+import {WeatherDaily} from './weather-data'
 
 /** X 轴和 Y 轴上的坐标 */
 export interface Coordinate {
@@ -53,8 +53,8 @@ export function drawWeatherDailyLineChart(ctx: CanvasRenderingContext2D, list: W
     const minY = getY(minList[i])
     const maxY = getY(maxList[i])
 
-    minCoordinates[i] = { x, y: minY }
-    maxCoordinates[i] = { x, y: maxY }
+    minCoordinates[i] = {x, y: minY}
+    maxCoordinates[i] = {x, y: maxY}
   }
 
   // 开始画图
