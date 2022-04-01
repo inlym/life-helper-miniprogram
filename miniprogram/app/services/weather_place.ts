@@ -7,26 +7,11 @@ export interface WeatherPlace {
   /** 主键 ID */
   id: number
 
-  /** 位置名称 */
+  /** 地点名称 */
   name: string
 
-  /** 详细地址 */
-  address: string
-
-  /** 经度 */
-  longitude: string
-
-  /** 纬度 */
-  latitude: string
-
-  /** 坐标点所在省 */
-  province: string
-
-  /** 坐标点所在市 */
-  city: string
-
-  /** 坐标点所在区 */
-  district: string
+  /** 地区名称，例如：“杭州市西湖区” */
+  region: string
 }
 
 /**

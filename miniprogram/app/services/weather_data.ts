@@ -317,35 +317,18 @@ export interface MixedWeatherData {
 }
 
 /**
- * 获取汇总的天气数据
+ * 处理天气数据
  *
- * @param coordinate 经纬度坐标
+ * @param data 天气数据
  */
-export async function getMixedWeatherData(coordinate?: LocationCoordinate): Promise<MixedWeatherData> {
-  const location = coordinate ? coordinate.longitude + ',' + coordinate.latitude : undefined
-  const data = await requestForData({
-    method: 'GET',
-    url: '/weather',
-    params: {location},
-    auth: false,
-  })
-
+export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
   data.f15d.forEach((item: WeatherDaily) => {
     item.weekday = calcWeekdayText(item.date)
     const d = dayjs(item.date)
     item.simpleDate = `${d.month()}/${d.date()}`
   })
 
-  processWeatherHourlyTime(data.f24h)
-
-  return data
-}
-
-/**
- * 将逐小时天气预报中的时间字段做处理
- */
-export function processWeatherHourlyTime(list: WeatherHourly[]): void {
-  list.forEach((item: WeatherHourly, index: number) => {
+  data.f24h.forEach((item: WeatherHourly, index: number) => {
     const t = dayjs(item.time)
     const now = dayjs()
 
@@ -360,4 +343,39 @@ export function processWeatherHourlyTime(list: WeatherHourly[]): void {
       item.timeText = `${hour}时`
     }
   })
+
+  return data
+}
+
+/**
+ * 获取汇总的天气数据
+ *
+ * @param coordinate 经纬度坐标
+ */
+export async function getMixedWeatherData(coordinate?: LocationCoordinate): Promise<MixedWeatherData> {
+  const location = coordinate ? coordinate.longitude + ',' + coordinate.latitude : undefined
+  const data = await requestForData({
+    method: 'GET',
+    url: '/weather',
+    params: {location},
+    auth: false,
+  })
+
+  return processWeatherData(data)
+}
+
+/**
+ * 根据天气地点 ID 获取天气数据
+ *
+ * @param placeId 天气地点 ID
+ */
+export async function getMixedWeatherDataByPlaceId(placeId: number): Promise<MixedWeatherData> {
+  const data = await requestForData({
+    method: 'GET',
+    url: '/weather',
+    params: {place_id: placeId},
+    auth: true,
+  })
+
+  return processWeatherData(data)
 }
