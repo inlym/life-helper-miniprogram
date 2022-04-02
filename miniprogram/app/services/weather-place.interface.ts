@@ -9,3 +9,13 @@ export interface WeatherPlace {
   /** 地区名称，例如：“杭州市西湖区” */
   region: string
 }
+
+/** 获取天气地点列表响应数据 */
+export interface GetWeatherPlacesResult {
+  list: WeatherPlace[]
+}
+
+/** 移除天气地点响应数据 */
+export interface RemoveWeatherPlaceResult {
+  id: number
+}

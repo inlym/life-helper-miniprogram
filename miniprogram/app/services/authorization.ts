@@ -1,7 +1,9 @@
-// 微信授权相关方法
+/**
+ * 信授权相关方法
+ */
 
 /** 授权状态 */
-import { AuthSetting } from '../utils/wx-typings'
+import {AuthSetting} from '../utils/wx-typings'
 
 export enum AuthorizeStatus {
   /** 已授权 */

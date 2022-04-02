@@ -1,13 +1,6 @@
 /** 用户资料 */
-import { requestForData } from '../core/http'
-
-export interface UserInfo {
-  /** 用户昵称 */
-  nickName: string
-
-  /** 用户头像图片的 URL */
-  avatarUrl: string
-}
+import {requestForData} from '../core/http'
+import {UserInfo} from './userinfo.interface'
 
 /**
  * 获取用户个人资料

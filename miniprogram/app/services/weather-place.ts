@@ -1,7 +1,7 @@
 /** 天气地点 */
 import {requestForData} from '../core/http'
 import {ChooseLocationSuccessCallbackResult} from '../utils/wx-typings'
-import {WeatherPlace} from './weather-place.interface'
+import {GetWeatherPlacesResult, RemoveWeatherPlaceResult, WeatherPlace} from './weather-place.interface'
 
 /**
  * 新增一个天气地点
@@ -16,10 +16,6 @@ export function addWeatherPlace(result: ChooseLocationSuccessCallbackResult): Pr
   })
 }
 
-export interface GetWeatherPlacesResult {
-  list: WeatherPlace[]
-}
-
 /**
  * 获取天气地点列表
  */
@@ -31,10 +27,6 @@ export async function getWeatherPlaces(): Promise<WeatherPlace[]> {
   })
 
   return data.list
-}
-
-export interface RemoveWeatherPlaceResult {
-  id: number
 }
 
 /**
