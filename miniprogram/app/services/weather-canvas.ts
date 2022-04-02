@@ -1,7 +1,8 @@
 /**
  * 在 canvas 中画逐日温度折线图
  */
-import {WeatherDaily} from './weather_data'
+
+import {WeatherDaily} from './weather-data.interface'
 
 /** X 轴和 Y 轴上的坐标 */
 export interface Coordinate {
