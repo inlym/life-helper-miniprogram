@@ -2,7 +2,7 @@
 import dayjs from 'dayjs'
 import {requestForData} from '../core/http'
 import {calcWeekdayText} from '../utils/time'
-import {MixedWeatherData, WeatherDaily, WeatherHourly} from './weather-data.interface'
+import {AirDaily, F2dItem, MixedWeatherData, WeatherDaily, WeatherHourly} from './weather-data.interface'
 
 /**
  * 处理天气数据
@@ -31,6 +31,33 @@ export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
       item.timeText = `${hour}时`
     }
   })
+
+  // 处理未来2天的天气数据
+  const todayDaily = data.f15d.find((item: WeatherDaily) => item.weekday === '今天')
+  const tomorrowDaily = data.f15d.find((item: WeatherDaily) => item.weekday === '明天')
+
+  const todayAqi = data.air5d.find((item: AirDaily) => item.date === todayDaily!.date)
+  const tomorrowAqi = data.air5d.find((item: AirDaily) => item.date === tomorrowDaily!.date)
+
+  const f2d: F2dItem[] = []
+  f2d[0] = {
+    weekday: '今天',
+    text: todayDaily!.text,
+    tempMax: todayDaily!.tempMax,
+    tempMin: todayDaily!.tempMin,
+    aqiCategory: todayAqi!.category,
+    aqiLevel: todayAqi!.level,
+  }
+  f2d[1] = {
+    weekday: '明天',
+    text: tomorrowDaily!.text,
+    tempMax: tomorrowDaily!.tempMax,
+    tempMin: tomorrowDaily!.tempMin,
+    aqiCategory: tomorrowAqi!.category,
+    aqiLevel: tomorrowAqi!.level,
+  }
+
+  data.f2d = f2d
 
   return data
 }

@@ -1,5 +1,6 @@
 // pages/me/me.ts
-import { getUserInfo, updateUserInfo, UserInfo } from '../../app/services/userinfo'
+import {getUserInfo, updateUserInfo} from '../../app/services/userinfo'
+import {UserInfo} from '../../app/services/userinfo.interface'
 
 Page({
   /**
@@ -7,10 +8,7 @@ Page({
    */
   data: {
     /** 用户资料 */
-    userInfo: { nickName: '', avatarUrl: '' } as UserInfo,
-
-    /** LOGO 图片的本地路径（当头像为空时，使用 LOGO 替代） */
-    logoUrl: '/assets/images/common/logo.jpg',
+    userInfo: {} as UserInfo,
   },
 
   /**
@@ -18,7 +16,7 @@ Page({
    */
   async init() {
     const userInfo = await getUserInfo()
-    this.setData({ userInfo })
+    this.setData({userInfo})
   },
 
   /**
@@ -49,7 +47,7 @@ Page({
       avatarUrl: result.userInfo.avatarUrl,
     }
 
-    this.setData({ userInfo })
+    this.setData({userInfo})
     await updateUserInfo(userInfo)
   },
 })

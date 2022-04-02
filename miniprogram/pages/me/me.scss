@@ -15,9 +15,10 @@
   .info {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 360rpx;
     margin-left: 30rpx;
+    padding: 4rpx 0 10rpx;
 
     .nickname {
       font-size: 38rpx;

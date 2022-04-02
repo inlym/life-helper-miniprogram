@@ -4,4 +4,7 @@ export interface UserInfo {
 
   /** 用户头像图片的 URL */
   avatarUrl: string
+
+  /** 资料是否为空 */
+  empty?: boolean
 }

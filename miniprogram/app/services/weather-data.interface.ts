@@ -1,3 +1,5 @@
+import {WeatherPlace} from './weather-place.interface'
+
 /** 实时天气数据 */
 export interface WeatherNow {
   /** 当前 API 的最近更新时间，不是原接口返回的时间节点，而是该时间与当前时间的时间差，单位：分钟 */
@@ -287,18 +289,51 @@ export interface AirDaily {
   primary: string
 }
 
+/** 地理位置 */
 export interface Location {
   name: string
+
   desc: string
+}
+
+/** 未来2天预报项目 */
+export interface F2dItem {
+  weekday: '今天' | '明天'
+
+  text: string
+
+  tempMax: string
+
+  tempMin: string
+
+  aqiCategory: string
+
+  aqiLevel: string
 }
 
 export interface MixedWeatherData {
   air5d: AirDaily[]
+
   airNow: AirNow
+
   f15d: WeatherDaily[]
+
   f24h: WeatherHourly[]
+
   indices3d: IndicesItem[]
-  location: Location
+
   now: WeatherNow
+
   rain: MinutelyRain
+
+  // location 和 place 只会同时存在一个
+  // 当不带参数查询时，服务端根据 IP 地址查询定位返回 location
+  // 当使用地点 ID 查询时，返回这个 ID 对应的 place
+
+  location: Location
+
+  place: WeatherPlace
+
+  // 自己添加在字段
+  f2d: F2dItem[]
 }

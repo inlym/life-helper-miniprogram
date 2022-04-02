@@ -1,37 +1,23 @@
 <!-- 顶部占位区域 -->
-<top-space offset="{{20}}"></top-space>
+<top-space offset="{{30}}"></top-space>
 
-  <!-- 用户资料 -->
+    <!-- 用户资料 -->
 <view class="userinfo">
-  <block wx:if="{{ userInfo.avatarUrl }}">
     <!-- 头像 -->
     <view class="avatar">
-      <image src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
+        <image src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
     </view>
 
     <!-- 昵称、按钮 -->
     <view class="info">
-      <view class="nickname">{{ userInfo.nickName }}</view>
-      <view class="desc">欢迎使用我的个人助手</view>
-    </view>
-  </block>
-
-  <!-- 用户个人信息（为空情况） -->
-  <block wx:else>
-    <!-- 头像 -->
-    <view class="avatar">
-      <image src="{{ logoUrl }}" mode="widthFix"></image>
+        <view class="nickname">{{ userInfo.nickName }}</view>
+        <view wx:if="{{userInfo.empty}}" class="desc">点击右侧按钮获取头像</view>
+        <view wx:else class="desc">欢迎使用小鸣助手</view>
     </view>
 
-    <!-- 昵称、按钮 -->
-    <view class="info">
-      <view class="nickname">我的个人助手</view>
-      <view class="desc">点击更新获取昵称</view>
-    </view>
-  </block>
 
-  <view class="operator">
-    <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
-  </view>
+    <view class="operator">
+        <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
+    </view>
 
 </view>
