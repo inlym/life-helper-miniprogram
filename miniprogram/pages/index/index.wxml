@@ -1,13 +1,18 @@
 <!-- 最外层的包裹容器 -->
-<view class="page {{now.clock}}">
+<view class="page {{clock}}">
     <!-- 实时天气 -->
     <view class="weather-now {{now.type}}">
         <view class="weather-bg" style="padding-top: {{reservedHeight}}px;">
             <!-- 地理位置条 -->
-            <view class="location-bar">
-                <mp-icon icon="location" size="28" color="{{now.clock==='day'?'#000':'#fff'}}"></mp-icon>
+            <view class="location-bar" bind:tap="handleLocationBarTap">
+                <mp-icon class="add-icon" icon="add" size="24" color="{{iconColor}}"></mp-icon>
                 <view class="content">
-                    <view class="location">{{location.name}}</view>
+                    <view class="location">
+                        <share-element transform key="{{currentPlaceId}}" duration="400" class="location-name">{{locationName}}
+                        </share-element>
+                        <mp-icon class="location-icon" icon="location" size="20"
+                                 color="{{iconColor}}"></mp-icon>
+                    </view>
                     <view class="update-text">{{now.updateMinutesDiff}}分钟前更新</view>
                 </view>
             </view>
@@ -17,7 +22,7 @@
                 <image src="{{now.iconUrl}}" mode="widthFix" class="weather-icon"></image>
                 <view class="temp">{{now.temp}}</view>
                 <view class="right">
-                    <view class="degree" style="border-color: {{now.clock==='day'?'#000':'#fff'}};"></view>
+                    <view class="degree" style="border-color: {{iconColor}};"></view>
                     <view class="text">{{now.text}}</view>
                 </view>
             </view>
@@ -124,3 +129,71 @@
 
     </view>
 </view>
+
+
+    <!-- 以下非页面文档流元素 -->
+<page-container class="page-container {{clock}}" show="{{showPageContainer}}" duration="1200" round
+                close-on-slideDown>
+    <view class="main">
+        <view class="header">
+            <view class="title">切换城市</view>
+            <view class="close" bind:tap="closePageContainer">
+                <mp-icon icon="close2" size="26"></mp-icon>
+            </view>
+        </view>
+
+        <!-- 内容区 -->
+        <view class="body">
+            <!-- 当前定位 -->
+            <view class="location">
+                <view class="title">
+                    <mp-icon class="icon" icon="location" size="20"></mp-icon>
+                    <text class="text">当前定位</text>
+                </view>
+                <view class="{{now.type}}" bind:tap="handleLocationItemTap" hover-class="hover">
+                    <view class="weather-bg">
+                        <view class="left">
+                            <share-element transform="{{currentPlaceId===0}}" key="0" duration="1000" class="name">
+                                {{location.name}}
+                            </share-element>
+                            <view class="region">{{location.region}}</view>
+                        </view>
+                        <view class="separator"></view>
+                        <view class="right">
+                            <image class="icon" src="{{now.iconUrl}}"></image>
+                            <view class="temp">{{now.temp}}℃</view>
+                        </view>
+                    </view>
+                </view>
+
+            </view>
+
+            <!-- 关注城市列表 -->
+            <view class="places">
+                <view class="title">
+                    <mp-icon class="icon" icon="star" size="20"></mp-icon>
+                    <text class="text">我的关注</text>
+                </view>
+                <view class="list">
+                    <view class="item {{item.type}}" wx:for="{{places}}" data-id="{{item.id}}" wx:key="id"
+                          hover-class="hover" bind:tap="handlePlaceItemTap">
+                        <view class="weather-bg">
+                            <view class="left">
+                                <share-element transform="{{currentPlaceId===item.id}}" key="{{item.id}}"
+                                               duration="1000"
+                                               class="name">{{item.name}}
+                                </share-element>
+                                <view class="region">{{item.region}}</view>
+                            </view>
+                            <view class="separator"></view>
+                            <view class="right">
+                                <image class="icon" src="{{item.iconUrl}}"></image>
+                                <view class="temp">{{item.temp}}℃</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</page-container>

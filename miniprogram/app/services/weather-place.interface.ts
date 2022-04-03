@@ -8,6 +8,18 @@ export interface WeatherPlace {
 
   /** 地区名称，例如：“杭州市西湖区” */
   region: string
+
+  /** 图标的 URL 地址 */
+  iconUrl: string
+
+  /** 自行归纳的天气类型 */
+  type: string
+
+  /** 日夜类型：day, night */
+  clock: string
+
+  /** 温度，默认单位：摄氏度 */
+  temp: string
 }
 
 /** 获取天气地点列表响应数据 */

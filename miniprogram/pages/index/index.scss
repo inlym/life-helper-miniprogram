@@ -1,3 +1,5 @@
+@import "../../assets/styles/weather.scss";
+
 page {
   padding-bottom: 80rpx;
   background-color: #eee;
@@ -14,17 +16,36 @@ page {
 
     // 位置条
     .location-bar {
+      position: relative;
       display: flex;
       align-items: center;
       height: 40px; // 备忘：此处确实是使用 px，非手误
       padding-left: 20rpx;
 
+      .add-icon {
+        position: relative;
+        top: -10rpx;
+      }
+
       .content {
         margin-left: 10rpx;
 
         .location {
-          font-size: 32rpx;
-          line-height: 30rpx;
+          position: relative;
+          display: flex;
+          align-items: center;
+          height: 32rpx;
+
+          .location-name {
+            font-size: 32rpx;
+            line-height: 32rpx;
+          }
+
+          .location-icon {
+            position: relative;
+            top: -4rpx;
+            margin-left: 16rpx;
+          }
         }
 
         .update-text {
@@ -169,116 +190,6 @@ page {
   }
 }
 
-// 白天
-.day {
-  color: #000;
-
-  .sun {
-    background-image: linear-gradient(225deg, #fee5ca, #e9f0ff 55%, #dce3fb);
-
-    .weather-bg {
-      background-image: none;
-    }
-  }
-
-  .cloudy {
-    background-image: linear-gradient(225deg, #d0dae8, #ccd4df 55%, #a5b3c5);
-
-    .weather-bg {
-      background-image: url("https://static.lifehelper.com.cn/qweather/bg/cloudy_day.png");
-    }
-  }
-
-  .rain {
-    background-image: linear-gradient(225deg, #dbebff, #dde5f4 55%, #becddd);
-
-    .weather-bg {
-      background-image: url("https://static.lifehelper.com.cn/qweather/bg/rain_day.png");
-    }
-  }
-
-  .snow {
-    background-image: linear-gradient(225deg, #d2f0fd, #e6f8fe 55%, #d6eded);
-
-    .weather-bg {
-      background-image: url("https://static.lifehelper.com.cn/qweather/bg/snow_day.png");
-    }
-  }
-
-  .haze {
-    background-image: linear-gradient(225deg, #b29c82, #ded9d7 64.29%, #d9d7dc);
-
-    .weather-bg {
-      background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_day.png");
-    }
-  }
-}
-
-// 夜晚
-.night {
-  color: #fff;
-
-  .sun {
-    background-image: linear-gradient(225deg, #2a427f, #1b2751);
-  }
-
-  .cloudy {
-    background-image: linear-gradient(225deg, #8089a5, #424c66);
-
-    .weather-bg {
-      background-image: url("https://static.lifehelper.com.cn/qweather/bg/cloudy_night.png");
-    }
-  }
-
-  .rain {
-    background-image: linear-gradient(225deg, #2c4a77, #1f3b59);
-
-    .weather-bg {
-      background-image: url("https://static.lifehelper.com.cn/qweather/bg/rain_night.png");
-    }
-  }
-
-  .snow {
-    background-image: linear-gradient(225deg, #18779e, #0d3f54);
-
-    .weather-bg {
-      background-image: url("https://static.lifehelper.com.cn/qweather/bg/snow_night.png");
-    }
-  }
-
-  .haze {
-    background-image: linear-gradient(225deg, #8f8d52, #2b333c);
-
-    .weather-bg {
-      background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_night.png");
-    }
-  }
-}
-
-.aqi-level-1 {
-  background-color: #95b359;
-}
-
-.aqi-level-2 {
-  background-color: #a9a538;
-}
-
-.aqi-level-3 {
-  background-color: #e0991d;
-}
-
-.aqi-level-4 {
-  background-color: #d96161;
-}
-
-.aqi-level-5 {
-  background-color: #a257d0;
-}
-
-.aqi-level-6 {
-  background-color: #d94371;
-}
-
 // 标题头
 .title {
   font-size: 30rpx;
@@ -411,6 +322,102 @@ page {
           font-size: 34rpx;
           position: relative;
           left: 4rpx;
+        }
+      }
+    }
+  }
+}
+
+.page-container {
+  .main {
+    height: 1200rpx;
+
+    .header {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      height: 80rpx;
+      padding: 0 26rpx;
+      border-bottom: 2rpx solid #eee;
+
+      .title {
+        font-size: 30rpx;
+        font-weight: bold;
+        line-height: 80rpx;
+        height: 80rpx;
+        color: #000;
+      }
+
+      .close {
+        position: absolute;
+        top: calc(50% - 13px);
+        right: 26rpx;
+      }
+    }
+
+    .body {
+      .location {
+        margin-bottom: 40rpx;
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          position: relative;
+          top: -2rpx;
+          height: 80rpx;
+          margin-right: 8rpx;
+        }
+
+        .text {
+          font-size: 30rpx;
+          font-weight: bold;
+          line-height: 80rpx;
+          height: 80rpx;
+          color: #000;
+        }
+      }
+
+      .weather-bg {
+        display: flex;
+        align-items: center;
+        height: 120rpx;
+        margin-bottom: 10rpx;
+        padding: 0 32rpx;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: 100% auto;
+      }
+
+      .left {
+        display: flex;
+        flex-direction: column;
+
+        .name {
+          font-size: 32rpx;
+        }
+
+        .region {
+          font-size: 22rpx;
+          opacity: 50%;
+        }
+      }
+
+      .separator {
+        flex-grow: 1;
+      }
+
+      .right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .icon {
+          width: 50rpx;
+          height: 50rpx;
+          margin-right: 10rpx;
         }
       }
     }

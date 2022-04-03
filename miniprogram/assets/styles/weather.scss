@@ -1,0 +1,111 @@
+// 天气类样式
+
+// 白天
+.day {
+  color: #000;
+
+  .sun {
+    background-image: linear-gradient(225deg, #fee5ca, #e9f0ff 55%, #dce3fb);
+
+    .weather-bg {
+      background-image: none;
+    }
+  }
+
+  .cloudy {
+    background-image: linear-gradient(225deg, #d0dae8, #ccd4df 55%, #a5b3c5);
+
+    .weather-bg {
+      background-image: url("https://static.lifehelper.com.cn/qweather/bg/cloudy_day.png");
+    }
+  }
+
+  .rain {
+    background-image: linear-gradient(225deg, #dbebff, #dde5f4 55%, #becddd);
+
+    .weather-bg {
+      background-image: url("https://static.lifehelper.com.cn/qweather/bg/rain_day.png");
+    }
+  }
+
+  .snow {
+    background-image: linear-gradient(225deg, #d2f0fd, #e6f8fe 55%, #d6eded);
+
+    .weather-bg {
+      background-image: url("https://static.lifehelper.com.cn/qweather/bg/snow_day.png");
+    }
+  }
+
+  .haze {
+    background-image: linear-gradient(225deg, #b29c82, #ded9d7 64.29%, #d9d7dc);
+
+    .weather-bg {
+      background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_day.png");
+    }
+  }
+}
+
+// 夜晚
+.night {
+  color: #fff;
+
+  .sun {
+    background-image: linear-gradient(225deg, #2a427f, #1b2751);
+  }
+
+  .cloudy {
+    background-image: linear-gradient(225deg, #8089a5, #424c66);
+
+    .weather-bg {
+      background-image: url("https://static.lifehelper.com.cn/qweather/bg/cloudy_night.png");
+    }
+  }
+
+  .rain {
+    background-image: linear-gradient(225deg, #2c4a77, #1f3b59);
+
+    .weather-bg {
+      background-image: url("https://static.lifehelper.com.cn/qweather/bg/rain_night.png");
+    }
+  }
+
+  .snow {
+    background-image: linear-gradient(225deg, #18779e, #0d3f54);
+
+    .weather-bg {
+      background-image: url("https://static.lifehelper.com.cn/qweather/bg/snow_night.png");
+    }
+  }
+
+  .haze {
+    background-image: linear-gradient(225deg, #8f8d52, #2b333c);
+
+    .weather-bg {
+      background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_night.png");
+    }
+  }
+}
+
+.aqi-level-1 {
+  background-color: #95b359;
+}
+
+.aqi-level-2 {
+  background-color: #a9a538;
+}
+
+.aqi-level-3 {
+  background-color: #e0991d;
+}
+
+.aqi-level-4 {
+  background-color: #d96161;
+}
+
+.aqi-level-5 {
+  background-color: #a257d0;
+}
+
+.aqi-level-6 {
+  background-color: #d94371;
+}

@@ -293,7 +293,7 @@ export interface AirDaily {
 export interface Location {
   name: string
 
-  desc: string
+  region: string
 }
 
 /** 未来2天预报项目 */
