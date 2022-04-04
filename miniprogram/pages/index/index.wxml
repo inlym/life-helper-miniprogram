@@ -165,14 +165,35 @@
                         </view>
                     </view>
                 </view>
-
             </view>
 
-            <!-- 关注城市列表 -->
-            <view class="places">
-                <view class="title">
-                    <mp-icon class="icon" icon="star" size="20"></mp-icon>
-                    <text class="text">我的关注</text>
+            <!-- 关注城市列表（列表为空情况） -->
+            <view class="places" wx:if="{{places.length===0}}">
+                <view class="container">
+                    <authorize-element scope="scope.userLocation">
+                        <button type="primary" bind:tap="addNewPlace">添加关注地点</button>
+                    </authorize-element>
+
+                </view>
+            </view>
+
+            <!-- 关注城市列表（列表不为空情况） -->
+            <view class="places" wx:else>
+                <view class="title-container">
+                    <view class="title">
+                        <mp-icon class="icon" icon="star" size="20"></mp-icon>
+                        <text class="text">我的关注</text>
+                    </view>
+                    <view class="right">
+                        <view class="edit">
+                            <button plain size="mini" bind:tap="editPlaceList">编辑</button>
+                        </view>
+                        <authorize-element scope="scope.userLocation" class="add">
+                            <button type="primary" size="mini" bind:tap="addNewPlace">添加</button>
+                        </authorize-element>
+
+                    </view>
+
                 </view>
                 <view class="list">
                     <view class="item {{item.type}}" wx:for="{{places}}" data-id="{{item.id}}" wx:key="id"
@@ -193,7 +214,12 @@
                         </view>
                     </view>
                 </view>
+
             </view>
+
         </view>
     </view>
 </page-container>
+
+<mp-actionSheet bindactiontap="handleActionsheetItemTap" show="{{showActionsheet}}" actions="{{actionsheetGroups}}"
+                title="请选择你要删除的地点"></mp-actionSheet>

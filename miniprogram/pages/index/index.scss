@@ -357,7 +357,28 @@ page {
 
     .body {
       .location {
-        margin-bottom: 40rpx;
+        margin-top: 20rpx;
+      }
+
+      .places {
+        margin-top: 80rpx;
+      }
+
+      .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .right {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding-right: 30rpx;
+
+          .add {
+            margin-left: 20rpx;
+          }
+        }
       }
 
       .title {
@@ -420,6 +441,7 @@ page {
           margin-right: 10rpx;
         }
       }
+
     }
   }
 }

@@ -3,6 +3,7 @@ import {getMixedWeatherDataAnonymous, getMixedWeatherDataByPlaceId} from '../../
 import {
   AirDaily,
   AirNow,
+  F2dItem,
   IndicesItem,
   Location,
   MinutelyRain,
@@ -10,23 +11,21 @@ import {
   WeatherHourly,
   WeatherNow,
 } from '../../app/services/weather-data.interface'
-import {getWeatherPlaces} from '../../app/services/weather-place'
+import {addWeatherPlace, getWeatherPlaces, removeWeatherPlace} from '../../app/services/weather-place'
 import {WeatherPlace} from '../../app/services/weather-place.interface'
 import {createCanvasContext} from '../../app/utils/canvas'
-import {BaseEvent} from '../../app/utils/wx-typings'
+import {BaseEvent, CustomEvent} from '../../app/utils/wx-typings'
 
-interface F2dItem {
-  weekday: string
-
+interface ActionsheetGroup {
   text: string
 
-  tempMax: string
+  value: number
+}
 
-  tempMin: string
+interface ActionSheetItemTapDetail {
+  index: number
 
-  aqiCategory: string
-
-  aqiLevel: string
+  value: number
 }
 
 Page({
@@ -60,7 +59,12 @@ Page({
     reservedHeight: 80,
 
     /** 是否展示页面容器 */
-    showPageContainer: false,
+    showPageContainer: true,
+
+    /** 是否展示底部弹起的操作按钮组件 */
+    showActionsheet: false,
+
+    actionsheetGroups: [] as ActionsheetGroup[],
 
     /** 'day' | 'night' */
     clock: 'day',
@@ -165,5 +169,74 @@ Page({
       this.getWeatherDataByPlaceId(placeId)
     }
     this.closePageContainer()
+  },
+
+  /** 添加新的关注城市 */
+  async addNewPlace() {
+    // 目前设定只允许添加 5 个
+    if (this.data.places.length >= 5) {
+      await wx.showModal({
+        title: '提示',
+        content: '目前仅支持添加5个地点，如需添加，请先删除其他地点！',
+        showCancel: false,
+        confirmText: '确定',
+      })
+    } else {
+      const result = await wx.chooseLocation({})
+      if (result.name) {
+        const place = await addWeatherPlace(result)
+        const list = this.data.places
+        list.unshift(place)
+
+        this.setData({
+          places: list,
+          currentPlaceId: place.id,
+          showPageContainer: false,
+        })
+
+        await wx.showToast({icon: 'none', title: '添加成功，已为您展示该地点的天气'})
+        this.getWeatherDataByPlaceId(place.id)
+      } else {
+        await wx.showModal({
+          content: '您未选择地点！',
+        })
+      }
+    }
+  },
+
+  processActionsheetGroups() {
+    const groups: ActionsheetGroup[] = this.data.places.map((item) => {
+      const text = item.name
+      const value = item.id
+      return {text, value}
+    })
+
+    this.setData({actionsheetGroups: groups})
+  },
+
+  /** 编辑天气地点列表 */
+  async editPlaceList() {
+    this.processActionsheetGroups()
+    this.setData({showActionsheet: true})
+  },
+
+  /** 处理弹出框点击 */
+  async handleActionsheetItemTap(e: CustomEvent<ActionSheetItemTapDetail>) {
+    const placeId = e.detail.value
+    const index = e.detail.index
+    console.log(index)
+    if (placeId === this.data.currentPlaceId) {
+      await wx.showModal({
+        title: '提示',
+        content: '当前地点已选中展示，请先切换为其他地点后再操作删除！',
+        showCancel: false,
+      })
+    } else {
+      const list = this.data.places
+      list.splice(index, 1)
+      this.setData({places: list, showActionsheet: false})
+      await removeWeatherPlace(placeId)
+      await wx.showToast({icon: 'success', title: '删除成功'})
+    }
   },
 })
