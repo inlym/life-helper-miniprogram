@@ -58,7 +58,7 @@
 
     <!-- 今明两天预报 -->
     <view class="forecast-2days">
-        <view class="item">
+        <view class="item" hover-class="hover">
             <view class="line">
                 <view class="weekday">{{f2d[0].weekday}}</view>
                 <view class="text">{{f2d[0].text}}</view>
@@ -68,7 +68,7 @@
                 <view class="aqi aqi-level-{{f2d[0].aqiLevel}}">{{f2d[0].aqiCategory}}</view>
             </view>
         </view>
-        <view class="item">
+        <view class="item" hover-class="hover">
             <view class="line">
                 <view class="weekday">{{f2d[1].weekday}}</view>
                 <view class="text">{{f2d[1].text}}</view>

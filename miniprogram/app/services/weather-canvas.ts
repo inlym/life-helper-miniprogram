@@ -5,8 +5,9 @@
 import {WeatherDaily} from './weather-data.interface'
 
 /** X 轴和 Y 轴上的坐标 */
-export interface Coordinate {
+export interface Point {
   x: number
+
   y: number
 }
 
@@ -44,18 +45,18 @@ export function drawWeatherDailyLineChart(ctx: CanvasRenderingContext2D, list: W
   }
 
   // 最小温度折线坐标
-  const minCoordinates: Coordinate[] = []
+  const minPoints: Point[] = []
 
   // 最大温度折线坐标
-  const maxCoordinates: Coordinate[] = []
+  const maxPoints: Point[] = []
 
   for (let i = 0; i < minList.length; i++) {
     const x = (i + 0.5) * gridWidth
     const minY = getY(minList[i])
     const maxY = getY(maxList[i])
 
-    minCoordinates[i] = {x, y: minY}
-    maxCoordinates[i] = {x, y: maxY}
+    minPoints[i] = {x, y: minY}
+    maxPoints[i] = {x, y: maxY}
   }
 
   // 开始画图
@@ -66,23 +67,23 @@ export function drawWeatherDailyLineChart(ctx: CanvasRenderingContext2D, list: W
   // 画高温线
   ctx.beginPath()
   ctx.strokeStyle = maxLineColor
-  for (let i = 0; i < maxCoordinates.length; i++) {
-    ctx.lineTo(maxCoordinates[i].x, maxCoordinates[i].y)
+  for (let i = 0; i < maxPoints.length; i++) {
+    ctx.lineTo(maxPoints[i].x, maxPoints[i].y)
   }
   ctx.stroke()
 
   // 画低温线
   ctx.beginPath()
   ctx.strokeStyle = minLineColor
-  for (let i = 0; i < minCoordinates.length; i++) {
-    ctx.lineTo(minCoordinates[i].x, minCoordinates[i].y)
+  for (let i = 0; i < minPoints.length; i++) {
+    ctx.lineTo(minPoints[i].x, minPoints[i].y)
   }
   ctx.stroke()
 
   // 画高温线的点
-  for (let i = 0; i < maxCoordinates.length; i++) {
-    const x = maxCoordinates[i].x
-    const y = maxCoordinates[i].y
+  for (let i = 0; i < maxPoints.length; i++) {
+    const x = maxPoints[i].x
+    const y = maxPoints[i].y
 
     ctx.beginPath()
     ctx.fillStyle = maxLineColor
@@ -96,9 +97,9 @@ export function drawWeatherDailyLineChart(ctx: CanvasRenderingContext2D, list: W
   }
 
   // 画低温线的点
-  for (let i = 0; i < minCoordinates.length; i++) {
-    const x = minCoordinates[i].x
-    const y = minCoordinates[i].y
+  for (let i = 0; i < minPoints.length; i++) {
+    const x = minPoints[i].x
+    const y = minPoints[i].y
 
     ctx.beginPath()
     ctx.fillStyle = minLineColor

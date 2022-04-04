@@ -59,7 +59,7 @@ Page({
     reservedHeight: 80,
 
     /** 是否展示页面容器 */
-    showPageContainer: true,
+    showPageContainer: false,
 
     /** 是否展示底部弹起的操作按钮组件 */
     showActionsheet: false,
