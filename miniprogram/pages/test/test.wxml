@@ -1,8 +1,3 @@
-<!--pages/test/test.wxml-->
-<top-space offset="{{0}}"></top-space>
-<text>pages/test/test.wxml</text>
-<view>
-  {{name}}
+<view class="main">
+    <canvas type="2d" class="canvas" id="my-canvas"></canvas>
 </view>
-
-<button open-type="getUserInfo" bind:tap="one">点击</button>

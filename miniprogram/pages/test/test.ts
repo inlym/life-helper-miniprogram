@@ -1,6 +1,6 @@
 // pages/test/test.ts
 
-import { getMixedWeatherData } from '../../app/services/weather'
+import {createCanvasContext} from '../../app/utils/canvas'
 
 Page({
   /**
@@ -8,6 +8,12 @@ Page({
    */
   data: {
     name: 'mark',
+    status: 2,
+
+    buttons: [
+      { type: 'warn', text: '按钮' },
+      { type: 'default', text: '按钮' },
+    ],
   },
 
   /**
@@ -17,7 +23,16 @@ Page({
     //
   },
 
-  one() {
-    getMixedWeatherData({ longitude: 120, latitude: 30 }).then(console.log)
+  async onReady() {
+    const ctx = await createCanvasContext('#my-canvas')
+    ctx.moveTo(100, 100)
+    ctx.quadraticCurveTo(200, 200, 300, 100)
+    ctx.stroke()
+    ctx.closePath()
+    ctx.moveTo(300, 100)
+    ctx.quadraticCurveTo(400, 200, 500, 100)
+    ctx.stroke()
+    ctx.closePath()
+
   },
 })

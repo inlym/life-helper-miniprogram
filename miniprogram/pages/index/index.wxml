@@ -8,7 +8,8 @@
                 <mp-icon class="add-icon" icon="add" size="24" color="{{iconColor}}"></mp-icon>
                 <view class="content">
                     <view class="location">
-                        <share-element transform key="{{currentPlaceId}}" duration="400" class="location-name">{{locationName}}
+                        <share-element transform key="{{currentPlaceId}}" duration="400" class="location-name">
+                            {{locationName}}
                         </share-element>
                         <mp-icon class="location-icon" icon="location" size="20"
                                  color="{{iconColor}}"></mp-icon>
@@ -108,7 +109,7 @@
                          fast-deceleration="{{true}}">
                 <view class="list">
                     <canvas type="2d" id="f15d" class="f15d-canvas"></canvas>
-                    <view class="item" wx:for="{{f15d}}" wx:key="date">
+                    <view class="item" wx:for="{{f15d}}" wx:key="date" hover-class="hover">
                         <view class="top-area">
                             <view class="weekday">{{item.weekday}}</view>
                             <view class="date">{{item.simpleDate}}</view>
@@ -125,6 +126,59 @@
                     </view>
                 </view>
             </scroll-view>
+        </view>
+    </view>
+    <!-- 实时空气质量 -->
+    <view class="air-now">
+        <view class="title">空气质量</view>
+        <view class="content">
+            <view class="left">
+                <view class="circle aqi-level-{{ airNow.level }}">
+                    <view class="aqi-num">{{ airNow.aqi }}</view>
+                    <view class="category">{{ airNow.category }}</view>
+                </view>
+            </view>
+            <view class="right">
+                <view class="item">
+                    <view class="value">{{ airNow.pm2p5 }}</view>
+                    <progress class="aqi-progress" duration="100" percent="{{ airNow.pm2p5 }}"></progress>
+                    <view class="name">PM2.5</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ airNow.pm10 }}</view>
+                    <progress class="aqi-progress" duration="100" percent="{{ airNow.pm10 }}"></progress>
+                    <view class="name">PM10</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ airNow.o3 }}</view>
+                    <progress class="aqi-progress" percent="{{ airNow.o3 }}"></progress>
+                    <view class="name">
+                        <text>O</text>
+                        <text class="small">3</text>
+                    </view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ airNow.co }}</view>
+                    <progress class="aqi-progress" percent="{{ airNow.co }}"></progress>
+                    <view class="name">CO</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ airNow.so2 }}</view>
+                    <progress class="aqi-progress" percent="{{ airNow.so2 }}"></progress>
+                    <view class="name">
+                        <text>SO</text>
+                        <text class="small">2</text>
+                    </view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ airNow.no2 }}</view>
+                    <progress class="aqi-progress" percent="{{ airNow.no2 }}"></progress>
+                    <view class="name">
+                        <text>NO</text>
+                        <text class="small">2</text>
+                    </view>
+                </view>
+            </view>
         </view>
 
     </view>

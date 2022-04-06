@@ -328,6 +328,79 @@ page {
   }
 }
 
+/* 空气质量 */
+.air-now {
+  margin-top: 16rpx;
+  color: #000;
+  background-color: #ffffff;
+
+  .content {
+    display: flex;
+    padding: 10rpx 10rpx 30rpx;
+
+    .left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 300rpx;
+
+      .circle {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width: 220rpx;
+        height: 220rpx;
+        color: #ffffff;
+        border-radius: 50%;
+
+        .aqi-num {
+          font-size: 80rpx;
+          line-height: 80rpx;
+          height: 80rpx;
+        }
+
+        .category {
+          font-size: 30rpx;
+          margin-top: 14rpx;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 400rpx;
+
+      .item {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 50%;
+        height: 100rpx;
+        margin-top: 30rpx;
+
+        .value {
+          font-size: 30rpx;
+        }
+
+        .aqi-progress {
+          width: 80%;
+        }
+
+        .name {
+          font-size: 28rpx;
+          margin-top: 10rpx;
+          color: #7c7c7c;
+        }
+
+      }
+    }
+  }
+}
+
 .page-container {
   .main {
     height: 1200rpx;
@@ -441,7 +514,8 @@ page {
           margin-right: 10rpx;
         }
       }
-
     }
   }
 }
+
+
