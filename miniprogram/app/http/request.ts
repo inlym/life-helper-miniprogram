@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { config } from '../core/config'
-import { accessTokenInterceptor } from './access-token-interceptor'
-import { aliyunApigwSignatureInterceptorBuilder } from './aliyun-apigw-signature-interceptor'
-import { authInterceptor } from './auth-interceptor'
-import { invalidTokenInterceptor } from './invalid-token-interceptor'
-import { miniprogramAdapter } from './miniprogram-adatper'
-import { requestLogInterceptor } from './request-log-interceptor'
+import {config} from '../core/config'
+import {accessTokenInterceptor} from './access-token-interceptor'
+import {aliyunApigwSignatureInterceptorBuilder} from './aliyun-apigw-signature-interceptor'
+import {authInterceptor} from './auth-interceptor'
+import {invalidTokenInterceptor} from './invalid-token-interceptor'
+import {miniprogramAdapter} from './miniprogram-adatper'
+import {requestLogInterceptor} from './request-log-interceptor'
 
 const instance = axios.create({
   baseURL: config.baseURL,
@@ -16,7 +16,7 @@ const instance = axios.create({
 })
 
 // 请求拦截器（先添加的后执行）
-instance.interceptors.request.use(aliyunApigwSignatureInterceptorBuilder('204032881', 'Ba3aSmGiqx6bFOuCRTaHUDGf9HI40jOV', false))
+instance.interceptors.request.use(aliyunApigwSignatureInterceptorBuilder(config.signature.key, config.signature.secret, false))
 instance.interceptors.request.use(accessTokenInterceptor)
 instance.interceptors.request.use(authInterceptor)
 

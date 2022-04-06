@@ -2,6 +2,8 @@
  * 配置文件
  */
 
+import {secret, Signature} from 'life-helper-miniprogram-secret'
+
 /**
  * 环境名称
  * 1. 对接的服务端环境，发版前务必改为 'production'
@@ -22,21 +24,27 @@ export interface Config {
 
   /** URL 前缀部分 */
   baseURL: string
+
+  /** 签名密钥 */
+  signature: Signature
 }
 
 const localConfig: Config = {
   stage: 'local',
   baseURL: 'http://127.0.0.1:23010',
+  signature: secret.development.signature,
 }
 
 const devConfig: Config = {
   stage: 'development',
   baseURL: 'https://api-test.lifehelper.com.cn',
+  signature: secret.development.signature,
 }
 
 const prodConfig: Config = {
   stage: 'production',
   baseURL: 'https://api-test.lifehelper.com.cn',
+  signature: secret.production.signature,
 }
 
 /** 封装获取配置的方法 */
