@@ -1,3 +1,1 @@
-<view class="main">
-    <canvas type="2d" class="canvas" id="my-canvas"></canvas>
-</view>
+<view class="main">test</view>
