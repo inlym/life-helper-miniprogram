@@ -15,7 +15,7 @@ import {secret, Signature} from 'life-helper-miniprogram-secret'
  */
 export type Stage = 'production' | 'development' | 'local'
 
-export const stage: Stage = 'development'
+export const stage: Stage = 'production'
 
 /** 配置项数据类型 */
 export interface Config {
@@ -43,7 +43,7 @@ const devConfig: Config = {
 
 const prodConfig: Config = {
   stage: 'production',
-  baseURL: 'https://api-test.lifehelper.com.cn',
+  baseURL: 'https://api.lifehelper.com.cn',
   signature: secret.production.signature,
 }
 
