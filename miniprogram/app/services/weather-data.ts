@@ -59,6 +59,17 @@ export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
 
   data.f2d = f2d
 
+  // 处理当前 IP 定位的位置天气数据
+  if (data.location) {
+    data.currentLocationWeather = {
+      name: data.location.name,
+      region: data.location.region,
+      iconUrl: data.now.iconUrl,
+      type: data.now.type,
+      temp: data.now.temp,
+    }
+  }
+
   return data
 }
 

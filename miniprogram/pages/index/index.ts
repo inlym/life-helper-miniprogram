@@ -3,9 +3,9 @@ import {getMixedWeatherDataAnonymous, getMixedWeatherDataByPlaceId} from '../../
 import {
   AirDaily,
   AirNow,
+  CurrentLocationWeather,
   F2dItem,
   IndicesItem,
-  Location,
   MinutelyRain,
   WeatherDaily,
   WeatherHourly,
@@ -39,10 +39,9 @@ Page({
     now: {} as WeatherNow,
     rain: {} as MinutelyRain,
     place: {} as WeatherPlace,
-    f2d: [] as F2dItem[],
 
-    /** 由 IP 地址获取的地理位置 */
-    location: {} as Location,
+    f2d: [] as F2dItem[],
+    currentLocationWeather: {} as CurrentLocationWeather,
 
     /** 天气地点列表 */
     places: [] as WeatherPlace[],
@@ -117,6 +116,7 @@ Page({
 
   /** 通过天气地点 ID 获取天气数据 */
   async getWeatherDataByPlaceId(placeId: number) {
+    this.setData({currentPlaceId: placeId})
     const data = await getMixedWeatherDataByPlaceId(placeId)
     this.setData(data)
     const locationName = data.place.name

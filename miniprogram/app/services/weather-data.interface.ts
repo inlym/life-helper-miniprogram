@@ -11,9 +11,6 @@ export interface WeatherNow {
   /** 自行归纳的天气类型 */
   type: string
 
-  /** 日夜类型：day, night */
-  clock: string
-
   /** 温度，默认单位：摄氏度 */
   temp: string
 
@@ -291,8 +288,10 @@ export interface AirDaily {
 
 /** 地理位置 */
 export interface Location {
+  /** 位置名称，一般是“区” */
   name: string
 
+  /** 所在区域，一般是省+市，例如“浙江省杭州市” */
   region: string
 }
 
@@ -309,6 +308,24 @@ export interface F2dItem {
   aqiCategory: string
 
   aqiLevel: string
+}
+
+/** 当前使用 IP 定位的地区的天气，数据来源于位置和实时天气 */
+export interface CurrentLocationWeather {
+  /** 位置名称，一般是“区” */
+  name: string
+
+  /** 所在区域，一般是省+市，例如“浙江省杭州市” */
+  region: string
+
+  /** 图标的 URL 地址 */
+  iconUrl: string
+
+  /** 自行归纳的天气类型 */
+  type: string
+
+  /** 温度，默认单位：摄氏度 */
+  temp: string
 }
 
 export interface MixedWeatherData {
@@ -336,4 +353,6 @@ export interface MixedWeatherData {
 
   // 自己添加在字段
   f2d: F2dItem[]
+
+  currentLocationWeather: CurrentLocationWeather
 }

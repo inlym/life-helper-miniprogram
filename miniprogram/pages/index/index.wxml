@@ -186,6 +186,8 @@
 
 
     <!-- 以下非页面文档流元素 -->
+
+    <!-- 半页容器 -->
 <page-container class="page-container {{clock}}" show="{{showPageContainer}}" duration="1200" round
                 close-on-slideDown>
     <view class="main">
@@ -204,18 +206,18 @@
                     <mp-icon class="icon" icon="location" size="20"></mp-icon>
                     <text class="text">当前定位</text>
                 </view>
-                <view class="{{now.type}}" bind:tap="handleLocationItemTap" hover-class="hover">
+                <view class="{{currentLocationWeather.type}}" bind:tap="handleLocationItemTap" hover-class="hover">
                     <view class="weather-bg">
                         <view class="left">
                             <share-element transform="{{currentPlaceId===0}}" key="0" duration="1000" class="name">
-                                {{location.name}}
+                                {{currentLocationWeather.name}}
                             </share-element>
-                            <view class="region">{{location.region}}</view>
+                            <view class="region">{{currentLocationWeather.region}}</view>
                         </view>
                         <view class="separator"></view>
                         <view class="right">
-                            <image class="icon" src="{{now.iconUrl}}"></image>
-                            <view class="temp">{{now.temp}}℃</view>
+                            <image class="icon" src="{{currentLocationWeather.iconUrl}}"></image>
+                            <view class="temp">{{currentLocationWeather.temp}}℃</view>
                         </view>
                     </view>
                 </view>
