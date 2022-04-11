@@ -1,1 +1,3 @@
-<view class="main">test</view>
+<view class="main">
+    <view class="one">哈哈哈胜多负少</view>
+</view>

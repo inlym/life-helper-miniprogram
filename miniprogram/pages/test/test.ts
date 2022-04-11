@@ -12,4 +12,15 @@ Page({
   onLoad() {
     //
   },
+
+  one() {
+    wx.getUserCryptoManager().getLatestUserKey({
+      success: (res) => {
+        console.info('getLatestUserKey', res)
+      },
+      fail: (err) => {
+        console.error('getLatestUserKey', err)
+      },
+    })
+  },
 })

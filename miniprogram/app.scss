@@ -1,28 +1,31 @@
-@import "/assets/styles/iconfont.wxss";
+@import '/assets/styles/iconfont.wxss';
 
-/* 页面根元素 */
 page {
+  /** 主背景色 */
+  --background-color-main: #ededed;
+
+  /** 在主背景上的模块的背景色 */
+  --background-color-block: #fff;
+
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
   font-size: 32rpx;
-  line-height: 1.41176471;
+  line-height: 1.4;
   height: 100%;
   min-height: 100%;
   color: var(--weui-FG-0);
   background-color: #fff;
+}
 
-  /* 常用颜色变量 */
-  --color-RED: #fa5151;
-  --color-ORANGE: #fa9d3b;
-  --color-YELLOW: #ffc300;
-  --color-GREEN: #91d300;
-  --color-LIGHTGREEN: #95ec69;
-  --color-BRAND: #07c160;
-  --color-BLUE: #10aeff;
-  --color-INDIGO: #1485ee;
-  --color-PURPLE: #6467f0;
-  --color-WHITE: #fff;
-  --color-weixin: #07c160;
-  --color-text-link: #576b95;
+// 暗黑主题适配
+// https://developers.weixin.qq.com/miniprogram/dev/framework/ability/darkmode.html#WXSS-适配
+@media (prefers-color-scheme: dark) {
+  page {
+    /** 主背景色 */
+    --background-color-main: #111;
+
+    /** 在主背景上的模块的背景色 */
+    --background-color-block: #1e1e1e;
+  }
 }
 
 image {
