@@ -1,0 +1,28 @@
+{
+  "light": {
+    "navigationBarBackgroundColor": "#ededed",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#ededed",
+    "backgroundTextStyle": "light",
+    "backgroundColorTop": "#ededed",
+    "backgroundColorBottom": "#ededed",
+    "tabBarColor": "#000",
+    "tabBarBackgroundColor": "#f7f7f7",
+    "tabBarBorderStyle": "black",
+    "tabBarIconPath_Home": "/assets/images/tabbar/home-outline-light.png",
+    "tabBarIconPath_Me": "/assets/images/tabbar/me-outline-light.png"
+  },
+  "dark": {
+    "navigationBarBackgroundColor": "#111",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#111",
+    "backgroundTextStyle": "dark",
+    "backgroundColorTop": "#111",
+    "backgroundColorBottom": "#111",
+    "tabBarColor": "#fff",
+    "tabBarBackgroundColor": "#1e1e1e",
+    "tabBarBorderStyle": "white",
+    "tabBarIconPath_Home": "/assets/images/tabbar/home-outline-dark.png",
+    "tabBarIconPath_Me": "/assets/images/tabbar/me-outline-dark.png"
+  }
+}

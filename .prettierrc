@@ -1,5 +1,5 @@
 {
-  "printWidth": 140,
+  "printWidth": 100,
   "tabWidth": 2,
   "useTabs": false,
   "semi": false,
@@ -10,5 +10,13 @@
   "jsxBracketSameLine": true,
   "arrowParens": "always",
   "endOfLine": "auto",
-  "embeddedLanguageFormatting": "auto"
+  "embeddedLanguageFormatting": "auto",
+  "overrides": [
+    {
+      "files": "*.wxml",
+      "options": {
+        "tabWidth": 4
+      }
+    }
+  ]
 }

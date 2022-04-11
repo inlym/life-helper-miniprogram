@@ -1,33 +1,31 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/test/test",
-    "pages/scan/login",
-    "pages/me/me"
-  ],
+  "pages": ["pages/index/index", "pages/test/test", "pages/scan/login", "pages/me/me"],
   "sitemapLocation": "sitemap.json",
   "window": {
-    "navigationBarBackgroundColor": "#fff",
-    "backgroundTextStyle": "light",
-    "navigationBarTitleText": "小鸣助手",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "@navigationBarBackgroundColor",
+    "navigationBarTextStyle": "@navigationBarTextStyle",
+    "backgroundColor": "@backgroundColor",
+    "backgroundTextStyle": "@backgroundTextStyle",
+    "backgroundColorTop": "@backgroundColorTop",
+    "backgroundColorBottom": "@backgroundColorBottom",
+    "navigationBarTitleText": "小鸣助手"
   },
   "tabBar": {
-    "color": "#1a1a1a",
+    "color": "@tabBarColor",
     "selectedColor": "#07c160",
-    "backgroundColor": "#F5F5F5",
-    "borderStyle": "white",
+    "backgroundColor": "@tabBarBackgroundColor",
+    "borderStyle": "@tabBarBorderStyle",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "天气",
-        "iconPath": "/assets/images/tabbar/home-outline.png",
+        "iconPath": "@tabBarIconPath_Home",
         "selectedIconPath": "/assets/images/tabbar/home-filled.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我",
-        "iconPath": "/assets/images/tabbar/me-outline.png",
+        "iconPath": "@tabBarIconPath_Me",
         "selectedIconPath": "/assets/images/tabbar/me-filled.png"
       }
     ]
@@ -41,5 +39,8 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "lazyCodeLoading": "requiredComponents"
+  "debug": true,
+  "lazyCodeLoading": "requiredComponents",
+  "darkmode": true,
+  "themeLocation": "theme.json"
 }
