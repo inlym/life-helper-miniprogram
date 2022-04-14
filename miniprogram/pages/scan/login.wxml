@@ -1,4 +1,5 @@
 <!--pages/scan/login.wxml-->
 
-
 <text>pages/scan/login.wxml</text>
+<view class="one" bind:tap="scan">scan</view>
+<view class="two" bind:tap="confirm">confirm</view>

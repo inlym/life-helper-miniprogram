@@ -22,6 +22,13 @@
           "name": "个人中心",
           "pathName": "pages/me/me",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "扫码登录页",
+          "pathName": "pages/scan/login",
+          "query": "scene=2dd5c1ad554241c28c79e29115b3323e",
           "scene": null,
           "launchMode": "default"
         }

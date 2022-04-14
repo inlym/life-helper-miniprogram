@@ -39,7 +39,7 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "debug": true,
+  "debug": false,
   "lazyCodeLoading": "requiredComponents",
   "darkmode": true,
   "themeLocation": "theme.json"
