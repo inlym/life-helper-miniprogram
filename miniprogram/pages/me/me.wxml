@@ -1,28 +1,37 @@
-<!-- 顶部占位区域 -->
-<top-space offset="{{ 30 }}"></top-space>
+<view class="page" data-weui-theme="{{ theme }}">
+    <!-- 顶部头像区域 -->
+    <view class="top">
+        <!-- 顶部占位区域 -->
+        <top-space offset="{{ 30 }}"></top-space>
 
-<!-- 用户资料 -->
-<view class="userinfo">
-    <!-- 头像 -->
-    <view class="avatar">
-        <image src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
+        <!-- 用户资料 -->
+        <view class="userinfo">
+            <!-- 头像 -->
+            <view class="avatar">
+                <image src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
+            </view>
+
+            <!-- 昵称、按钮 -->
+            <view class="info">
+                <view class="nickname">{{ userInfo.nickName }}</view>
+                <view wx:if="{{ userInfo.empty }}" class="desc">点击右侧按钮获取头像</view>
+                <view wx:else class="desc">欢迎使用小鸣助手</view>
+            </view>
+
+            <view class="operator">
+                <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
+            </view>
+        </view>
+
+        <view class="weui-footer weui-footer_fixed-bottom">
+            <view class="weui-footer__links">
+                <navigator url="" class="weui-footer__link">小鸣助手</navigator>
+            </view>
+            <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
+        </view>
     </view>
 
-    <!-- 昵称、按钮 -->
-    <view class="info">
-        <view class="nickname">{{ userInfo.nickName }}</view>
-        <view wx:if="{{ userInfo.empty }}" class="desc">点击右侧按钮获取头像</view>
-        <view wx:else class="desc">欢迎使用小鸣助手</view>
-    </view>
-
-    <view class="operator">
-        <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
-    </view>
-</view>
-
-<view class="weui-footer weui-footer_fixed-bottom">
-    <view class="weui-footer__links">
-        <navigator url="" class="weui-footer__link">小鸣助手</navigator>
-    </view>
-    <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
+    <mp-cells>
+        <mp-cell value="我的 IP" footer="{{ ipDesc }}"> </mp-cell>
+    </mp-cells>
 </view>

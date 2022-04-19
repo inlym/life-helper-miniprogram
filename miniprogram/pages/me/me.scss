@@ -1,10 +1,13 @@
 /* pages/me/me.scss */
+.top {
+  background-color: var(--weui-BG-1);
+  padding-bottom: 40rpx;
+}
+
 .userinfo {
   display: flex;
   justify-content: flex-start;
-  padding-bottom: 40rpx;
   padding-left: 50rpx;
-  background-color: #fff;
 
   .avatar image {
     width: 120rpx;
@@ -27,7 +30,7 @@
 
     .desc {
       font-size: 30rpx;
-      color: #7c7c7c;
+      color: var(--weui-FG-1);
     }
   }
 

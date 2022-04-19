@@ -1,31 +1,14 @@
 @import '/assets/styles/iconfont.wxss';
 
-page {
-  /** 主背景色 */
-  --background-color-main: #ededed;
-
-  /** 在主背景上的模块的背景色 */
-  --background-color-block: #fff;
-
+page,
+.page {
+  background-color: var(--weui-BG-0);
+  color: var(--weui-FG-0);
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
   font-size: 32rpx;
   line-height: 1.4;
   height: 100%;
   min-height: 100%;
-  color: var(--weui-FG-0);
-  background-color: #fff;
-}
-
-// 暗黑主题适配
-// https://developers.weixin.qq.com/miniprogram/dev/framework/ability/darkmode.html#WXSS-适配
-@media (prefers-color-scheme: dark) {
-  page {
-    /** 主背景色 */
-    --background-color-main: #111;
-
-    /** 在主背景上的模块的背景色 */
-    --background-color-block: #1e1e1e;
-  }
 }
 
 image {
