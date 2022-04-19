@@ -1,6 +1,8 @@
 /* pages/test/test.scss */
-.one {
-  height: 400rpx;
-  width: 400rpx;
-  background-color: var(--background-color-main);
+
+page,
+.page {
+  background-color: var(--weui-BG-0);
+  color: var(--weui-FG-0);
+  min-height: 100%;
 }
