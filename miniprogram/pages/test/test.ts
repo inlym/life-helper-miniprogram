@@ -1,6 +1,6 @@
 // pages/test/test.ts
 
-import {themeBehavior} from '../../app/core/theme'
+import {mixedBehavior} from '../../behaviors/mixed-bahavior'
 
 Page({
   /**
@@ -8,7 +8,7 @@ Page({
    */
   data: {},
 
-  behaviors: [themeBehavior],
+  behaviors: [mixedBehavior],
 
   /**
    * 生命周期函数--监听页面加载
