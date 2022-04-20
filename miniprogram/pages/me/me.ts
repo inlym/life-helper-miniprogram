@@ -61,6 +61,7 @@ Page({
    * 点击「更新」按钮
    */
   async onUpdateButtonTap() {
+    wx.vibrateShort({type: 'medium'})
     const result = await wx.getUserProfile({
       lang: 'zh_CN',
       desc: '获取您的头像和昵称',
@@ -73,5 +74,12 @@ Page({
 
     this.setData({userInfo})
     await updateUserInfo(userInfo)
+  },
+
+  /** 复制 IP 地址 */
+  async copyIp() {
+    const ip = this.data.ipInfo.ip
+    wx.vibrateShort({type: 'medium'})
+    wx.setClipboardData({data: ip})
   },
 })
