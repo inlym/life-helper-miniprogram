@@ -1,7 +1,7 @@
 {
   "name": "life-helper-miniprogram",
-  "version": "1.0.2",
-  "description": "「小鸣助手」小程序端部分代码",
+  "version": "1.1.0",
+  "description": "「小鸣助手」小程序端代码",
   "scripts": {
     "tsc": "node ./node_modules/typescript/lib/tsc.js"
   },
