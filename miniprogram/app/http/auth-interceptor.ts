@@ -1,6 +1,6 @@
-import { AxiosRequestConfig } from 'axios'
-import { getToken, login } from '../core/auth'
-import { RequestOptionsInternal } from './types'
+import {AxiosRequestConfig} from 'axios'
+import {getToken, login} from '../core/auth'
+import {RequestOptionsInternal} from './types'
 
 /**
  * 登录鉴权拦截器

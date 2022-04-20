@@ -16,7 +16,9 @@ const instance = axios.create({
 })
 
 // 请求拦截器（先添加的后执行）
-instance.interceptors.request.use(aliyunApigwSignatureInterceptorBuilder(config.signature.key, config.signature.secret, false))
+instance.interceptors.request.use(
+  aliyunApigwSignatureInterceptorBuilder(config.signature.key, config.signature.secret, false)
+)
 instance.interceptors.request.use(accessTokenInterceptor)
 instance.interceptors.request.use(authInterceptor)
 
