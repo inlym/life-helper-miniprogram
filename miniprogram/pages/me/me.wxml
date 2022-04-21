@@ -2,7 +2,7 @@
     <!-- 顶部头像区域 -->
     <view class="top">
         <!-- 顶部占位区域 -->
-        <top-space offset="{{ 30 }}"></top-space>
+        <top-space offset="{{ 50 }}"></top-space>
 
         <!-- 用户资料 -->
         <view class="userinfo">
@@ -11,13 +11,13 @@
                 <image src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
             </view>
 
-            <!-- 昵称、按钮 -->
+            <!-- 昵称、使用天数 -->
             <view class="info">
                 <view class="nickname">{{ userInfo.nickName }}</view>
-                <view wx:if="{{ userInfo.empty }}" class="desc">点击右侧按钮获取头像</view>
-                <view wx:else class="desc">欢迎使用小鸣助手</view>
+                <view class="desc">已使用小鸣助手 {{ userInfo.registeredDays }} 天</view>
             </view>
 
+            <!-- 操作区 -->
             <view class="operator">
                 <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
             </view>

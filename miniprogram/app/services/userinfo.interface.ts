@@ -7,4 +7,7 @@ export interface UserInfo {
 
   /** 资料是否为空 */
   empty?: boolean
+
+  /** 注册天数 */
+  registeredDays: number
 }
