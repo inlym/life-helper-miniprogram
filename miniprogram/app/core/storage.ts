@@ -17,9 +17,18 @@ export interface StorageWrapper<T = any> {
 /**
  * 二次封装的数据缓存方法
  */
-export class Storage {
+export class StoragePlus {
   constructor() {
     // 空
+  }
+
+  /**
+   * 将分钟数转换为毫秒值
+   *
+   * @param minutes 分钟数
+   */
+  static ofMinutes(minutes: number): number {
+    return minutes * 60 * 1000
   }
 
   /**
@@ -86,4 +95,4 @@ export class Storage {
   }
 }
 
-export const storage = new Storage()
+export const storage = new StoragePlus()
