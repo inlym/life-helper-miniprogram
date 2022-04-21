@@ -18,6 +18,9 @@ Page({
 
     /** 将 IP 信息拼接成一句话描述 */
     ipDesc: '',
+
+    /** 已使用天数 */
+    registeredDays: 0,
   },
 
   behaviors: [mixedBehavior],
@@ -47,7 +50,7 @@ Page({
   /** 获取用户信息 */
   async getUserInfo() {
     const userInfo = await getUserInfo()
-    this.setData({userInfo})
+    this.setData({userInfo, registeredDays: userInfo.registeredDays})
   },
 
   /** 获取 IP 信息 */

@@ -31,7 +31,7 @@ export interface Config {
 
 const localConfig: Config = {
   stage: 'local',
-  baseURL: 'http://local.tolym.com/',
+  baseURL: 'http://local.tolym.com',
   signature: secret.development.signature,
 }
 
