@@ -5,7 +5,7 @@
 
 import {StorageField} from './constant'
 import {requestForData} from './http'
-import {storage, StoragePlus} from './storage'
+import {enhancedStorage, EnhancedStorage} from './storage'
 
 /**
  * 获取微信 code
@@ -16,7 +16,7 @@ import {storage, StoragePlus} from './storage'
  */
 export function getCode(): Promise<string> {
   return new Promise((resolve, reject) => {
-    const code = storage.get<string>(StorageField.CODE)
+    const code = enhancedStorage.get<string>(StorageField.CODE)
     if (code) {
       resolve(code)
       return
@@ -25,7 +25,7 @@ export function getCode(): Promise<string> {
     wx.login({
       success(res) {
         resolve(res.code)
-        storage.set(StorageField.CODE, res.code, StoragePlus.ofMinutes(5))
+        enhancedStorage.set(StorageField.CODE, res.code, EnhancedStorage.ofMinutes(5))
       },
       fail(res) {
         reject(new Error(res.errMsg))
@@ -55,7 +55,7 @@ export async function login(): Promise<string> {
     auth: false,
   })
 
-  storage.set(StorageField.TOKEN, data.token, data.expiration - Date.now())
+  enhancedStorage.set(StorageField.TOKEN, data.token, data.expiration - Date.now())
 
   return data.token
 }
@@ -64,7 +64,7 @@ export async function login(): Promise<string> {
  * 获取本地存储的登录凭证，若为空，则返回空字符串
  */
 export function getLocalToken(): string {
-  const token = storage.get<string>(StorageField.TOKEN)
+  const token = enhancedStorage.get<string>(StorageField.TOKEN)
   if (token) {
     return token
   }

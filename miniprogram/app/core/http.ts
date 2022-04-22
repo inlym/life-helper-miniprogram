@@ -1,6 +1,6 @@
-import { AxiosRequestConfig } from 'axios'
-import { request } from '../http/request'
-import { RequestOptionsInternal } from '../http/types'
+import {AxiosRequestConfig} from 'axios'
+import {request} from '../http/request'
+import {RequestOptionsInternal} from '../http/types'
 
 /**
  * 获取请求数据

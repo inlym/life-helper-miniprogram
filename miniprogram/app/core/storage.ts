@@ -17,7 +17,7 @@ export interface StorageWrapper<T = any> {
 /**
  * 二次封装的数据缓存方法
  */
-export class StoragePlus {
+export class EnhancedStorage {
   constructor() {
     // 空
   }
@@ -95,4 +95,4 @@ export class StoragePlus {
   }
 }
 
-export const storage = new StoragePlus()
+export const enhancedStorage = new EnhancedStorage()
