@@ -8,7 +8,8 @@
     "backgroundTextStyle": "@backgroundTextStyle",
     "backgroundColorTop": "@backgroundColorTop",
     "backgroundColorBottom": "@backgroundColorBottom",
-    "navigationBarTitleText": "小鸣助手"
+    "navigationBarTitleText": "小鸣助手",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "@tabBarColor",

@@ -8,7 +8,8 @@
         {
           "name": "测试页",
           "pathName": "pages/test/test",
-          "query": "",
+          "query": "id=11&name=mark&good=true",
+          "launchMode": "default",
           "scene": null
         },
         {
