@@ -1,6 +1,6 @@
 {
   "setting": {
-    "compileHotReLoad": true
+    "compileHotReLoad": false
   },
   "condition": {
     "miniprogram": {
@@ -23,6 +23,13 @@
           "name": "扫码登录页",
           "pathName": "pages/scan/login",
           "query": "scene=2dd5c1ad554241c28c79e29115b3323e",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "临时首页",
+          "pathName": "pages/index2/index2",
+          "query": "",
           "launchMode": "default",
           "scene": null
         }

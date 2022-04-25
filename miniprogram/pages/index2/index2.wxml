@@ -1,0 +1,61 @@
+<view class="page" data-weui-theme="{{ theme }}">
+    <!-- 实时天气模块 -->
+    <view
+        class="weather-now weather-{{ clock }} weather-{{ clock }}--{{ now.type }}"
+        style="padding-top: {{ reservedHeight }}px;"
+    >
+        <!-- 和胶囊按钮垂直对齐的位置条 -->
+        <view class="location-bar">
+            <!-- 左侧加号 -->
+            <mp-icon class="add-icon" icon="add" size="24" color="{{ iconColor }}"></mp-icon>
+
+            <!-- 右侧地名和更新时间 -->
+            <view class="content">
+                <!-- 第一行：地名+定位图标 -->
+                <view class="location">
+                    <share-element class="location-name">{{ locationName }}</share-element>
+                    <mp-icon class="location-icon" icon="location" size="20" color="{{ iconColor }}"></mp-icon>
+                </view>
+                <!-- 第二行：更新时间 -->
+                <view class="update-text">{{ now.updateMinutesDiff }}分钟前更新</view>
+            </view>
+        </view>
+
+        <!-- 详情天气信息：天气 icon、温度、天气文本描述 -->
+        <view class="weather-detail">
+            <image src="{{ now.iconUrl }}" mode="widthFix" class="weather-icon"></image>
+            <view class="temp">{{ now.temp }}</view>
+            <view class="right">
+                <view class="degree" style="border-color: {{ iconColor }};"></view>
+                <view class="text">{{ now.text }}</view>
+            </view>
+        </view>
+
+        <!-- 空气质量 -->
+        <view class="aqi">
+            <view class="content aqi-level--{{ airNow.level }}">AQI {{ airNow.aqi }} {{ airNow.category }}</view>
+        </view>
+
+        <!-- 其他信息 -->
+        <view class="other">
+            <view class="list">
+                <view class="item">
+                    <view class="value">{{ now.windScale }}级</view>
+                    <view class="name">{{ now.windDir }}</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ now.humidity }}%</view>
+                    <view class="name">相对湿度</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ now.vis }}km</view>
+                    <view class="name">能见度</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ now.precip }}mm</view>
+                    <view class="name">降水量</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

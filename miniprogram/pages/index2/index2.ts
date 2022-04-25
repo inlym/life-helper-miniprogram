@@ -1,0 +1,65 @@
+import {getMixedWeatherDataAnonymous} from '../../app/services/weather-data'
+import {AirNow, WeatherNow} from '../../app/services/weather-data.interface'
+import {mixedBehavior} from '../../behaviors/mixed-bahavior'
+
+Page({
+  data: {
+    // --------------------------- 从 HTTP 请求获取和处理的数据 --------------------------
+
+    now: {} as WeatherNow,
+    airNow: {} as AirNow,
+
+    /** 顶部显示的地点名称 */
+    locationName: '正在获取定位 ...',
+
+    // -------------------------------- 其他页面数据 --------------------------------
+
+    /** 地理位置栏与顶部的闲置高度，单位：px */
+    reservedHeight: 80,
+
+    /** 时钟：早6至晚6为 'day`，其余为 'night' */
+    clock: 'day',
+
+    /** 图标颜色，跟时钟对应，白天为黑色，晚上为白色 */
+    iconColor: '#000',
+
+    /** 当前选中的天气地点 ID */
+    currentPlaceId: 0,
+  },
+
+  behaviors: [mixedBehavior],
+
+  onLoad() {
+    this.start()
+  },
+
+  async start() {
+    this.setClock()
+    this.setReservedHeight()
+
+    await this.getWeatherDataAnonymous()
+  },
+
+  /** 获取时钟并设置相关值 */
+  setClock() {
+    const hour = new Date().getHours()
+    const clock = hour >= 6 && hour < 18 ? 'day' : 'night'
+    const iconColor = clock === 'day' ? '#000' : '#fff'
+    this.setData({clock, iconColor})
+  },
+
+  /** 获取并设置保留高度 */
+  setReservedHeight() {
+    const rect = wx.getMenuButtonBoundingClientRect()
+    this.setData({reservedHeight: rect.top - 4})
+  },
+
+  /** 通过 IP 获取天气数据（即不带任何参数） */
+  async getWeatherDataAnonymous() {
+    this.setData({currentPlaceId: 0})
+    const data = await getMixedWeatherDataAnonymous()
+    this.setData(data)
+    const locationName = data.location.name
+    this.setData({locationName})
+  },
+})
