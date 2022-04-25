@@ -151,3 +151,52 @@
     }
   }
 }
+
+// 今明两天天气
+.forecast-2days {
+  font-size: 32rpx;
+
+  display: flex;
+  justify-content: space-between;
+
+  padding: 26rpx 0;
+
+  color: var(--weui-FG-0);
+  background-color: var(--weui-BG-1);
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 375rpx;
+    padding: 0 30rpx;
+
+    .line {
+      display: flex;
+      justify-content: space-between;
+
+      .text {
+        font-size: 30rpx;
+      }
+
+      .aqi {
+        font-size: 26rpx;
+        line-height: 40rpx;
+
+        height: 40rpx;
+        padding: 0 30rpx;
+
+        border-radius: 20rpx;
+      }
+    }
+
+    .line:first-child {
+      margin-bottom: 14rpx;
+    }
+  }
+
+  .item:first-child {
+    border-right: 4rpx solid var(--weui-FG-2);
+  }
+}

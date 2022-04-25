@@ -1,16 +1,22 @@
 import {getMixedWeatherDataAnonymous} from '../../app/services/weather-data'
-import {AirNow, WeatherNow} from '../../app/services/weather-data.interface'
+import {AirNow, F2dItem, WeatherDaily, WeatherNow} from '../../app/services/weather-data.interface'
 import {mixedBehavior} from '../../behaviors/mixed-bahavior'
 
 Page({
   data: {
-    // --------------------------- 从 HTTP 请求获取和处理的数据 --------------------------
+    // ---------------------------- 从 HTTP 请求获取的数据 ----------------------------
 
     now: {} as WeatherNow,
     airNow: {} as AirNow,
+    f15d: [] as WeatherDaily[],
+
+    // ------------------------ 从 HTTP 请求获取二次处理后的数据 -----------------------
 
     /** 顶部显示的地点名称 */
     locationName: '正在获取定位 ...',
+
+    /** 未来2天预报 */
+    f2d: [] as F2dItem[],
 
     // -------------------------------- 其他页面数据 --------------------------------
 
