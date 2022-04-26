@@ -1,4 +1,4 @@
-@import "../../assets/styles/weather2.scss";
+@import '../../assets/styles/weather2.scss';
 
 // 实时天气
 .weather-now {
@@ -198,5 +198,69 @@
 
   .item:first-child {
     border-right: 4rpx solid var(--weui-FG-2);
+  }
+}
+
+// 标题头
+.title {
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 80rpx;
+
+  height: 80rpx;
+  padding: 0 26rpx;
+
+  border-bottom: 2rpx solid var(--weui-FG-2);
+  background-color: var(--weui-BG-1);
+}
+
+// 逐小时预报
+.weather-hourly {
+  margin-top: 16rpx;
+
+  background-color: var(--weui-BG-1);
+
+  .content {
+    .scroll {
+      .list {
+        display: flex;
+
+        width: 2400rpx;
+        padding: 10rpx;
+
+        .item {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+
+          width: 200rpx;
+
+          .time-text {
+            font-size: 28rpx;
+
+            color: var(--weui-FG-1);
+          }
+
+          .icon {
+            width: 50rpx;
+            height: 50rpx;
+            margin-top: 14rpx;
+          }
+
+          .text {
+            font-size: 28rpx;
+
+            margin-top: 20rpx;
+          }
+
+          .temp {
+            font-size: 32rpx;
+
+            margin-top: 24rpx;
+            margin-bottom: 16rpx;
+          }
+        }
+      }
+    }
   }
 }
