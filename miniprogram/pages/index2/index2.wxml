@@ -101,7 +101,6 @@
                         <view class="time-text">{{ item.timeText }}</view>
                         <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
                         <view class="text">{{ item.text }}</view>
-                        <view class="temp">{{ item.temp }}°</view>
                     </view>
                 </view>
             </scroll-view>

@@ -205,9 +205,10 @@
 .title {
   font-size: 30rpx;
   font-weight: bold;
-  line-height: 80rpx;
+  line-height: 90rpx;
 
-  height: 80rpx;
+  height: 90rpx;
+  margin-top: 16rpx;
   padding: 0 26rpx;
 
   border-bottom: 2rpx solid var(--weui-FG-2);
@@ -216,8 +217,6 @@
 
 // 逐小时预报
 .weather-hourly {
-  margin-top: 16rpx;
-
   background-color: var(--weui-BG-1);
 
   .content {
@@ -234,16 +233,17 @@
           flex-direction: column;
 
           width: 200rpx;
+          padding: 16rpx 0;
 
           .time-text {
-            font-size: 28rpx;
+            font-size: 26rpx;
 
             color: var(--weui-FG-1);
           }
 
           .icon {
-            width: 50rpx;
-            height: 50rpx;
+            width: 56rpx;
+            height: 56rpx;
             margin-top: 14rpx;
           }
 
