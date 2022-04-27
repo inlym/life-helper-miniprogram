@@ -1,14 +1,23 @@
+import {drawWeatherHourlyLineChart} from '../../app/services/weather-canvas'
 import {getMixedWeatherDataAnonymous} from '../../app/services/weather-data'
-import {AirNow, F2dItem, WeatherDaily, WeatherNow} from '../../app/services/weather-data.interface'
-import {mixedBehavior} from '../../behaviors/mixed-bahavior'
+import {
+  AirNow,
+  F2dItem,
+  WeatherDailyItem,
+  WeatherHourlyItem,
+  WeatherNow,
+} from '../../app/services/weather-data.interface'
+import {createCanvasContext} from '../../app/utils/canvas'
+import {themeBehavior} from '../../behaviors/theme-behavior'
 
-Page({
+Page<any, Record<string, any>>({
   data: {
     // ---------------------------- 从 HTTP 请求获取的数据 ----------------------------
 
     now: {} as WeatherNow,
+    f24h: [] as WeatherHourlyItem[],
     airNow: {} as AirNow,
-    f15d: [] as WeatherDaily[],
+    f15d: [] as WeatherDailyItem[],
 
     // ------------------------ 从 HTTP 请求获取二次处理后的数据 -----------------------
 
@@ -33,7 +42,7 @@ Page({
     currentPlaceId: 0,
   },
 
-  behaviors: [mixedBehavior],
+  behaviors: [themeBehavior],
 
   onLoad() {
     this.start()
@@ -44,6 +53,7 @@ Page({
     this.setReservedHeight()
 
     await this.getWeatherDataAnonymous()
+    await this.afterGettingData()
   },
 
   /** 获取时钟并设置相关值 */
@@ -67,5 +77,11 @@ Page({
     this.setData(data)
     const locationName = data.location.name
     this.setData({locationName})
+  },
+
+  /** 在获取天气数据后执行 */
+  async afterGettingData() {
+    const ctx = await createCanvasContext('#f24h')
+    drawWeatherHourlyLineChart(ctx, this.data.f24h, this.data.theme)
   },
 })

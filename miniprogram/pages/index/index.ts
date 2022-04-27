@@ -7,8 +7,8 @@ import {
   F2dItem,
   IndicesItem,
   MinutelyRain,
-  WeatherDaily,
-  WeatherHourly,
+  WeatherDailyItem,
+  WeatherHourlyItem,
   WeatherNow,
 } from '../../app/services/weather-data.interface'
 import {addWeatherPlace, getWeatherPlaces, removeWeatherPlace} from '../../app/services/weather-place'
@@ -33,8 +33,8 @@ Page({
     // 天气数据
     air5d: [] as AirDaily[],
     airNow: {} as AirNow,
-    f15d: [] as WeatherDaily[],
-    f24h: [] as WeatherHourly[],
+    f15d: [] as WeatherDailyItem[],
+    f24h: [] as WeatherHourlyItem[],
     indices3d: [] as IndicesItem[],
     now: {} as WeatherNow,
     rain: {} as MinutelyRain,

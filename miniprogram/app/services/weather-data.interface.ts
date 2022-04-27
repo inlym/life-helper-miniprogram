@@ -49,7 +49,7 @@ export interface WeatherNow {
 }
 
 /** 逐天天气预报中单天的数据详情 */
-export interface WeatherDaily {
+export interface WeatherDailyItem {
   // 处理后增加的字段
   weekday: string
 
@@ -140,7 +140,7 @@ export interface WeatherDaily {
 }
 
 /** 逐小时天气预报中的单小时数据详情 */
-export interface WeatherHourly {
+export interface WeatherHourlyItem {
   // 处理后增加的字段
   timeText: string
 
@@ -333,9 +333,9 @@ export interface MixedWeatherData {
 
   airNow: AirNow
 
-  f15d: WeatherDaily[]
+  f15d: WeatherDailyItem[]
 
-  f24h: WeatherHourly[]
+  f24h: WeatherHourlyItem[]
 
   indices3d: IndicesItem[]
 

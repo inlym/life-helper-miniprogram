@@ -89,18 +89,29 @@
         <view class="content">
             <scroll-view
                 class="scroll"
-                scroll-x="{{ true }}"
-                scroll-with-animation="{{ true }}"
-                enable-flex="{{ true }}"
-                scroll-anchoring="{{ true }}"
-                enhanced="{{ true }}"
-                fast-deceleration="{{ true }}"
+                scroll-x
+                scroll-with-animation
+                enable-flex
+                scroll-anchoring
+                enhanced
+                fast-deceleration
             >
-                <view class="list">
-                    <view class="item" wx:for="{{ f24h }}" wx:key="time">
-                        <view class="time-text">{{ item.timeText }}</view>
-                        <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
-                        <view class="text">{{ item.text }}</view>
+                <view class="wrapper">
+                    <view class="top">
+                        <view class="item" wx:for="{{ f24h }}" wx:key="time">
+                            <view class="time-text">{{ item.timeText }}</view>
+                            <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
+                            <view class="text">{{ item.text }}</view>
+                        </view>
+                    </view>
+                    <view class="middle">
+                        <canvas type="2d" id="f24h" class="f24h-canvas"></canvas>
+                    </view>
+                    <view class="bottom">
+                        <view class="item" wx:for="{{ f24h }}" wx:key="time">
+                            <view class="wind-dir">{{ item.windDir }}</view>
+                            <view class="wind-scale">{{ item.windScale }}级</view>
+                        </view>
                     </view>
                 </view>
             </scroll-view>

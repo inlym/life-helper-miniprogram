@@ -1,4 +1,4 @@
-@import '../../assets/styles/weather2.scss';
+@import "../../assets/styles/weather2.scss";
 
 // 实时天气
 .weather-now {
@@ -197,7 +197,7 @@
   }
 
   .item:first-child {
-    border-right: 4rpx solid var(--weui-FG-2);
+    border-right: 2rpx solid var(--weui-FG-2);
   }
 }
 
@@ -221,18 +221,28 @@
 
   .content {
     .scroll {
-      .list {
-        display: flex;
-
-        width: 2400rpx;
+      .wrapper {
+        width: 2300rpx;
         padding: 10rpx;
+
+        .top, .bottom {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .middle {
+          .f24h-canvas {
+            width: 100%;
+            height: 160rpx;
+          }
+        }
 
         .item {
           display: flex;
           align-items: center;
           flex-direction: column;
 
-          width: 200rpx;
+          width: 80rpx;
           padding: 16rpx 0;
 
           .time-text {
@@ -242,22 +252,29 @@
           }
 
           .icon {
-            width: 56rpx;
-            height: 56rpx;
+            width: 62rpx;
+            height: 62rpx;
             margin-top: 14rpx;
           }
 
           .text {
-            font-size: 28rpx;
+            font-size: 30rpx;
 
             margin-top: 20rpx;
           }
 
-          .temp {
-            font-size: 32rpx;
+          .wind-dir {
+            font-size: 24rpx;
 
-            margin-top: 24rpx;
-            margin-bottom: 16rpx;
+            margin-top: 20rpx;
+          }
+
+          .wind-scale {
+            font-size: 20rpx;
+
+            margin-top: 8rpx;
+
+            color: var(--weui-FG-2);
           }
         }
       }

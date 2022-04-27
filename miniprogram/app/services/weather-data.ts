@@ -2,7 +2,7 @@
 import dayjs from 'dayjs'
 import {requestForData} from '../core/http'
 import {calcWeekdayText} from '../utils/time'
-import {AirDaily, F2dItem, MixedWeatherData, WeatherDaily, WeatherHourly} from './weather-data.interface'
+import {AirDaily, F2dItem, MixedWeatherData, WeatherDailyItem, WeatherHourlyItem} from './weather-data.interface'
 
 /**
  * 处理天气数据
@@ -10,13 +10,14 @@ import {AirDaily, F2dItem, MixedWeatherData, WeatherDaily, WeatherHourly} from '
  * @param data 天气数据
  */
 export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
-  data.f15d.forEach((item: WeatherDaily) => {
+  data.f15d.forEach((item: WeatherDailyItem) => {
     item.weekday = calcWeekdayText(item.date)
     const d = dayjs(item.date)
     item.simpleDate = `${d.month()}/${d.date()}`
   })
 
-  data.f24h.forEach((item: WeatherHourly, index: number) => {
+  // 处理未来 24 小时预报数据
+  data.f24h.forEach((item: WeatherHourlyItem, index: number) => {
     const t = dayjs(item.time)
     const now = dayjs()
 
@@ -28,13 +29,13 @@ export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
       item.timeText = `${month}/${day}`
     } else {
       const hour = t.hour()
-      item.timeText = `${hour}时`
+      item.timeText = `${hour}:00`
     }
   })
 
   // 处理未来2天的天气数据
-  const todayDaily = data.f15d.find((item: WeatherDaily) => item.weekday === '今天')
-  const tomorrowDaily = data.f15d.find((item: WeatherDaily) => item.weekday === '明天')
+  const todayDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '今天')
+  const tomorrowDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '明天')
 
   const todayAqi = data.air5d.find((item: AirDaily) => item.date === todayDaily!.date)
   const tomorrowAqi = data.air5d.find((item: AirDaily) => item.date === tomorrowDaily!.date)
