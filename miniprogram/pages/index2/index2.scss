@@ -1,4 +1,4 @@
-@import "../../assets/styles/weather2.scss";
+@import '../../assets/styles/weather2.scss';
 
 // 实时天气
 .weather-now {
@@ -14,42 +14,18 @@
     height: 40px;
     padding-left: 20rpx;
 
-    .add-icon {
+    .location-name {
+      font-size: 32rpx;
+      line-height: 32rpx;
+
       position: relative;
-      top: -10rpx;
+      top: 1px;
+
+      margin-left: 8rpx;
     }
 
-    .content {
+    .location-icon {
       margin-left: 10rpx;
-
-      .location {
-        position: relative;
-
-        display: flex;
-        align-items: center;
-
-        height: 32rpx;
-
-        .location-name {
-          font-size: 32rpx;
-          line-height: 32rpx;
-        }
-
-        .location-icon {
-          position: relative;
-          top: -4rpx;
-
-          margin-left: 16rpx;
-        }
-      }
-
-      .update-text {
-        font-size: 18rpx;
-
-        margin-top: 6rpx;
-
-        opacity: 50%;
-      }
     }
   }
 
@@ -225,7 +201,8 @@
         width: 2300rpx;
         padding: 10rpx;
 
-        .top, .bottom {
+        .top,
+        .bottom {
           display: flex;
           justify-content: space-between;
         }
