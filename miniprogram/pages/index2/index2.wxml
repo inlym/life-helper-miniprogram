@@ -112,7 +112,34 @@
     <view class="weather-daily">
         <view class="title">15天预报</view>
         <view class="content">
-            <view class="item" wx:for="{{ f15d }}"></view>
+            <scroll-view
+                class="scroll"
+                scroll-x
+                scroll-with-animation
+                enable-flex
+                scroll-anchoring
+                enhanced
+                fast-deceleration
+            >
+                <view class="wrapper">
+                    <view class="item" wx:for="{{ f15d }}" wx:key="date">
+                        <view class="weekday">{{ item.weekday }}</view>
+                        <view class="date">{{ item.simpleDate }}</view>
+                        <view class="text">{{ item.textDay }}</view>
+                        <image class="icon" src="{{ item.iconDayUrl }}" mode="widthFix"></image>
+                        <view class="temp">{{ item.tempMax }}°</view>
+                        <view class="chart"></view>
+                        <view class="temp">{{ item.tempMin }}°</view>
+                        <image class="icon" src="{{ item.iconNightUrl }}" mode="widthFix"></image>
+                        <view class="text">{{ item.textNight }}</view>
+                        <view class="wind-dir">{{ item.windDirDay }}</view>
+                        <view class="wind-scale">{{ item.windScaleDay }}级</view>
+                        <view wx:if="{{ item.aqiCategory }}" class="aqi aqi-level--{{ item.aqiLevel }}">
+                            {{ item.aqiCategory }}
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
         </view>
     </view>
 </view>

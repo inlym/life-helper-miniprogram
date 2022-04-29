@@ -1,4 +1,4 @@
-@import '../../assets/styles/weather2.scss';
+@import "../../assets/styles/weather2.scss";
 
 // 实时天气
 .weather-now {
@@ -201,8 +201,7 @@
         width: 2300rpx;
         padding: 10rpx;
 
-        .top,
-        .bottom {
+        .top, .bottom {
           display: flex;
           justify-content: space-between;
         }
@@ -263,13 +262,82 @@
   background-color: var(--weui-BG-1);
 
   .content {
-    padding: 10rpx 10rpx;
+    .scroll {
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
 
-    .item {
-      height: 100rpx;
-      margin: 10rpx;
+        width: 1800rpx;
+        padding: 10rpx 20rpx;
 
-      background-color: var(--weui-BG-3);
+        .item {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+
+          width: 80rpx;
+          padding: 16rpx 0;
+
+          .date {
+            font-size: 26rpx;
+
+            color: var(--weui-FG-1);
+          }
+
+          .icon {
+            width: 62rpx;
+            height: 62rpx;
+          }
+
+          .text {
+            font-size: 30rpx;
+
+            margin-top: 20rpx;
+
+            white-space: nowrap;
+          }
+
+          .temp {
+            font-size: 32rpx;
+
+            margin: 16rpx 0;
+          }
+
+          .chart {
+            width: 20rpx;
+            height: 300rpx;
+
+            background-color: aqua;
+          }
+
+          .wind-dir {
+            font-size: 24rpx;
+
+            margin-top: 20rpx;
+          }
+
+          .wind-scale {
+            font-size: 20rpx;
+
+            margin-top: 8rpx;
+
+            color: var(--weui-FG-2);
+          }
+
+          .aqi {
+            font-size: 22rpx;
+            line-height: 32rpx;
+
+            height: 32rpx;
+            margin-top: 20rpx;
+            padding: 0 18rpx;
+
+            white-space: nowrap;
+
+            border-radius: 14rpx;
+          }
+        }
+      }
     }
   }
 }
