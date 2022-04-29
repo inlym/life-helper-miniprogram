@@ -2,7 +2,7 @@
 import dayjs from 'dayjs'
 import {requestForData} from '../core/http'
 import {calcWeekdayText} from '../utils/time'
-import {F2dItem, MixedWeatherData, WeatherDailyItem, WeatherHourlyItem} from './weather-data.interface'
+import {F2dItem, MixedWeatherData, TempBar, WeatherDailyItem, WeatherHourlyItem} from './weather-data.interface'
 
 /**
  * 处理天气数据
@@ -13,7 +13,7 @@ export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
   data.f15d.forEach((item: WeatherDailyItem) => {
     item.weekday = calcWeekdayText(item.date)
     const d = dayjs(item.date)
-    item.simpleDate = `${d.month()}/${d.date()}`
+    item.simpleDate = `${d.month() + 1}/${d.date()}`
   })
 
   // 处理未来 24 小时预报数据
@@ -68,6 +68,9 @@ export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
     }
   }
 
+  // 附上温度条数据
+  data.tempBars = getTempBarList(data.f15d)
+
   return data
 }
 
@@ -98,4 +101,33 @@ export async function getMixedWeatherDataByPlaceId(placeId: number): Promise<Mix
   })
 
   return processWeatherData(data)
+}
+
+/**
+ * 生成温度条数据
+ *
+ * @param list 未来15天预报数据
+ */
+export function getTempBarList(list: WeatherDailyItem[]): TempBar[] {
+  /** 父元素的高度 */
+  const boxHeight = 200
+
+  const maxList: number[] = list.map((item: WeatherDailyItem) => parseInt(item.tempMax))
+  const minList: number[] = list.map((item: WeatherDailyItem) => parseInt(item.tempMin))
+
+  const max = Math.max(...maxList)
+  const min = Math.min(...minList)
+
+  /** 每一摄氏度占有的高度 */
+  const heightPerTemp = boxHeight / (max - min)
+
+  const tempBarList: TempBar[] = []
+
+  for (let i = 0; i < list.length; i++) {
+    const paddingTop = (max - maxList[i]) * heightPerTemp
+    const height = (maxList[i] - minList[i]) * heightPerTemp
+    tempBarList.push({paddingTop, height})
+  }
+
+  return tempBarList
 }

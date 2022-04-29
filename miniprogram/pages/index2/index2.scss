@@ -1,5 +1,9 @@
 @import "../../assets/styles/weather2.scss";
 
+.page {
+  padding-bottom: 100rpx;
+}
+
 // 实时天气
 .weather-now {
   padding-bottom: 100rpx;
@@ -268,7 +272,7 @@
         justify-content: space-between;
 
         width: 1800rpx;
-        padding: 10rpx 20rpx;
+        padding: 12rpx 20rpx;
 
         .item {
           display: flex;
@@ -280,6 +284,8 @@
 
           .date {
             font-size: 26rpx;
+
+            margin-top: 2rpx;
 
             color: var(--weui-FG-1);
           }
@@ -293,6 +299,7 @@
             font-size: 30rpx;
 
             margin-top: 20rpx;
+            margin-bottom: 10rpx;
 
             white-space: nowrap;
           }
@@ -303,11 +310,17 @@
             margin: 16rpx 0;
           }
 
-          .chart {
+          .temp-bar {
             width: 20rpx;
-            height: 300rpx;
+            height: 200rpx;
 
-            background-color: aqua;
+            border-radius: 10px;
+            background-color: var(--weui-BG-0);
+
+            .temp-body {
+              border-radius: 10px;
+              background-image: linear-gradient(0deg, var(--weui-LIGHTGREEN), var(--weui-ORANGE));
+            }
           }
 
           .wind-dir {

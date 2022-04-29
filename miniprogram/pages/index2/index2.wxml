@@ -122,13 +122,15 @@
                 fast-deceleration
             >
                 <view class="wrapper">
-                    <view class="item" wx:for="{{ f15d }}" wx:key="date">
+                    <view class="item" wx:for="{{ f15d }}" wx:for-index="index" wx:key="date" hover-class="hover">
                         <view class="weekday">{{ item.weekday }}</view>
                         <view class="date">{{ item.simpleDate }}</view>
                         <view class="text">{{ item.textDay }}</view>
                         <image class="icon" src="{{ item.iconDayUrl }}" mode="widthFix"></image>
                         <view class="temp">{{ item.tempMax }}°</view>
-                        <view class="chart"></view>
+                        <view class="temp-bar" style="padding-top: {{ tempBars[index].paddingTop }}rpx;">
+                            <view class="temp-body" style="height: {{ tempBars[index].height }}rpx;"></view>
+                        </view>
                         <view class="temp">{{ item.tempMin }}°</view>
                         <image class="icon" src="{{ item.iconNightUrl }}" mode="widthFix"></image>
                         <view class="text">{{ item.textNight }}</view>

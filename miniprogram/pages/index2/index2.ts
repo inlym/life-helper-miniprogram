@@ -3,6 +3,7 @@ import {getMixedWeatherDataAnonymous} from '../../app/services/weather-data'
 import {
   AirNow,
   F2dItem,
+  TempBar,
   WeatherDailyItem,
   WeatherHourlyItem,
   WeatherNow,
@@ -26,6 +27,9 @@ Page<any, Record<string, any>>({
 
     /** 未来2天预报 */
     f2d: [] as F2dItem[],
+
+    /** 未来15天预报的温度条 */
+    tempBars: [] as TempBar[],
 
     // -------------------------------- 其他页面数据 --------------------------------
 

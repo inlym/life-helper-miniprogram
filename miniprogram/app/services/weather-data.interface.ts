@@ -337,6 +337,15 @@ export interface CurrentLocationWeather {
   temp: string
 }
 
+/** 温度调 */
+export interface TempBar {
+  /** 用于外部的父元素 */
+  paddingTop: number
+
+  /** 用于子元素 */
+  height: number
+}
+
 export interface MixedWeatherData {
   airNow: AirNow
 
@@ -362,4 +371,6 @@ export interface MixedWeatherData {
   f2d: F2dItem[]
 
   currentLocationWeather: CurrentLocationWeather
+
+  tempBars: TempBar[]
 }
