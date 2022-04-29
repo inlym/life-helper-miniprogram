@@ -50,13 +50,22 @@ export interface WeatherNow {
 
 /** 逐天天气预报中单天的数据详情 */
 export interface WeatherDailyItem {
-  // 处理后增加的字段
+  // ==============================  数据处理后新增的字段  ==============================
+
+  /** 优化形式的周几，格式示例：昨天、明天、后天、周一、...、周日 */
   weekday: string
 
-  /** 03/19 格式的日期 */
+  /** 简单格式的日期，格式示例：04/29 */
   simpleDate: string
 
-  // 接口返回的数据
+  // ===============================  接口返回的数据  ================================
+
+  /** 空气质量指数等级 */
+  aqiLevel: string
+
+  /** 空气质量指数级别 */
+  aqiCategory: string
+
   /** 预报日期 */
   date: string
 
@@ -329,8 +338,6 @@ export interface CurrentLocationWeather {
 }
 
 export interface MixedWeatherData {
-  air5d: AirDaily[]
-
   airNow: AirNow
 
   f15d: WeatherDailyItem[]

@@ -108,4 +108,11 @@
             </scroll-view>
         </view>
     </view>
+
+    <view class="weather-daily">
+        <view class="title">15天预报</view>
+        <view class="content">
+            <view class="item" wx:for="{{ f15d }}"></view>
+        </view>
+    </view>
 </view>

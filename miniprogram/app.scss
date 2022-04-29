@@ -2,13 +2,14 @@
 
 page,
 .page {
-  background-color: var(--weui-BG-0);
-  color: var(--weui-FG-0);
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
   font-size: 32rpx;
   line-height: 1.4;
-  height: 100%;
+
   min-height: 100%;
+
+  color: var(--weui-FG-0);
+  background-color: var(--weui-BG-0);
 }
 
 image {
@@ -28,6 +29,7 @@ navigator {
 /* 单行文本缩略 */
 .text-ellipsis-l1 {
   overflow: hidden;
+
   white-space: nowrap;
   text-overflow: ellipsis;
 }

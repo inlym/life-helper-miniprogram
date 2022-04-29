@@ -21,7 +21,7 @@
       position: relative;
       top: 1px;
 
-      margin-left: 8rpx;
+      margin-left: 16rpx;
     }
 
     .location-icon {
@@ -255,6 +255,21 @@
           }
         }
       }
+    }
+  }
+}
+
+.weather-daily {
+  background-color: var(--weui-BG-1);
+
+  .content {
+    padding: 10rpx 10rpx;
+
+    .item {
+      height: 100rpx;
+      margin: 10rpx;
+
+      background-color: var(--weui-BG-3);
     }
   }
 }
