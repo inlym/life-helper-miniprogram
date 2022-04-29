@@ -24,7 +24,7 @@ export function drawWeatherHourlyLineChart(
   theme: string
 ): void {
   /** 线条颜色 */
-  const LINE_COLOR = '#10aeff'
+  const LINE_COLOR = '#427bff'
 
   /** 温度字体颜色 */
   const TEXT_COLOR = theme === 'dark' ? '#d6d6d6' : '#040404'

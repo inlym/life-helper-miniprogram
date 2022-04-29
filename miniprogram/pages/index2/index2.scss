@@ -311,15 +311,15 @@
           }
 
           .temp-bar {
-            width: 20rpx;
+            width: 14rpx;
             height: 200rpx;
 
-            border-radius: 10px;
+            border-radius: 7rpx;
             background-color: var(--weui-BG-0);
 
             .temp-body {
-              border-radius: 10px;
-              background-image: linear-gradient(0deg, var(--weui-LIGHTGREEN), var(--weui-ORANGE));
+              border-radius: 7rpx;
+              background-image: linear-gradient(0deg, #427bff, #f18360);
             }
           }
 
