@@ -21,7 +21,7 @@
                 hover-class="hover"
             >
                 <mp-icon icon="volume-up" type="field" size="18" color="{{ item.color }}"></mp-icon>
-                <view class="warning-title">{{ item.title }}</view>
+                <view class="warning-title">{{ item.typeName }}{{ item.level }}预警</view>
             </view>
         </view>
 
