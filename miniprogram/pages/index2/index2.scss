@@ -46,11 +46,11 @@
     }
 
     .temp {
-      font-size: 140rpx;
+      font-size: 160rpx;
       line-height: var(--height);
 
       height: var(--height);
-      margin-left: 24rpx;
+      margin-left: 30rpx;
     }
 
     .right {
@@ -135,15 +135,17 @@
 // 天气灾害预警模块
 .warning-now {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
 
-  margin-top: 40rpx;
+  margin-top: 20rpx;
+  padding: 0 26rpx;
 
   .item {
     display: flex;
     align-items: center;
 
+    width: auto;
     margin-top: 26rpx;
 
     .warning-title {
