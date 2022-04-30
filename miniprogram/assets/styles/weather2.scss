@@ -13,23 +13,23 @@
   }
 
   &--cloudy {
-    background-image: url("https://static.lifehelper.com.cn/qweather/bg/cloudy_day.png"),
-    linear-gradient(225deg, #d0dae8, #ccd4df 55%, #a5b3c5);
+    background-image: url('https://static.lifehelper.com.cn/qweather/bg/cloudy_day.png'),
+      linear-gradient(225deg, #d0dae8, #ccd4df 55%, #a5b3c5);
   }
 
   &--rain {
-    background-image: url("https://static.lifehelper.com.cn/qweather/bg/rain_day.png"),
-    linear-gradient(225deg, #dbebff, #dde5f4 55%, #becddd);
+    background-image: url('https://static.lifehelper.com.cn/qweather/bg/rain_day.png'),
+      linear-gradient(225deg, #dbebff, #dde5f4 55%, #becddd);
   }
 
   &--snow {
-    background-image: url("https://static.lifehelper.com.cn/qweather/bg/snow_day.png"),
-    linear-gradient(225deg, #d2f0fd, #e6f8fe 55%, #d6eded);
+    background-image: url('https://static.lifehelper.com.cn/qweather/bg/snow_day.png'),
+      linear-gradient(225deg, #d2f0fd, #e6f8fe 55%, #d6eded);
   }
 
   &--haze {
-    background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_day.png"),
-    linear-gradient(225deg, #b29c82, #ded9d7 64.29%, #d9d7dc);
+    background-image: url('https://static.lifehelper.com.cn/qweather/bg/haze_day.png'),
+      linear-gradient(225deg, #b29c82, #ded9d7 64.29%, #d9d7dc);
   }
 }
 
@@ -44,23 +44,23 @@
   }
 
   &--cloudy {
-    background-image: url("https://static.lifehelper.com.cn/qweather/bg/cloudy_night.png"),
-    linear-gradient(225deg, #8089a5, #424c66);
+    background-image: url('https://static.lifehelper.com.cn/qweather/bg/cloudy_night.png'),
+      linear-gradient(225deg, #8089a5, #424c66);
   }
 
   &--rain {
-    background-image: url("https://static.lifehelper.com.cn/qweather/bg/rain_night.png"),
-    linear-gradient(225deg, #2c4a77, #1f3b59);
+    background-image: url('https://static.lifehelper.com.cn/qweather/bg/rain_night.png'),
+      linear-gradient(225deg, #2c4a77, #1f3b59);
   }
 
   &--snow {
-    background-image: url("https://static.lifehelper.com.cn/qweather/bg/snow_night.png"),
-    linear-gradient(225deg, #18779e, #0d3f54);
+    background-image: url('https://static.lifehelper.com.cn/qweather/bg/snow_night.png'),
+      linear-gradient(225deg, #18779e, #0d3f54);
   }
 
   &--haze {
-    background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_night.png"),
-    linear-gradient(225deg, #8f8d52, #2b333c);
+    background-image: url('https://static.lifehelper.com.cn/qweather/bg/haze_night.png'),
+      linear-gradient(225deg, #8f8d52, #2b333c);
   }
 }
 
@@ -89,5 +89,39 @@
 
   &-level--6 {
     background-color: #d94371;
+  }
+}
+
+.warning {
+  padding: 4rpx 30rpx 4rpx 24rpx;
+
+  border-radius: 20rpx;
+
+  &--white {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  &--blue {
+    background-color: rgba(16, 174, 255, 0.3);
+  }
+
+  &--green {
+    background-color: rgba(145, 211, 0, 0.3);
+  }
+
+  &--yellow {
+    background-color: rgba(255, 195, 0, 0.3);
+  }
+
+  &--orange {
+    background-color: rgba(250, 157, 59, 0.3);
+  }
+
+  &--red {
+    background-color: rgba(250, 81, 81, 0.3);
+  }
+
+  &--black {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 }

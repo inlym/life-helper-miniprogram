@@ -12,6 +12,19 @@
             <mp-icon class="location-icon" icon="location" size="20" color="{{ iconColor }}" type="field"></mp-icon>
         </view>
 
+        <!-- 天气灾害预警（非实时天气数据） -->
+        <view class="warning-now" wx:if="{{ warnings.length > 0 }}">
+            <view
+                class="item warning warning--{{ item.color }}"
+                wx:for="{{ warnings }}"
+                wx:key="id"
+                hover-class="hover"
+            >
+                <mp-icon icon="volume-up" type="field" size="18" color="{{ item.color }}"></mp-icon>
+                <view class="warning-title">{{ item.title }}</view>
+            </view>
+        </view>
+
         <!-- 详情天气信息：天气 icon、温度、天气文本描述 -->
         <view class="weather-detail">
             <image src="{{ now.iconUrl }}" mode="widthFix" class="weather-icon"></image>

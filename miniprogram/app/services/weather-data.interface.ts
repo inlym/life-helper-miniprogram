@@ -244,6 +244,39 @@ export interface IndicesItem {
   text: string
 }
 
+/** 天气预警项目 */
+export interface WarningItem {
+  // ==============================  数据处理后新增的字段  ==============================
+  /** 颜色，用于背景色和图标颜色 */
+  color: string
+
+  // ===============================  接口返回的数据  ================================
+
+  /** 本条预警的唯一标识，可判断本条预警是否已经存在 */
+  id: string
+
+  /** 预警等级，目前包含：白色、蓝色、绿色、黄色、橙色、红色、黑色 */
+  level: string
+
+  /** 预警发布时间 */
+  pubTime: string
+
+  /** 预警发布单位，可能为空 */
+  sender: string
+
+  /** 预警详细文字描述 */
+  text: string
+
+  /** 预警信息标题 */
+  title: string
+
+  /** 预警类型 ID */
+  type: string
+
+  /** 预警类型名称 */
+  typeName: string
+}
+
 /** 实时空气质量数据 */
 export interface AirNow {
   /** 空气质量指数 */
@@ -359,6 +392,8 @@ export interface MixedWeatherData {
 
   rain: MinutelyRain
 
+  warnings: WarningItem[]
+
   // location 和 place 只会同时存在一个
   // 当不带参数查询时，服务端根据 IP 地址查询定位返回 location
   // 当使用地点 ID 查询时，返回这个 ID 对应的 place
@@ -367,7 +402,8 @@ export interface MixedWeatherData {
 
   place: WeatherPlace
 
-  // 自己添加在字段
+  // ==============================  数据处理后新增的字段  ==============================
+
   f2d: F2dItem[]
 
   currentLocationWeather: CurrentLocationWeather

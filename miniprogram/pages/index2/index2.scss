@@ -1,4 +1,4 @@
-@import "../../assets/styles/weather2.scss";
+@import '../../assets/styles/weather2.scss';
 
 .page {
   padding-bottom: 100rpx;
@@ -132,6 +132,28 @@
   }
 }
 
+// 天气灾害预警模块
+.warning-now {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  margin-top: 60rpx;
+
+  .item {
+    display: flex;
+    align-items: center;
+
+    margin-top: 26rpx;
+
+    .warning-title {
+      font-size: 24rpx;
+
+      margin-left: 16rpx;
+    }
+  }
+}
+
 // 今明两天天气
 .forecast-2days {
   font-size: 32rpx;
@@ -205,7 +227,8 @@
         width: 2300rpx;
         padding: 10rpx;
 
-        .top, .bottom {
+        .top,
+        .bottom {
           display: flex;
           justify-content: space-between;
         }

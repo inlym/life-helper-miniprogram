@@ -4,6 +4,7 @@ import {
   AirNow,
   F2dItem,
   TempBar,
+  WarningItem,
   WeatherDailyItem,
   WeatherHourlyItem,
   WeatherNow,
@@ -19,6 +20,7 @@ Page<any, Record<string, any>>({
     f24h: [] as WeatherHourlyItem[],
     airNow: {} as AirNow,
     f15d: [] as WeatherDailyItem[],
+    warnings: [] as WarningItem[],
 
     // ------------------------ 从 HTTP 请求获取二次处理后的数据 -----------------------
 
