@@ -12,6 +12,10 @@ page,
   background-color: var(--weui-BG-0);
 }
 
+.page {
+  min-height: 100vh;
+}
+
 image {
   max-width: 100%;
   max-height: 100%;

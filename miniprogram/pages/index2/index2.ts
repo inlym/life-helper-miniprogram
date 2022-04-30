@@ -90,4 +90,16 @@ Page<any, Record<string, any>>({
     const ctx = await createCanvasContext('#f24h')
     drawWeatherHourlyLineChart(ctx, this.data.f24h, this.data.theme)
   },
+
+  /** 跳转到天气预警页面 */
+  navigateToWarningPage() {
+    const warnings = this.data.warnings
+
+    wx.navigateTo({
+      url: '/pages/weather/warning/warning',
+      success(res) {
+        res.eventChannel.emit('transferData', warnings)
+      },
+    })
+  },
 })

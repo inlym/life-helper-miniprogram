@@ -1,15 +1,22 @@
 {
-  "pages": ["pages/index/index", "pages/test/test", "pages/scan/login", "pages/me/me", "pages/index2/index2"],
+  "pages": [
+    "pages/index/index",
+    "pages/test/test",
+    "pages/scan/login",
+    "pages/me/me",
+    "pages/index2/index2",
+    "pages/weather/warning/warning"
+  ],
   "entryPagePath": "pages/index2/index2",
   "sitemapLocation": "sitemap.json",
   "window": {
     "navigationBarBackgroundColor": "@navigationBarBackgroundColor",
     "navigationBarTextStyle": "@navigationBarTextStyle",
+    "navigationBarTitleText": "小鸣助手",
     "backgroundColor": "@backgroundColor",
     "backgroundTextStyle": "@backgroundTextStyle",
     "backgroundColorTop": "@backgroundColorTop",
     "backgroundColorBottom": "@backgroundColorBottom",
-    "navigationBarTitleText": "小鸣助手",
     "enablePullDownRefresh": true
   },
   "tabBar": {

@@ -1,0 +1,45 @@
+/* pages/weather/warning/warning.wxss */
+.warning {
+  padding: 20rpx;
+
+  .item {
+    margin-bottom: 40rpx;
+    padding: 20rpx;
+
+    border-radius: 20rpx;
+    background-color: var(--weui-BG-1);
+
+    .head {
+      display: flex;
+
+      .image {
+        width: 200rpx;
+        height: 150rpx;
+
+        background-color: burlywood;
+      }
+
+      .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        margin-left: 20rpx;
+
+        .title {
+          font-size: 30rpx;
+        }
+
+        .time {
+          font-size: 24rpx;
+        }
+      }
+    }
+
+    .content {
+      font-size: 28rpx;
+
+      margin-top: 18rpx;
+    }
+  }
+}

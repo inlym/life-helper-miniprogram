@@ -19,6 +19,7 @@
                 wx:for="{{ warnings }}"
                 wx:key="id"
                 hover-class="hover"
+                bindtap="navigateToWarningPage"
             >
                 <mp-icon icon="volume-up" type="field" size="18" color="{{ item.color }}"></mp-icon>
                 <view class="warning-title">{{ item.typeName }}{{ item.level }}预警</view>

@@ -1,0 +1,15 @@
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="warning">
+        <view class="item" wx:for="{{ warnings }}" wx:key="id">
+            <view class="head">
+                <!-- 图片，之后再替换 -->
+                <view class="image"></view>
+                <view class="right">
+                    <view class="title">{{ item.title }}</view>
+                    <view class="time">发布时间：{{ item.pubTime }}</view>
+                </view>
+            </view>
+            <view class="content">{{ item.text }}</view>
+        </view>
+    </view>
+</view>
