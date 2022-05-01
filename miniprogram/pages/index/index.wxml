@@ -159,4 +159,11 @@
             </scroll-view>
         </view>
     </view>
+
+    <view class="footer weui-footer">
+        <view class="weui-footer__links">
+            <navigator url="" class="weui-footer__link">小鸣天气 - 懂天气，也懂你</navigator>
+        </view>
+        <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
+    </view>
 </view>

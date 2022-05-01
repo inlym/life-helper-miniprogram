@@ -1,7 +1,7 @@
 @import '../../assets/styles/weather2.scss';
 
 .page {
-  padding-bottom: 100rpx;
+  padding-bottom: 40rpx;
 }
 
 // 实时天气
@@ -378,4 +378,8 @@
       }
     }
   }
+}
+
+.footer {
+  margin-top: 60rpx;
 }
