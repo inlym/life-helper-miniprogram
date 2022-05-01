@@ -53,8 +53,6 @@ Page({
 
   /** 添加新的关注城市 */
   async addNewPlace() {
-    console.log('44444444444444444444444')
-
     // 目前设定只允许添加 5 个
     if (this.data.places.length >= 5) {
       await wx.showModal({
@@ -70,13 +68,10 @@ Page({
         const list = this.data.places
         list.unshift(place)
 
-        this.setData({
-          places: list,
-          currentPlaceId: place.id,
-        })
+        this.setData({places: list})
 
         await wx.showToast({icon: 'none', title: '添加成功，已为您展示该地点的天气'})
-        // this.getWeatherDataByPlaceId(place.id)
+        this.switchPlace(place.id)
       } else {
         await wx.showModal({
           content: '您未选择地点！',
@@ -107,6 +102,23 @@ Page({
       this.setData({places})
 
       wx.showToast({title: '删除成功', icon: 'success'})
+    }
+  },
+
+  /** 切换要查看天气的地点，并返回上一页 */
+  switchPlace(placeId: number) {
+    this.setData({currentPlaceId: placeId})
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('switchPlace', {currentPlaceId: placeId})
+    wx.navigateBack()
+  },
+
+  /** 处理地点列表项点击事件 */
+  handleItemTap(event: any) {
+    if (!this.data.isEdit) {
+      const id: number = event.currentTarget.dataset.id
+
+      this.switchPlace(id)
     }
   },
 })

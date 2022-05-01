@@ -1,5 +1,5 @@
 import {drawWeatherHourlyLineChart} from '../../app/services/weather-canvas'
-import {getMixedWeatherDataAnonymous} from '../../app/services/weather-data'
+import {getMixedWeatherDataAnonymous, getMixedWeatherDataByPlaceId} from '../../app/services/weather-data'
 import {
   AirNow,
   F2dItem,
@@ -13,7 +13,7 @@ import {
 import {createCanvasContext} from '../../app/utils/canvas'
 import {themeBehavior} from '../../behaviors/theme-behavior'
 
-Page<any, Record<string, any>>({
+Page({
   data: {
     // ---------------------------- 从 HTTP 请求获取的数据 ----------------------------
 
@@ -64,7 +64,6 @@ Page<any, Record<string, any>>({
     this.setReservedHeight()
 
     await this.getWeatherDataAnonymous()
-    await this.afterGettingData()
   },
 
   /** 获取时钟并设置相关值 */
@@ -89,12 +88,26 @@ Page<any, Record<string, any>>({
     const locationName = data.location.name
     const ipLocatedWeatherNow = data.now
     this.setData({locationName, ipLocatedWeatherNow})
+
+    await this.afterGettingData()
+  },
+
+  /** 通过天气地点 ID 获取天气数据 */
+  async getWeatherDataByPlaceId(placeId: number) {
+    this.setData({currentPlaceId: placeId})
+    const data = await getMixedWeatherDataByPlaceId(placeId)
+    this.setData(data)
+    const locationName = data.place.name
+    this.setData({locationName})
+
+    await this.afterGettingData()
   },
 
   /** 在获取天气数据后执行 */
   async afterGettingData() {
     const ctx = await createCanvasContext('#f24h')
-    drawWeatherHourlyLineChart(ctx, this.data.f24h, this.data.theme)
+    const theme = wx.getSystemInfoSync().theme || 'light'
+    drawWeatherHourlyLineChart(ctx, this.data.f24h, theme)
   },
 
   /** 跳转到天气预警页面 */
@@ -111,12 +124,26 @@ Page<any, Record<string, any>>({
 
   /** 跳转到天气地点页 */
   navigateToPlacePage() {
+    const self = this
     const {location, currentPlaceId, ipLocatedWeatherNow} = this.data
 
     wx.navigateTo({
       url: '/pages/weather/place/place',
       success(res) {
         res.eventChannel.emit('transferData', {location, currentPlaceId, ipLocatedWeatherNow})
+      },
+      events: {
+        async switchPlace(data: any) {
+          const placeId = data.currentPlaceId
+          if (placeId !== self.data.currentPlaceId) {
+            if (placeId === 0) {
+              await self.getWeatherDataAnonymous()
+            } else {
+              await self.getWeatherDataByPlaceId(placeId)
+            }
+            wx.showToast({title: '数据已更新', icon: 'success'})
+          }
+        },
       },
     })
   },

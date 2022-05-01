@@ -4,7 +4,7 @@
         <view class="located">
             <view class="title">当前位置</view>
             <view class="list">
-                <view class="item" hover-class="hover">
+                <view class="item" hover-class="hover" bindtap="handleItemTap" data-id="{{ 0 }}">
                     <view class="left">
                         <view class="name">{{ location.name }}</view>
                         <view class="region">{{ location.region }}</view>
@@ -25,7 +25,12 @@
             </view>
             <view class="list">
                 <view class="item" wx:for="{{ places }}" wx:key="id">
-                    <view class="content" hover-class="{{ isEdit ? '' : 'hover' }}">
+                    <view
+                        class="content"
+                        hover-class="{{ isEdit ? '' : 'hover' }}"
+                        data-id="{{ item.id }}"
+                        bindtap="handleItemTap"
+                    >
                         <view class="left">
                             <view class="name">{{ item.name }}</view>
                             <view class="region">{{ item.region }}</view>
