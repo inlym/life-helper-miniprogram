@@ -52,8 +52,6 @@ Component({
       const scope = this.data.scope as keyof AuthSetting
       const res = await getAuthorizeStatus(scope)
 
-      console.log('res:', res)
-
       if (res === AuthorizeStatus.Authorized) {
         this.triggerEvent('success')
         return
