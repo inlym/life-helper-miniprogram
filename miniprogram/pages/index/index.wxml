@@ -8,7 +8,7 @@
         <view class="location-bar" hover-class="hover" bindtap="navigateToPlacePage">
             <!-- 左侧加号 -->
             <mp-icon class="add-icon" icon="add" size="26" color="{{ iconColor }}" type="field"></mp-icon>
-            <view class="location-name">{{ locationName }}</view>
+            <view class="location-name text-ellipsis-l1">{{ locationName }}</view>
             <mp-icon class="location-icon" icon="location" size="20" color="{{ iconColor }}" type="field"></mp-icon>
         </view>
 
@@ -157,6 +157,92 @@
                     </view>
                 </view>
             </scroll-view>
+        </view>
+    </view>
+
+    <!-- 实时空气质量 -->
+    <view class="air-now">
+        <view class="title">空气质量</view>
+        <view class="content">
+            <view class="left">
+                <div class="circle aqi-level--{{ airNow.level }}">{{ airNow.aqi }}</div>
+                <div class="text">{{ airNow.category }}</div>
+            </view>
+            <view class="right">
+                <view class="line">
+                    <view class="item">
+                        <view class="value">{{ airNow.pm2p5 }}</view>
+                        <progress
+                            class="progress"
+                            duration="100"
+                            percent="{{ airNow.pm2p5 }}"
+                            border-radius="10"
+                        ></progress>
+                        <view class="name">PM2.5</view>
+                    </view>
+                    <view class="item">
+                        <view class="value">{{ airNow.pm10 }}</view>
+                        <progress
+                            class="progress"
+                            duration="100"
+                            percent="{{ airNow.pm10 }}"
+                            border-radius="10"
+                        ></progress>
+                        <view class="name">PM10</view>
+                    </view>
+                    <view class="item">
+                        <view class="value">{{ airNow.o3 }}</view>
+                        <progress
+                            class="progress"
+                            duration="100"
+                            percent="{{ airNow.o3 }}"
+                            border-radius="10"
+                        ></progress>
+                        <view class="name">
+                            <text>O</text>
+                            <text class="small">3</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="line">
+                    <view class="item">
+                        <view class="value">{{ airNow.co }}</view>
+                        <progress
+                            class="progress"
+                            duration="100"
+                            percent="{{ airNow.co }}"
+                            border-radius="10"
+                        ></progress>
+                        <view class="name">CO</view>
+                    </view>
+                    <view class="item">
+                        <view class="value">{{ airNow.so2 }}</view>
+                        <progress
+                            class="progress"
+                            duration="100"
+                            percent="{{ airNow.so2 }}"
+                            border-radius="10"
+                        ></progress>
+                        <view class="name">
+                            <text>SO</text>
+                            <text class="small">2</text>
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="value">{{ airNow.no2 }}</view>
+                        <progress
+                            class="progress"
+                            duration="100"
+                            percent="{{ airNow.no2 }}"
+                            border-radius="10"
+                        ></progress>
+                        <view class="name">
+                            <text>NO</text>
+                            <text class="small">2</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
 

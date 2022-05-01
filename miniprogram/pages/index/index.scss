@@ -1,7 +1,7 @@
 @import '../../assets/styles/weather2.scss';
 
 .page {
-  padding-bottom: 40rpx;
+  padding-bottom: 30rpx;
 }
 
 // 实时天气
@@ -25,6 +25,7 @@
       position: relative;
       top: 1px;
 
+      max-width: 450rpx;
       margin-left: 16rpx;
     }
 
@@ -373,6 +374,91 @@
             white-space: nowrap;
 
             border-radius: 14rpx;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 实时空气质量
+.air-now {
+  background-color: var(--weui-BG-2);
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+
+    height: 400rpx;
+    padding-right: 60rpx;
+
+    .left {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      width: 300rpx;
+
+      .circle {
+        font-size: 70rpx;
+        line-height: 180rpx;
+
+        width: 180rpx;
+        height: 180rpx;
+
+        text-align: center;
+
+        color: #fff;
+        border-radius: 50%;
+      }
+
+      .text {
+        font-size: 30rpx;
+
+        margin-top: 40rpx;
+      }
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      padding-top: 40rpx;
+
+      .line {
+        display: flex;
+        justify-content: space-between;
+
+        margin-top: 40rpx;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        width: 100rpx;
+
+        .progress {
+          width: 100rpx;
+          height: 8rpx;
+          margin-top: 10rpx;
+        }
+
+        .name {
+          font-size: 24rpx;
+
+          margin-top: 12rpx;
+
+          color: var(--weui-FG-1);
+
+          .small {
+            font-size: 16rpx;
+
+            position: relative;
+            top: 8rpx;
           }
         }
       }
