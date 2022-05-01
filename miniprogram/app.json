@@ -17,7 +17,7 @@
     "backgroundTextStyle": "@backgroundTextStyle",
     "backgroundColorTop": "@backgroundColorTop",
     "backgroundColorBottom": "@backgroundColorBottom",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": false
   },
   "tabBar": {
     "color": "@tabBarColor",

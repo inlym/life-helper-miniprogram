@@ -8,7 +8,7 @@
         <view class="location-bar" hover-class="hover" bindtap="navigateToPlacePage">
             <!-- 左侧加号 -->
             <mp-icon class="add-icon" icon="add" size="26" color="{{ iconColor }}" type="field"></mp-icon>
-            <share-element class="location-name">{{ locationName }}</share-element>
+            <view class="location-name">{{ locationName }}</view>
             <mp-icon class="location-icon" icon="location" size="20" color="{{ iconColor }}" type="field"></mp-icon>
         </view>
 

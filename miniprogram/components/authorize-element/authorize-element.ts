@@ -1,7 +1,7 @@
 // components/authorize-element/authorize-element.ts
 
-import { AuthorizeStatus, getAuthorizeStatus, openSettingAndCheck } from '../../app/services/authorization'
-import { AuthSetting, CustomEvent } from '../../app/utils/wx-typings'
+import {AuthorizeStatus, getAuthorizeStatus, openSettingAndCheck} from '../../app/services/authorization'
+import {AuthSetting, CustomEvent} from '../../app/utils/wx-typings'
 
 interface Detail {
   index: number
@@ -35,7 +35,7 @@ Component({
     dialog: {
       title: '系统提示',
       content: '为保证功能正常使用，需要您开启相应权限！',
-      buttons: [{ text: '我不想用' }, { text: '去设置' }],
+      buttons: [{text: '我不想用'}, {text: '去设置'}],
     },
 
     /**  是否展示弹窗 */
@@ -48,9 +48,11 @@ Component({
   methods: {
     /**  处理主要内容被点击 */
     async viewTap() {
-      const { triggerEvent } = this
+      const {triggerEvent} = this
       const scope = this.data.scope as keyof AuthSetting
       const res = await getAuthorizeStatus(scope)
+
+      console.log('res:', res)
 
       if (res === AuthorizeStatus.Authorized) {
         this.triggerEvent('success')
@@ -58,42 +60,43 @@ Component({
       }
 
       if (res === AuthorizeStatus.NotApplied) {
-        const res2 = await wx.showModal({
+        wx.showModal({
           title: '系统提示',
           content: '为保证功能正常使用，需要您开启相应权限！',
           showCancel: true,
           cancelText: '取消',
           confirmText: '去设置',
-        })
-
-        // 点了「确定」按钮
-        if (res2.confirm) {
-          await wx.authorize({
-            scope,
-            success() {
-              getAuthorizeStatus(scope).then((res3) => {
-                if (res3 === AuthorizeStatus.Authorized) {
-                  triggerEvent('success')
-                } else {
+          success(res2) {
+            // 点了「确定」按钮
+            if (res2.confirm) {
+              wx.authorize({
+                scope,
+                success() {
+                  getAuthorizeStatus(scope).then((res3) => {
+                    if (res3 === AuthorizeStatus.Authorized) {
+                      triggerEvent('success')
+                    } else {
+                      triggerEvent('fail')
+                    }
+                  })
+                },
+                fail() {
                   triggerEvent('fail')
-                }
+                },
               })
-            },
-            fail() {
-              triggerEvent('fail')
-            },
-          })
-        }
+            }
+          },
+        })
       }
 
       if (res === AuthorizeStatus.Denied) {
-        this.setData({ showDialog: true })
+        this.setData({showDialog: true})
       }
     },
 
     /**  处理弹窗按钮被点击 */
     async dialogButtonTap(event: CustomEvent<Detail>) {
-      this.setData({ showDialog: false })
+      this.setData({showDialog: false})
 
       // 表示点了「确定」按钮
       if (event.detail.index === 1) {

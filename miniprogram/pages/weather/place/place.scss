@@ -97,4 +97,22 @@
       }
     }
   }
+
+  .bottom {
+    margin-top: 100rpx;
+  }
+
+  .empty {
+    margin-top: 400rpx;
+
+    .desc {
+      font-size: 28rpx;
+
+      margin-bottom: 40rpx;
+
+      text-align: center;
+
+      color: var(--weui-FG-2);
+    }
+  }
 }

@@ -53,6 +53,8 @@ Page({
 
   /** 添加新的关注城市 */
   async addNewPlace() {
+    console.log('44444444444444444444444')
+
     // 目前设定只允许添加 5 个
     if (this.data.places.length >= 5) {
       await wx.showModal({
@@ -71,7 +73,6 @@ Page({
         this.setData({
           places: list,
           currentPlaceId: place.id,
-          showPageContainer: false,
         })
 
         await wx.showToast({icon: 'none', title: '添加成功，已为您展示该地点的天气'})

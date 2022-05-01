@@ -48,6 +48,20 @@
                     </view>
                 </view>
             </view>
+
+            <view class="bottom">
+                <authorize-element scope="scope.userLocation" bindsuccess="addNewPlace">
+                    <button type="primary">添加地点</button>
+                </authorize-element>
+            </view>
+        </view>
+
+        <!-- 空列表情况 -->
+        <view class="empty" wx:if="{{ !places.length }}">
+            <view class="desc">点击下方“添加地点”可关注其他城市天气</view>
+            <authorize-element scope="scope.userLocation" bindsuccess="addNewPlace">
+                <button type="primary">添加地点</button>
+            </authorize-element>
         </view>
     </view>
 </view>
