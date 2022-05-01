@@ -1,147 +1,157 @@
-@import "../../assets/styles/weather.scss";
+@import '../../assets/styles/weather2.scss';
 
-page {
-  padding-bottom: 80rpx;
-  background-color: #eee;
+.page {
+  padding-bottom: 100rpx;
 }
 
 // 实时天气
 .weather-now {
   padding-bottom: 100rpx;
 
-  .weather-bg {
-    background-repeat: no-repeat;
-    background-position: 0 5%;
-    background-size: 100% auto;
+  // 地理位置条
+  .location-bar {
+    position: relative;
 
-    // 位置条
-    .location-bar {
+    display: flex;
+    align-items: center;
+
+    height: 40px;
+    padding-left: 20rpx;
+
+    .location-name {
+      font-size: 32rpx;
+      line-height: 32rpx;
+
       position: relative;
-      display: flex;
-      align-items: center;
-      height: 40px; // 备忘：此处确实是使用 px，非手误
-      padding-left: 20rpx;
+      top: 1px;
 
-      .add-icon {
-        position: relative;
-        top: -10rpx;
-      }
-
-      .content {
-        margin-left: 10rpx;
-
-        .location {
-          position: relative;
-          display: flex;
-          align-items: center;
-          height: 32rpx;
-
-          .location-name {
-            font-size: 32rpx;
-            line-height: 32rpx;
-          }
-
-          .location-icon {
-            position: relative;
-            top: -4rpx;
-            margin-left: 16rpx;
-          }
-        }
-
-        .update-text {
-          font-size: 18rpx;
-          margin-top: 6rpx;
-          opacity: 50%;
-        }
-      }
+      margin-left: 16rpx;
     }
 
-    .weather-detail {
+    .location-icon {
+      margin-left: 10rpx;
+    }
+  }
+
+  .weather-detail {
+    display: flex;
+    justify-content: center;
+
+    --height: 160rpx;
+    margin-top: 200rpx;
+
+    .weather-icon {
+      width: var(--height);
+      height: var(--height);
+    }
+
+    .temp {
+      font-size: 160rpx;
+      line-height: var(--height);
+
+      height: var(--height);
+      margin-left: 30rpx;
+    }
+
+    .right {
       display: flex;
-      justify-content: center;
-      margin-top: 200rpx;
-      --height: 160rpx;
+      flex-direction: column;
+      justify-content: space-between;
 
-      .weather-icon {
-        width: var(--height);
-        height: var(--height);
+      margin-right: 40rpx;
+      margin-left: 16rpx;
+      padding: 30rpx 0 24rpx;
+
+      .degree {
+        width: 24rpx;
+        height: 24rpx;
+
+        border: 6rpx solid #000;
+        border-radius: 50%;
       }
 
-      .temp {
-        font-size: 140rpx;
-        line-height: var(--height);
-        height: var(--height);
-        margin-left: 24rpx;
+      .text {
+        font-size: 36rpx;
       }
+    }
+  }
 
-      .right {
+  .aqi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 80rpx;
+    margin-top: 40rpx;
+
+    .content {
+      font-size: 30rpx;
+      line-height: 50rpx;
+
+      height: 50rpx;
+      padding: 0 26rpx;
+
+      color: #fff;
+      border-radius: 25rpx;
+    }
+  }
+
+  .other {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 80rpx;
+    margin-top: 240rpx;
+
+    .list {
+      display: flex;
+      justify-content: space-between;
+
+      border-radius: 20rpx;
+      background-color: rgba(0, 0, 0, 5%);
+
+      .item {
         display: flex;
+        align-items: center;
         flex-direction: column;
-        justify-content: space-between;
-        margin-right: 40rpx;
-        margin-left: 16rpx;
-        padding: 30rpx 0 24rpx;
 
-        .degree {
-          width: 24rpx;
-          height: 24rpx;
-          border: 6rpx solid #000;
-          border-radius: 50%;
+        margin: 20rpx;
+        padding: 0 10rpx;
+
+        .value {
+          font-size: 34rpx;
+          font-weight: bold;
         }
 
-        .text {
-          font-size: 36rpx;
+        .name {
+          font-size: 20rpx;
         }
       }
     }
+  }
+}
 
-    .aqi {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 80rpx;
-      margin-top: 40rpx;
+// 天气灾害预警模块
+.warning-now {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 
-      .content {
-        font-size: 30rpx;
-        line-height: 50rpx;
-        height: 50rpx;
-        padding: 0 26rpx;
-        color: #fff;
-        border-radius: 25rpx;
-      }
-    }
+  margin-top: 20rpx;
+  padding: 0 26rpx;
 
-    .other {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 80rpx;
-      margin-top: 240rpx;
+  .item {
+    display: flex;
+    align-items: center;
 
-      .list {
-        display: flex;
-        justify-content: space-between;
-        border-radius: 20rpx;
-        background-color: rgba(0, 0, 0, 5%);
+    width: auto;
+    margin-top: 26rpx;
 
-        .item {
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          margin: 20rpx;
-          padding: 0 10rpx;
+    .warning-title {
+      font-size: 24rpx;
 
-          .value {
-            font-size: 34rpx;
-            font-weight: bold;
-          }
-
-          .name {
-            font-size: 20rpx;
-          }
-        }
-      }
+      margin-left: 16rpx;
     }
   }
 }
@@ -149,16 +159,20 @@ page {
 // 今明两天天气
 .forecast-2days {
   font-size: 32rpx;
+
   display: flex;
   justify-content: space-between;
+
   padding: 26rpx 0;
-  color: #000;
-  background-color: #fff;
+
+  color: var(--weui-FG-0);
+  background-color: var(--weui-BG-1);
 
   .item {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     width: 375rpx;
     padding: 0 30rpx;
 
@@ -173,9 +187,10 @@ page {
       .aqi {
         font-size: 26rpx;
         line-height: 40rpx;
+
         height: 40rpx;
         padding: 0 30rpx;
-        color: #fff;
+
         border-radius: 20rpx;
       }
     }
@@ -186,7 +201,7 @@ page {
   }
 
   .item:first-child {
-    border-right: 4rpx solid #eee;
+    border-right: 2rpx solid var(--weui-FG-2);
   }
 }
 
@@ -194,50 +209,77 @@ page {
 .title {
   font-size: 30rpx;
   font-weight: bold;
-  line-height: 80rpx;
-  height: 80rpx;
+  line-height: 90rpx;
+
+  height: 90rpx;
+  margin-top: 16rpx;
   padding: 0 26rpx;
-  border-bottom: 2rpx solid #eee;
+
+  border-bottom: 2rpx solid var(--weui-FG-2);
+  background-color: var(--weui-BG-1);
 }
 
+// 逐小时预报
 .weather-hourly {
-  margin-top: 16rpx;
-  color: #000;
-  background-color: #fff;
+  background-color: var(--weui-BG-1);
 
   .content {
     .scroll {
-      .list {
-        display: flex;
-        width: 2400rpx;
+      .wrapper {
+        width: 2300rpx;
         padding: 10rpx;
+
+        .top,
+        .bottom {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .middle {
+          .f24h-canvas {
+            width: 100%;
+            height: 160rpx;
+          }
+        }
 
         .item {
           display: flex;
           align-items: center;
           flex-direction: column;
-          width: 200rpx;
+
+          width: 80rpx;
+          padding: 16rpx 0;
 
           .time-text {
-            font-size: 28rpx;
-            color: #999;
+            font-size: 26rpx;
+
+            color: var(--weui-FG-1);
           }
 
           .icon {
-            width: 50rpx;
-            height: 50rpx;
+            width: 62rpx;
+            height: 62rpx;
             margin-top: 14rpx;
           }
 
           .text {
-            font-size: 28rpx;
+            font-size: 30rpx;
+
             margin-top: 20rpx;
           }
 
-          .temp {
-            font-size: 34rpx;
-            margin-top: 24rpx;
-            margin-bottom: 16rpx;
+          .wind-dir {
+            font-size: 24rpx;
+
+            margin-top: 20rpx;
+          }
+
+          .wind-scale {
+            font-size: 20rpx;
+
+            margin-top: 8rpx;
+
+            color: var(--weui-FG-2);
           }
         }
       }
@@ -245,277 +287,95 @@ page {
   }
 }
 
-// 15天预报
 .weather-daily {
-  margin-top: 16rpx;
-  color: #000;
-  background-color: #fff;
-
-  .scroll {
-    .list {
-      position: relative;
-      display: flex;
-      width: 2000rpx;
-      padding: 10rpx 0;
-
-      --canvas-height: 260rpx;
-      --top-area-height: 300rpx;
-
-      .f15d-canvas {
-        position: absolute;
-        top: var(--top-area-height);
-        width: 2000rpx;
-        height: var(--canvas-height);
-      }
-
-      .item {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        width: 200rpx;
-
-        .top-area {
-          position: relative;
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          justify-content: space-between;
-          height: var(--top-area-height);
-        }
-
-        .free-space {
-          height: var(--canvas-height);
-        }
-
-        .bottom-area {
-          position: relative;
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          justify-content: space-between;
-          height: 200rpx;
-        }
-
-        .weekday {
-          font-size: 30rpx;
-          margin-top: 10rpx;
-        }
-
-        .date {
-          font-size: 24rpx;
-          margin-top: 12rpx;
-          color: #888;
-        }
-
-        .text {
-          font-size: 28rpx;
-          margin-top: 10rpx;
-        }
-
-        .icon {
-          width: 50rpx;
-          height: 50rpx;
-          margin-top: 14rpx;
-        }
-
-        .temp {
-          font-size: 34rpx;
-          position: relative;
-          left: 4rpx;
-        }
-      }
-    }
-  }
-}
-
-/* 空气质量 */
-.air-now {
-  margin-top: 16rpx;
-  color: #000;
-  background-color: #ffffff;
+  background-color: var(--weui-BG-1);
 
   .content {
-    display: flex;
-    padding: 10rpx 10rpx 30rpx;
-
-    .left {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 300rpx;
-
-      .circle {
+    .scroll {
+      .wrapper {
         display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        width: 220rpx;
-        height: 220rpx;
-        color: #ffffff;
-        border-radius: 50%;
-
-        .aqi-num {
-          font-size: 80rpx;
-          line-height: 80rpx;
-          height: 80rpx;
-        }
-
-        .category {
-          font-size: 30rpx;
-          margin-top: 14rpx;
-        }
-      }
-    }
-
-    .right {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      width: 400rpx;
-
-      .item {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 50%;
-        height: 100rpx;
-        margin-top: 30rpx;
-
-        .value {
-          font-size: 30rpx;
-        }
-
-        .aqi-progress {
-          width: 80%;
-        }
-
-        .name {
-          font-size: 28rpx;
-          margin-top: 10rpx;
-          color: #7c7c7c;
-        }
-
-      }
-    }
-  }
-}
-
-.page-container {
-  .main {
-    height: 1200rpx;
-
-    .header {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      height: 80rpx;
-      padding: 0 26rpx;
-      border-bottom: 2rpx solid #eee;
-
-      .title {
-        font-size: 30rpx;
-        font-weight: bold;
-        line-height: 80rpx;
-        height: 80rpx;
-        color: #000;
-      }
-
-      .close {
-        position: absolute;
-        top: calc(50% - 13px);
-        right: 26rpx;
-      }
-    }
-
-    .body {
-      .location {
-        margin-top: 20rpx;
-      }
-
-      .places {
-        margin-top: 80rpx;
-      }
-
-      .title-container {
-        display: flex;
-        align-items: center;
         justify-content: space-between;
 
-        .right {
+        width: 1800rpx;
+        padding: 12rpx 20rpx;
+
+        .item {
           display: flex;
           align-items: center;
-          justify-content: flex-end;
-          padding-right: 30rpx;
+          flex-direction: column;
 
-          .add {
-            margin-left: 20rpx;
+          width: 80rpx;
+          padding: 16rpx 0;
+
+          .date {
+            font-size: 26rpx;
+
+            margin-top: 2rpx;
+
+            color: var(--weui-FG-1);
+          }
+
+          .icon {
+            width: 62rpx;
+            height: 62rpx;
+          }
+
+          .text {
+            font-size: 30rpx;
+
+            margin-top: 20rpx;
+            margin-bottom: 10rpx;
+
+            white-space: nowrap;
+          }
+
+          .temp {
+            font-size: 32rpx;
+
+            margin: 16rpx 0;
+          }
+
+          .temp-bar {
+            width: 14rpx;
+            height: 200rpx;
+
+            border-radius: 7rpx;
+            background-color: var(--weui-BG-0);
+
+            .temp-body {
+              border-radius: 7rpx;
+              background-image: linear-gradient(0deg, #427bff, #f18360);
+            }
+          }
+
+          .wind-dir {
+            font-size: 24rpx;
+
+            margin-top: 20rpx;
+          }
+
+          .wind-scale {
+            font-size: 20rpx;
+
+            margin-top: 8rpx;
+
+            color: var(--weui-FG-2);
+          }
+
+          .aqi {
+            font-size: 22rpx;
+            line-height: 32rpx;
+
+            height: 32rpx;
+            margin-top: 20rpx;
+            padding: 0 18rpx;
+
+            white-space: nowrap;
+
+            border-radius: 14rpx;
           }
         }
       }
-
-      .title {
-        display: flex;
-        align-items: center;
-
-        .icon {
-          position: relative;
-          top: -2rpx;
-          height: 80rpx;
-          margin-right: 8rpx;
-        }
-
-        .text {
-          font-size: 30rpx;
-          font-weight: bold;
-          line-height: 80rpx;
-          height: 80rpx;
-          color: #000;
-        }
-      }
-
-      .weather-bg {
-        display: flex;
-        align-items: center;
-        height: 120rpx;
-        margin-bottom: 10rpx;
-        padding: 0 32rpx;
-        background-repeat: no-repeat;
-        background-position: 0 0;
-        background-size: 100% auto;
-      }
-
-      .left {
-        display: flex;
-        flex-direction: column;
-
-        .name {
-          font-size: 32rpx;
-        }
-
-        .region {
-          font-size: 22rpx;
-          opacity: 50%;
-        }
-      }
-
-      .separator {
-        flex-grow: 1;
-      }
-
-      .right {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .icon {
-          width: 50rpx;
-          height: 50rpx;
-          margin-right: 10rpx;
-        }
-      }
     }
   }
 }
-
-

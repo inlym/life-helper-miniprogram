@@ -1,313 +1,162 @@
 <view class="page" data-weui-theme="{{ theme }}">
-    <view class="{{ clock }}">
-        <!-- 实时天气 -->
-        <view class="weather-now {{ now.type }}">
-            <view class="weather-bg" style="padding-top: {{ reservedHeight }}px;">
-                <!-- 地理位置条 -->
-                <view class="location-bar" bind:tap="handleLocationBarTap">
-                    <mp-icon class="add-icon" icon="add" size="24" color="{{ iconColor }}"></mp-icon>
-                    <view class="content">
-                        <view class="location">
-                            <share-element transform key="{{ currentPlaceId }}" duration="400" class="location-name">
-                                {{ locationName }}
-                            </share-element>
-                            <mp-icon class="location-icon" icon="location" size="20" color="{{ iconColor }}"></mp-icon>
-                        </view>
-                        <view class="update-text">{{ now.updateMinutesDiff }}分钟前更新</view>
-                    </view>
-                </view>
+    <!-- 实时天气模块 -->
+    <view
+        class="weather-now weather-{{ clock }} weather-{{ clock }}--{{ now.type }}"
+        style="padding-top: {{ reservedHeight }}px;"
+    >
+        <!-- 和胶囊按钮垂直对齐的位置条 -->
+        <view class="location-bar" hover-class="hover">
+            <!-- 左侧加号 -->
+            <mp-icon class="add-icon" icon="add" size="26" color="{{ iconColor }}" type="field"></mp-icon>
+            <share-element class="location-name">{{ locationName }}</share-element>
+            <mp-icon class="location-icon" icon="location" size="20" color="{{ iconColor }}" type="field"></mp-icon>
+        </view>
 
-                <!-- 天气核心信息区 -->
-                <view class="weather-detail">
-                    <image src="{{ now.iconUrl }}" mode="widthFix" class="weather-icon"></image>
-                    <view class="temp">{{ now.temp }}</view>
-                    <view class="right">
-                        <view class="degree" style="border-color: {{ iconColor }};"></view>
-                        <view class="text">{{ now.text }}</view>
-                    </view>
-                </view>
-
-                <!-- 空气质量 -->
-                <view class="aqi">
-                    <view class="content aqi-level-{{ airNow.level }}">AQI {{ airNow.aqi }} {{ airNow.category }}</view>
-                </view>
-
-                <!-- 其他信息 -->
-                <view class="other">
-                    <view class="list">
-                        <view class="item">
-                            <view class="value">{{ now.windScale }}级</view>
-                            <view class="name">{{ now.windDir }}</view>
-                        </view>
-                        <view class="item">
-                            <view class="value">{{ now.humidity }}%</view>
-                            <view class="name">相对湿度</view>
-                        </view>
-                        <view class="item">
-                            <view class="value">{{ now.vis }}km</view>
-                            <view class="name">能见度</view>
-                        </view>
-                        <view class="item">
-                            <view class="value">{{ now.precip }}mm</view>
-                            <view class="name">降水量</view>
-                        </view>
-                    </view>
-                </view>
+        <!-- 天气灾害预警（非实时天气数据） -->
+        <view class="warning-now" wx:if="{{ warnings.length > 0 }}">
+            <view
+                class="item warning warning--{{ item.color }}"
+                wx:for="{{ warnings }}"
+                wx:key="id"
+                hover-class="hover"
+                bindtap="navigateToWarningPage"
+            >
+                <mp-icon icon="volume-up" type="field" size="18" color="{{ item.color }}"></mp-icon>
+                <view class="warning-title">{{ item.typeName }}{{ item.level }}预警</view>
             </view>
         </view>
 
-        <!-- 今明两天预报 -->
-        <view class="forecast-2days">
-            <view class="item" hover-class="hover">
-                <view class="line">
-                    <view class="weekday">{{ f2d[0].weekday }}</view>
-                    <view class="text">{{ f2d[0].text }}</view>
-                </view>
-                <view class="line">
-                    <view class="temp">{{ f2d[0].tempMax }}/{{ f2d[0].tempMin }}℃</view>
-                    <view class="aqi aqi-level-{{ f2d[0].aqiLevel }}">{{ f2d[0].aqiCategory }}</view>
-                </view>
-            </view>
-            <view class="item" hover-class="hover">
-                <view class="line">
-                    <view class="weekday">{{ f2d[1].weekday }}</view>
-                    <view class="text">{{ f2d[1].text }}</view>
-                </view>
-                <view class="line">
-                    <view class="temp">{{ f2d[1].tempMax }}/{{ f2d[1].tempMin }}℃</view>
-                    <view class="aqi aqi-level-{{ f2d[1].aqiLevel }}">{{ f2d[1].aqiCategory }}</view>
-                </view>
+        <!-- 详情天气信息：天气 icon、温度、天气文本描述 -->
+        <view class="weather-detail">
+            <image src="{{ now.iconUrl }}" mode="widthFix" class="weather-icon"></image>
+            <view class="temp">{{ now.temp }}</view>
+            <view class="right">
+                <view class="degree" style="border-color: {{ iconColor }};"></view>
+                <view class="text">{{ now.text }}</view>
             </view>
         </view>
 
-        <!-- 24小时预报 -->
-        <view class="weather-hourly">
-            <view class="title">24小时预报</view>
-            <view class="content">
-                <scroll-view
-                    class="scroll"
-                    scroll-x="{{ true }}"
-                    scroll-with-animation="{{ true }}"
-                    enable-flex="{{ true }}"
-                    scroll-anchoring="{{ true }}"
-                    enhanced="{{ true }}"
-                    fast-deceleration="{{ true }}"
-                >
-                    <view class="list">
-                        <view class="item" wx:for="{{ f24h }}" wx:key="time">
-                            <view class="time-text">{{ item.timeText }}</view>
-                            <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
-                            <view class="text">{{ item.text }}</view>
-                            <view class="temp">{{ item.temp }}°</view>
-                        </view>
-                    </view>
-                </scroll-view>
-            </view>
+        <!-- 空气质量 -->
+        <view class="aqi">
+            <view class="content aqi-level--{{ airNow.level }}">AQI {{ airNow.aqi }} {{ airNow.category }}</view>
         </view>
 
-        <!-- 15天预报 -->
-        <view class="weather-daily">
-            <view class="title">15天预报</view>
-            <view class="content">
-                <scroll-view
-                    class="scroll"
-                    scroll-x="{{ true }}"
-                    scroll-with-animation="{{ true }}"
-                    enable-flex="{{ true }}"
-                    scroll-anchoring="{{ true }}"
-                    enhanced="{{ true }}"
-                    fast-deceleration="{{ true }}"
-                >
-                    <view class="list">
-                        <canvas type="2d" id="f15d" class="f15d-canvas"></canvas>
-                        <view class="item" wx:for="{{ f15d }}" wx:key="date" hover-class="hover">
-                            <view class="top-area">
-                                <view class="weekday">{{ item.weekday }}</view>
-                                <view class="date">{{ item.simpleDate }}</view>
-                                <view class="text">{{ item.textDay }}</view>
-                                <image class="icon" src="{{ item.iconDayUrl }}"></image>
-                                <view class="temp">{{ item.tempMax }}°</view>
-                            </view>
-                            <view class="free-space"></view>
-                            <view class="bottom-area">
-                                <view class="temp">{{ item.tempMin }}°</view>
-                                <image class="icon" src="{{ item.iconNightUrl }}"></image>
-                                <view class="text">{{ item.textNight }}</view>
-                            </view>
-                        </view>
-                    </view>
-                </scroll-view>
-            </view>
-        </view>
-        <!-- 实时空气质量 -->
-        <view class="air-now">
-            <view class="title">空气质量</view>
-            <view class="content">
-                <view class="left">
-                    <view class="circle aqi-level-{{ airNow.level }}">
-                        <view class="aqi-num">{{ airNow.aqi }}</view>
-                        <view class="category">{{ airNow.category }}</view>
-                    </view>
+        <!-- 其他信息 -->
+        <view class="other">
+            <view class="list">
+                <view class="item">
+                    <view class="value">{{ now.windScale }}级</view>
+                    <view class="name">{{ now.windDir }}</view>
                 </view>
-                <view class="right">
-                    <view class="item">
-                        <view class="value">{{ airNow.pm2p5 }}</view>
-                        <progress class="aqi-progress" duration="100" percent="{{ airNow.pm2p5 }}"></progress>
-                        <view class="name">PM2.5</view>
-                    </view>
-                    <view class="item">
-                        <view class="value">{{ airNow.pm10 }}</view>
-                        <progress class="aqi-progress" duration="100" percent="{{ airNow.pm10 }}"></progress>
-                        <view class="name">PM10</view>
-                    </view>
-                    <view class="item">
-                        <view class="value">{{ airNow.o3 }}</view>
-                        <progress class="aqi-progress" percent="{{ airNow.o3 }}"></progress>
-                        <view class="name">
-                            <text>O</text>
-                            <text class="small">3</text>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <view class="value">{{ airNow.co }}</view>
-                        <progress class="aqi-progress" percent="{{ airNow.co }}"></progress>
-                        <view class="name">CO</view>
-                    </view>
-                    <view class="item">
-                        <view class="value">{{ airNow.so2 }}</view>
-                        <progress class="aqi-progress" percent="{{ airNow.so2 }}"></progress>
-                        <view class="name">
-                            <text>SO</text>
-                            <text class="small">2</text>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <view class="value">{{ airNow.no2 }}</view>
-                        <progress class="aqi-progress" percent="{{ airNow.no2 }}"></progress>
-                        <view class="name">
-                            <text>NO</text>
-                            <text class="small">2</text>
-                        </view>
-                    </view>
+                <view class="item">
+                    <view class="value">{{ now.humidity }}%</view>
+                    <view class="name">相对湿度</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ now.vis }}km</view>
+                    <view class="name">能见度</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ now.precip }}mm</view>
+                    <view class="name">降水量</view>
                 </view>
             </view>
         </view>
     </view>
 
-    <!-- 以下非页面文档流元素 -->
-
-    <!-- 半页容器 -->
-    <page-container
-        class="page-container {{ clock }}"
-        show="{{ showPageContainer }}"
-        duration="1200"
-        round
-        close-on-slideDown
-    >
-        <view class="main">
-            <view class="header">
-                <view class="title">切换城市</view>
-                <view class="close" bind:tap="closePageContainer">
-                    <mp-icon icon="close2" size="26"></mp-icon>
-                </view>
+    <!-- 今明两天预报 -->
+    <view class="forecast-2days">
+        <view class="item" hover-class="hover">
+            <view class="line">
+                <view class="weekday">{{ f2d[0].weekday }}</view>
+                <view class="text">{{ f2d[0].text }}</view>
             </view>
-
-            <!-- 内容区 -->
-            <view class="body">
-                <!-- 当前定位 -->
-                <view class="location">
-                    <view class="title">
-                        <mp-icon class="icon" icon="location" size="20"></mp-icon>
-                        <text class="text">当前定位</text>
-                    </view>
-                    <view
-                        class="{{ currentLocationWeather.type }}"
-                        bind:tap="handleLocationItemTap"
-                        hover-class="hover"
-                    >
-                        <view class="weather-bg">
-                            <view class="left">
-                                <share-element
-                                    transform="{{ currentPlaceId === 0 }}"
-                                    key="0"
-                                    duration="1000"
-                                    class="name"
-                                >
-                                    {{ currentLocationWeather.name }}
-                                </share-element>
-                                <view class="region">{{ currentLocationWeather.region }}</view>
-                            </view>
-                            <view class="separator"></view>
-                            <view class="right">
-                                <image class="icon" src="{{ currentLocationWeather.iconUrl }}"></image>
-                                <view class="temp">{{ currentLocationWeather.temp }}℃</view>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-
-                <!-- 关注城市列表（列表为空情况） -->
-                <view class="places" wx:if="{{ places.length === 0 }}">
-                    <view class="container">
-                        <authorize-element scope="scope.userLocation">
-                            <button type="primary" bind:tap="addNewPlace">添加关注地点</button>
-                        </authorize-element>
-                    </view>
-                </view>
-
-                <!-- 关注城市列表（列表不为空情况） -->
-                <view class="places" wx:else>
-                    <view class="title-container">
-                        <view class="title">
-                            <mp-icon class="icon" icon="star" size="20"></mp-icon>
-                            <text class="text">我的关注</text>
-                        </view>
-                        <view class="right">
-                            <view class="edit">
-                                <button plain size="mini" bind:tap="editPlaceList">编辑</button>
-                            </view>
-                            <authorize-element scope="scope.userLocation" class="add">
-                                <button type="primary" size="mini" bind:tap="addNewPlace">添加</button>
-                            </authorize-element>
-                        </view>
-                    </view>
-                    <view class="list">
-                        <view
-                            class="item {{ item.type }}"
-                            wx:for="{{ places }}"
-                            data-id="{{ item.id }}"
-                            wx:key="id"
-                            hover-class="hover"
-                            bind:tap="handlePlaceItemTap"
-                        >
-                            <view class="weather-bg">
-                                <view class="left">
-                                    <share-element
-                                        transform="{{ currentPlaceId === item.id }}"
-                                        key="{{ item.id }}"
-                                        duration="1000"
-                                        class="name"
-                                        >{{ item.name }}
-                                    </share-element>
-                                    <view class="region">{{ item.region }}</view>
-                                </view>
-                                <view class="separator"></view>
-                                <view class="right">
-                                    <image class="icon" src="{{ item.iconUrl }}"></image>
-                                    <view class="temp">{{ item.temp }}℃</view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                </view>
+            <view class="line">
+                <view class="temp">{{ f2d[0].tempMax }}/{{ f2d[0].tempMin }}℃</view>
+                <view class="aqi aqi-level--{{ f2d[0].aqiLevel }}">{{ f2d[0].aqiCategory }}</view>
             </view>
         </view>
-    </page-container>
+        <view class="item" hover-class="hover">
+            <view class="line">
+                <view class="weekday">{{ f2d[1].weekday }}</view>
+                <view class="text">{{ f2d[1].text }}</view>
+            </view>
+            <view class="line">
+                <view class="temp">{{ f2d[1].tempMax }}/{{ f2d[1].tempMin }}℃</view>
+                <view class="aqi aqi-level--{{ f2d[1].aqiLevel }}">{{ f2d[1].aqiCategory }}</view>
+            </view>
+        </view>
+    </view>
 
-    <mp-actionSheet
-        bindactiontap="handleActionsheetItemTap"
-        show="{{ showActionsheet }}"
-        actions="{{ actionsheetGroups }}"
-        title="请选择你要删除的地点"
-    ></mp-actionSheet>
+    <!-- 24小时预报 -->
+    <view class="weather-hourly">
+        <view class="title">24小时预报</view>
+        <view class="content">
+            <scroll-view
+                class="scroll"
+                scroll-x
+                scroll-with-animation
+                enable-flex
+                scroll-anchoring
+                enhanced
+                fast-deceleration
+            >
+                <view class="wrapper">
+                    <view class="top">
+                        <view class="item" wx:for="{{ f24h }}" wx:key="time">
+                            <view class="time-text">{{ item.timeText }}</view>
+                            <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
+                            <view class="text">{{ item.text }}</view>
+                        </view>
+                    </view>
+                    <view class="middle">
+                        <canvas type="2d" id="f24h" class="f24h-canvas"></canvas>
+                    </view>
+                    <view class="bottom">
+                        <view class="item" wx:for="{{ f24h }}" wx:key="time">
+                            <view class="wind-dir">{{ item.windDir }}</view>
+                            <view class="wind-scale">{{ item.windScale }}级</view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+
+    <!-- 未来15天预报 -->
+    <view class="weather-daily">
+        <view class="title">15天预报</view>
+        <view class="content">
+            <scroll-view
+                class="scroll"
+                scroll-x
+                scroll-with-animation
+                enable-flex
+                scroll-anchoring
+                enhanced
+                fast-deceleration
+            >
+                <view class="wrapper">
+                    <view class="item" wx:for="{{ f15d }}" wx:for-index="index" wx:key="date" hover-class="hover">
+                        <view class="weekday">{{ item.weekday }}</view>
+                        <view class="date">{{ item.simpleDate }}</view>
+                        <view class="text">{{ item.textDay }}</view>
+                        <image class="icon" src="{{ item.iconDayUrl }}" mode="widthFix"></image>
+                        <view class="temp">{{ item.tempMax }}°</view>
+                        <view class="temp-bar" style="padding-top: {{ tempBars[index].paddingTop }}rpx;">
+                            <view class="temp-body" style="height: {{ tempBars[index].height }}rpx;"></view>
+                        </view>
+                        <view class="temp">{{ item.tempMin }}°</view>
+                        <image class="icon" src="{{ item.iconNightUrl }}" mode="widthFix"></image>
+                        <view class="text">{{ item.textNight }}</view>
+                        <view class="wind-dir">{{ item.windDirDay }}</view>
+                        <view class="wind-scale">{{ item.windScaleDay }}级</view>
+                        <view wx:if="{{ item.aqiCategory }}" class="aqi aqi-level--{{ item.aqiLevel }}">
+                            {{ item.aqiCategory }}
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
 </view>
