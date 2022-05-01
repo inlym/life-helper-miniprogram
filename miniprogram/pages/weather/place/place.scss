@@ -1,0 +1,100 @@
+/* pages/weather/place/place.wxss */
+.main {
+  padding: 20rpx 40rpx;
+
+  .title {
+    font-size: 24rpx;
+
+    color: var(--weui-FG-1);
+  }
+
+  .located {
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 20rpx;
+
+      border-radius: 16rpx;
+      background-color: var(--weui-BG-2);
+    }
+  }
+
+  .edit {
+    font-size: 24rpx;
+
+    color: var(--weui-LINK);
+  }
+
+  .favorite {
+    margin-top: 80rpx;
+
+    .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .operator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 80rpx;
+      height: 80rpx;
+      margin-left: 30rpx;
+
+      border-radius: 40rpx;
+      background-color: var(--weui-BG-2);
+    }
+  }
+
+  .list {
+    margin-top: 20rpx;
+
+    .item {
+      display: flex;
+      align-items: center;
+
+      height: 130rpx;
+      margin-bottom: 20rpx;
+
+      .content {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        justify-content: space-between;
+
+        height: 100%;
+        padding: 0 20rpx;
+
+        border-radius: 16rpx;
+        background-color: var(--weui-BG-2);
+      }
+
+      .left {
+        display: flex;
+        flex-direction: column;
+
+        .region {
+          font-size: 26rpx;
+
+          color: var(--weui-FG-2);
+        }
+      }
+
+      .right {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .icon {
+          width: 60rpx;
+          height: 60rpx;
+          margin-left: 20rpx;
+        }
+      }
+    }
+  }
+}

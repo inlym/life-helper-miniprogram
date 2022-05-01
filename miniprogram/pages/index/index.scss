@@ -166,7 +166,7 @@
   padding: 26rpx 0;
 
   color: var(--weui-FG-0);
-  background-color: var(--weui-BG-1);
+  background-color: var(--weui-BG-2);
 
   .item {
     display: flex;
@@ -216,12 +216,12 @@
   padding: 0 26rpx;
 
   border-bottom: 2rpx solid var(--weui-FG-2);
-  background-color: var(--weui-BG-1);
+  background-color: var(--weui-BG-2);
 }
 
 // 逐小时预报
 .weather-hourly {
-  background-color: var(--weui-BG-1);
+  background-color: var(--weui-BG-2);
 
   .content {
     .scroll {
@@ -288,7 +288,7 @@
 }
 
 .weather-daily {
-  background-color: var(--weui-BG-1);
+  background-color: var(--weui-BG-2);
 
   .content {
     .scroll {

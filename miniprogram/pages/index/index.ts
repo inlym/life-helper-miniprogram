@@ -3,6 +3,7 @@ import {getMixedWeatherDataAnonymous} from '../../app/services/weather-data'
 import {
   AirNow,
   F2dItem,
+  Location,
   TempBar,
   WarningItem,
   WeatherDailyItem,
@@ -21,6 +22,7 @@ Page<any, Record<string, any>>({
     airNow: {} as AirNow,
     f15d: [] as WeatherDailyItem[],
     warnings: [] as WarningItem[],
+    location: {} as Location,
 
     // ------------------------ 从 HTTP 请求获取二次处理后的数据 -----------------------
 
@@ -32,6 +34,9 @@ Page<any, Record<string, any>>({
 
     /** 未来15天预报的温度条 */
     tempBars: [] as TempBar[],
+
+    /** 通过 IP 定位获取的实时天气，页面上不使用，带入到其他页面展示 */
+    ipLocatedWeatherNow: {} as WeatherNow,
 
     // -------------------------------- 其他页面数据 --------------------------------
 
@@ -50,7 +55,7 @@ Page<any, Record<string, any>>({
 
   behaviors: [themeBehavior],
 
-  onLoad() {
+  onReady() {
     this.start()
   },
 
@@ -82,7 +87,8 @@ Page<any, Record<string, any>>({
     const data = await getMixedWeatherDataAnonymous()
     this.setData(data)
     const locationName = data.location.name
-    this.setData({locationName})
+    const ipLocatedWeatherNow = data.now
+    this.setData({locationName, ipLocatedWeatherNow})
   },
 
   /** 在获取天气数据后执行 */
@@ -99,6 +105,18 @@ Page<any, Record<string, any>>({
       url: '/pages/weather/warning/warning',
       success(res) {
         res.eventChannel.emit('transferData', warnings)
+      },
+    })
+  },
+
+  /** 跳转到天气地点页 */
+  navigateToPlacePage() {
+    const {location, currentPlaceId, ipLocatedWeatherNow} = this.data
+
+    wx.navigateTo({
+      url: '/pages/weather/place/place',
+      success(res) {
+        res.eventChannel.emit('transferData', {location, currentPlaceId, ipLocatedWeatherNow})
       },
     })
   },

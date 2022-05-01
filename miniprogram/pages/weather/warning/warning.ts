@@ -9,14 +9,9 @@ Page({
 
   behaviors: [themeBehavior],
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad() {
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('transferData', (data) => {
-      console.log(data)
-
       this.setData({warnings: data})
     })
   },

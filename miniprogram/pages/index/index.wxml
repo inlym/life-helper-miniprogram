@@ -5,7 +5,7 @@
         style="padding-top: {{ reservedHeight }}px;"
     >
         <!-- 和胶囊按钮垂直对齐的位置条 -->
-        <view class="location-bar" hover-class="hover">
+        <view class="location-bar" hover-class="hover" bindtap="navigateToPlacePage">
             <!-- 左侧加号 -->
             <mp-icon class="add-icon" icon="add" size="26" color="{{ iconColor }}" type="field"></mp-icon>
             <share-element class="location-name">{{ locationName }}</share-element>
