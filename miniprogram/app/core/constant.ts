@@ -11,3 +11,9 @@ export const StorageField = {
 export const HeaderField = {
   JWT: 'x-auth-jwt',
 }
+
+/** 静态资源地址 */
+export const StaticUrl = {
+  /** 用于分享时 logo */
+  shareAppLogo: 'https://static.lifehelper.com.cn/static/project/share.jpeg',
+}
