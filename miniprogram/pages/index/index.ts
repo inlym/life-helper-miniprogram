@@ -11,6 +11,7 @@ import {
   WeatherNow,
 } from '../../app/services/weather-data.interface'
 import {createCanvasContext} from '../../app/utils/canvas'
+import {TapEvent} from '../../app/utils/types'
 import {themeBehavior} from '../../behaviors/theme-behavior'
 
 Page({
@@ -144,6 +145,19 @@ Page({
             wx.showToast({title: '数据已更新', icon: 'success'})
           }
         },
+      },
+    })
+  },
+
+  /** 跳转到逐日预报页 */
+  navigateToDailyPage(event: TapEvent<{date: string}>) {
+    const date = event.currentTarget.dataset.date
+    const {f15d, locationName} = this.data
+
+    wx.navigateTo({
+      url: '/pages/weather/daily/daily',
+      success(res) {
+        res.eventChannel.emit('transferData', {f15d, date, locationName})
       },
     })
   },

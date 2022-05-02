@@ -66,7 +66,7 @@
 
     <!-- 今明两天预报 -->
     <view class="forecast-2days">
-        <view class="item" hover-class="hover">
+        <view class="item" hover-class="hover" data-date="{{ f2d[0].date }}" bindtap="navigateToDailyPage">
             <view class="line">
                 <view class="weekday">{{ f2d[0].weekday }}</view>
                 <view class="text">{{ f2d[0].text }}</view>
@@ -76,7 +76,7 @@
                 <view class="aqi aqi-level--{{ f2d[0].aqiLevel }}">{{ f2d[0].aqiCategory }}</view>
             </view>
         </view>
-        <view class="item" hover-class="hover">
+        <view class="item" hover-class="hover" data-date="{{ f2d[1].date }}" bindtap="navigateToDailyPage">
             <view class="line">
                 <view class="weekday">{{ f2d[1].weekday }}</view>
                 <view class="text">{{ f2d[1].text }}</view>
@@ -137,7 +137,15 @@
                 fast-deceleration
             >
                 <view class="wrapper">
-                    <view class="item" wx:for="{{ f15d }}" wx:for-index="index" wx:key="date" hover-class="hover">
+                    <view
+                        class="item"
+                        wx:for="{{ f15d }}"
+                        wx:for-index="index"
+                        wx:key="date"
+                        hover-class="hover"
+                        data-date="{{ item.date }}"
+                        bindtap="navigateToDailyPage"
+                    >
                         <view class="weekday">{{ item.weekday }}</view>
                         <view class="date">{{ item.simpleDate }}</view>
                         <view class="text">{{ item.textDay }}</view>

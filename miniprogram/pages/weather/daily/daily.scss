@@ -1,0 +1,89 @@
+@import "../../../assets/styles/weather2.scss";
+
+.tabs {
+  .list {
+    display: flex;
+
+    width: 2000rpx;
+
+    .active {
+      background-color: var(--weui-BG-2);
+    }
+
+    .item {
+      padding: 10rpx;
+
+      .wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        width: 120rpx;
+        padding: 16rpx;
+
+        border-radius: 6rpx;
+
+        .weekday {
+          font-size: 30rpx;
+        }
+
+        .date {
+          font-size: 24rpx;
+
+          margin-top: 10rpx;
+
+          color: var(--weui-FG-1);
+        }
+      }
+    }
+  }
+}
+
+.content {
+  margin-top: 20rpx;
+
+  .swiper {
+    height: 800rpx;
+  }
+
+  .item {
+    height: 1000rpx;
+    padding: 10rpx 0;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 300rpx;
+
+    background-color: var(--weui-BG-2);
+
+    .weather-icon {
+      width: 200rpx;
+      margin-right: 80rpx;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .temp {
+        font-size: 54rpx;
+
+        margin-bottom: 10rpx;
+      }
+
+      .aqi {
+        font-size: 22rpx;
+
+        margin-top: 12rpx;
+        padding: 6rpx 24rpx;
+
+        border-radius: 30rpx;
+      }
+    }
+  }
+}

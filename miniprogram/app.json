@@ -5,7 +5,8 @@
     "pages/scan/login",
     "pages/me/me",
     "pages/weather/warning/warning",
-    "pages/weather/place/place"
+    "pages/weather/place/place",
+    "pages/weather/daily/daily"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",

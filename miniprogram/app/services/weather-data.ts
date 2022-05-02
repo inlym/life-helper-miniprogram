@@ -41,25 +41,27 @@ export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
   })
 
   // 处理未来2天的天气数据
-  const todayDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '今天')
-  const tomorrowDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '明天')
+  const todayDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '今天')!
+  const tomorrowDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '明天')!
 
   const f2d: F2dItem[] = []
   f2d[0] = {
+    date: todayDaily.date,
     weekday: '今天',
-    text: todayDaily!.text,
-    tempMax: todayDaily!.tempMax,
-    tempMin: todayDaily!.tempMin,
-    aqiCategory: todayDaily!.aqiCategory,
-    aqiLevel: todayDaily!.aqiLevel,
+    text: todayDaily.text,
+    tempMax: todayDaily.tempMax,
+    tempMin: todayDaily.tempMin,
+    aqiCategory: todayDaily.aqiCategory,
+    aqiLevel: todayDaily.aqiLevel,
   }
   f2d[1] = {
+    date: tomorrowDaily.date,
     weekday: '明天',
-    text: tomorrowDaily!.text,
-    tempMax: tomorrowDaily!.tempMax,
-    tempMin: tomorrowDaily!.tempMin,
-    aqiCategory: tomorrowDaily!.aqiCategory,
-    aqiLevel: tomorrowDaily!.aqiLevel,
+    text: tomorrowDaily.text,
+    tempMax: tomorrowDaily.tempMax,
+    tempMin: tomorrowDaily.tempMin,
+    aqiCategory: tomorrowDaily.aqiCategory,
+    aqiLevel: tomorrowDaily.aqiLevel,
   }
 
   data.f2d = f2d

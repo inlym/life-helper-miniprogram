@@ -339,6 +339,8 @@ export interface Location {
 
 /** 未来2天预报项目 */
 export interface F2dItem {
+  date: string
+
   weekday: '今天' | '明天'
 
   text: string

@@ -1,0 +1,55 @@
+<view class="page" data-weui-theme="{{ theme }}">
+    <scroll-view
+        class="tabs"
+        scroll-x
+        enable-flex
+        scroll-anchoring
+        enhanced
+        bounces
+        fast-deceleration
+        scroll-with-animation
+        scroll-into-view="{{ activeScrollItemId }}"
+        show-scrollbar="{{ false }}"
+    >
+        <view class="list">
+            <view
+                class="item"
+                wx:for="{{ f15d }}"
+                wx:key="date"
+                id="s-{{ index }}"
+                data-index="{{ index }}"
+                hover-class="hover"
+                bindtap="handleScrollItemTap"
+            >
+                <view class="wrapper {{ index === currentIndex ? 'active' : '' }}">
+                    <view class="weekday">{{ item.weekday }}</view>
+                    <view class="date">{{ item.simpleDate }}</view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+
+    <!-- 底下内容区 -->
+    <view class="content">
+        <swiper class="swiper" circular bindchange="handleSwiperChange" current="{{ currentIndex }}">
+            <swiper-item
+                class="item"
+                item-id="swiper:{{ item.date }}"
+                wx:for="{{ f15d }}"
+                wx:key="date"
+                id="swiper:{{ item.date }}"
+            >
+                <view class="info weather-day--{{ item.type }}">
+                    <image src="{{ item.iconDayUrl }}" mode="widthFix" class="weather-icon"></image>
+                    <view class="right">
+                        <view class="temp">{{ item.tempMax }}° / {{ item.tempMin }}°</view>
+                        <view class="text">{{ item.text }}</view>
+                        <view wx:if="{{ item.aqiCategory }}" class="aqi aqi-level--{{ item.aqiLevel }}">
+                            AQI {{ item.aqiCategory }}
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+</view>
