@@ -3,7 +3,8 @@ import {getIpInfo} from '../../app/services/ip'
 import {IpInfo} from '../../app/services/ip.interface'
 import {getUserInfo, updateUserInfo} from '../../app/services/userinfo'
 import {UserInfo} from '../../app/services/userinfo.interface'
-import {mixedBehavior} from '../../behaviors/mixed-bahavior'
+import {shareAppBehavior} from '../../behaviors/share-app-behavior'
+import {themeBehavior} from '../../behaviors/theme-behavior'
 
 Page({
   /**
@@ -23,7 +24,7 @@ Page({
     registeredDays: 0,
   },
 
-  behaviors: [mixedBehavior],
+  behaviors: [themeBehavior, shareAppBehavior],
 
   /**
    * 页面初始化方法

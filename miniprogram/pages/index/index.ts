@@ -12,6 +12,7 @@ import {
 } from '../../app/services/weather-data.interface'
 import {createCanvasContext} from '../../app/utils/canvas'
 import {TapEvent} from '../../app/utils/types'
+import {shareAppBehavior} from '../../behaviors/share-app-behavior'
 import {themeBehavior} from '../../behaviors/theme-behavior'
 
 Page({
@@ -54,7 +55,7 @@ Page({
     currentPlaceId: 0,
   },
 
-  behaviors: [themeBehavior],
+  behaviors: [themeBehavior, shareAppBehavior],
 
   onReady() {
     this.start()

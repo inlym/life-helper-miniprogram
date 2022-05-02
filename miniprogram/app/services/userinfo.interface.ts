@@ -9,5 +9,5 @@ export interface UserInfo {
   empty?: boolean
 
   /** 注册天数 */
-  registeredDays: number
+  registeredDays?: number
 }
