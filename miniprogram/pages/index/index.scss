@@ -1,4 +1,4 @@
-@import '../../assets/styles/weather2.scss';
+@import "../../assets/styles/weather.scss";
 
 .page {
   padding-bottom: 30rpx;
@@ -230,8 +230,7 @@
         width: 2300rpx;
         padding: 10rpx;
 
-        .top,
-        .bottom {
+        .top, .bottom {
           display: flex;
           justify-content: space-between;
         }
