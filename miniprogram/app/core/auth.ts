@@ -71,3 +71,10 @@ export function getLocalToken(): string {
 
   return ''
 }
+
+/** 确保已登录 */
+export async function ensureLogined(): Promise<void> {
+  if (!getLocalToken()) {
+    await login()
+  }
+}
