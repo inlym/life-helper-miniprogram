@@ -4,7 +4,7 @@
   .list {
     display: flex;
 
-    width: 2000rpx;
+    width: 1600rpx;
 
     .active {
       background-color: var(--weui-BG-2);
@@ -43,12 +43,30 @@
   margin-top: 20rpx;
 
   .swiper {
-    height: 800rpx;
+    height: 1800rpx;
   }
 
   .item {
     height: 1000rpx;
     padding: 10rpx 0;
+  }
+
+  .module {
+    margin: 0 18rpx 18rpx;
+
+    border-radius: 18rpx;
+    background-color: var(--weui-BG-2);
+  }
+
+  .title {
+    font-size: 30rpx;
+    line-height: 80rpx;
+
+    width: 100%;
+    height: 80rpx;
+    padding: 0 28rpx;
+
+    border-bottom: 2rpx solid var(--weui-FG-3);
   }
 
   .info {
@@ -57,8 +75,6 @@
     justify-content: center;
 
     height: 300rpx;
-
-    background-color: var(--weui-BG-2);
 
     .weather-icon {
       width: 200rpx;
@@ -83,6 +99,102 @@
         padding: 6rpx 24rpx;
 
         border-radius: 30rpx;
+      }
+    }
+  }
+
+  .sun, .moon {
+    .body {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      padding: 26rpx;
+      padding-top: 60rpx;
+
+      .box {
+        overflow: hidden;
+
+        width: 600rpx;
+        height: 150rpx;
+
+        .line {
+          position: relative;
+          left: -100rpx;
+
+          width: 800rpx;
+          height: 800rpx;
+
+          border-radius: 50%;
+        }
+      }
+
+      .value {
+        display: flex;
+        justify-content: space-between;
+
+        width: 660rpx;
+
+        .wrapper {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+
+          .name {
+            font-size: 28rpx;
+          }
+
+          .time {
+            font-size: 26rpx;
+
+            color: var(--weui-FG-1);
+          }
+        }
+      }
+    }
+  }
+
+  .sun .line {
+    border: 8rpx dotted var(--weui-ORANGE);
+  }
+
+  .moon .line {
+    border: 8rpx dotted var(--weui-PURPLE);
+  }
+
+  .wind {
+    .body {
+      padding: 26rpx;
+
+      .line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        height: 200rpx;
+        margin-top: 20rpx;
+        padding: 0 40rpx;
+
+        background-color: var(--weui-BG-1);
+
+        .one {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+
+          .value {
+            font-size: 34rpx;
+            font-weight: bold;
+          }
+
+          .name {
+            font-size: 20rpx;
+          }
+
+          .small {
+            font-size: 80%;
+          }
+        }
       }
     }
   }

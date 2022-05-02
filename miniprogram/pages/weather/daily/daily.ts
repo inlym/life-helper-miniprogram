@@ -37,6 +37,9 @@ Page({
   onReady() {
     const title = this.data.locationName
     wx.setNavigationBarTitle({title})
+
+    const index = this.data.f15d.findIndex((item: WeatherDailyItem) => item.date === this.data.date)
+    this.show(index)
   },
 
   /** 处理滚动条点击事件 */

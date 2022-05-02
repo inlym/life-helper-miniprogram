@@ -39,13 +39,92 @@
                 wx:key="date"
                 id="swiper:{{ item.date }}"
             >
-                <view class="info weather-day--{{ item.type }}">
+                <!-- 基本信息模块 -->
+                <view class="info module">
                     <image src="{{ item.iconDayUrl }}" mode="widthFix" class="weather-icon"></image>
                     <view class="right">
                         <view class="temp">{{ item.tempMax }}° / {{ item.tempMin }}°</view>
                         <view class="text">{{ item.text }}</view>
                         <view wx:if="{{ item.aqiCategory }}" class="aqi aqi-level--{{ item.aqiLevel }}">
                             AQI {{ item.aqiCategory }}
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 日出日落 -->
+                <view class="sun module">
+                    <view class="title">日出日落</view>
+                    <view class="body">
+                        <view class="box">
+                            <view class="line"></view>
+                        </view>
+                        <view class="value">
+                            <view class="wrapper">
+                                <view class="name">日出</view>
+                                <view class="time">{{ item.sunrise }}</view>
+                            </view>
+                            <view class="middle">正午</view>
+                            <view class="wrapper">
+                                <view class="name">日落</view>
+                                <view class="time">{{ item.sunset }}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 月出月落 -->
+                <view class="moon module">
+                    <view class="title">月升月落</view>
+                    <view class="body">
+                        <view class="box">
+                            <view class="line"></view>
+                        </view>
+                        <view class="value">
+                            <view class="wrapper">
+                                <view class="name">月升</view>
+                                <view class="time">{{ item.moonrise }}</view>
+                            </view>
+                            <view class="middle">{{ item.moonPhase }}</view>
+                            <view class="wrapper">
+                                <view class="name">月落</view>
+                                <view class="time">{{ item.moonset }}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="wind module">
+                    <view class="title">风</view>
+                    <view class="body">
+                        <view class="line">
+                            <view class="type">白天</view>
+                            <view class="one">
+                                <view class="value">{{ item.windScaleDay }}级</view>
+                                <view class="name">{{ item.windDirDay }}</view>
+                            </view>
+                            <view class="one">
+                                <view class="value">{{ item.windSpeedDay }}km/h</view>
+                                <view class="name">风速</view>
+                            </view>
+                            <view class="one">
+                                <view class="value">{{ item.wind360Day }}°</view>
+                                <view class="name">风向角度</view>
+                            </view>
+                        </view>
+                        <view class="line">
+                            <view class="type">夜晚</view>
+                            <view class="one">
+                                <view class="value">{{ item.windScaleNight }}级</view>
+                                <view class="name">{{ item.windDirNight }}</view>
+                            </view>
+                            <view class="one">
+                                <view class="value">{{ item.windSpeedNight }}km/h</view>
+                                <view class="name">风速</view>
+                            </view>
+                            <view class="one">
+                                <view class="value">{{ item.wind360Night }}°</view>
+                                <view class="name">风向角度</view>
+                            </view>
                         </view>
                     </view>
                 </view>
