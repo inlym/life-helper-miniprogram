@@ -68,6 +68,8 @@ export function drawWeatherHourlyLineChart(
   })
 
   // 开始画图
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+
   ctx.lineWidth = LINE_WIDTH
 
   // 画温度线

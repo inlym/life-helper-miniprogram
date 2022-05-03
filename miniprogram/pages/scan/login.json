@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "登录确认"
+  "navigationBarTitleText": "登录确认",
+  "enablePullDownRefresh": false
 }

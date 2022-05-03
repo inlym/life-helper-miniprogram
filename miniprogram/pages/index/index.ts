@@ -53,19 +53,36 @@ Page({
 
     /** 当前选中的天气地点 ID */
     currentPlaceId: 0,
+
+    f24Canvas: {} as CanvasRenderingContext2D,
   },
 
   behaviors: [themeBehavior, shareAppBehavior],
 
   onReady() {
+    this.setReservedHeight()
+
     this.start()
+  },
+
+  onPullDownRefresh() {
+    this.start().then(() => {
+      wx.stopPullDownRefresh()
+      wx.showToast({
+        title: '更新成功',
+        icon: 'success',
+      })
+    })
   },
 
   async start() {
     this.setClock()
-    this.setReservedHeight()
 
-    await this.getWeatherDataAnonymous()
+    if (this.data.currentPlaceId) {
+      await this.getWeatherDataByPlaceId(this.data.currentPlaceId)
+    } else {
+      await this.getWeatherDataAnonymous()
+    }
   },
 
   /** 获取时钟并设置相关值 */
@@ -76,7 +93,7 @@ Page({
     this.setData({clock, iconColor})
   },
 
-  /** 获取并设置保留高度 */
+  /** 获取并设置保留高度，只需在初始化时执行一次即可 */
   setReservedHeight() {
     const rect = wx.getMenuButtonBoundingClientRect()
     this.setData({reservedHeight: rect.top - 4})
@@ -107,7 +124,14 @@ Page({
 
   /** 在获取天气数据后执行 */
   async afterGettingData() {
-    const ctx = await createCanvasContext('#f24h')
+    let ctx: CanvasRenderingContext2D
+    if (!this.data.f24Canvas.canvas) {
+      ctx = await createCanvasContext('#f24h')
+      this.setData({f24Canvas: ctx})
+    } else {
+      ctx = this.data.f24Canvas
+    }
+
     const theme = wx.getSystemInfoSync().theme || 'light'
     drawWeatherHourlyLineChart(ctx, this.data.f24h, theme)
   },
@@ -143,7 +167,7 @@ Page({
             } else {
               await self.getWeatherDataByPlaceId(placeId)
             }
-            wx.showToast({title: '数据已更新', icon: 'success'})
+            wx.showToast({title: '更新成功', icon: 'success'})
           }
         },
       },

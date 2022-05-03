@@ -4,5 +4,6 @@
     "top-space": "/components/top-space/top-space",
     "mp-cells": "weui-miniprogram/cells/cells",
     "mp-cell": "weui-miniprogram/cell/cell"
-  }
+  },
+  "enablePullDownRefresh": false
 }
