@@ -408,6 +408,9 @@ export interface MixedWeatherData {
 
   f2d: F2dItem[]
 
+  /** 从未来15天预报中抽出的今天的详情 */
+  todayFromDaily: WeatherDailyItem
+
   currentLocationWeather: CurrentLocationWeather
 
   tempBars: TempBar[]

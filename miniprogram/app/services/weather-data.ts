@@ -87,6 +87,9 @@ export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
   // 附上温度条数据
   data.tempBars = getTempBarList(data.f15d)
 
+  // 从未来15天列表中抽取今天的记录
+  data.todayFromDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '今天')!
+
   return data
 }
 

@@ -254,6 +254,48 @@
         </view>
     </view>
 
+    <!-- 日出日落 -->
+    <view class="sun">
+        <view class="title">日出日落</view>
+        <view class="body">
+            <view class="box">
+                <view class="line"></view>
+            </view>
+            <view class="value">
+                <view class="wrapper">
+                    <view class="name">日出</view>
+                    <view class="time">{{ todayFromDaily.sunrise }}</view>
+                </view>
+                <view class="middle">正午</view>
+                <view class="wrapper">
+                    <view class="name">日落</view>
+                    <view class="time">{{ todayFromDaily.sunset }}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 月出月落 -->
+    <view class="moon">
+        <view class="title">月升月落</view>
+        <view class="body">
+            <view class="box">
+                <view class="line"></view>
+            </view>
+            <view class="value">
+                <view class="wrapper">
+                    <view class="name">月升</view>
+                    <view class="time">{{ todayFromDaily.moonrise }}</view>
+                </view>
+                <view class="middle">{{ todayFromDaily.moonPhase }}</view>
+                <view class="wrapper">
+                    <view class="name">月落</view>
+                    <view class="time">{{ todayFromDaily.moonset }}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
     <view class="footer weui-footer">
         <view class="weui-footer__links">
             <navigator url="" class="weui-footer__link">小鸣天气 - 懂天气，也懂你</navigator>

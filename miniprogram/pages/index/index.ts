@@ -40,6 +40,8 @@ Page({
     /** 通过 IP 定位获取的实时天气，页面上不使用，带入到其他页面展示 */
     ipLocatedWeatherNow: {} as WeatherNow,
 
+    todayFromDaily: {} as WeatherDailyItem,
+
     // -------------------------------- 其他页面数据 --------------------------------
 
     /** 地理位置栏与顶部的闲置高度，单位：px */
