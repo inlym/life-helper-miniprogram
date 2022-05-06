@@ -1,7 +1,26 @@
-@import "../../assets/styles/weather.scss";
+@import '../../assets/styles/weather.scss';
 
 .page {
   padding-bottom: 30rpx;
+}
+
+// =================================== 模块样式 ===================================
+.container {
+  margin: 18rpx;
+
+  border-radius: 20rpx;
+  background-color: var(--weui-BG-2);
+
+  .title {
+    font-size: 34rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+
+    height: 100rpx;
+    padding: 0 36rpx;
+
+    border-bottom: 2rpx solid var(--weui-FG-3);
+  }
 }
 
 // 实时天气
@@ -39,7 +58,7 @@
     justify-content: center;
 
     --height: 160rpx;
-    margin-top: 200rpx;
+    margin-top: 220rpx;
 
     .weather-icon {
       width: var(--height);
@@ -206,20 +225,6 @@
   }
 }
 
-// 标题头
-.title {
-  font-size: 30rpx;
-  font-weight: bold;
-  line-height: 90rpx;
-
-  height: 90rpx;
-  margin-top: 16rpx;
-  padding: 0 26rpx;
-
-  border-bottom: 2rpx solid var(--weui-FG-3);
-  background-color: var(--weui-BG-2);
-}
-
 // 逐小时预报
 .weather-hourly {
   background-color: var(--weui-BG-2);
@@ -230,7 +235,8 @@
         width: 2300rpx;
         padding: 10rpx;
 
-        .top, .bottom {
+        .top,
+        .bottom {
           display: flex;
           justify-content: space-between;
         }
@@ -457,7 +463,8 @@
             font-size: 16rpx;
 
             position: relative;
-            top: 8rpx;
+            top: 6rpx;
+            left: 2rpx;
           }
         }
       }
@@ -465,7 +472,8 @@
   }
 }
 
-.sun, .moon {
+.sun,
+.moon {
   background-color: var(--weui-BG-2);
 
   .body {

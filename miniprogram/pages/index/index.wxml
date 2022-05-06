@@ -1,15 +1,24 @@
 <view class="page" data-weui-theme="{{ theme }}">
     <!-- 实时天气模块 -->
-    <view
-        class="weather-now weather-{{ clock }} weather-{{ clock }}--{{ now.type }}"
-        style="padding-top: {{ reservedHeight }}px;"
-    >
+    <view class="weather-now weather-bg weather-bg--{{ now.type }}" style="padding-top: {{ reservedHeight }}px;">
         <!-- 和胶囊按钮垂直对齐的位置条 -->
         <view class="location-bar" hover-class="hover" bindtap="navigateToPlacePage">
             <!-- 左侧加号 -->
-            <mp-icon class="add-icon" icon="add" size="26" color="{{ iconColor }}" type="field"></mp-icon>
+            <mp-icon
+                class="add-icon"
+                icon="add"
+                size="26"
+                color="{{ theme === 'light' ? '#111' : '#ededed' }}"
+                type="field"
+            ></mp-icon>
             <view class="location-name text-ellipsis-l1">{{ locationName }}</view>
-            <mp-icon class="location-icon" icon="location" size="20" color="{{ iconColor }}" type="field"></mp-icon>
+            <mp-icon
+                class="location-icon"
+                icon="location"
+                size="20"
+                color="{{ theme === 'light' ? '#111' : '#ededed' }}"
+                type="field"
+            ></mp-icon>
         </view>
 
         <!-- 天气灾害预警（非实时天气数据） -->
@@ -31,7 +40,7 @@
             <image src="{{ now.iconUrl }}" mode="widthFix" class="weather-icon"></image>
             <view class="temp">{{ now.temp }}</view>
             <view class="right">
-                <view class="degree" style="border-color: {{ iconColor }};"></view>
+                <view class="degree" style="border-color: {{ theme === 'light' ? '#111' : '#ededed' }};"></view>
                 <view class="text">{{ now.text }}</view>
             </view>
         </view>
@@ -65,7 +74,7 @@
     </view>
 
     <!-- 今明两天预报 -->
-    <view class="forecast-2days">
+    <view class="forecast-2days container">
         <view class="item" hover-class="hover" data-date="{{ f2d[0].date }}" bindtap="navigateToDailyPage">
             <view class="line">
                 <view class="weekday">{{ f2d[0].weekday }}</view>
@@ -89,7 +98,7 @@
     </view>
 
     <!-- 24小时预报 -->
-    <view class="weather-hourly">
+    <view class="weather-hourly container">
         <view class="title">24小时预报</view>
         <view class="content">
             <scroll-view
@@ -124,7 +133,7 @@
     </view>
 
     <!-- 未来15天预报 -->
-    <view class="weather-daily">
+    <view class="weather-daily container">
         <view class="title">15天预报</view>
         <view class="content">
             <scroll-view
@@ -169,7 +178,7 @@
     </view>
 
     <!-- 实时空气质量 -->
-    <view class="air-now">
+    <view class="air-now container">
         <view class="title">空气质量</view>
         <view class="content">
             <view class="left">
@@ -186,7 +195,10 @@
                             percent="{{ airNow.pm2p5 }}"
                             border-radius="10"
                         ></progress>
-                        <view class="name">PM2.5</view>
+                        <view class="name">
+                            <text>PM</text>
+                            <text class="small">2.5</text>
+                        </view>
                     </view>
                     <view class="item">
                         <view class="value">{{ airNow.pm10 }}</view>
@@ -196,7 +208,10 @@
                             percent="{{ airNow.pm10 }}"
                             border-radius="10"
                         ></progress>
-                        <view class="name">PM10</view>
+                        <view class="name">
+                            <text>PM</text>
+                            <text class="small">10</text>
+                        </view>
                     </view>
                     <view class="item">
                         <view class="value">{{ airNow.o3 }}</view>
@@ -255,7 +270,7 @@
     </view>
 
     <!-- 日出日落 -->
-    <view class="sun">
+    <view class="sun container">
         <view class="title">日出日落</view>
         <view class="body">
             <view class="box">
@@ -276,7 +291,7 @@
     </view>
 
     <!-- 月出月落 -->
-    <view class="moon">
+    <view class="moon container">
         <view class="title">月升月落</view>
         <view class="body">
             <view class="box">

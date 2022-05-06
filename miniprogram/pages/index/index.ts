@@ -47,9 +47,6 @@ Page({
     /** 地理位置栏与顶部的闲置高度，单位：px */
     reservedHeight: 80,
 
-    /** 时钟：早6至晚6为 'day`，其余为 'night' */
-    clock: 'day',
-
     /** 图标颜色，跟时钟对应，白天为黑色，晚上为白色 */
     iconColor: '#000',
 
@@ -78,21 +75,11 @@ Page({
   },
 
   async start() {
-    this.setClock()
-
     if (this.data.currentPlaceId) {
       await this.getWeatherDataByPlaceId(this.data.currentPlaceId)
     } else {
       await this.getWeatherDataAnonymous()
     }
-  },
-
-  /** 获取时钟并设置相关值 */
-  setClock() {
-    const hour = new Date().getHours()
-    const clock = hour >= 6 && hour < 18 ? 'day' : 'night'
-    const iconColor = clock === 'day' ? '#000' : '#fff'
-    this.setData({clock, iconColor})
   },
 
   /** 获取并设置保留高度，只需在初始化时执行一次即可 */

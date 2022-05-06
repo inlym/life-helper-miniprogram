@@ -2,8 +2,7 @@
 // ------------------ 天气类样式，包含实时天气背景图、空气质量指数 -------------------
 // ----------------------------------------------------------------------------
 
-.weather-day {
-  color: #000;
+[data-weui-theme='light'] .weather-bg {
   background-repeat: no-repeat;
   background-position: 0 5%;
   background-size: 100% auto;
@@ -33,8 +32,7 @@
   }
 }
 
-.weather-night {
-  color: #fff;
+[data-weui-theme='dark'] .weather-bg {
   background-repeat: no-repeat;
   background-position: 0 5%;
   background-size: 100% auto;
