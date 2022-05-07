@@ -9,6 +9,9 @@
   }
 
   .located {
+    margin-top: 10rpx;
+    margin-bottom: 80rpx;
+
     .item {
       display: flex;
       align-items: center;
@@ -28,7 +31,7 @@
   }
 
   .favorite {
-    margin-top: 80rpx;
+    margin-top: 10rpx;
 
     .head {
       display: flex;

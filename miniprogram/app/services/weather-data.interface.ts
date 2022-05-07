@@ -2,8 +2,7 @@ import {WeatherPlace} from './weather-place.interface'
 
 /** 实时天气数据 */
 export interface WeatherNow {
-  /** 当前 API 的最近更新时间，不是原接口返回的时间节点，而是该时间与当前时间的时间差，单位：分钟 */
-  updateMinutesDiff: string
+  // ================================ 接口返回的数据 =================================
 
   /** 图标的 URL 地址 */
   iconUrl: string
@@ -58,7 +57,7 @@ export interface WeatherDailyItem {
   /** 简单格式的日期，格式示例：04/29 */
   simpleDate: string
 
-  // ===============================  接口返回的数据  ================================
+  // ================================ 接口返回的数据 =================================
 
   /** 空气质量指数等级 */
   aqiLevel: string
@@ -153,7 +152,7 @@ export interface WeatherHourlyItem {
   // 处理后增加的字段
   timeText: string
 
-  // 接口返回的数据
+  // ================================ 接口返回的数据 =================================
 
   /** 预报时间 */
   time: string
@@ -198,23 +197,24 @@ export interface MinutelyRainItem {
   time: string
 
   /** 10分钟累计降水量，单位毫米 */
-  precip: string
-
-  /**
-   * 降水类型:
-   * - rain -> 雨
-   * - snow -> 雪
-   */
-  type: 'rain' | 'snow'
+  precip: number
 }
 
 /** 分钟级降水数据 */
 export interface MinutelyRain {
-  /** 当前 API 的最近更新时间，不是原接口返回的时间节点，而是该时间与当前时间的时间差，单位：分钟 */
-  updateMinutesDiff: string
+  /** 是否有雨 */
+  hasRain: boolean
+
+  /**
+   * 降水类型: - rain -> 雨 - snow -> 雪
+   */
+  type: string
 
   /** 分钟降水描述 */
   summary: string
+
+  /** 当前 API 的最近更新时间，格式示例：`07:55` */
+  updateTime: string
 
   /** 列表数据 */
   minutely: MinutelyRainItem[]
@@ -246,17 +246,22 @@ export interface IndicesItem {
 
 /** 天气预警项目 */
 export interface WarningItem {
-  // ==============================  数据处理后新增的字段  ==============================
-  /** 颜色，用于背景色和图标颜色 */
-  color: string
+  // ================================= 接口返回的数据 ==================================
 
-  // ===============================  接口返回的数据  ================================
+  /** 预警图标 */
+  iconUrl: string
 
   /** 本条预警的唯一标识，可判断本条预警是否已经存在 */
   id: string
 
+  /** 预警图片 */
+  imageUrl: string
+
   /** 预警等级，目前包含：白色、蓝色、绿色、黄色、橙色、红色、黑色 */
   level: string
+
+  /** 预警等级 ID */
+  levelId: string
 
   /** 预警发布时间 */
   pubTime: string

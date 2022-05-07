@@ -1,4 +1,4 @@
-@import '../../assets/styles/weather.scss';
+@import "../../assets/styles/weather.scss";
 
 .page {
   padding-bottom: 30rpx;
@@ -23,7 +23,7 @@
   }
 }
 
-// 实时天气
+// =================================== 实时天气 ===================================
 .weather-now {
   padding-bottom: 100rpx;
 
@@ -152,7 +152,7 @@
   }
 }
 
-// 天气灾害预警模块
+// ================================= 天气灾害预警模块 =================================
 .warning-now {
   display: flex;
   align-items: flex-start;
@@ -166,7 +166,12 @@
     align-items: center;
 
     width: auto;
-    margin-top: 26rpx;
+    height: 40rpx;
+    margin-top: 20rpx;
+
+    .icon {
+      width: 26rpx;
+    }
 
     .warning-title {
       font-size: 24rpx;
@@ -235,8 +240,7 @@
         width: 2300rpx;
         padding: 10rpx;
 
-        .top,
-        .bottom {
+        .top, .bottom {
           display: flex;
           justify-content: space-between;
         }
@@ -472,8 +476,7 @@
   }
 }
 
-.sun,
-.moon {
+.sun, .moon {
   background-color: var(--weui-BG-2);
 
   .body {

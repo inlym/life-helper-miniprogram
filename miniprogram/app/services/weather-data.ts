@@ -2,14 +2,7 @@
 import dayjs from 'dayjs'
 import {requestForData} from '../core/http'
 import {calcWeekdayText} from '../utils/time'
-import {
-  F2dItem,
-  MixedWeatherData,
-  TempBar,
-  WarningItem,
-  WeatherDailyItem,
-  WeatherHourlyItem,
-} from './weather-data.interface'
+import {F2dItem, MixedWeatherData, TempBar, WeatherDailyItem, WeatherHourlyItem} from './weather-data.interface'
 
 /**
  * 处理天气数据
@@ -77,13 +70,6 @@ export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
     }
   }
 
-  // 天气灾害预警附上颜色
-  if (data.warnings.length > 0) {
-    data.warnings.map((item: WarningItem) => {
-      item.color = getColorFromWarningLevel(item.level)
-    })
-  }
-
   // 附上温度条数据
   data.tempBars = getTempBarList(data.f15d)
 
@@ -149,32 +135,4 @@ export function getTempBarList(list: WeatherDailyItem[]): TempBar[] {
   }
 
   return tempBarList
-}
-
-/**
- * 从天气灾害预警等级获取对应的颜色
- *
- * ## 说明
- * 目前直接使用微信颜色
- *
- * @param level 预警等级，目前包含：白色、蓝色、绿色、黄色、橙色、红色、黑色
- */
-export function getColorFromWarningLevel(level: string): string {
-  if (level === '白色') {
-    return 'white'
-  } else if (level === '蓝色') {
-    return 'blue'
-  } else if (level === '绿色') {
-    return 'green'
-  } else if (level === '黄色') {
-    return 'yellow'
-  } else if (level === '橙色') {
-    return 'orange'
-  } else if (level === '红色') {
-    return 'red'
-  } else if (level === '黑色') {
-    return 'black'
-  } else {
-    return 'red'
-  }
 }

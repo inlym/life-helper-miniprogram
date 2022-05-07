@@ -9,7 +9,7 @@ export const StorageField = {
 
 /** 自定义请求头字段名 */
 export const HeaderField = {
-  JWT: 'x-auth-jwt',
+  JWT: 'x-lifehelper-auth-jwt',
 }
 
 /** 静态资源地址 */

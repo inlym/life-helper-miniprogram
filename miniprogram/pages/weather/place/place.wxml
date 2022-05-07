@@ -1,7 +1,7 @@
 <view class="page" data-weui-theme="{{ theme }}">
     <view class="main">
         <!-- IP 定位地点 -->
-        <view class="located">
+        <view class="located" wx:if="{{ location.name }}">
             <view class="title">当前位置</view>
             <view class="list">
                 <view class="item" hover-class="hover" bindtap="handleItemTap" data-id="{{ 0 }}">
@@ -54,7 +54,7 @@
                 </view>
             </view>
 
-            <view class="bottom">
+            <view class="bottom" wx:if="{{ !isEdit }}">
                 <authorize-element scope="scope.userLocation" bindsuccess="addNewPlace">
                     <button type="primary">添加地点</button>
                 </authorize-element>

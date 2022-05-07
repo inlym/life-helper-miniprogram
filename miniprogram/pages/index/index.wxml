@@ -24,13 +24,13 @@
         <!-- 天气灾害预警（非实时天气数据） -->
         <view class="warning-now" wx:if="{{ warnings.length > 0 }}">
             <view
-                class="item warning warning--{{ item.color }}"
+                class="item warning warning-level--{{ item.levelId }}"
                 wx:for="{{ warnings }}"
                 wx:key="id"
                 hover-class="hover"
                 bindtap="navigateToWarningPage"
             >
-                <mp-icon icon="volume-up" type="field" size="18" color="{{ item.color }}"></mp-icon>
+                <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
                 <view class="warning-title">{{ item.typeName }}{{ item.level }}预警</view>
             </view>
         </view>
