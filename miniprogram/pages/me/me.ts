@@ -57,7 +57,7 @@ Page({
   /** 获取 IP 信息 */
   async getIpInfo() {
     const ipInfo = await getIpInfo()
-    const ipDesc = `${ipInfo.ip}（${ipInfo.region}）`
+    const ipDesc = ipInfo.ip + (ipInfo.region ? ` (${ipInfo.region})` : '')
     this.setData({ipInfo, ipDesc})
   },
 
