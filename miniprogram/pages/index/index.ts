@@ -1,3 +1,5 @@
+import {StorageField} from '../../app/core/constant'
+import {enhancedStorage} from '../../app/core/storage'
 import {drawWeatherHourlyLineChart} from '../../app/services/weather-canvas'
 import {getMixedWeatherDataAnonymous, getMixedWeatherDataByPlaceId} from '../../app/services/weather-data'
 import {
@@ -60,6 +62,7 @@ Page({
 
   onReady() {
     this.setReservedHeight()
+    this.getCurrentPlaceIdFromStorage()
 
     this.start()
   },
@@ -79,6 +82,14 @@ Page({
       await this.getWeatherDataByPlaceId(this.data.currentPlaceId)
     } else {
       await this.getWeatherDataAnonymous()
+    }
+  },
+
+  /** 从本地存储中获取之前选中的天气地点 */
+  getCurrentPlaceIdFromStorage() {
+    const id = enhancedStorage.get(StorageField.CURRENT_WEATHER_PLACE_ID)
+    if (id) {
+      this.setData({currentPlaceId: id})
     }
   },
 

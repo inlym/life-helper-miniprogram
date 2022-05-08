@@ -26,7 +26,7 @@
             <view class="list">
                 <view class="item" wx:for="{{ places }}" wx:key="id">
                     <view
-                        class="content"
+                        class="content {{ item.id === currentPlaceId ? 'active' : '' }}"
                         hover-class="{{ isEdit ? '' : 'hover' }}"
                         data-id="{{ item.id }}"
                         bindtap="handleItemTap"

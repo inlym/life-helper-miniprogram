@@ -3,6 +3,8 @@ import {addWeatherPlace, getWeatherPlaces} from '../../../app/services/weather-p
 import {WeatherPlace} from '../../../app/services/weather-place.interface'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 import {removeWeatherPlace} from '../../../app/services/weather-place'
+import {enhancedStorage} from '../../../app/core/storage'
+import {StorageField} from '../../../app/core/constant'
 
 Page({
   data: {
@@ -84,29 +86,39 @@ Page({
   async removePlace(event: any) {
     const id: number = event.currentTarget.dataset.id
 
-    const places = this.data.places
+    if (id === this.data.currentPlaceId) {
+      await wx.showModal({
+        title: '提示',
+        content: '当前已选中该地点，请切换至其他地点后再操作删除！',
+        showCancel: false,
+        confirmText: '我知道了',
+      })
+    } else {
+      const places = this.data.places
 
-    const place: WeatherPlace = places.find((item: WeatherPlace) => item.id === id)!
+      const place: WeatherPlace = places.find((item: WeatherPlace) => item.id === id)!
 
-    const res = await wx.showModal({
-      title: '提示',
-      content: `是否不再关注 ${place.name} 的天气？`,
-      confirmText: '不再关注',
-      confirmColor: '#fa5151',
-    })
+      const res = await wx.showModal({
+        title: '提示',
+        content: `是否不再关注 ${place.name} 的天气？`,
+        confirmText: '不再关注',
+        confirmColor: '#fa5151',
+      })
 
-    if (res.confirm) {
-      removeWeatherPlace(id)
-      const index = places.findIndex((item) => item.id === id)
-      places.splice(index, 1)
-      this.setData({places})
+      if (res.confirm) {
+        removeWeatherPlace(id)
+        const index = places.findIndex((item) => item.id === id)
+        places.splice(index, 1)
+        this.setData({places})
 
-      wx.showToast({title: '删除成功', icon: 'success'})
+        wx.showToast({title: '删除成功', icon: 'success'})
+      }
     }
   },
 
   /** 切换要查看天气的地点，并返回上一页 */
   switchPlace(placeId: number) {
+    enhancedStorage.set(StorageField.CURRENT_WEATHER_PLACE_ID, placeId)
     this.setData({currentPlaceId: placeId})
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('switchPlace', {currentPlaceId: placeId})

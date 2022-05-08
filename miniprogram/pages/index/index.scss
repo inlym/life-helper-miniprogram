@@ -1,4 +1,4 @@
-@import "../../assets/styles/weather.scss";
+@import '../../assets/styles/weather.scss';
 
 .page {
   padding-bottom: 30rpx;
@@ -181,7 +181,7 @@
   }
 }
 
-// 今明两天天气
+// ================================== 今明两天天气 ==================================
 .forecast-2days {
   font-size: 32rpx;
 
@@ -226,7 +226,7 @@
   }
 
   .item:first-child {
-    border-right: 2rpx solid var(--weui-FG-2);
+    border-right: 2rpx solid var(--weui-FG-3);
   }
 }
 
@@ -240,7 +240,8 @@
         width: 2300rpx;
         padding: 10rpx;
 
-        .top, .bottom {
+        .top,
+        .bottom {
           display: flex;
           justify-content: space-between;
         }
@@ -476,7 +477,8 @@
   }
 }
 
-.sun, .moon {
+.sun,
+.moon {
   background-color: var(--weui-BG-2);
 
   .body {

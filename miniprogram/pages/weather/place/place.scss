@@ -76,6 +76,10 @@
         background-color: var(--weui-BG-2);
       }
 
+      .active {
+        border: 2rpx solid var(--weui-GREEN);
+      }
+
       .left {
         display: flex;
         flex-direction: column;
