@@ -44,11 +44,11 @@ export class EnhancedStorage {
    *
    * @param key 键名
    * @param data 要存入的数据
-   * @param expiration 有效期，单位：毫秒
+   * @param expiration 有效期或到期时间，单位：毫秒
    */
   set<T = any>(key: string, data: T, expiration: number): void
 
-  set<T = any>(first: string, second: T, third: number): void {
+  set<T = any>(first: string, second: T, third?: number): void {
     const key = first
     const data = second
 
@@ -56,7 +56,7 @@ export class EnhancedStorage {
     const expiration = third ? third : longEnoughMs
 
     const createTime = Date.now()
-    const expireTime = createTime + expiration
+    const expireTime = expiration > createTime ? expiration : expiration + createTime
 
     const wrapper: StorageWrapper<T> = {createTime, expireTime, data}
 
