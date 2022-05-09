@@ -1,13 +1,12 @@
 <view class="page" data-weui-theme="{{ theme }}">
     <view class="main">
         <!-- IP 定位地点 -->
-        <view class="located" wx:if="{{ location.name }}">
+        <view class="located" wx:if="{{ ipLocationName }}">
             <view class="title">当前位置</view>
             <view class="list">
                 <view class="item" hover-class="hover" bindtap="handleItemTap" data-id="{{ 0 }}">
                     <view class="left">
-                        <view class="name">{{ location.name }}</view>
-                        <view class="region">{{ location.region }}</view>
+                        <view class="name">{{ ipLocationName }}</view>
                     </view>
                     <view class="right">
                         <view class="temp">{{ ipLocatedWeatherNow.temp }}℃</view>

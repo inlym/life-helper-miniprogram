@@ -333,15 +333,6 @@ export interface AirDaily {
   primary: string
 }
 
-/** 地理位置 */
-export interface Location {
-  /** 位置名称，一般是“区” */
-  name: string
-
-  /** 所在区域，一般是省+市，例如“浙江省杭州市” */
-  region: string
-}
-
 /** 未来2天预报项目 */
 export interface F2dItem {
   date: string
@@ -405,7 +396,8 @@ export interface MixedWeatherData {
   // 当不带参数查询时，服务端根据 IP 地址查询定位返回 location
   // 当使用地点 ID 查询时，返回这个 ID 对应的 place
 
-  location: Location
+  /** 通过 IP 定位获取的位置名称，目前为市，示例：“杭州市” */
+  ipLocationName: string
 
   place: WeatherPlace
 

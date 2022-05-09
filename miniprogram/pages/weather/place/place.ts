@@ -1,17 +1,16 @@
-import {Location, WeatherNow} from '../../../app/services/weather-data.interface'
-import {addWeatherPlace, getWeatherPlaces} from '../../../app/services/weather-place'
+import {StorageField} from '../../../app/core/constant'
+import {enhancedStorage} from '../../../app/core/storage'
+import {WeatherNow} from '../../../app/services/weather-data.interface'
+import {addWeatherPlace, getWeatherPlaces, removeWeatherPlace} from '../../../app/services/weather-place'
 import {WeatherPlace} from '../../../app/services/weather-place.interface'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
-import {removeWeatherPlace} from '../../../app/services/weather-place'
-import {enhancedStorage} from '../../../app/core/storage'
-import {StorageField} from '../../../app/core/constant'
 
 Page({
   data: {
     // -----------------------------  从上个页面带来的数据  -----------------------------
 
     /** IP 定位获取的位置 */
-    location: {} as Location,
+    ipLocationName: '',
 
     /** 当前选中的天气地点 ID */
     currentPlaceId: 0,

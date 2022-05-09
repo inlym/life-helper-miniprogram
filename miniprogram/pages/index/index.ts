@@ -5,7 +5,6 @@ import {getMixedWeatherDataAnonymous, getMixedWeatherDataByPlaceId} from '../../
 import {
   AirNow,
   F2dItem,
-  Location,
   TempBar,
   WarningItem,
   WeatherDailyItem,
@@ -26,7 +25,8 @@ Page({
     airNow: {} as AirNow,
     f15d: [] as WeatherDailyItem[],
     warnings: [] as WarningItem[],
-    location: {} as Location,
+
+    ipLocationName: '',
 
     // ------------------------ 从 HTTP 请求获取二次处理后的数据 -----------------------
 
@@ -104,7 +104,7 @@ Page({
     this.setData({currentPlaceId: 0})
     const data = await getMixedWeatherDataAnonymous()
     this.setData(data)
-    const locationName = data.location.name
+    const locationName = data.ipLocationName
     const ipLocatedWeatherNow = data.now
     this.setData({locationName, ipLocatedWeatherNow})
 
@@ -151,12 +151,12 @@ Page({
   /** 跳转到天气地点页 */
   navigateToPlacePage() {
     const self = this
-    const {location, currentPlaceId, ipLocatedWeatherNow} = this.data
+    const {ipLocationName, currentPlaceId, ipLocatedWeatherNow} = this.data
 
     wx.navigateTo({
       url: '/pages/weather/place/place',
       success(res) {
-        res.eventChannel.emit('transferData', {location, currentPlaceId, ipLocatedWeatherNow})
+        res.eventChannel.emit('transferData', {ipLocationName, currentPlaceId, ipLocatedWeatherNow})
       },
       events: {
         async switchPlace(data: any) {
