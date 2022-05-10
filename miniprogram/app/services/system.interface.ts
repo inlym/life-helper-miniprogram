@@ -1,50 +1,57 @@
-/** 系统详情 */
-export interface SystemDetail {
-  // --------------------------------------------------------------------------
-  // 以下字段来源于 `wx.getSystemInfoSync` 方法
-  // --------------------------------------------------------------------------
+/**
+ * 小程序基础信息
+ *
+ * ## 说明
+ * （1）将能够获取到的小程序基础信息汇总起来
+ * （2）由于直接将返回值上传，不对数据做二次处理，所以每个类型就都直接标记为 any 了。
+ */
+export interface MiniProgramInfo {
+  /**
+   * 窗口信息
+   *
+   * @see https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getWindowInfo.html
+   */
+  window: any
 
-  /** 设备品牌 */
-  brand: string
+  /**
+   * 系统信息
+   *
+   * @see https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getSystemInfoSync.html
+   */
+  system: any
 
-  /** 设备型号 */
-  model: string
+  /**
+   * 设备基础信息
+   *
+   * @see https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getDeviceInfo.html
+   */
+  device: any
 
-  /** 微信设置的语言 */
-  language: string
+  /**
+   * 微信APP基础信息
+   *
+   * @see https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getAppBaseInfo.html
+   */
+  appBase: any
 
-  /** 微信版本号 */
-  version: string
+  /**
+   * 当前帐号信息
+   *
+   * @see https://developers.weixin.qq.com/miniprogram/dev/api/open-api/account-info/wx.getAccountInfoSync.html
+   */
+  account: any
 
-  /** 操作系统及版本 */
-  system: string
+  /**
+   * 设备电量
+   *
+   * @see https://developers.weixin.qq.com/miniprogram/dev/api/device/battery/wx.getBatteryInfo.html
+   */
+  battery: any
 
-  /** 客户端平台：`ios`, `android`, `windows`, `mac` */
-  platform: string
-
-  /** 系统当前主题，取值为 `light` 或 `dark` */
-  theme: string
-
-  // --------------------------------------------------------------------------
-  // 以下字段来源于 `wx.getBatteryInfoSync` 方法
-  // --------------------------------------------------------------------------
-
-  /** 设备电量，范围 1 - 100 */
-  batteryLevel: number
-
-  /** 是否正在充电中 */
-  isCharging: boolean
-
-  // --------------------------------------------------------------------------
-  // 以下字段来源于 `wx.getNetworkType` 方法
-  // --------------------------------------------------------------------------
-
-  /** 网络类型 */
-  networkType: string
-
-  /** 信号强弱，单位 dbm */
-  signalStrength: number
-
-  /** 设备是否使用了网络代理 */
-  hasSystemProxy: boolean
+  /**
+   * 网络类型
+   *
+   * @see https://developers.weixin.qq.com/miniprogram/dev/api/device/network/wx.getNetworkType.html
+   */
+  network: any
 }

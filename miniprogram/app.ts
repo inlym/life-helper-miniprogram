@@ -1,11 +1,11 @@
 // app.ts
 
-import {ensureLogined} from './app/core/auth'
 import {logger} from './app/core/logger'
+import {reportMiniprogramBasicInfo} from './app/services/report'
 
 App({
   onLaunch() {
-    wx.nextTick(ensureLogined)
+    wx.nextTick(reportMiniprogramBasicInfo)
   },
 
   // 监听未处理的 Promise 拒绝事件

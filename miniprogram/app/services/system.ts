@@ -1,28 +1,18 @@
-import {SystemDetail} from './system.interface'
+import {MiniProgramInfo} from './system.interface'
 
-export async function getSystemDetail(): Promise<SystemDetail> {
-  const [systemInfo, batteryInfo, networkType] = await Promise.all([
+/**
+ * 获取小程序的相关信息
+ */
+export async function getMiniprogramInfo(): Promise<MiniProgramInfo> {
+  const [window, system, device, appBase, account, battery, network] = await Promise.all([
+    wx.getWindowInfo(),
     wx.getSystemInfoSync(),
+    wx.getDeviceInfo(),
+    wx.getAppBaseInfo(),
+    wx.getAccountInfoSync(),
     wx.getBatteryInfo(),
     wx.getNetworkType(),
   ])
 
-  const detail: SystemDetail = {
-    brand: systemInfo.brand,
-    model: systemInfo.model,
-    language: systemInfo.language,
-    version: systemInfo.version,
-    system: systemInfo.system,
-    platform: systemInfo.platform,
-    theme: systemInfo.theme,
-
-    batteryLevel: batteryInfo.level,
-    isCharging: batteryInfo.isCharging,
-
-    networkType: networkType.networkType,
-    signalStrength: networkType.signalStrength,
-    hasSystemProxy: networkType.hasSystemProxy,
-  }
-
-  return detail
+  return {window, system, device, appBase, account, battery, network}
 }
