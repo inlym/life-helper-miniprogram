@@ -36,7 +36,7 @@
         </view>
 
         <!-- 分钟级降水 -->
-        <view class="rain" wx:if="{{ rain.hasRain }}">
+        <view class="rain" wx:if="{{ rain.hasRain }}" bindtap="navigateToRainPage">
             <view class="summary">{{ rain.summary }}</view>
         </view>
 

@@ -6,7 +6,8 @@
     "pages/me/me",
     "pages/weather/warning/warning",
     "pages/weather/place/place",
-    "pages/weather/daily/daily"
+    "pages/weather/daily/daily",
+    "pages/weather/rain/rain"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",

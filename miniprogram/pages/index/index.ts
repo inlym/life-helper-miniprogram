@@ -188,4 +188,16 @@ Page({
       },
     })
   },
+
+  /** 跳转到分钟级降水详情页 */
+  navigateToRainPage() {
+    const {rain, locationName} = this.data
+
+    wx.navigateTo({
+      url: '/pages/weather/rain/rain',
+      success(res) {
+        res.eventChannel.emit('transferData', {rain, locationName})
+      },
+    })
+  },
 })
