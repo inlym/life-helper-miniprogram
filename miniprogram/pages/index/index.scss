@@ -177,7 +177,31 @@
       font-size: 24rpx;
 
       margin-left: 16rpx;
+
+      color: #fff;
     }
+  }
+}
+
+// ================================= 分钟级降水 =================================
+.rain {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  margin-top: 20rpx;
+  padding: 0 26rpx;
+
+  .summary {
+    font-size: 24rpx;
+    line-height: 40rpx;
+
+    height: 40rpx;
+    padding: 0 24rpx;
+
+    color: #fff;
+    border-radius: 24rpx;
+    background-color: var(--weui-INDIGO);
   }
 }
 

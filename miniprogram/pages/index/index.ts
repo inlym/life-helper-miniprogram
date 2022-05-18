@@ -5,6 +5,7 @@ import {getMixedWeatherDataAnonymous, getMixedWeatherDataByPlaceId} from '../../
 import {
   AirNow,
   F2dItem,
+  MinutelyRain,
   TempBar,
   WarningItem,
   WeatherDailyItem,
@@ -25,6 +26,7 @@ Page({
     airNow: {} as AirNow,
     f15d: [] as WeatherDailyItem[],
     warnings: [] as WarningItem[],
+    rain: {} as MinutelyRain,
 
     ipLocationName: '',
 
