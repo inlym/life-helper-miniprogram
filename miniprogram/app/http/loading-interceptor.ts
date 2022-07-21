@@ -24,6 +24,10 @@ enum RequestStatus {
   FINISHED = 2,
 }
 
+function getKey(config: AxiosRequestConfig): string {
+  return `loading:${config.method?.toLowerCase()}:${config.url}:${ParamsUtils.encode(config.params)}`
+}
+
 /**
  * 等待标志展示拦截器
  *
@@ -38,7 +42,7 @@ export function showLoadingInterceptor(config: AxiosRequestConfig): AxiosRequest
   const loading = (config as unknown as RequestOptionsInternal).loading
 
   if (loading) {
-    const key = `loading:${config.method}:${config.url}:${ParamsUtils.encode(config.params)}`
+    const key = getKey(config)
     enhancedStorage.set(key, RequestStatus.UNFINISHED, 60 * 1000)
 
     setTimeout(() => {
@@ -74,7 +78,7 @@ export function hideLoadingInterceptor(response: AxiosResponse): AxiosResponse {
   const loading = (config as unknown as RequestOptionsInternal).loading
 
   if (loading) {
-    const key = `loading:${config.method}:${config.url}:${ParamsUtils.encode(config.params)}`
+    const key = getKey(config)
     enhancedStorage.set(key, RequestStatus.FINISHED, 60 * 1000)
     if (enhancedStorage.get('isShowingLoading') === true) {
       enhancedStorage.remove('isShowingLoading')
