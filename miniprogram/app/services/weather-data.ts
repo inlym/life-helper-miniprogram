@@ -87,6 +87,7 @@ export async function getMixedWeatherDataAnonymous(): Promise<MixedWeatherData> 
     method: 'GET',
     url: '/weather',
     auth: false,
+    loading: true,
   })
 
   return processWeatherData(data)
