@@ -13,5 +13,8 @@ export interface RequestOptionsInternal {
   data?: Record<string, any>
 
   /** 是否需要登录 */
-  auth: boolean
+  auth?: boolean
+
+  /** 是否需要展示 Loading 提示 */
+  loading?: boolean
 }
