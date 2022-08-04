@@ -36,11 +36,17 @@ export function getCode(): Promise<string> {
 
 /** 登录接口响应数据 */
 export interface TokenInfo {
-  /** 到期时间的时间戳 */
-  expiration: number
+  /** 登录凭证创建时间 */
+  createTime: number
+
+  /** 登录凭证过期时间 */
+  expireTime: number
 
   /** 登录凭证 */
   token: string
+
+  /** 登录凭证类型 */
+  type: string
 }
 
 /**
@@ -50,12 +56,14 @@ export async function login(): Promise<string> {
   const code = await getCode()
   const data = await requestForData<TokenInfo>({
     method: 'POST',
-    url: '/login/weixin',
+    url: '/login/wechat',
     data: {code},
     auth: false,
   })
 
-  enhancedStorage.set(StorageField.TOKEN, data.token, data.expiration - Date.now())
+  console.log(data)
+
+  enhancedStorage.set(StorageField.TOKEN, data.token, data.expireTime)
 
   return data.token
 }
