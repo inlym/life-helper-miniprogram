@@ -7,8 +7,8 @@
             <view class="title">确认登录“小鸣助手”网页版</view>
             <view wx:if="{{ ip }}" class="ip">登录 IP：{{ ip }}（{{ region }}）</view>
 
-            <button class="confirm" bind:tap="confirm" type="primary">确认登录</button>
-            <view class="cancel">取消登录</view>
+            <button class="confirm" bind:tap="confirm" type="primary" loading="{{ confirmLoading }}">确认登录</button>
+            <view class="cancel" bind:tap="cancel">取消登录</view>
         </view>
     </view>
 </view>
