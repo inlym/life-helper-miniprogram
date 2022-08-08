@@ -32,6 +32,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "扫码登录页",
+          "pathName": "pages/scan/login",
+          "query": "scene=23d9ab4aa2924061a2d5858f947e2521",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

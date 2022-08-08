@@ -1,5 +1,14 @@
 <!--pages/scan/login.wxml-->
 
-<text>pages/scan/login.wxml</text>
-<view class="one" bind:tap="scan">scan</view>
-<view class="two" bind:tap="confirm">confirm</view>
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="box">
+        <view class="container">
+            <image class="pc" src="{{ pcImageUrl }}" mode="widthFix"></image>
+            <view class="title">确认登录“小鸣助手”网页版</view>
+            <view wx:if="{{ ip }}" class="ip">登录 IP：{{ ip }}（{{ region }}）</view>
+
+            <button class="confirm" bind:tap="confirm" type="primary">确认登录</button>
+            <view class="cancel">取消登录</view>
+        </view>
+    </view>
+</view>

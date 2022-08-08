@@ -10,12 +10,12 @@ import {ScanLoginResult} from './scan-login.interface'
 /**
  * 进行 "扫码" 操作
  */
-export function scanQrcode(ticket: string): Promise<ScanLoginResult> {
+export function scanQrCode(id: string): Promise<ScanLoginResult> {
   return requestForData({
     method: 'PUT',
-    url: '/scan_login',
+    url: '/login/qrcode',
     params: {operator: 'scan'},
-    data: {ticket},
+    data: {id},
     auth: true,
   })
 }
@@ -23,12 +23,12 @@ export function scanQrcode(ticket: string): Promise<ScanLoginResult> {
 /**
  * 进行 "确认登录" 操作
  */
-export function confirmQrcode(ticket: string): Promise<ScanLoginResult> {
+export function confirmQrCode(id: string): Promise<ScanLoginResult> {
   return requestForData({
     method: 'PUT',
-    url: '/scan_login',
+    url: '/login/qrcode',
     params: {operator: 'confirm'},
-    data: {ticket},
+    data: {id},
     auth: true,
   })
 }
