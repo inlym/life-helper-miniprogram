@@ -1,7 +1,6 @@
-@import '/assets/styles/iconfont.wxss';
+@import "/assets/styles/iconfont/iconfont.wxss";
 
-page,
-.page {
+page, .page {
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
   font-size: 32rpx;
   line-height: 1.4;
@@ -21,10 +20,7 @@ image {
   max-height: 100%;
 }
 
-view,
-image,
-text,
-navigator {
+view, image, text, navigator {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -40,5 +36,5 @@ navigator {
 
 /* 通用 view 组件 按下去的样式 */
 .hover {
-  opacity: 0.3;
+  opacity: .3;
 }
