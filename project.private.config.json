@@ -39,6 +39,13 @@
           "query": "scene=23d9ab4aa2924061a2d5858f947e2521",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "相册列表页",
+          "pathName": "pages/album/list/list",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

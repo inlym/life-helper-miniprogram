@@ -1,1 +1,5 @@
-<view class="page" data-weui-theme="{{ theme }}"> sadfjlkasdfjlk </view>
+<view class="page" data-weui-theme="{{ theme }}">
+    <image src="{{ imageUrl }}" mode="widthFix"></image>
+</view>
+
+<text class="iconfont icon-paixu"></text>
