@@ -7,7 +7,8 @@
     "pages/weather/warning/warning",
     "pages/weather/place/place",
     "pages/weather/daily/daily",
-    "pages/weather/rain/rain"
+    "pages/weather/rain/rain",
+    "pages/album/list/list"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",
@@ -32,6 +33,12 @@
         "text": "天气",
         "iconPath": "@tabBarIconPath_Home",
         "selectedIconPath": "/assets/images/tabbar/home-filled.png"
+      },
+      {
+        "pagePath": "pages/album/list/list",
+        "text": "相册",
+        "iconPath": "@tabBarIconPath_Album",
+        "selectedIconPath": "/assets/images/tabbar/album-filled.png"
       },
       {
         "pagePath": "pages/me/me",
