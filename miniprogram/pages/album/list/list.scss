@@ -1,1 +1,63 @@
 /* pages/album/list/list.wxss */
+
+.container {
+  padding: 30rpx;
+
+  background-color: var(--weui-BG-2);
+}
+
+// 按钮区
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding-top: 36rpx;
+
+  .button {
+    font-size: 26rpx;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 130rpx;
+    height: 60rpx;
+    margin-left: 16rpx;
+    padding: 0 20rpx;
+
+    color: var(--weui-FG-1);
+    border-radius: 30rpx;
+    background-color: var(--weui-BG-3);
+
+    .icon {
+      width: 28rpx;
+    }
+
+    .title {
+      margin-left: 10rpx;
+    }
+  }
+
+  .button:first-child {
+    margin-left: 0;
+  }
+}
+
+// 相册列表区
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  margin-top: 30rpx;
+
+  .item {
+    width: 330rpx;
+    height: 430rpx;
+    margin-bottom: 20rpx;
+
+    border: 2rpx solid var(--weui-FG-3);
+    border-radius: 10rpx;
+  }
+}

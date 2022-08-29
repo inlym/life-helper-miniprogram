@@ -1,1 +1,21 @@
-<view class="page" data-weui-theme="{{ theme }}"> </view>
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="container">
+        <!-- 按钮区 - 开始 -->
+        <view class="buttons">
+            <view class="button">
+                <image class="icon" src="/assets/icons/sort.svg" mode="widthFix"></image>
+                <view class="title">排序</view>
+            </view>
+            <view class="button">
+                <image class="icon" src="/assets/icons/add.svg" mode="widthFix"></image>
+                <view class="title">创建</view>
+            </view>
+        </view>
+        <!-- 按钮区 - 结束 -->
+
+        <!-- 相册列表区 -->
+        <view class="list">
+            <view class="item" wx:for="{{ albumList }}" wx:key="id"></view>
+        </view>
+    </view>
+</view>

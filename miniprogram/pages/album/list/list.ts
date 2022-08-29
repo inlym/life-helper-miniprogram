@@ -9,7 +9,9 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    albumList: [1, 2, 3, 4],
+  },
 
   behaviors: [themeBehavior, shareAppBehavior],
 

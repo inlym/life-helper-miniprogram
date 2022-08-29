@@ -58,7 +58,7 @@
     }
   },
   "requiredPrivateInfos": ["chooseLocation"],
-  "debug": false,
+  "debug": true,
   "lazyCodeLoading": "requiredComponents",
   "darkmode": true,
   "themeLocation": "theme.json"

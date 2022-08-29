@@ -52,7 +52,8 @@
       "typescript",
       "sass"
     ],
-    "ignoreUploadUnusedFiles": true,
+    "ignoreDevUnusedFiles": false,
+    "ignoreUploadUnusedFiles": false,
     "useStaticServer": true
   },
   "simulatorType": "wechat",
