@@ -3,11 +3,11 @@
         <!-- 按钮区 - 开始 -->
         <view class="buttons">
             <view class="button">
-                <image class="icon" src="/assets/icons/sort.svg" mode="widthFix"></image>
+                <view class="iconfont icon-paixu"></view>
                 <view class="title">排序</view>
             </view>
             <view class="button">
-                <image class="icon" src="/assets/icons/add.svg" mode="widthFix"></image>
+                <view class="iconfont icon-add"></view>
                 <view class="title">创建</view>
             </view>
         </view>
@@ -15,7 +15,27 @@
 
         <!-- 相册列表区 -->
         <view class="list">
-            <view class="item" wx:for="{{ albumList }}" wx:key="id"></view>
+            <view class="item" wx:for="{{ list }}" wx:key="id">
+                <!-- 封面图部分（包含数字） -->
+                <view class="cover">
+                    <image class="cover-image" src="{{ coverImageUrl }}" mode="aspectFill"></image>
+                    <view class="total">111</view>
+                </view>
+
+                <!-- 相册名称和描述 -->
+                <view class="text-area">
+                    <view class="name text-ellipsis-l1">{{ item.name }}</view>
+                    <view class="desc text-ellipsis-l1">{{ item.description }}</view>
+                </view>
+            </view>
         </view>
+    </view>
+
+    <!-- 底部脚注 -->
+    <view class="weui-footer">
+        <view class="weui-footer__links">
+            <navigator url="" class="weui-footer__link">小鸣相册 - 留住这一刻的美好</navigator>
+        </view>
+        <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
     </view>
 </view>
