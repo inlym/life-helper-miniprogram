@@ -8,7 +8,7 @@
 
 第 3 步：将资源目录中的 `iconfont.css` 复制至小程序的 `miniprogram/assets/styles/iconfont` 目录下。
 
-第 4 步：将复制后的 `iconfont.css` 文件改名为 `iconfont.wxss`。
+第 4 步：将复制后的 `iconfont.css` 文件改名为 `iconfont.wxss`（文件内容无需做任何修改）。
 
 第 5 步：在 `app.scss` 中引入（该步已完成，后续迭代中无需操作）。
 
