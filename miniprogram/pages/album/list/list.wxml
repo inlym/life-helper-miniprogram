@@ -2,11 +2,11 @@
     <view class="container">
         <!-- 按钮区 - 开始 -->
         <view class="buttons">
-            <view class="button">
+            <view class="button" bindtap="showOrderOptionsPanel" hover-class="hover">
                 <view class="iconfont icon-paixu"></view>
                 <view class="title">排序</view>
             </view>
-            <view class="button">
+            <view class="button" bindtap="goToAddPage">
                 <view class="iconfont icon-add"></view>
                 <view class="title">创建</view>
             </view>
@@ -15,7 +15,7 @@
 
         <!-- 相册列表区 -->
         <view class="list">
-            <view class="item" wx:for="{{ list }}" wx:key="id">
+            <view class="item" wx:for="{{ list }}" wx:key="id" hover-class="hover">
                 <!-- 封面图部分（包含数字） -->
                 <view class="cover">
                     <image class="cover-image" src="{{ coverImageUrl }}" mode="aspectFill"></image>
@@ -38,4 +38,12 @@
         </view>
         <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
     </view>
+
+    <mp-actionSheet
+        title="{{ actionSheet.title }}"
+        show="{{ showActionSheet }}"
+        actions="{{ actionSheet.actions }}"
+        bindactiontap="onActionTap"
+    >
+    </mp-actionSheet>
 </view>
