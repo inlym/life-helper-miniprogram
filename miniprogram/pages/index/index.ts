@@ -80,11 +80,15 @@ Page({
   },
 
   async start() {
+    wx.showLoading({title: '数据加载中', mask: true})
+
     if (this.data.currentPlaceId) {
       await this.getWeatherDataByPlaceId(this.data.currentPlaceId)
     } else {
       await this.getWeatherDataAnonymous()
     }
+
+    wx.hideLoading()
   },
 
   /** 从本地存储中获取之前选中的天气地点 */
