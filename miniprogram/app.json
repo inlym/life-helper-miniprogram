@@ -8,7 +8,8 @@
     "pages/weather/place/place",
     "pages/weather/daily/daily",
     "pages/weather/rain/rain",
-    "pages/album/list/list"
+    "pages/album/list/list",
+    "pages/album/add/add"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",
@@ -61,5 +62,6 @@
   "debug": true,
   "lazyCodeLoading": "requiredComponents",
   "darkmode": true,
-  "themeLocation": "theme.json"
+  "themeLocation": "theme.json",
+  "resizable": true
 }
