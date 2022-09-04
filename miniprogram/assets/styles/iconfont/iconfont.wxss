@@ -1,9 +1,9 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2362383 */
 
-  src: url("/assets/styles/iconfont/iconfont.woff2?t=1660745166081") format("woff2"),
-  url("/assets/styles/iconfont/iconfont.ttf?t=1660745166081") format("truetype"),
-  url("/assets/styles/iconfont/iconfont.svg?t=1660745166081#iconfont") format("svg");
+  src: url("/assets/styles/iconfont/iconfont.woff2?t=1662302440661") format("woff2"),
+  url("/assets/styles/iconfont/iconfont.ttf?t=1662302440661") format("truetype"),
+  url("/assets/styles/iconfont/iconfont.svg?t=1662302440661#iconfont") format("svg");
 }
 
 .iconfont {
@@ -13,6 +13,10 @@
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-empty:before {
+  content: "\e708";
 }
 
 .icon-add:before {
