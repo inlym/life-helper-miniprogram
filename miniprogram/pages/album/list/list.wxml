@@ -1,34 +1,45 @@
 <view class="page" data-weui-theme="{{ theme }}">
     <view class="container">
-        <!-- 按钮区 - 开始 -->
-        <view class="buttons">
-            <view class="button" bindtap="showOrderOptionsPanel" hover-class="hover">
-                <view class="iconfont icon-paixu"></view>
-                <view class="title">排序</view>
-            </view>
-            <view class="button" bindtap="goToAddPage">
-                <view class="iconfont icon-add"></view>
-                <view class="title">创建</view>
-            </view>
-        </view>
-        <!-- 按钮区 - 结束 -->
-
-        <!-- 相册列表区 -->
-        <view class="list">
-            <view class="item" wx:for="{{ list }}" wx:key="id" hover-class="hover">
-                <!-- 封面图部分（包含数字） -->
-                <view class="cover">
-                    <image class="cover-image" src="{{ coverImageUrl }}" mode="aspectFill"></image>
-                    <view class="total">111</view>
+        <!-- 相册列表有数据情况 -->
+        <block wx:if="{{ list.length > 0 }}">
+            <!-- 按钮区 - 开始 -->
+            <view class="buttons">
+                <view class="button" bindtap="showOrderOptionsPanel" hover-class="hover">
+                    <view class="iconfont icon-paixu"></view>
+                    <view class="title">排序</view>
                 </view>
-
-                <!-- 相册名称和描述 -->
-                <view class="text-area">
-                    <view class="name text-ellipsis-l1">{{ item.name }}</view>
-                    <view class="desc text-ellipsis-l1">{{ item.description }}</view>
+                <view class="button" bindtap="goToAddPage">
+                    <view class="iconfont icon-add"></view>
+                    <view class="title">创建</view>
                 </view>
             </view>
-        </view>
+            <!-- 按钮区 - 结束 -->
+
+            <!-- 相册列表区 -->
+            <view class="list">
+                <view class="item" wx:for="{{ list }}" wx:key="id" hover-class="hover">
+                    <!-- 封面图部分（包含数字） -->
+                    <view class="cover">
+                        <image class="cover-image" src="{{ coverImageUrl }}" mode="aspectFill"></image>
+                        <view class="total">111</view>
+                    </view>
+
+                    <!-- 相册名称和描述 -->
+                    <view class="text-area">
+                        <view class="name text-ellipsis-l1">{{ item.name }}</view>
+                        <view class="desc text-ellipsis-l1">{{ item.description }}</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+
+        <!-- 相册列表数据为空情况 -->
+        <block wx:else>
+            <view class="empty-list">
+                <view class="tips">当前无相册</view>
+                <button class="add" type="primary" bindtap="goToAddPage">新增相册</button>
+            </view>
+        </block>
     </view>
 
     <!-- 底部脚注 -->
@@ -39,6 +50,7 @@
         <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
     </view>
 
+    <!-- 弹出栏 -->
     <mp-actionSheet
         title="{{ actionSheet.title }}"
         show="{{ showActionSheet }}"

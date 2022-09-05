@@ -104,6 +104,25 @@
   }
 }
 
+.empty-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 800rpx;
+
+  .tips {
+    font-size: 28rpx;
+
+    color: var(--weui-FG-1);
+  }
+
+  .add {
+    margin-top: 100rpx;
+  }
+}
+
 .weui-footer {
   margin-top: 80rpx;
 }
