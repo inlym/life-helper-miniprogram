@@ -46,6 +46,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "新增相册",
+          "pathName": "pages/album/add/add",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

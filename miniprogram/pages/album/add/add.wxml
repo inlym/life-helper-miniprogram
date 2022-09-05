@@ -1,1 +1,30 @@
-<view class="page" data-weui-theme="{{ theme }}"> </view>
+<view class="page" data-weui-theme="{{ theme }}">
+    <!-- 页面常规内容区域 -->
+    <view class="container">
+        <form class="form" bindsubmit="submit">
+            <input
+                type="text"
+                name="name"
+                class="name"
+                placeholder="请输入相册名称"
+                maxlength="20"
+                focus
+                cursor="0"
+                placeholder-class="name-placeholder"
+            />
+            <input
+                type="text"
+                name="description"
+                class="description"
+                placeholder="可以用一句话介绍一下这个相册哦 ~"
+                maxlength="40"
+                placeholder-class="description-placeholder"
+            />
+
+            <button class="submit" type="primary" form-type="submit">提交</button>
+        </form>
+    </view>
+
+    <!-- 非页面常规内容 -->
+    <mp-toptips msg="请输入相册名称" type="error" show="{{ showNameError }}"></mp-toptips>
+</view>

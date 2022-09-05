@@ -40,7 +40,14 @@ Page({
 
   behaviors: [themeBehavior, shareAppBehavior],
 
-  onLoad() {
+  // 从“新增页”返回时，页面数据也需要刷新，因此把初始化放在这个生命周期
+  onShow() {
+    console.log('onShow')
+
+    this.init()
+  },
+
+  onPullDownRefresh() {
     this.init()
   },
 
@@ -53,6 +60,7 @@ Page({
   async getAlbumList() {
     const {list} = await getAlbumList()
     this.setData({list})
+    this.reorderList()
   },
 
   /** 打开排序操作面板 */
@@ -63,6 +71,13 @@ Page({
   onActionTap(event: any) {
     const mode = event.detail.value
     this.setData({mode, showActionSheet: false})
+
+    this.reorderList()
+  },
+
+  /** 将相册列表数据重排序 */
+  reorderList() {
+    const mode = this.data.mode
 
     if (mode === 'createTimeAsc') {
       this.sortByCreateTimeAsc()

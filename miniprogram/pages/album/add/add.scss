@@ -1,1 +1,24 @@
 /* pages/album/add/add.wxss */
+
+.container {
+  padding: 32rpx;
+
+  .name, .description {
+    height: 60rpx;
+    padding: 0 20rpx;
+
+    border-bottom: 2rpx solid var(--weui-FG-3);
+  }
+
+  .description {
+    margin-top: 60rpx;
+  }
+
+  .submit {
+    margin-top: 120rpx;
+  }
+}
+
+.name-placeholder, .description-placeholder {
+  font-size: 28rpx;
+}

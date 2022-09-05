@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "新建相册"
+  "navigationBarTitleText": "新建相册",
+  "usingComponents": {
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
+  }
 }
