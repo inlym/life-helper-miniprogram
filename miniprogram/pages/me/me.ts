@@ -86,4 +86,20 @@ Page({
     wx.vibrateShort({type: 'medium'})
     wx.setClipboardData({data: ip})
   },
+
+  /** 监听头像的图片加载完成 */
+  onAvatarLoad() {
+    this.animate(
+      '.avatar',
+      [
+        {offset: 0, scale: [1]},
+        {offset: 0.5, scale: [0.8]},
+        {offset: 1, scale: [1]},
+      ],
+      500,
+      () => {
+        this.clearAnimation('.avatar', {scale: true})
+      }
+    )
+  },
 })
