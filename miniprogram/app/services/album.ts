@@ -1,4 +1,5 @@
 import {requestForData} from '../core/http'
+import {getOssPostCredential, uploadToOss} from './oss'
 
 /** 相册 */
 export interface Album {
@@ -22,7 +23,7 @@ export interface Album {
 }
 
 /** 创建或修改接口需要的相册数据 */
-export interface ModifyingAlbum {
+export interface ModifyingAlbumData {
   /** 相册名称 */
   name: string
 
@@ -55,7 +56,7 @@ export function getAlbumList(): Promise<AlbumListResponse> {
 /**
  * 创建一个相册
  */
-export function createAlbum(album: ModifyingAlbum): Promise<Album> {
+export function createAlbum(album: ModifyingAlbumData): Promise<Album> {
   return requestForData({
     method: 'POST',
     url: '/album',
@@ -67,7 +68,7 @@ export function createAlbum(album: ModifyingAlbum): Promise<Album> {
 /**
  * 修改相册信息
  */
-export function updateAlbum(id: string, album: ModifyingAlbum): Promise<Album> {
+export function updateAlbum(id: string, album: ModifyingAlbumData): Promise<Album> {
   return requestForData({
     method: 'PUT',
     url: `/album/${id}`,
@@ -85,4 +86,73 @@ export function deleteAlbum(id: string): Promise<DeleteAlbumResponse> {
     url: `/album/${id}`,
     auth: true,
   })
+}
+
+/**
+ * 上传媒体文件至 OSS
+ *
+ * @param albumId 相册 ID
+ * @param media 从微信选取的媒体文件
+ * @param onProgressUpdate 进度变化回调函数
+ */
+
+export async function uploadMediaFile(
+  albumId: string,
+  media: WechatMiniprogram.MediaFile,
+  onProgressUpdate: WechatMiniprogram.UploadTaskOnProgressUpdateCallback
+): Promise<void> {
+  if (media.fileType === 'image') {
+    const credential = await getOssPostCredential('image')
+
+    uploadToOss(media.tempFilePath, credential).onProgressUpdate((res) => {
+      if (res.progress === 100) {
+        requestForData({
+          method: 'POST',
+          url: `/album/${albumId}/media`,
+          params: {type: 'image'},
+          auth: true,
+          data: {
+            path: credential.key,
+            size: media.size,
+            uploadTime: Date.now(),
+          },
+        })
+      }
+
+      onProgressUpdate(res)
+    })
+  } else if (media.fileType === 'video') {
+    const [c1, c2] = await Promise.all([getOssPostCredential('image'), getOssPostCredential('video')])
+
+    // 上传封面图
+    uploadToOss(media.thumbTempFilePath, c1)
+
+    // 备注（2022.09.07）
+    // 这里假定了上传封面图一定会成功，临时先这么处理了。
+
+    // 上传视频
+    uploadToOss(media.tempFilePath, c2).onProgressUpdate((res) => {
+      if (res.progress === 100) {
+        requestForData({
+          method: 'POST',
+          url: `/album/${albumId}/media`,
+          params: {type: 'video'},
+          auth: true,
+          data: {
+            path: c2.key,
+            size: media.size,
+            uploadTime: Date.now(),
+            width: media.width,
+            height: media.height,
+            thumbPath: c1.key,
+            duration: media.duration,
+          },
+        })
+      }
+
+      onProgressUpdate(res)
+    })
+  } else {
+    throw new Error('未支持的媒体类型！')
+  }
 }
