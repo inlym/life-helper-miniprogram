@@ -92,11 +92,11 @@ Page({
     this.animate(
       '.avatar',
       [
-        {offset: 0, scale: [1]},
-        {offset: 0.5, scale: [0.8]},
-        {offset: 1, scale: [1]},
+        {offset: 0, scale: [1], rotateX: 0},
+        {offset: 0.5, scale: [0.9], rotateX: 180},
+        {offset: 1, scale: [1], rotateX: 0},
       ],
-      500,
+      700,
       () => {
         this.clearAnimation('.avatar', {scale: true})
       }
