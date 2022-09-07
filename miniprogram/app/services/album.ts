@@ -20,6 +20,35 @@ export interface Album {
 
   /** 资源（照片和视频）数量 */
   total: number
+
+  /** 相册封面图地址 */
+  coverImageUrl: string
+
+  /** 媒体文件列表，仅查看相册详情时返回 */
+  medias: Media[]
+}
+
+/** 媒体文件（照片和视频） */
+export interface Media {
+  /** 媒体文件 ID */
+  id: string
+
+  /**
+   * 类型
+   *
+   * 1. `image` => 图片
+   * 2. `video` => 视频
+   */
+  type: string
+
+  /** 文件地址 */
+  url: string
+
+  /** 上传时间 */
+  uploadTime: number
+
+  /** 视频缩略图地址 */
+  thumbUrl: string
 }
 
 /** 创建或修改接口需要的相册数据 */

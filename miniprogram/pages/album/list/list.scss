@@ -85,6 +85,20 @@
       }
     }
 
+    .empty-cover {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background-color: var(--weui-BG-1);
+
+      .iconfont {
+        font-size: 80rpx;
+
+        color: var(--weui-FG-2);
+      }
+    }
+
     // 相册名称和描述
     .text-area {
       padding: 18rpx 12rpx;

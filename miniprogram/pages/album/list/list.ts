@@ -31,11 +31,6 @@ Page({
         {text: '更新时间（降序）', value: 'updateTimeDesc'},
       ],
     },
-
-    /** ============================== 其他 ============================== */
-
-    // 临时测试数据
-    coverImageUrl: 'https://res.lifehelper.com.cn/image/7a384bc69e12480081c7e34ebaaab34f',
   },
 
   behaviors: [themeBehavior, shareAppBehavior],
