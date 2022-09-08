@@ -1,0 +1,4 @@
+<!--pages/album/detail/detail.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <button bindtap="chooseAndUpload">上传</button>
+</view>

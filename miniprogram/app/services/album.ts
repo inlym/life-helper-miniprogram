@@ -118,6 +118,19 @@ export function deleteAlbum(id: string): Promise<DeleteAlbumResponse> {
 }
 
 /**
+ * 获取包含媒体文件列表的相册详情
+ *
+ * @param id 相册 ID
+ */
+export function getAlbumDetail(id: string): Promise<Album> {
+  return requestForData({
+    method: 'GET',
+    url: `/album/${id}`,
+    auth: true,
+  })
+}
+
+/**
  * 上传媒体文件至 OSS
  *
  * @param albumId 相册 ID

@@ -37,12 +37,6 @@ Page({
 
   // 从“新增页”返回时，页面数据也需要刷新，因此把初始化放在这个生命周期
   onShow() {
-    console.log('onShow')
-
-    this.init()
-  },
-
-  onPullDownRefresh() {
     this.init()
   },
 
@@ -116,5 +110,12 @@ Page({
   /** 跳转到创建相册页面 */
   goToAddPage() {
     wx.navigateTo({url: '/pages/album/add/add'})
+  },
+
+  /** 处理相册列表项目点击事件 */
+  onAlbumItemTap(e: any) {
+    const albumId = e.currentTarget.dataset.id
+    const url = `/pages/album/detail/detail?id=${albumId}`
+    wx.navigateTo({url})
   },
 })

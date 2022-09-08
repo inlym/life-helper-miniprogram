@@ -2,6 +2,5 @@
   "usingComponents": {
     "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet"
   },
-  "navigationBarTitleText": "相册",
-  "enablePullDownRefresh": true
+  "navigationBarTitleText": "相册"
 }
