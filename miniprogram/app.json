@@ -9,7 +9,8 @@
     "pages/weather/daily/daily",
     "pages/weather/rain/rain",
     "pages/album/list/list",
-    "pages/album/add/add"
+    "pages/album/add/add",
+    "pages/album/detail/detail"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",
@@ -58,7 +59,9 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "requiredPrivateInfos": ["chooseLocation"],
+  "requiredPrivateInfos": [
+    "chooseLocation"
+  ],
   "debug": true,
   "lazyCodeLoading": "requiredComponents",
   "darkmode": true,

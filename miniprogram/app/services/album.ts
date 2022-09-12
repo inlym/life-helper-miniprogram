@@ -137,7 +137,6 @@ export function getAlbumDetail(id: string): Promise<Album> {
  * @param media 从微信选取的媒体文件
  * @param onProgressUpdate 进度变化回调函数
  */
-
 export async function uploadMediaFile(
   albumId: string,
   media: WechatMiniprogram.MediaFile,

@@ -1,7 +1,7 @@
 // pages/album/detail/detail.ts
 // 相册详情页
 
-import {getAlbumDetail, uploadMediaFile} from '../../../app/services/album'
+import {Album, getAlbumDetail, uploadMediaFile} from '../../../app/services/album'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
 // 注意事项（1）
@@ -17,6 +17,9 @@ Page({
   data: {
     /** 相册 ID，从页面路径参数获取 */
     albumId: '',
+
+    /** 相册详情 */
+    albumDetail: {} as Album,
   },
 
   behaviors: [themeBehavior],
@@ -36,6 +39,7 @@ Page({
   async init() {
     const albumId = this.data.albumId
     const album = await getAlbumDetail(albumId)
+    this.setData({albumDetail: album})
 
     wx.setNavigationBarTitle({title: album.name})
   },

@@ -1,4 +1,21 @@
 <!--pages/album/detail/detail.wxml-->
 <view class="page" data-weui-theme="{{ theme }}">
-    <button bindtap="chooseAndUpload">上传</button>
+    <!-- 页面核心内容区域 -->
+    <view class="container">
+        <!-- 媒体资源（照片、视频）列表区域 -->
+        <view class="list" wx:if="{{ albumDetail.medias && albumDetail.medias.length > 0 }}">
+            <view class="item" wx:for="{{ albumDetail.medias }}" wx:key="id">
+                <view class="image" wx:if="{{ item.type === 'image' }}">
+                    <image src="{{ item.url }}" mode="aspectFill"></image>
+                </view>
+                <view class="image" wx:if="{{ item.type === 'video' }}">
+                    <image src="{{ item.thumbUrl }}" mode="aspectFill"></image>
+                    <mp-icon class="icon" icon="play2" type="field" color="#fff" size="60"></mp-icon>
+                </view>
+            </view>
+        </view>
+
+        <!-- 空列表情况 -->
+        <view class="list empty-list" wx:else></view>
+    </view>
 </view>
