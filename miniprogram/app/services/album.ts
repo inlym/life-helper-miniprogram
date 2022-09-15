@@ -19,7 +19,7 @@ export interface Album {
   updateTime: number
 
   /** 资源（照片和视频）数量 */
-  total: number
+  count: number
 
   /** 相册封面图地址 */
   coverImageUrl: string
@@ -63,6 +63,12 @@ export interface ModifyingAlbumData {
 /** 获取相册列表接口响应数据 */
 export interface AlbumListResponse {
   list: Album[]
+
+  /** 所有相册的资源数量之和 */
+  totalCount: number
+
+  /** 所有资源的文件大小之和 */
+  totalSize: number
 }
 
 /** 删除相册接口响应数据 */

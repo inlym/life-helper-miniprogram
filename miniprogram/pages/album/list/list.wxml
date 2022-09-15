@@ -4,11 +4,16 @@
         <block wx:if="{{ list.length > 0 }}">
             <!-- 按钮区 - 开始 -->
             <view class="buttons">
+                <!-- 信息区 -->
+                <view class="info">
+                    {{ list.length }} 个相册，包含 {{ totalCount }} 个文件，占用 {{ totalSizeMB }}MB
+                </view>
+                <view class="placeholder"></view>
                 <view class="button" bindtap="showOrderOptionsPanel" hover-class="hover">
                     <view class="iconfont icon-paixu"></view>
                     <view class="title">排序</view>
                 </view>
-                <view class="button" bindtap="goToAddPage">
+                <view class="button" bindtap="goToAddPage" hover-class="hover">
                     <view class="iconfont icon-add"></view>
                     <view class="title">创建</view>
                 </view>
@@ -29,13 +34,13 @@
                     <!-- 封面图部分（包含数字） ，包含封面图情况 -->
                     <view class="cover" wx:if="{{ item.coverImageUrl }}">
                         <image class="cover-image" src="{{ item.coverImageUrl }}" mode="aspectFill"></image>
-                        <view class="total">{{ item.total }}</view>
+                        <view class="total">{{ item.count }}</view>
                     </view>
 
                     <!-- 无封面图情况 -->
                     <view class="cover empty-cover" wx:else>
                         <view class="iconfont icon-empty"></view>
-                        <view class="total">{{ item.total }}</view>
+                        <view class="total">{{ item.count }}</view>
                     </view>
 
                     <!-- 相册名称和描述 -->
