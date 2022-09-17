@@ -21,11 +21,20 @@ export interface Album {
   /** 资源（照片和视频）数量 */
   count: number
 
+  /** 相册文件总大小（单位：B） */
+  size: number
+
   /** 相册封面图地址 */
   coverImageUrl: string
 
   /** 媒体文件列表，仅查看相册详情时返回 */
   medias: Media[]
+
+  /** 图片总数 */
+  imageCount: number
+
+  /** 视频总数 */
+  videoCount: number
 }
 
 /** 媒体文件（照片和视频） */

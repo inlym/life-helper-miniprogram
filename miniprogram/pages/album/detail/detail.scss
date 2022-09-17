@@ -3,6 +3,53 @@
 .container {
   padding: 0 20rpx;
 
+  // 按钮区
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-top: 36rpx;
+
+    .info {
+      font-size: 22rpx;
+
+      color: var(--weui-FG-1);
+    }
+
+    .placeholder {
+      flex: 1;
+    }
+
+    .button {
+      font-size: 26rpx;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      height: 60rpx;
+      margin-left: 16rpx;
+      padding: 0 20rpx;
+
+      color: var(--weui-FG-1);
+      border-radius: 30rpx;
+      background-color: var(--weui-BG-3);
+
+      .icon {
+        width: 28rpx;
+      }
+
+      .title {
+        margin-left: 10rpx;
+      }
+    }
+
+    .button:first-child {
+      margin-left: 0;
+    }
+  }
+
   .list {
     display: flex;
     flex-wrap: wrap;

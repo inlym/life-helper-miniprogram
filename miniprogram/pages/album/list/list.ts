@@ -54,7 +54,7 @@ Page({
   /** 获取相册列表数据并赋值 */
   async getAlbumList() {
     const {list, totalCount, totalSize} = await getAlbumList()
-    const totalSizeMB = Math.ceil(totalSize / 1024)
+    const totalSizeMB = Math.ceil(totalSize / (1024 * 1024))
     this.setData({list, totalCount, totalSizeMB})
     this.reorderList()
   },

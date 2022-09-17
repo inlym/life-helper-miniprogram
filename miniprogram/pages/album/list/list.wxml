@@ -50,6 +50,9 @@
                     </view>
                 </view>
             </view>
+
+            <!-- 列表结束 -->
+            <view class="list-end">没有更多相册了</view>
         </block>
 
         <!-- 相册列表数据为空情况 -->

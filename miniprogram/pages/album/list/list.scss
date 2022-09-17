@@ -128,6 +128,16 @@
   }
 }
 
+.list-end {
+  font-size: 24rpx;
+
+  padding: 40rpx 0 10rpx;
+
+  text-align: center;
+
+  color: var(--weui-FG-1);
+}
+
 .empty-list {
   display: flex;
   align-items: center;

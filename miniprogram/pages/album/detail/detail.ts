@@ -20,6 +20,8 @@ Page({
 
     /** 相册详情 */
     albumDetail: {} as Album,
+
+    sizeMB: 0,
   },
 
   behaviors: [themeBehavior],
@@ -39,7 +41,8 @@ Page({
   async init() {
     const albumId = this.data.albumId
     const album = await getAlbumDetail(albumId)
-    this.setData({albumDetail: album})
+    const sizeMB = Math.ceil(album.size / (1024 * 1024))
+    this.setData({albumDetail: album, sizeMB})
 
     wx.setNavigationBarTitle({title: album.name})
   },
@@ -56,6 +59,25 @@ Page({
       uploadMediaFile(albumId, item, () => {
         // ...
       })
+    })
+  },
+
+  /** 获取预览列表 */
+  getPreviewList(): WechatMiniprogram.MediaSource[] {
+    return this.data.albumDetail.medias.map((item) => {
+      return {
+        url: item.url,
+        type: item.type as 'image' | 'video',
+        poster: item.type === 'video' ? item.thumbUrl : undefined,
+      }
+    })
+  },
+
+  // 临时测试
+  preview() {
+    const list = this.getPreviewList()
+    wx.previewMedia({
+      sources: list,
     })
   },
 })

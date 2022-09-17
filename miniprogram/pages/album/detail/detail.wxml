@@ -3,19 +3,39 @@
     <!-- 页面核心内容区域 -->
     <view class="container">
         <!-- 媒体资源（照片、视频）列表区域 -->
-        <view class="list" wx:if="{{ albumDetail.medias && albumDetail.medias.length > 0 }}">
-            <view class="item" wx:for="{{ albumDetail.medias }}" wx:key="id">
-                <view class="image" wx:if="{{ item.type === 'image' }}">
-                    <image src="{{ item.url }}" mode="aspectFill"></image>
+        <view class="content" wx:if="{{ albumDetail.medias && albumDetail.medias.length > 0 }}">
+            <!-- 按钮区 - 开始 -->
+            <view class="buttons">
+                <!-- 信息区 -->
+                <view class="info">
+                    {{ albumDetail.videoCount }} 个视频，{{ albumDetail.imageCount }} 张照片，占用 {{ sizeMB }}MB
                 </view>
-                <view class="image" wx:if="{{ item.type === 'video' }}">
-                    <image src="{{ item.thumbUrl }}" mode="aspectFill"></image>
-                    <mp-icon class="icon" icon="play2" type="field" color="#fff" size="60"></mp-icon>
+                <view class="placeholder"></view>
+
+                <view class="button" bindtap="chooseAndUpload" hover-class="hover">
+                    <view class="iconfont icon-add"></view>
+                    <view class="title">上传</view>
+                </view>
+            </view>
+            <!-- 按钮区 - 结束 -->
+
+            <view class="list">
+                <view class="item" wx:for="{{ albumDetail.medias }}" wx:key="id">
+                    <view class="image" wx:if="{{ item.type === 'image' }}">
+                        <image src="{{ item.url }}" mode="aspectFill"></image>
+                    </view>
+                    <view class="image" wx:if="{{ item.type === 'video' }}">
+                        <image src="{{ item.thumbUrl }}" mode="aspectFill"></image>
+                        <mp-icon class="icon" icon="play2" type="field" color="#fff" size="60"></mp-icon>
+                    </view>
                 </view>
             </view>
         </view>
 
         <!-- 空列表情况 -->
-        <view class="list empty-list" wx:else></view>
+        <view class="content empty-list" wx:else>
+            <view class="tips">当前相册无照片或视频</view>
+            <button class="add" type="primary" bindtap="chooseAndUpload">上传</button>
+        </view>
     </view>
 </view>
