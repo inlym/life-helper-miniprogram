@@ -50,7 +50,8 @@ Page({
 
   onLoad(query: PageQuery) {
     if (query.album_id) {
-      // “编辑”相册情况
+      // 页面路径包含 `album_id` 参数表示当前“编辑”相册情况
+
       this.setData({
         type: 'edit',
         albumId: query.album_id,
@@ -58,7 +59,8 @@ Page({
 
       wx.setNavigationBarTitle({title: '编辑相册'})
 
-      // 待编辑的相册数据由上个页面通过事件通道传递，不需要发起 HTTP 请求获取
+      // （2022.09.20）目前设定：“编辑相册”情况不会从外链直接跳入，而是从相册详情页跳转进入，因此待编辑的相册数据由上个页面通过事件通道传
+      // 递，不需要发起 HTTP 请求获取。若该设定发生变化，后续需要调整为通过 `albumId` 参数发情 HTTP 请求获取待编辑的相册信息。
       const eventChannel = this.getOpenerEventChannel()
       eventChannel.on(TRANSFER_VALUE_EVENT, (data: PageTransferedValue) => {
         this.setData({
@@ -66,6 +68,11 @@ Page({
           albumDesc: data.description,
         })
       })
+    } else {
+      // 页面路径不包含 `album_id` 参数表示当前“新增”相册情况
+      // 目前设定只有“新增”和“编辑”两种情况，因此这些逻辑就直接写在 `else` 分支中了
+
+      wx.setNavigationBarTitle({title: '新增相册'})
     }
   },
 })
