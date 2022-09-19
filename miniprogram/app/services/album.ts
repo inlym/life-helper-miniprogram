@@ -146,6 +146,20 @@ export function getAlbumDetail(id: string): Promise<Album> {
 }
 
 /**
+ * 删除媒体资源
+ *
+ * @param albumId 相册 ID
+ * @param mediaId 媒体资源 ID
+ */
+export function deleteMedia(albumId: string, mediaId: string) {
+  return requestForData({
+    method: 'DELETE',
+    url: `/album/${albumId}/media/${mediaId}`,
+    auth: true,
+  })
+}
+
+/**
  * 上传媒体文件至 OSS
  *
  * @param albumId 相册 ID

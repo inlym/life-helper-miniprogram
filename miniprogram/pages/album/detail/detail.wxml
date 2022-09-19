@@ -8,7 +8,7 @@
             <view class="buttons">
                 <!-- 信息区 -->
                 <view class="info">
-                    {{ albumDetail.videoCount }} 个视频，{{ albumDetail.imageCount }} 张照片，占用 {{ sizeMB }}MB
+                    {{ albumDetail.imageCount }} 张照片，{{ albumDetail.videoCount }} 个视频，占用 {{ sizeMB }}MB
                 </view>
                 <view class="placeholder"></view>
 
@@ -20,7 +20,13 @@
             <!-- 按钮区 - 结束 -->
 
             <view class="list">
-                <view class="item" wx:for="{{ albumDetail.medias }}" wx:key="id">
+                <view
+                    class="item"
+                    wx:for="{{ albumDetail.medias }}"
+                    wx:key="id"
+                    data-index="{{ index }}"
+                    bindtap="onMediaItemTap"
+                >
                     <view class="image" wx:if="{{ item.type === 'image' }}">
                         <image src="{{ item.url }}" mode="aspectFill"></image>
                     </view>
@@ -38,4 +44,12 @@
             <button class="add" type="primary" bindtap="chooseAndUpload">上传</button>
         </view>
     </view>
+
+    <mp-actionSheet
+        bindactiontap="onActionTap"
+        show="{{ showActionSheet }}"
+        actions="{{ actionSheetActions }}"
+        title="请选择操作"
+    >
+    </mp-actionSheet>
 </view>
