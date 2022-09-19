@@ -10,7 +10,8 @@
     "pages/weather/rain/rain",
     "pages/album/list/list",
     "pages/album/add/add",
-    "pages/album/detail/detail"
+    "pages/album/detail/detail",
+    "pages/album/edit/edit"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",
