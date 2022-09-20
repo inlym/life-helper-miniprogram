@@ -1,2 +1,26 @@
 <!--pages/album/edit/edit.wxml-->
-<text>pages/album/edit/edit.wxml</text>
+<view class="page" data-weui-theme="{{ theme }}">
+    <mp-form-page title="小鸣相册" subtitle="用照片和视频记录生活">
+        <mp-form id="form" rules="{{ formRules }}" models="{{ formData }}">
+            <mp-cells title="相册信息" footer="相册名称最长10个字哦 ~">
+                <mp-cell prop="albumName" title="相册名称" hover>
+                    <input
+                        value="{{ albumName }}"
+                        maxlength="10"
+                        placeholder="{{ textWrapper.text1 }}"
+                        confirm-type="done"
+                        bindinput="onAlbumNameInputChange"
+                    />
+                </mp-cell>
+            </mp-cells>
+        </mp-form>
+
+        <!-- 底部操作按钮 -->
+        <view slot="button">
+            <button type="primary" bindtap="onSubmitTap">{{ textWrapper.text2 }}</button>
+        </view>
+    </mp-form-page>
+
+    <!-- 页面附加元素 -->
+    <mp-toptips msg="{{ error }}" type="error" show="{{ error }}"></mp-toptips>
+</view>

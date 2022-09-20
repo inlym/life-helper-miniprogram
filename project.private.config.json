@@ -53,6 +53,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "编辑相册",
+          "pathName": "pages/album/edit/edit",
+          "query": "album_id=234324sdafsdaf",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

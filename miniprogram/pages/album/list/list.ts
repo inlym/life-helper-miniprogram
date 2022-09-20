@@ -116,7 +116,7 @@ Page({
 
   /** 跳转到创建相册页面 */
   goToAddPage() {
-    wx.navigateTo({url: '/pages/album/add/add'})
+    wx.navigateTo({url: '/pages/album/edit/edit'})
   },
 
   /** 处理相册列表项目点击事件 */

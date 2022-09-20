@@ -61,12 +61,9 @@ export interface Media {
 }
 
 /** 创建或修改接口需要的相册数据 */
-export interface ModifyingAlbumData {
+export interface ModifyAlbumData {
   /** 相册名称 */
   name: string
-
-  /** 相册描述 */
-  description: string
 }
 
 /** 获取相册列表接口响应数据 */
@@ -100,7 +97,7 @@ export function getAlbumList(): Promise<AlbumListResponse> {
 /**
  * 创建一个相册
  */
-export function createAlbum(album: ModifyingAlbumData): Promise<Album> {
+export function createAlbum(album: ModifyAlbumData): Promise<Album> {
   return requestForData({
     method: 'POST',
     url: '/album',
@@ -112,7 +109,7 @@ export function createAlbum(album: ModifyingAlbumData): Promise<Album> {
 /**
  * 修改相册信息
  */
-export function updateAlbum(id: string, album: ModifyingAlbumData): Promise<Album> {
+export function updateAlbum(id: string, album: ModifyAlbumData): Promise<Album> {
   return requestForData({
     method: 'PUT',
     url: `/album/${id}`,

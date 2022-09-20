@@ -1,4 +1,4 @@
-import {createAlbum, ModifyingAlbumData} from '../../../app/services/album'
+import {createAlbum, ModifyAlbumData} from '../../../app/services/album'
 import {shareAppBehavior} from '../../../behaviors/share-app-behavior'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
@@ -21,7 +21,7 @@ Page({
 
   /** 提交操作 */
   submit(event: any) {
-    const albumData = event.detail.value as ModifyingAlbumData
+    const albumData = event.detail.value as ModifyAlbumData
     if (this.checkData(albumData)) {
       createAlbum(albumData).then(() => {
         wx.showToast({title: '相册已添加', icon: 'success'})
@@ -31,7 +31,7 @@ Page({
   },
 
   /** 检测待提交的相册数据 */
-  checkData(albumData: ModifyingAlbumData): boolean {
+  checkData(albumData: ModifyAlbumData): boolean {
     if (!albumData.name) {
       this.setData({showNameError: true})
       return false
