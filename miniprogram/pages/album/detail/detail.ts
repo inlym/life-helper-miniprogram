@@ -13,6 +13,9 @@ export interface QueryParams {
   id: string
 }
 
+/** 页面传值事件 */
+const TRANSFER_VALUE_EVENT = 'TRANSFER_VALUE_EVENT'
+
 Page({
   data: {
     /** 相册 ID，从页面路径参数获取 */
@@ -134,6 +137,19 @@ Page({
         type: item.type as 'image' | 'video',
         poster: item.type === 'video' ? item.thumbUrl : undefined,
       }
+    })
+  },
+
+  /** 处理“编辑”按钮点击事件 */
+  onEditButtonTap() {
+    const albumId = this.data.albumId
+    const albumName = this.data.albumDetail.name
+
+    wx.navigateTo({
+      url: `/pages/album/edit/edit?album_id=${albumId}`,
+      success(res) {
+        res.eventChannel.emit(TRANSFER_VALUE_EVENT, {name: albumName})
+      },
     })
   },
 })

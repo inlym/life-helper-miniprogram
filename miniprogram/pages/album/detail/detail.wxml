@@ -12,6 +12,10 @@
                 </view>
                 <view class="placeholder"></view>
 
+                <view class="button" bindtap="onEditButtonTap" hover-class="hover">
+                    <view class="iconfont icon-bianji"></view>
+                    <view class="title">编辑</view>
+                </view>
                 <view class="button" bindtap="chooseAndUpload" hover-class="hover">
                     <view class="iconfont icon-add"></view>
                     <view class="title">上传</view>

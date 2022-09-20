@@ -2,5 +2,5 @@
   "usingComponents": {
     "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet"
   },
-  "navigationBarTitleText": "相册"
+  "navigationBarTitleText": "我的相册"
 }

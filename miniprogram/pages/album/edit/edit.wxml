@@ -3,7 +3,7 @@
     <mp-form-page title="小鸣相册" subtitle="用照片和视频记录生活">
         <mp-form id="form" rules="{{ formRules }}" models="{{ formData }}">
             <mp-cells title="相册信息" footer="相册名称最长10个字哦 ~">
-                <mp-cell prop="albumName" title="相册名称" hover>
+                <mp-cell prop="albumName" title="相册名称" focus>
                     <input
                         value="{{ albumName }}"
                         maxlength="10"

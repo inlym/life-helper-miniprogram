@@ -48,13 +48,6 @@
           "scene": null
         },
         {
-          "name": "新增相册",
-          "pathName": "pages/album/add/add",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "编辑相册",
           "pathName": "pages/album/edit/edit",
           "query": "album_id=234324sdafsdaf",

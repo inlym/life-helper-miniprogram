@@ -46,7 +46,6 @@
                     <!-- 相册名称和描述 -->
                     <view class="text-area">
                         <view class="name text-ellipsis-l1">{{ item.name }}</view>
-                        <view class="desc text-ellipsis-l1">{{ item.description }}</view>
                     </view>
                 </view>
             </view>
@@ -67,7 +66,7 @@
     <!-- 底部脚注 -->
     <view class="weui-footer">
         <view class="weui-footer__links">
-            <navigator url="" class="weui-footer__link">小鸣相册 - 留住这一刻的美好</navigator>
+            <navigator url="" class="weui-footer__link">小鸣相册 - 用照片和视频记录生活</navigator>
         </view>
         <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
     </view>
