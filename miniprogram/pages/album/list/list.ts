@@ -6,10 +6,9 @@ import {shareAppBehavior} from '../../../behaviors/share-app-behavior'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
+    /** ============================== 直接从 HTTP 请求获取的数据 ============================== */
+
     /** 相册列表 */
     list: [] as Album[],
 
@@ -37,6 +36,10 @@ Page({
         {text: '更新时间（降序）', value: 'updateTimeDesc'},
       ],
     },
+
+    /** ============================== 其他页面数据 ============================== */
+
+    albumsImageUrl: 'https://static.lifehelper.com.cn/images/albums.svg',
   },
 
   behaviors: [themeBehavior, shareAppBehavior],

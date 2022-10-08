@@ -73,7 +73,7 @@ export interface AlbumListResponse {
   /** 所有相册的资源数量之和 */
   totalCount: number
 
-  /** 所有资源的文件大小之和 */
+  /** 所有资源的文件大小之和（单位：B） */
   totalSize: number
 }
 

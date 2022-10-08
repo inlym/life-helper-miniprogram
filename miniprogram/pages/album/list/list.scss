@@ -138,6 +138,7 @@
   color: var(--weui-FG-1);
 }
 
+// 空列表区
 .empty-list {
   display: flex;
   align-items: center;
@@ -149,11 +150,11 @@
   .tips {
     font-size: 28rpx;
 
-    color: var(--weui-FG-1);
+    margin-top: 50rpx;
   }
 
   .add {
-    margin-top: 100rpx;
+    margin-top: 30rpx;
   }
 }
 
