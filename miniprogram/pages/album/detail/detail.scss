@@ -1,8 +1,6 @@
 /* pages/album/detail/detail.wxss */
 
 .container {
-  padding: 0 20rpx;
-
   // 按钮区
   .buttons {
     display: flex;
@@ -78,5 +76,43 @@
         }
       }
     }
+  }
+}
+
+// 空列表情况
+.empty-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  padding-bottom: 80rpx;
+
+  background-color: var(--weui-BG-2);
+
+  .iconfont {
+    font-size: 240rpx;
+
+    margin-top: 200rpx;
+
+    color: var(--weui-FG-2);
+  }
+
+  .tips {
+    font-size: 28rpx;
+
+    margin-top: 20rpx;
+  }
+
+  .add {
+    margin-top: 60rpx;
+  }
+
+  .delete {
+    font-size: 22rpx;
+
+    margin-top: 300rpx;
+
+    color: var(--weui-RED);
   }
 }

@@ -31,14 +31,14 @@ export interface PageTransferedValue {
 /** 新增相册情况的几处文案 */
 const AddTypeText = {
   /** 输入框的默认文案 */
-  text1: '请输入要创建的相册名称',
+  text1: '请输入相册名称',
   /** 底部操作按钮文案 */
-  text2: '创建相册',
+  text2: '新建相册',
 }
 
 const EditTypeText = {
   /** 输入框的默认文案 */
-  text1: '请输入修改后的相册名称',
+  text1: '请输入相册名称',
   /** 底部操作按钮文案 */
   text2: '确定修改',
 }
