@@ -38,6 +38,9 @@ Page({
     /** 当前正要操作的媒体资源索引值 */
     currentIndex: 0,
 
+    /** 是否展示顶部提示条 */
+    showTopTips: false,
+
     // ================= ActionSheet 组件数据 =================
 
     /** 是否展示底部操作按钮组件 */
@@ -80,9 +83,16 @@ Page({
       maxDuration: 60,
     })
 
+    // 使用顶部提示条进行操作提示
+    this.setData({showTopTips: true})
+
     result.tempFiles.forEach((item) => {
-      uploadMediaFile(albumId, item, () => {
-        // ...
+      uploadMediaFile(albumId, item, (res) => {
+        if (res.progress === 100) {
+          setTimeout(() => {
+            this.init()
+          }, 500)
+        }
       })
     })
   },

@@ -2,6 +2,7 @@
   "navigationBarTitleText": "",
   "usingComponents": {
     "mp-icon": "weui-miniprogram/icon/icon",
-    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet"
+    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
   }
 }

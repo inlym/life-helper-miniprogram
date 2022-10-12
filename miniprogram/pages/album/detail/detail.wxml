@@ -43,7 +43,7 @@
         </view>
 
         <!-- 空列表情况 -->
-        <view class="content empty-list" wx:else>
+        <view class="empty-list" wx:else>
             <view class="iconfont icon-empty"></view>
             <view class="tips">暂无照片，上传一张试试吧</view>
             <button class="add" type="primary" size="mini" bindtap="chooseAndUpload">上传照片 / 视频</button>
@@ -58,4 +58,6 @@
         title="请选择操作"
     >
     </mp-actionSheet>
+
+    <mp-toptips msg="资源上传中，上传成功后将自动更新列表" type="info" show="{{ showTopTips }}"></mp-toptips>
 </view>

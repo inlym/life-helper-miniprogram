@@ -1,6 +1,10 @@
 /* pages/album/detail/detail.wxss */
 
 .container {
+  .content {
+    padding: 0 18rpx;
+  }
+
   // 按钮区
   .buttons {
     display: flex;
