@@ -93,7 +93,7 @@ Page({
 
   /** 从本地存储中获取之前选中的天气地点 */
   getCurrentPlaceIdFromStorage() {
-    const id = enhancedStorage.get(StorageField.CURRENT_WEATHER_PLACE_ID)
+    const id = enhancedStorage.get(StorageField.SELECTED_WEATHER_PLACE_ID)
     if (id) {
       this.setData({currentPlaceId: id})
     }

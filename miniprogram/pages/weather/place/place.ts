@@ -117,7 +117,7 @@ Page({
 
   /** 切换要查看天气的地点，并返回上一页 */
   switchPlace(placeId: number) {
-    enhancedStorage.set(StorageField.CURRENT_WEATHER_PLACE_ID, placeId)
+    enhancedStorage.set(StorageField.SELECTED_WEATHER_PLACE_ID, placeId)
     this.setData({currentPlaceId: placeId})
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('switchPlace', {currentPlaceId: placeId})

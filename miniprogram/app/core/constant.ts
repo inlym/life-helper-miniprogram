@@ -7,7 +7,7 @@ export const StorageField = {
   TOKEN: 'token',
 
   /** 当前选中的天气地点 ID */
-  CURRENT_WEATHER_PLACE_ID: 'currentWeatherPlaceId',
+  SELECTED_WEATHER_PLACE_ID: 'SELECTED_WEATHER_PLACE_ID',
 }
 
 /** 自定义请求头字段名 */

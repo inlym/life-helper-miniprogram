@@ -53,6 +53,17 @@
           "query": "album_id=234324sdafsdaf",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "天气地点列表页",
+          "pathName": "pages/weather/place/place",
+          "query": "",
+          "launchMode": "default",
+          "scene": null,
+          "partialCompile": {
+            "enabled": true,
+            "pages": []
+          }
         }
       ]
     }
