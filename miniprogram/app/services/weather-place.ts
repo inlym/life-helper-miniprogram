@@ -56,7 +56,7 @@ export interface GetWeatherPlaceListResponse {
  *
  * @param result 微信选择定位的结果
  */
-export function addWeatherPlace(result: WechatMiniprogram.ChooseLocationSuccessCallback): Promise<WeatherPlace> {
+export function addWeatherPlace(result: WechatMiniprogram.ChooseLocationSuccessCallbackResult): Promise<WeatherPlace> {
   return requestForData({
     method: 'POST',
     url: '/weather/place',

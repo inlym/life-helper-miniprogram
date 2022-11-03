@@ -1,29 +1,30 @@
-import {StorageField} from '../../../app/core/constant'
-import {enhancedStorage} from '../../../app/core/storage'
-import {WeatherNow} from '../../../app/services/weather-data.interface'
-import {addWeatherPlace, getWeatherPlaces, removeWeatherPlace} from '../../../app/services/weather-place'
-import {WeatherPlace} from '../../../app/services/weather-place.interface'
+import {
+  addWeatherPlace,
+  getSelectWeatherPlaceId,
+  getWeatherPlaceList,
+  IpLocatedPlace,
+  setSelectWeatherPlaceId,
+  WeatherPlace,
+} from '../../../app/services/weather-place'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
 Page({
   data: {
-    // -----------------------------  从上个页面带来的数据  -----------------------------
-
-    /** IP 定位获取的位置 */
-    ipLocationName: '',
-
-    /** 当前选中的天气地点 ID */
-    currentPlaceId: 0,
-
-    /** 通过 IP 定位获取的实时天气 */
-    ipLocatedWeatherNow: {} as WeatherNow,
-
     // ---------------------------  从 HTTP 请求获取的数据  ---------------------------
 
     /** 天气地点列表 */
-    places: [] as WeatherPlace[],
+    list: [] as WeatherPlace[],
 
-    // -------------------------------- 其他页面数据 --------------------------------
+    /** IP 定位地点 */
+    ipLocated: {} as IpLocatedPlace,
+
+    // -------------------------------- 页面状态数据 --------------------------------
+
+    /** 页面是否加载完毕 */
+    loaded: false,
+
+    /** 当前选中的 ID */
+    selectedId: '',
 
     /** 当前是否为编辑状态 */
     isEdit: false,
@@ -32,104 +33,46 @@ Page({
   behaviors: [themeBehavior],
 
   onLoad() {
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('transferData', (data) => {
-      this.setData(data)
-    })
+    this.init()
+  },
 
-    this.getWeatherPlaces()
+  /** 页面初始化方法 */
+  async init() {
+    const {list, ipLocated} = await getWeatherPlaceList()
+    const selectedId = getSelectWeatherPlaceId()
+    this.setData({list, ipLocated, selectedId, loaded: true})
+  },
+
+  /** 绑定添加天气地点事件 */
+  async add() {
+    try {
+      const result = await wx.chooseLocation({})
+
+      // 发起添加天气地点请求
+      const place = await addWeatherPlace(result)
+
+      // 将新增的地点设为活跃项
+      setSelectWeatherPlaceId(place.id)
+
+      // 提示添加成功
+      wx.showToast({
+        title: '添加成功',
+        icon: 'success',
+      })
+
+      // 1秒后自动跳走
+      setTimeout(() => {
+        wx.switchTab({url: '/pages/index/index'})
+      }, 1000)
+    } catch (e) {
+      // 备注（2022.11.04）
+      // 直接点“取消”则会报错进入此处，这种情况不需要处理
+    }
   },
 
   /** 变更“编辑”状态 */
   switchEdit() {
     const isEdit = this.data.isEdit
     this.setData({isEdit: !isEdit})
-  },
-
-  /** 获取天气地点列表 */
-  async getWeatherPlaces(): Promise<void> {
-    const list = await getWeatherPlaces()
-    this.setData({places: list})
-  },
-
-  /** 添加新的关注城市 */
-  async addNewPlace() {
-    // 目前设定只允许添加 5 个
-    if (this.data.places.length >= 5) {
-      await wx.showModal({
-        title: '提示',
-        content: '目前仅支持添加5个地点，如需添加，请先删除其他地点！',
-        showCancel: false,
-        confirmText: '确定',
-      })
-    } else {
-      const result = await wx.chooseLocation({})
-      if (result.name) {
-        const place = await addWeatherPlace(result)
-        const list = this.data.places
-        list.unshift(place)
-
-        this.setData({places: list})
-
-        await wx.showToast({icon: 'none', title: '添加成功，已为您展示该地点的天气'})
-        this.switchPlace(place.id)
-      } else {
-        await wx.showModal({
-          content: '您未选择地点！',
-        })
-      }
-    }
-  },
-
-  /** 移除一个关注地点 */
-  async removePlace(event: any) {
-    const id: number = event.currentTarget.dataset.id
-
-    if (id === this.data.currentPlaceId) {
-      await wx.showModal({
-        title: '提示',
-        content: '当前已选中该地点，请切换至其他地点后再操作删除！',
-        showCancel: false,
-        confirmText: '我知道了',
-      })
-    } else {
-      const places = this.data.places
-
-      const place: WeatherPlace = places.find((item: WeatherPlace) => item.id === id)!
-
-      const res = await wx.showModal({
-        title: '提示',
-        content: `是否不再关注 ${place.name} 的天气？`,
-        confirmText: '不再关注',
-        confirmColor: '#fa5151',
-      })
-
-      if (res.confirm) {
-        removeWeatherPlace(id)
-        const index = places.findIndex((item) => item.id === id)
-        places.splice(index, 1)
-        this.setData({places})
-
-        wx.showToast({title: '删除成功', icon: 'success'})
-      }
-    }
-  },
-
-  /** 切换要查看天气的地点，并返回上一页 */
-  switchPlace(placeId: number) {
-    enhancedStorage.set(StorageField.SELECTED_WEATHER_PLACE_ID, placeId)
-    this.setData({currentPlaceId: placeId})
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('switchPlace', {currentPlaceId: placeId})
-    wx.navigateBack()
-  },
-
-  /** 处理地点列表项点击事件 */
-  handleItemTap(event: any) {
-    if (!this.data.isEdit) {
-      const id: number = event.currentTarget.dataset.id
-
-      this.switchPlace(id)
-    }
   },
 })

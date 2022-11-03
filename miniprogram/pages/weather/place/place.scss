@@ -123,3 +123,10 @@
     }
   }
 }
+
+// 页面未完成初始化时展示的空白页面
+.empty-page {
+  height: 1200rpx;
+
+  background-color: var(--weui-BG-0);
+}

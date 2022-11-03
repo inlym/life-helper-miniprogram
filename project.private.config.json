@@ -59,11 +59,7 @@
           "pathName": "pages/weather/place/place",
           "query": "",
           "launchMode": "default",
-          "scene": null,
-          "partialCompile": {
-            "enabled": true,
-            "pages": []
-          }
+          "scene": null
         }
       ]
     }

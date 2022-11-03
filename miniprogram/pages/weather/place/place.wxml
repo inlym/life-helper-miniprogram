@@ -1,5 +1,5 @@
 <view class="page" data-weui-theme="{{ theme }}">
-    <view class="main">
+    <view class="main" wx:if="{{ loaded }}">
         <!-- IP 定位地点 -->
         <view class="located" wx:if="{{ ipLocationName }}">
             <view class="title">当前位置</view>
@@ -17,15 +17,15 @@
         </view>
 
         <!-- 关注的地点 -->
-        <view class="favorite" wx:if="{{ places.length }}">
+        <view class="favorite" wx:if="{{ list.length }}">
             <view class="head">
                 <view class="title">我的关注</view>
                 <view class="edit" hover-class="hover" bindtap="switchEdit">{{ isEdit ? '完成' : '编辑' }}</view>
             </view>
             <view class="list">
-                <view class="item" wx:for="{{ places }}" wx:key="id">
+                <view class="item" wx:for="{{ list }}" wx:key="id">
                     <view
-                        class="content {{ item.id === currentPlaceId ? 'active' : '' }}"
+                        class="content {{ item.id === selectedId ? 'active' : '' }}"
                         hover-class="{{ isEdit ? '' : 'hover' }}"
                         data-id="{{ item.id }}"
                         bindtap="handleItemTap"
@@ -35,8 +35,8 @@
                             <view class="region">{{ item.region }}</view>
                         </view>
                         <view class="right">
-                            <view class="temp">{{ item.temp }}℃</view>
-                            <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
+                            <view class="temp">{{ item.weather.temp }}℃</view>
+                            <image class="icon" src="{{ item.weather.iconUrl }}" mode="widthFix"></image>
                         </view>
                     </view>
 
@@ -54,18 +54,21 @@
             </view>
 
             <view class="bottom" wx:if="{{ !isEdit }}">
-                <authorize-element scope="scope.userLocation" bindsuccess="addNewPlace">
+                <authorize-element scope="scope.userLocation" bindsuccess="add">
                     <button type="primary">添加地点</button>
                 </authorize-element>
             </view>
         </view>
 
         <!-- 空列表情况 -->
-        <view class="empty" wx:if="{{ !places.length }}">
+        <view class="empty" wx:if="{{ !list.length }}">
             <view class="desc">点击下方“添加地点”可关注其他城市天气</view>
-            <authorize-element scope="scope.userLocation" bindsuccess="addNewPlace">
+            <authorize-element scope="scope.userLocation" bindsuccess="add">
                 <button type="primary">添加地点</button>
             </authorize-element>
         </view>
     </view>
+
+    <!-- 页面未完成初始化时展示的空白页面 -->
+    <view class="empty-page" wx:else></view>
 </view>
