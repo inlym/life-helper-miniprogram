@@ -1,8 +1,249 @@
-/** 经纬度坐标组合 */
 import dayjs from 'dayjs'
 import {requestForData} from '../core/http'
 import {calcWeekdayText} from '../utils/time'
 import {F2dItem, MixedWeatherData, TempBar, WeatherDailyItem, WeatherHourlyItem} from './weather-data.interface'
+
+/** 天气中的“风” */
+export interface Wind {
+  /** 风向 360 角度，示例："45" */
+  angle: string
+
+  /** 风向，示例："东北风" */
+  direction: string
+
+  /** 风力等级，示例："3-4" */
+  scale: string
+
+  /** 风速（km/h），示例："16" */
+  speed: string
+}
+
+/** 星球（在天气模块特指太阳和月亮） */
+export interface Star {
+  /** 升起时间，指日出和月出 */
+  riseTime: string
+
+  /** 落下时间，指日落和月落 */
+  setTime: string
+}
+
+/** 空气质量逐天预报中的单天详情 */
+export interface AirDaily {
+  /** 预报日期 */
+  date: string
+
+  /** 空气质量指数 */
+  aqi: string
+
+  /** 空气质量指数等级 */
+  level: string
+
+  /** 空气质量指数级别 */
+  category: string
+
+  /** 空气质量的主要污染物，空气质量为优时，返回值为 "NA" */
+  primary: string
+}
+
+/** 实时空气质量数据 */
+export interface AirNow {
+  /** 空气质量指数 */
+  aqi: string
+
+  /** 空气质量指数等级 */
+  level: string
+
+  /** 空气质量指数级别 */
+  category: string
+
+  /** 空气质量的主要污染物，空气质量为优时，返回值为NA */
+  primary: string
+
+  /** PM10 */
+  pm10: string
+
+  /** PM2.5 */
+  pm2p5: string
+
+  /** 二氧化氮 */
+  no2: string
+
+  /** 二氧化硫 */
+  so2: string
+
+  /** 一氧化碳 */
+  co: string
+
+  /** 臭氧 */
+  o3: string
+}
+
+/** 实时天气数据 */
+export interface WeatherNow {
+  /** 天气图标的 URL 地址 */
+  iconUrl: string
+
+  /** 自行归纳的天气类型 */
+  type: string
+
+  /** 风相关元素 */
+  wind: Wind
+
+  /** 当前 API 的最近更新时间 */
+  updateTime: string
+
+  /** 温度，默认单位：摄氏度 */
+  temp: string
+
+  /** 天气状况的文字描述，包括阴晴雨雪等天气状态的描述 */
+  text: string
+
+  /** 相对湿度，百分比数值 */
+  humidity: string
+
+  /** 大气压强，默认单位：百帕 */
+  pressure: string
+
+  /** 能见度，默认单位：公里 */
+  vis: string
+}
+
+export interface WeatherDailyHalfDay {
+  /** 温度，默认单位：摄氏度 */
+  temp: string
+
+  /** 天气状况的文字描述，包括阴晴雨雪等天气状态的描述 */
+  text: string
+
+  /** 天气图标的 URL 地址 */
+  iconUrl: string
+
+  wind: Wind
+}
+
+/** 逐天天气预报中单天的数据详情 */
+export interface WeatherDaily {
+  /** 预报日期，格式示例：2022-04-29 */
+  date: string
+
+  day: WeatherDailyHalfDay
+
+  night: WeatherDailyHalfDay
+
+  /** 月相图标 URL 地址 */
+  moonPhaseIconUrl: string
+
+  /** 天气总结，示例：晴转多云 */
+  text: string
+
+  /** 日出日落 */
+  sun: Star
+
+  /** 月升月落 */
+  moon: Star
+
+  /** 空气质量预报 */
+  air: AirDaily
+
+  /** 月相名称 */
+  moonPhase: string
+
+  /** 预报当天总降水量，默认单位：毫米 */
+  precip: string
+
+  /** 紫外线强度指数 */
+  uvIndex: string
+
+  /** 相对湿度，百分比数值 */
+  humidity: string
+
+  /** 大气压强，默认单位：百帕 */
+  pressure: string
+
+  /** 能见度，默认单位：公里 */
+  vis: string
+}
+
+/** 逐小时天气预报中的单小时数据详情 */
+export interface WeatherHourly {
+  /** 预报时间 */
+  time: string
+
+  /** 天气状况和图标 URL 地址 */
+  iconUrl: string
+
+  /** 风 */
+  wind: Wind
+
+  /** 温度，默认单位：摄氏度 */
+  temp: string
+
+  /** 天气状况的文字描述 */
+  text: string
+
+  /** 相对湿度，百分比数值 */
+  humidity: string
+
+  /** 当前小时累计降水量，默认单位：毫米 */
+  precip: string
+
+  /** 逐小时预报降水概率，百分比数值，可能为空 */
+  pop: string
+
+  /** 大气压强，默认单位：百帕 */
+  pressure: string
+}
+
+export interface MinutelyRainItem {
+  /** 预报时间 */
+  time: string
+
+  /** 10分钟累计降水量，单位毫米 */
+  precip: number
+}
+
+export interface MinutelyRain {
+  /**
+   * 是否有雨
+   *
+   * <h2>字段规则
+   * <p>遍历列表降水量值，只要存在不为零的项，该值即为 true
+   */
+  hasRain: boolean
+
+  /**
+   * 降水类型: - rain -> 雨 / snow -> 雪
+   */
+  type: string
+
+  // ============================== 和风天气原有的字段 ===============================
+
+  /** 当前 API 的最近更新时间 */
+  updateTime: string
+
+  /** 分钟降水描述 */
+  summary: string
+
+  minutely: MinutelyRainItem[]
+}
+
+/** 天气数据整合 */
+export interface WeatherDataVO {
+  now: WeatherNow
+
+  daily: WeatherDaily[]
+
+  hourly: WeatherHourly[]
+
+  rain: MinutelyRain
+
+  airNow: AirNow
+
+  airDaily: AirDaily
+
+  /** 用于展示的地点名称 */
+  locationName: string
+}
 
 /**
  * 处理天气数据
