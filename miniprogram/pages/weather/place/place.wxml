@@ -1,16 +1,16 @@
 <view class="page" data-weui-theme="{{ theme }}">
     <view class="main" wx:if="{{ loaded }}">
         <!-- IP 定位地点 -->
-        <view class="located" wx:if="{{ ipLocationName }}">
+        <view class="located" wx:if="{{ ipLocated }}">
             <view class="title">当前位置</view>
             <view class="list">
-                <view class="item" hover-class="hover" bindtap="handleItemTap" data-id="{{ 0 }}">
+                <view class="item" hover-class="hover" bindtap="handleIpLocatedItemTap" data-id="{{ 0 }}">
                     <view class="left">
-                        <view class="name">{{ ipLocationName }}</view>
+                        <view class="name">{{ ipLocated.name }}</view>
                     </view>
                     <view class="right">
-                        <view class="temp">{{ ipLocatedWeatherNow.temp }}℃</view>
-                        <image class="icon" src="{{ ipLocatedWeatherNow.iconUrl }}" mode="widthFix"></image>
+                        <view class="temp">{{ ipLocated.weather.temp }}℃</view>
+                        <image class="icon" src="{{ ipLocated.weather.iconUrl }}" mode="widthFix"></image>
                     </view>
                 </view>
             </view>
@@ -28,7 +28,7 @@
                         class="content {{ item.id === selectedId ? 'active' : '' }}"
                         hover-class="{{ isEdit ? '' : 'hover' }}"
                         data-id="{{ item.id }}"
-                        bindtap="handleItemTap"
+                        bindtap="handleWeatherPlaceItemTap"
                     >
                         <view class="left">
                             <view class="name">{{ item.name }}</view>
@@ -44,7 +44,7 @@
                     <view
                         class="operator"
                         wx:if="{{ isEdit }}"
-                        bindtap="removePlace"
+                        bindtap="handleRemoveButtonTap"
                         data-id="{{ item.id }}"
                         hover-class="hover"
                     >

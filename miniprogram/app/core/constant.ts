@@ -20,3 +20,19 @@ export const StaticUrl = {
   /** 用于分享时 logo */
   shareAppLogo: 'https://static.lifehelper.com.cn/static/project/share.jpeg',
 }
+
+/** 通用颜色 */
+export const CommonColor = {
+  RED: '#fa5151',
+  ORANGE: '#fa9d3b',
+  YELLOW: '#ffc300',
+  GREEN: '#91d300',
+  LIGHTGREEN: '#95ec69',
+  BRAND: '#07c160',
+  BLUE: '#10aeff',
+  INDIGO: '#1485ee',
+  PURPLE: '#6467f0',
+  WHITE: '#fff',
+  LINK: '#576b95',
+  TEXTGREEN: '#06ae56',
+}
