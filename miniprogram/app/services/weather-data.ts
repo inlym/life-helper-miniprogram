@@ -216,8 +216,6 @@ export interface MinutelyRain {
    */
   type: string
 
-  // ============================== 和风天气原有的字段 ===============================
-
   /** 当前 API 的最近更新时间 */
   updateTime: string
 
