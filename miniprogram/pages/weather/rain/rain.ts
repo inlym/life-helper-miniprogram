@@ -1,5 +1,5 @@
-import {MinutelyRain} from '../../../app/services/weather-data.interface'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
+import {MinutelyRain} from '../../../app/services/weather-data'
 
 Page({
   data: {

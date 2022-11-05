@@ -1,6 +1,6 @@
-import {WeatherDailyItem} from '../../../app/services/weather-data.interface'
 import {TapEvent} from '../../../app/utils/types'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
+import {WeatherDaily} from '../../../app/services/weather-data'
 
 // pages/weather/daily/daily.ts
 Page({
@@ -8,7 +8,7 @@ Page({
     // -----------------------------  从上个页面带来的数据  -----------------------------
 
     /** 未来15天预报数据 */
-    f15d: [] as WeatherDailyItem[],
+    f15d: [] as WeatherDaily[],
 
     /** 选中的日期 */
     date: '',
@@ -38,7 +38,7 @@ Page({
     const title = this.data.locationName
     wx.setNavigationBarTitle({title})
 
-    const index = this.data.f15d.findIndex((item: WeatherDailyItem) => item.date === this.data.date)
+    const index = this.data.f15d.findIndex((item: WeatherDaily) => item.date === this.data.date)
     this.show(index)
   },
 

@@ -1,7 +1,5 @@
-import dayjs from 'dayjs'
 import {requestForData} from '../core/http'
 import {calcWeekdayText} from '../utils/time'
-import {F2dItem, MixedWeatherData, TempBar, WeatherDailyItem, WeatherHourlyItem} from './weather-data.interface'
 
 /** 天气中的“风” */
 export interface Wind {
@@ -126,6 +124,9 @@ export interface WeatherDaily {
   /** 预报日期，格式示例：2022-04-29 */
   date: string
 
+  /** 缩略日期格式，格式示例：4/29 */
+  simpleDate: string
+
   day: WeatherDailyHalfDay
 
   night: WeatherDailyHalfDay
@@ -162,6 +163,11 @@ export interface WeatherDaily {
 
   /** 能见度，默认单位：公里 */
   vis: string
+}
+
+/** 二次处理后新增的字段 */
+export interface WeatherDaily {
+  weekday: string
 }
 
 /** 逐小时天气预报中的单小时数据详情 */
@@ -225,8 +231,35 @@ export interface MinutelyRain {
   minutely: MinutelyRainItem[]
 }
 
+/** 天气灾害预警信息 */
+export interface WarningNow {
+  /** 图片的 URL 地址 */
+  imageUrl: string
+
+  /** 本条预警的唯一标识，可判断本条预警是否已经存在 */
+  id: string
+
+  /** 预警发布时间 */
+  pubTime: string
+
+  /** 预警信息标题 */
+  title: string
+
+  /** 预警严重等级颜色，可能为空 */
+  severityColor: string
+
+  /** 预警类型 ID */
+  type: string
+
+  /** 预警类型名称 */
+  typeName: string
+
+  /** 预警详细文字描述 */
+  text: string
+}
+
 /** 天气数据整合 */
-export interface WeatherDataVO {
+export interface WeatherData {
   now: WeatherNow
 
   daily: WeatherDaily[]
@@ -237,10 +270,30 @@ export interface WeatherDataVO {
 
   airNow: AirNow
 
-  airDaily: AirDaily
-
   /** 用于展示的地点名称 */
   locationName: string
+}
+
+/** 逐日天气的温度条 */
+export interface TempBar {
+  /** 用于外部的父元素 */
+  paddingTop: number
+
+  /** 用于子元素 */
+  height: number
+}
+
+/** 二次处理后附加的数据 */
+export interface WeatherData {
+  tempBars: TempBar[]
+}
+
+/**
+ * 处理逐日天气预报的单天数据
+ */
+export function processWeatherDaily(data: WeatherDaily): WeatherDaily {
+  data.weekday = calcWeekdayText(data.date)
+  return data
 }
 
 /**
@@ -248,80 +301,16 @@ export interface WeatherDataVO {
  *
  * @param data 天气数据
  */
-export function processWeatherData(data: MixedWeatherData): MixedWeatherData {
-  data.f15d.forEach((item: WeatherDailyItem) => {
-    item.weekday = calcWeekdayText(item.date)
-    const d = dayjs(item.date)
-    item.simpleDate = `${d.month() + 1}/${d.date()}`
-  })
-
-  // 处理未来 24 小时预报数据
-  data.f24h.forEach((item: WeatherHourlyItem, index: number) => {
-    const t = dayjs(item.time)
-    const now = dayjs()
-
-    if (now.isSame(t, 'hour')) {
-      item.timeText = '现在'
-    } else if (t.hour() === 0 && index > 0) {
-      const month = t.month() + 1
-      const day = t.date()
-      item.timeText = `${month}/${day}`
-    } else {
-      const hour = t.hour()
-      item.timeText = `${hour}:00`
-    }
-  })
-
-  // 处理未来2天的天气数据
-  const todayDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '今天')!
-  const tomorrowDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '明天')!
-
-  const f2d: F2dItem[] = []
-  f2d[0] = {
-    date: todayDaily.date,
-    weekday: '今天',
-    text: todayDaily.text,
-    tempMax: todayDaily.tempMax,
-    tempMin: todayDaily.tempMin,
-    aqiCategory: todayDaily.aqiCategory,
-    aqiLevel: todayDaily.aqiLevel,
-  }
-  f2d[1] = {
-    date: tomorrowDaily.date,
-    weekday: '明天',
-    text: tomorrowDaily.text,
-    tempMax: tomorrowDaily.tempMax,
-    tempMin: tomorrowDaily.tempMin,
-    aqiCategory: tomorrowDaily.aqiCategory,
-    aqiLevel: tomorrowDaily.aqiLevel,
-  }
-
-  data.f2d = f2d
-
-  // 处理当前 IP 定位的位置天气数据
-  if (data.location) {
-    data.currentLocationWeather = {
-      name: data.location.name,
-      region: data.location.region,
-      iconUrl: data.now.iconUrl,
-      type: data.now.type,
-      temp: data.now.temp,
-    }
-  }
-
-  // 附上温度条数据
-  data.tempBars = getTempBarList(data.f15d)
-
-  // 从未来15天列表中抽取今天的记录
-  data.todayFromDaily = data.f15d.find((item: WeatherDailyItem) => item.weekday === '今天')!
+export function processWeatherData(data: WeatherData): WeatherData {
+  data.daily.forEach((item) => processWeatherDaily(item))
 
   return data
 }
 
 /**
- * 获取汇总的天气数据
+ * 获取天气数据（默认方式，根据 IP 定位获取）
  */
-export async function getMixedWeatherDataAnonymous(): Promise<MixedWeatherData> {
+export async function getWeatherDataAnonymous(): Promise<WeatherData> {
   const data = await requestForData({
     method: 'GET',
     url: '/weather',
@@ -337,7 +326,7 @@ export async function getMixedWeatherDataAnonymous(): Promise<MixedWeatherData> 
  *
  * @param placeId 天气地点 ID
  */
-export async function getMixedWeatherDataByPlaceId(placeId: number): Promise<MixedWeatherData> {
+export async function getWeatherDataByPlaceId(placeId: string): Promise<WeatherData> {
   const data = await requestForData({
     method: 'GET',
     url: '/weather',
@@ -349,16 +338,16 @@ export async function getMixedWeatherDataByPlaceId(placeId: number): Promise<Mix
 }
 
 /**
- * 生成温度条数据
+ * 生成逐日天气温度条数据
  *
  * @param list 未来15天预报数据
  */
-export function getTempBarList(list: WeatherDailyItem[]): TempBar[] {
+export function getTempBarList(list: WeatherDaily[]): TempBar[] {
   /** 父元素的高度 */
   const boxHeight = 200
 
-  const maxList: number[] = list.map((item: WeatherDailyItem) => parseInt(item.tempMax))
-  const minList: number[] = list.map((item: WeatherDailyItem) => parseInt(item.tempMin))
+  const maxList: number[] = list.map((item: WeatherDaily) => parseInt(item.day.temp))
+  const minList: number[] = list.map((item: WeatherDaily) => parseInt(item.night.temp))
 
   const max = Math.max(...maxList)
   const min = Math.min(...minList)

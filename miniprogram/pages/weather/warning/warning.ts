@@ -1,10 +1,10 @@
-import {WarningItem} from '../../../app/services/weather-data.interface'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
+import {WarningNow} from '../../../app/services/weather-data'
 
 // pages/weather/warning/warning.ts
 Page({
   data: {
-    warnings: [] as WarningItem[],
+    warnings: [] as WarningNow[],
   },
 
   behaviors: [themeBehavior],
