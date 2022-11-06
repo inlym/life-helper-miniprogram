@@ -21,27 +21,6 @@
             ></mp-icon>
         </view>
 
-        <!-- 天气灾害预警（非实时天气数据） -->
-        <view class="warning-now" wx:if="{{ warnings.length > 0 }}">
-            <view
-                class="item warning warning-level--{{ item.levelId }}"
-                wx:for="{{ warnings }}"
-                wx:key="id"
-                hover-class="hover"
-                bindtap="navigateToWarningPage"
-            >
-                <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
-                <view class="warning-title">{{ item.typeName }}{{ item.level }}预警</view>
-            </view>
-        </view>
-
-        <!-- 分钟级降水 -->
-        <view class="rain" wx:if="{{ rain.hasRain }}" bindtap="navigateToRainPage">
-            <view class="summary">{{ rain.summary }}</view>
-        </view>
-
-        <view class="date">{{ date }}</view>
-
         <!-- 详情天气信息：天气 icon、温度、天气文本描述 -->
         <view class="weather-detail">
             <image src="{{ now.iconUrl }}" mode="widthFix" class="weather-icon"></image>
@@ -55,6 +34,14 @@
         <!-- 空气质量 -->
         <view class="aqi">
             <view class="content aqi-level--{{ airNow.level }}">AQI {{ airNow.aqi }} {{ airNow.category }}</view>
+        </view>
+
+        <!-- 天气预警模块 -->
+        <view class="warning" wx:if="{{ warnings.length>0 }}">
+            <view class="item" wx:for="{{ warnings }}" wx:key="id" bind:tap="goToWarningPage">
+                <view class="name">{{ item.name }}</view>
+                <view class="iconfont icon-link"></view>
+            </view>
         </view>
 
         <!-- 其他信息 -->

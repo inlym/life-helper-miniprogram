@@ -111,6 +111,7 @@
 
     height: 80rpx;
     margin-top: 40rpx;
+    margin-bottom: 200rpx;
 
     .content {
       font-size: 30rpx;
@@ -124,15 +125,44 @@
     }
   }
 
+  // 空气预警模块
+  .warning {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .item {
+      margin-top: 20rpx;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4rpx 28rpx;
+      height: 50rpx;
+      width: 540rpx;
+      background-color: rgba(0, 0, 0, 10%);
+      border-radius: 14rpx;
+
+      .name {
+        font-size: 28rpx;
+      }
+
+      .iconfont {
+        opacity: 50%;
+      }
+    }
+  }
+
   .other {
     display: flex;
     align-items: center;
     justify-content: center;
 
     height: 80rpx;
-    margin-top: 240rpx;
+    margin-top: 40rpx;
 
     .list {
+      width: 540rpx;
       display: flex;
       justify-content: space-between;
 
@@ -177,6 +207,8 @@
     height: 40rpx;
     margin-top: 20rpx;
 
+    background-color: var(--weui-RED);
+
     .icon {
       width: 26rpx;
     }
@@ -191,27 +223,6 @@
   }
 }
 
-// ================================= 分钟级降水 =================================
-.rain {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-
-  margin-top: 20rpx;
-  padding: 0 26rpx;
-
-  .summary {
-    font-size: 24rpx;
-    line-height: 40rpx;
-
-    height: 40rpx;
-    padding: 0 24rpx;
-
-    color: #fff;
-    border-radius: 24rpx;
-    background-color: var(--weui-INDIGO);
-  }
-}
 
 // ================================== 今明两天天气 ==================================
 .forecast-2days {

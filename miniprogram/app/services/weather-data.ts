@@ -236,6 +236,9 @@ export interface WarningNow {
   /** 图片的 URL 地址 */
   imageUrl: string
 
+  /** 预警名称，示例："暴雨红色预警" */
+  name: string
+
   /** 本条预警的唯一标识，可判断本条预警是否已经存在 */
   id: string
 
@@ -244,9 +247,6 @@ export interface WarningNow {
 
   /** 预警信息标题 */
   title: string
-
-  /** 预警严重等级颜色，可能为空 */
-  severityColor: string
 
   /** 预警类型 ID */
   type: string

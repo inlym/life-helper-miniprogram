@@ -155,7 +155,7 @@ Page({
   },
 
   /**
-   * 跳转到“逐日天气预报”详情页
+   * 跳转到“逐日天气预报详情”页
    */
   goToWeatherDailyPage(e: WechatMiniprogram.CustomEvent<any, any, {date: string}>) {
     const {daily, locationName} = this.data
@@ -165,6 +165,17 @@ Page({
       url: '/pages/weather/daily/daily',
     }).then((res) => {
       res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {daily, date, locationName})
+    })
+  },
+
+  /**
+   * 跳转到“天气预警列表”页
+   */
+  goToWarningPage() {
+    const {warnings} = this.data
+
+    wx.navigateTo({url: '/pages/weather/warning/warning'}).then((res) => {
+      res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {warnings})
     })
   },
 })
