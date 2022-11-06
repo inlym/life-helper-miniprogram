@@ -2,7 +2,7 @@
     <!-- 实时天气模块 -->
     <view class="weather-now weather-bg weather-bg--{{ now.type }}" style="padding-top: {{ reservedHeight }}px;">
         <!-- 和胶囊按钮垂直对齐的位置条 -->
-        <view class="location-bar" hover-class="hover" bindtap="navigateToPlacePage">
+        <view class="location-bar" hover-class="hover" bindtap="goToWeatherPlacePage">
             <!-- 左侧加号 -->
             <mp-icon
                 class="add-icon"
@@ -40,6 +40,8 @@
             <view class="summary">{{ rain.summary }}</view>
         </view>
 
+        <view class="date">{{ date }}</view>
+
         <!-- 详情天气信息：天气 icon、温度、天气文本描述 -->
         <view class="weather-detail">
             <image src="{{ now.iconUrl }}" mode="widthFix" class="weather-icon"></image>
@@ -59,8 +61,12 @@
         <view class="other">
             <view class="list">
                 <view class="item">
-                    <view class="value">{{ now.windScale }}级</view>
-                    <view class="name">{{ now.windDir }}</view>
+                    <view class="value">{{ now.wind.direction }}</view>
+                    <view class="name">风向</view>
+                </view>
+                <view class="item">
+                    <view class="value">{{ now.wind.scale }}级</view>
+                    <view class="name">风力</view>
                 </view>
                 <view class="item">
                     <view class="value">{{ now.humidity }}%</view>
@@ -70,40 +76,26 @@
                     <view class="value">{{ now.vis }}km</view>
                     <view class="name">能见度</view>
                 </view>
-                <view class="item">
-                    <view class="value">{{ now.precip }}mm</view>
-                    <view class="name">降水量</view>
-                </view>
             </view>
         </view>
     </view>
 
     <!-- 今明两天预报 -->
-    <view class="forecast-2days container">
-        <view class="item" hover-class="hover" data-date="{{ f2d[0].date }}" bindtap="navigateToDailyPage">
+    <view class="forecast-2days container" wx:if="{{ f2d.length>0 }}">
+        <view wx:for="{{ f2d }}" class="item" hover-class="hover" wx:key="date" data-date="{{ item.date }}" bindtap="goToWeatherDailyPage">
             <view class="line">
-                <view class="weekday">{{ f2d[0].weekday }}</view>
-                <view class="text">{{ f2d[0].text }}</view>
+                <view class="weekday">{{ item.weekday }}</view>
+                <view class="text">{{ item.text }}</view>
             </view>
             <view class="line">
-                <view class="temp">{{ f2d[0].tempMax }}/{{ f2d[0].tempMin }}℃</view>
-                <view class="aqi aqi-level--{{ f2d[0].aqiLevel }}">{{ f2d[0].aqiCategory }}</view>
-            </view>
-        </view>
-        <view class="item" hover-class="hover" data-date="{{ f2d[1].date }}" bindtap="navigateToDailyPage">
-            <view class="line">
-                <view class="weekday">{{ f2d[1].weekday }}</view>
-                <view class="text">{{ f2d[1].text }}</view>
-            </view>
-            <view class="line">
-                <view class="temp">{{ f2d[1].tempMax }}/{{ f2d[1].tempMin }}℃</view>
-                <view class="aqi aqi-level--{{ f2d[1].aqiLevel }}">{{ f2d[1].aqiCategory }}</view>
+                <view class="temp">{{ item.day.temp }}/{{ item.night.temp }}℃</view>
+                <view class="aqi aqi-level--{{ item.air.level }}">{{ item.air.category }}</view>
             </view>
         </view>
     </view>
 
     <!-- 24小时预报 -->
-    <view class="weather-hourly container">
+    <view class="weather-hourly container" wx:if="{{ hourly.length>0 }}">
         <view class="title">24小时预报</view>
         <view class="content">
             <scroll-view
@@ -117,8 +109,8 @@
             >
                 <view class="wrapper">
                     <view class="top">
-                        <view class="item" wx:for="{{ f24h }}" wx:key="time">
-                            <view class="time-text">{{ item.timeText }}</view>
+                        <view class="item" wx:for="{{ hourly }}" wx:key="time">
+                            <view class="time-text">{{ item.time }}</view>
                             <image class="icon" src="{{ item.iconUrl }}" mode="widthFix"></image>
                             <view class="text">{{ item.text }}</view>
                         </view>
@@ -127,9 +119,9 @@
                         <canvas type="2d" id="f24h" class="f24h-canvas"></canvas>
                     </view>
                     <view class="bottom">
-                        <view class="item" wx:for="{{ f24h }}" wx:key="time">
-                            <view class="wind-dir">{{ item.windDir }}</view>
-                            <view class="wind-scale">{{ item.windScale }}级</view>
+                        <view class="item" wx:for="{{ hourly }}" wx:key="time">
+                            <view class="wind-dir">{{ item.wind.direction }}</view>
+                            <view class="wind-scale">{{ item.wind.scale }}级</view>
                         </view>
                     </view>
                 </view>
@@ -138,7 +130,7 @@
     </view>
 
     <!-- 未来15天预报 -->
-    <view class="weather-daily container">
+    <view class="weather-daily container" wx:if="{{ daily.length>0 }}">
         <view class="title">15天预报</view>
         <view class="content">
             <scroll-view
@@ -153,28 +145,28 @@
                 <view class="wrapper">
                     <view
                         class="item"
-                        wx:for="{{ f15d }}"
+                        wx:for="{{ daily }}"
                         wx:for-index="index"
                         wx:key="date"
                         hover-class="hover"
                         data-date="{{ item.date }}"
-                        bindtap="navigateToDailyPage"
+                        bindtap="goToWeatherDailyPage"
                     >
                         <view class="weekday">{{ item.weekday }}</view>
                         <view class="date">{{ item.simpleDate }}</view>
-                        <view class="text">{{ item.textDay }}</view>
-                        <image class="icon" src="{{ item.iconDayUrl }}" mode="widthFix"></image>
-                        <view class="temp">{{ item.tempMax }}°</view>
+                        <view class="text">{{ item.day.text }}</view>
+                        <image class="icon" src="{{ item.day.iconUrl }}" mode="widthFix"></image>
+                        <view class="temp">{{ item.day.temp }}°</view>
                         <view class="temp-bar" style="padding-top: {{ tempBars[index].paddingTop }}rpx;">
                             <view class="temp-body" style="height: {{ tempBars[index].height }}rpx;"></view>
                         </view>
-                        <view class="temp">{{ item.tempMin }}°</view>
-                        <image class="icon" src="{{ item.iconNightUrl }}" mode="widthFix"></image>
-                        <view class="text">{{ item.textNight }}</view>
-                        <view class="wind-dir">{{ item.windDirDay }}</view>
-                        <view class="wind-scale">{{ item.windScaleDay }}级</view>
-                        <view wx:if="{{ item.aqiCategory }}" class="aqi aqi-level--{{ item.aqiLevel }}">
-                            {{ item.aqiCategory }}
+                        <view class="temp">{{ item.night.temp }}°</view>
+                        <image class="icon" src="{{ item.night.iconUrl }}" mode="widthFix"></image>
+                        <view class="text">{{ item.night.text }}</view>
+                        <view class="wind-dir">{{ item.day.wind.direction }}</view>
+                        <view class="wind-scale">{{ item.day.wind.scale }}级</view>
+                        <view wx:if="{{ item.air.category }}" class="aqi aqi-level--{{ item.air.level }}">
+                            {{ item.air.category }}
                         </view>
                     </view>
                 </view>
@@ -187,8 +179,8 @@
         <view class="title">空气质量</view>
         <view class="content">
             <view class="left">
-                <div class="circle aqi-level--{{ airNow.level }}">{{ airNow.aqi }}</div>
-                <div class="text">{{ airNow.category }}</div>
+                <view class="circle aqi-level--{{ airNow.level }}">{{ airNow.aqi }}</view>
+                <view class="text">{{ airNow.category }}</view>
             </view>
             <view class="right">
                 <view class="line">
@@ -284,12 +276,12 @@
             <view class="value">
                 <view class="wrapper">
                     <view class="name">日出</view>
-                    <view class="time">{{ todayFromDaily.sunrise }}</view>
+                    <view class="time">{{ f2d[0].sun.riseTime }}</view>
                 </view>
                 <view class="middle">正午</view>
                 <view class="wrapper">
                     <view class="name">日落</view>
-                    <view class="time">{{ todayFromDaily.sunset }}</view>
+                    <view class="time">{{ f2d[0].sun.setTime }}</view>
                 </view>
             </view>
         </view>
@@ -305,12 +297,12 @@
             <view class="value">
                 <view class="wrapper">
                     <view class="name">月升</view>
-                    <view class="time">{{ todayFromDaily.moonrise }}</view>
+                    <view class="time">{{ f2d[0].moon.riseTime }}</view>
                 </view>
-                <view class="middle">{{ todayFromDaily.moonPhase }}</view>
+                <view class="middle">{{ f2d[0].moonPhase }}</view>
                 <view class="wrapper">
                     <view class="name">月落</view>
-                    <view class="time">{{ todayFromDaily.moonset }}</view>
+                    <view class="time">{{ f2d[0].moon.setTime }}</view>
                 </view>
             </view>
         </view>

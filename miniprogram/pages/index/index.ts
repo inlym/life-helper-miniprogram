@@ -1,50 +1,62 @@
-import {StorageField} from '../../app/core/constant'
-import {enhancedStorage} from '../../app/core/storage'
-import {drawWeatherHourlyLineChart} from '../../app/services/weather-canvas'
-import {getMixedWeatherDataAnonymous, getMixedWeatherDataByPlaceId} from '../../app/services/weather-data'
 import {
   AirNow,
-  F2dItem,
+  getWeatherDataAnonymous,
+  getWeatherDataByPlaceId,
   MinutelyRain,
   TempBar,
-  WarningItem,
-  WeatherDailyItem,
-  WeatherHourlyItem,
+  WarningNow,
+  WeatherDaily,
+  WeatherData,
+  WeatherHourly,
   WeatherNow,
-} from '../../app/services/weather-data.interface'
+} from '../../app/services/weather-data'
 import {createCanvasContext} from '../../app/utils/canvas'
-import {TapEvent} from '../../app/utils/types'
 import {shareAppBehavior} from '../../behaviors/share-app-behavior'
 import {themeBehavior} from '../../behaviors/theme-behavior'
+import {getSelectWeatherPlaceId} from '../../app/services/weather-place'
+import {CommonColor, PageChannelEvent} from '../../app/core/constant'
+import {drawWeatherHourlyLineChart} from '../../app/services/weather-canvas'
 
 Page({
   data: {
     // ---------------------------- 从 HTTP 请求获取的数据 ----------------------------
 
+    /** 实时天气 */
     now: {} as WeatherNow,
-    f24h: [] as WeatherHourlyItem[],
-    airNow: {} as AirNow,
-    f15d: [] as WeatherDailyItem[],
-    warnings: [] as WarningItem[],
+
+    /** 逐日天气预报 */
+    daily: [] as WeatherDaily[],
+
+    /** 今天和明天2天的逐日天气预报 */
+    f2d: [] as WeatherDaily[],
+
+    /** 逐小时天气预报 */
+    hourly: [] as WeatherHourly[],
+
+    /** 分钟级降水 */
     rain: {} as MinutelyRain,
 
-    ipLocationName: '',
+    /** 实时空气质量 */
+    airNow: {} as AirNow,
 
-    // ------------------------ 从 HTTP 请求获取二次处理后的数据 -----------------------
+    /** 天气预警 */
+    warnings: [] as WarningNow[],
 
-    /** 顶部显示的地点名称 */
+    /** 用于展示的地点名称 */
     locationName: '正在获取定位 ...',
 
-    /** 未来2天预报 */
-    f2d: [] as F2dItem[],
+    /** 当前日期 */
+    date: '',
+
+    // ------------------------ 从 HTTP 请求获取二次处理后的数据 -----------------------
 
     /** 未来15天预报的温度条 */
     tempBars: [] as TempBar[],
 
-    /** 通过 IP 定位获取的实时天气，页面上不使用，带入到其他页面展示 */
-    ipLocatedWeatherNow: {} as WeatherNow,
+    // -------------------------------- 页面状态数据 --------------------------------
 
-    todayFromDaily: {} as WeatherDailyItem,
+    /** 页面装载完成 */
+    loaded: false,
 
     // -------------------------------- 其他页面数据 --------------------------------
 
@@ -52,80 +64,73 @@ Page({
     reservedHeight: 80,
 
     /** 图标颜色，跟时钟对应，白天为黑色，晚上为白色 */
-    iconColor: '#000',
+    iconColor: CommonColor.BLACK,
 
     /** 当前选中的天气地点 ID */
-    currentPlaceId: 0,
+    currentPlaceId: '',
 
     f24Canvas: {} as CanvasRenderingContext2D,
   },
 
   behaviors: [themeBehavior, shareAppBehavior],
 
-  onReady() {
+  async onReady() {
     this.setReservedHeight()
-    this.getCurrentPlaceIdFromStorage()
 
-    this.start()
+    await this.init()
+    this.setData({loaded: true})
   },
 
+  // 从其他页面返回时，判断下是否切换了地点，如果切换了则重新请求数据
+  onShow() {
+    if (this.data.loaded) {
+      const selectedWeatherPlaceId = getSelectWeatherPlaceId()
+      if (this.data.currentPlaceId !== selectedWeatherPlaceId) {
+        this.init()
+      }
+    }
+  },
+
+  // 下拉刷新
   onPullDownRefresh() {
-    this.start().then(() => {
-      wx.stopPullDownRefresh()
-      wx.showToast({
-        title: '更新成功',
-        icon: 'success',
+    this.init().then(() => {
+      wx.stopPullDownRefresh().then(() => {
+        wx.showToast({
+          title: '更新成功',
+          icon: 'success',
+        })
       })
     })
   },
 
-  async start() {
-    wx.showLoading({title: '数据加载中', mask: true})
+  /** 页面初始化 */
+  async init() {
+    await wx.showLoading({title: '数据加载中', mask: true})
 
-    if (this.data.currentPlaceId) {
-      await this.getWeatherDataByPlaceId(this.data.currentPlaceId)
+    let weatherData: WeatherData
+
+    const selectedWeatherPlaceId = getSelectWeatherPlaceId()
+    this.setData({currentPlaceId: selectedWeatherPlaceId})
+
+    if (selectedWeatherPlaceId) {
+      weatherData = await getWeatherDataByPlaceId(selectedWeatherPlaceId)
     } else {
-      await this.getWeatherDataAnonymous()
+      weatherData = await getWeatherDataAnonymous()
     }
 
-    wx.hideLoading()
-  },
+    // 备注（2022.11.05）
+    // 此处是偷懒的写法，应该将字段值一个个取出来，然后再赋值
+    this.setData(weatherData)
 
-  /** 从本地存储中获取之前选中的天气地点 */
-  getCurrentPlaceIdFromStorage() {
-    const id = enhancedStorage.get(StorageField.SELECTED_WEATHER_PLACE_ID)
-    if (id) {
-      this.setData({currentPlaceId: id})
-    }
+    await wx.hideLoading()
+
+    await this.afterGettingData()
   },
 
   /** 获取并设置保留高度，只需在初始化时执行一次即可 */
   setReservedHeight() {
     const rect = wx.getMenuButtonBoundingClientRect()
     this.setData({reservedHeight: rect.top - 4})
-  },
-
-  /** 通过 IP 获取天气数据（即不带任何参数） */
-  async getWeatherDataAnonymous() {
-    this.setData({currentPlaceId: 0})
-    const data = await getMixedWeatherDataAnonymous()
-    this.setData(data)
-    const locationName = data.ipLocationName
-    const ipLocatedWeatherNow = data.now
-    this.setData({locationName, ipLocatedWeatherNow})
-
-    await this.afterGettingData()
-  },
-
-  /** 通过天气地点 ID 获取天气数据 */
-  async getWeatherDataByPlaceId(placeId: number) {
-    this.setData({currentPlaceId: placeId})
-    const data = await getMixedWeatherDataByPlaceId(placeId)
-    this.setData(data)
-    const locationName = data.place.name
-    this.setData({locationName})
-
-    await this.afterGettingData()
   },
 
   /** 在获取天气数据后执行 */
@@ -139,69 +144,27 @@ Page({
     }
 
     const theme = wx.getSystemInfoSync().theme || 'light'
-    drawWeatherHourlyLineChart(ctx, this.data.f24h, theme)
+    drawWeatherHourlyLineChart(ctx, this.data.hourly, theme)
   },
 
-  /** 跳转到天气预警页面 */
-  navigateToWarningPage() {
-    const warnings = this.data.warnings
-
-    wx.navigateTo({
-      url: '/pages/weather/warning/warning',
-      success(res) {
-        res.eventChannel.emit('transferData', warnings)
-      },
-    })
+  /**
+   * 跳转到“天气地点”页
+   */
+  goToWeatherPlacePage() {
+    wx.navigateTo({url: '/pages/weather/place/place'})
   },
 
-  /** 跳转到天气地点页 */
-  navigateToPlacePage() {
-    const self = this
-    const {ipLocationName, currentPlaceId, ipLocatedWeatherNow} = this.data
-
-    wx.navigateTo({
-      url: '/pages/weather/place/place',
-      success(res) {
-        res.eventChannel.emit('transferData', {ipLocationName, currentPlaceId, ipLocatedWeatherNow})
-      },
-      events: {
-        async switchPlace(data: any) {
-          const placeId = data.currentPlaceId
-          if (placeId !== self.data.currentPlaceId) {
-            if (placeId === 0) {
-              await self.getWeatherDataAnonymous()
-            } else {
-              await self.getWeatherDataByPlaceId(placeId)
-            }
-            wx.showToast({title: '更新成功', icon: 'success'})
-          }
-        },
-      },
-    })
-  },
-
-  /** 跳转到逐日预报页 */
-  navigateToDailyPage(event: TapEvent<{date: string}>) {
-    const date = event.currentTarget.dataset.date
-    const {f15d, locationName} = this.data
+  /**
+   * 跳转到“逐日天气预报”详情页
+   */
+  goToWeatherDailyPage(e: WechatMiniprogram.CustomEvent<any, any, {date: string}>) {
+    const {daily, locationName} = this.data
+    const date = e.currentTarget.dataset.date
 
     wx.navigateTo({
       url: '/pages/weather/daily/daily',
-      success(res) {
-        res.eventChannel.emit('transferData', {f15d, date, locationName})
-      },
-    })
-  },
-
-  /** 跳转到分钟级降水详情页 */
-  navigateToRainPage() {
-    const {rain, locationName} = this.data
-
-    wx.navigateTo({
-      url: '/pages/weather/rain/rain',
-      success(res) {
-        res.eventChannel.emit('transferData', {rain, locationName})
-      },
+    }).then((res) => {
+      res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {daily, date, locationName})
     })
   },
 })
