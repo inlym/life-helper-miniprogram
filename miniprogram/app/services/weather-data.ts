@@ -270,8 +270,13 @@ export interface WeatherData {
 
   airNow: AirNow
 
+  warnings: WarningNow[]
+
   /** 用于展示的地点名称 */
   locationName: string
+
+  /** 当前日期 */
+  date: string
 }
 
 /** 逐日天气的温度条 */
@@ -286,6 +291,9 @@ export interface TempBar {
 /** 二次处理后附加的数据 */
 export interface WeatherData {
   tempBars: TempBar[]
+
+  /** 今天和明天的逐日预报 */
+  f2d: WeatherDaily[]
 }
 
 /**
@@ -303,6 +311,12 @@ export function processWeatherDaily(data: WeatherDaily): WeatherDaily {
  */
 export function processWeatherData(data: WeatherData): WeatherData {
   data.daily.forEach((item) => processWeatherDaily(item))
+
+  // 抽取今明两天列表
+  const todayIndex = data.daily.findIndex((item) => item.weekday === '今天')
+  data.f2d = data.daily.slice(todayIndex, todayIndex + 2)
+
+  data.tempBars = getTempBarList(data.daily)
 
   return data
 }

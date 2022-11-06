@@ -53,12 +53,20 @@
     }
   }
 
+  // 日期
+  .date {
+    font-size: 110%;
+    text-align: center;
+    margin-top: 40rpx;
+  }
+
   .weather-detail {
     display: flex;
     justify-content: center;
 
     --height: 160rpx;
-    margin-top: 220rpx;
+    margin-top: 160rpx;
+
 
     .weather-icon {
       width: var(--height);

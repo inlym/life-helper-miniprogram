@@ -21,6 +21,12 @@ export const StaticUrl = {
   shareAppLogo: 'https://static.lifehelper.com.cn/static/project/share.jpeg',
 }
 
+/** 页面通道事件 */
+export const PageChannelEvent = {
+  /** 页面传递数据 */
+  DATA_TRANSFER: 'DATA_TRANSFER',
+}
+
 /** 通用颜色 */
 export const CommonColor = {
   RED: '#fa5151',
@@ -33,6 +39,7 @@ export const CommonColor = {
   INDIGO: '#1485ee',
   PURPLE: '#6467f0',
   WHITE: '#fff',
+  BLACK: '#000',
   LINK: '#576b95',
   TEXTGREEN: '#06ae56',
 }

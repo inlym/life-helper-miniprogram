@@ -1,6 +1,7 @@
 import {TapEvent} from '../../../app/utils/types'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 import {WeatherDaily} from '../../../app/services/weather-data'
+import {PageChannelEvent} from '../../../app/core/constant'
 
 // pages/weather/daily/daily.ts
 Page({
@@ -8,7 +9,7 @@ Page({
     // -----------------------------  从上个页面带来的数据  -----------------------------
 
     /** 未来15天预报数据 */
-    f15d: [] as WeatherDaily[],
+    daily: [] as WeatherDaily[],
 
     /** 选中的日期 */
     date: '',
@@ -29,16 +30,18 @@ Page({
 
   onLoad() {
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('transferData', (data) => {
-      this.setData(data)
-    })
+    if (eventChannel) {
+      eventChannel.on(PageChannelEvent.DATA_TRANSFER, (data) => {
+        this.setData(data)
+      })
+    }
   },
 
   onReady() {
     const title = this.data.locationName
     wx.setNavigationBarTitle({title})
 
-    const index = this.data.f15d.findIndex((item: WeatherDaily) => item.date === this.data.date)
+    const index = this.data.daily.findIndex((item: WeatherDaily) => item.date === this.data.date)
     this.show(index)
   },
 
