@@ -7,6 +7,7 @@ import {invalidTokenInterceptor} from './invalid-token-interceptor'
 import {hideLoadingInterceptor, showLoadingInterceptor} from './loading-interceptor'
 import {miniprogramAdapter} from './miniprogram-adatper'
 import {requestLogInterceptor} from './request-log-interceptor'
+import {errorTipsInterceptor} from './error-tips-interceptor'
 
 const instance = axios.create({
   baseURL: config.baseURL,
@@ -28,5 +29,6 @@ instance.interceptors.request.use(showLoadingInterceptor)
 instance.interceptors.response.use(hideLoadingInterceptor)
 instance.interceptors.response.use(invalidTokenInterceptor)
 instance.interceptors.response.use(requestLogInterceptor)
+instance.interceptors.response.use(errorTipsInterceptor)
 
 export const request = instance

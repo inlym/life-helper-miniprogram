@@ -1,4 +1,4 @@
-@import '../../assets/styles/weather.scss';
+@import "../../assets/styles/weather.scss";
 
 .page {
   padding-bottom: 30rpx;
@@ -56,16 +56,16 @@
   // 日期
   .date {
     font-size: 110%;
-    text-align: center;
     margin-top: 40rpx;
+    text-align: center;
   }
 
   .weather-detail {
     display: flex;
     justify-content: center;
 
-    --height: 160rpx;
     margin-top: 160rpx;
+    --height: 160rpx;
 
 
     .weather-icon {
@@ -125,23 +125,52 @@
     }
   }
 
+  // 分钟级降水
+  .rain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 540rpx;
+      height: 50rpx;
+      margin-top: 20rpx;
+      padding: 4rpx 20rpx 4rpx 28rpx;
+      border-radius: 14rpx;
+      background-color: rgba(0, 0, 0, 15%);
+
+      .name {
+        font-size: 28rpx;
+      }
+
+      .iconfont {
+        opacity: 50%;
+      }
+
+
+    }
+  }
+
   // 空气预警模块
   .warning {
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 
     .item {
-      margin-top: 20rpx;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 4rpx 28rpx;
-      height: 50rpx;
+      justify-content: space-between;
       width: 540rpx;
-      background-color: rgba(0, 0, 0, 10%);
+      height: 50rpx;
+      margin-top: 20rpx;
+      padding: 4rpx 20rpx 4rpx 28rpx;
       border-radius: 14rpx;
+      background-color: rgba(0, 0, 0, 10%);
 
       .name {
         font-size: 28rpx;
@@ -162,9 +191,9 @@
     margin-top: 40rpx;
 
     .list {
-      width: 540rpx;
       display: flex;
       justify-content: space-between;
+      width: 540rpx;
 
       border-radius: 20rpx;
       background-color: rgba(0, 0, 0, 5%);
@@ -186,39 +215,6 @@
           font-size: 20rpx;
         }
       }
-    }
-  }
-}
-
-// ================================= 天气灾害预警模块 =================================
-.warning-now {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-
-  margin-top: 20rpx;
-  padding: 0 26rpx;
-
-  .item {
-    display: flex;
-    align-items: center;
-
-    width: auto;
-    height: 40rpx;
-    margin-top: 20rpx;
-
-    background-color: var(--weui-RED);
-
-    .icon {
-      width: 26rpx;
-    }
-
-    .warning-title {
-      font-size: 24rpx;
-
-      margin-left: 16rpx;
-
-      color: #fff;
     }
   }
 }
@@ -528,9 +524,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-
-    padding: 26rpx;
-    padding-top: 60rpx;
+    padding: 60rpx 26rpx 26rpx;
 
     .box {
       overflow: hidden;

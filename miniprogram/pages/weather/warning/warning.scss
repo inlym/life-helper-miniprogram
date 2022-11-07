@@ -1,4 +1,5 @@
 /* pages/weather/warning/warning.wxss */
+
 .warning {
   padding: 20rpx;
 
@@ -15,15 +16,12 @@
       .image {
         width: 200rpx;
         height: 150rpx;
-
-        background-color: burlywood;
       }
 
       .right {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
         margin-left: 20rpx;
 
         .title {
@@ -38,7 +36,6 @@
 
     .content {
       font-size: 28rpx;
-
       margin-top: 18rpx;
     }
   }

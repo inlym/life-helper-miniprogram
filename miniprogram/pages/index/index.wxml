@@ -36,6 +36,14 @@
             <view class="content aqi-level--{{ airNow.level }}">AQI {{ airNow.aqi }} {{ airNow.category }}</view>
         </view>
 
+        <!-- 分钟级降水 -->
+        <view class="rain" wx:if="{{ rain.hasRain }}">
+            <view class="item">
+                <view class="name text-ellipsis-l1">{{ rain.summary }}</view>
+                <view class="iconfont icon-link"></view>
+            </view>
+        </view>
+
         <!-- 天气预警模块 -->
         <view class="warning" wx:if="{{ warnings.length>0 }}">
             <view class="item" wx:for="{{ warnings }}" wx:key="id" bind:tap="goToWarningPage">
