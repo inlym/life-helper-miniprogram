@@ -268,7 +268,7 @@
             <view class="link">更多</view>
         </view>
         <view class="body">
-            <view class="item" wx:for="{{ todayIndex }}" wx:key="date" data-type="{{ item.type }}">
+            <view class="item" wx:for="{{ todayIndex }}" wx:key="date" data-type="{{ item.type }}" bind:tap="goToLivingPage">
                 <image class="left" src="{{ item.imageUrl }}" mode="widthFix"></image>
                 <view class="right">
                     <view class="name">{{ item.name }}</view>

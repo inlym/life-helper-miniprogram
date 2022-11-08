@@ -18,6 +18,7 @@ import {themeBehavior} from '../../behaviors/theme-behavior'
 import {getSelectWeatherPlaceId} from '../../app/services/weather-place'
 import {CommonColor, PageChannelEvent} from '../../app/core/constant'
 import {drawWeatherHourlyLineChart} from '../../app/services/weather-canvas'
+import {TapEvent} from '../../app/utils/types'
 
 Page({
   data: {
@@ -163,7 +164,7 @@ Page({
   /**
    * 跳转到“逐日天气预报详情”页
    */
-  goToWeatherDailyPage(e: WechatMiniprogram.CustomEvent<any, any, {date: string}>) {
+  goToWeatherDailyPage(e: TapEvent<{date: string}>) {
     const {daily, locationName} = this.data
     const date = e.currentTarget.dataset.date
 
@@ -182,6 +183,20 @@ Page({
 
     wx.navigateTo({url: '/pages/weather/warning/warning'}).then((res) => {
       res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {warnings})
+    })
+  },
+
+  /**
+   * 跳转到“生活指数”页面
+   */
+  goToLivingPage(e: TapEvent<{type: string}>) {
+    const {indices} = this.data
+    const type = e.currentTarget.dataset.type
+
+    wx.navigateTo({
+      url: '/pages/weather/living/living',
+    }).then((res) => {
+      res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {indices, type})
     })
   },
 })

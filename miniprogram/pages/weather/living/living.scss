@@ -1,0 +1,32 @@
+/* pages/weather/living/living.wxss */
+.head {
+  display: flex;
+  justify-content: space-between;
+  height: 200rpx;
+  margin: 20rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+  background-color: var(--weui-BG-2);
+
+  .item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    .image {
+      width: 160rpx;
+    }
+
+    .name {
+      font-size: 30rpx;
+      color: var(--weui-FG-1);
+    }
+  }
+
+  .active {
+    border: 2rpx solid var(--weui-BRAND);
+    border-radius: 10rpx;
+    background-color: var(--weui-FG-3);
+  }
+}

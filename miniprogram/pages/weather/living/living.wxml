@@ -1,0 +1,9 @@
+<!--pages/weather/living/living.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="head">
+        <view class="item" wx:for="{{ indices }}" wx:key="type">
+            <image class="image" src="{{ item.imageUrl }}"></image>
+            <view class="name">{{ item.name }}</view>
+        </view>
+    </view>
+</view>

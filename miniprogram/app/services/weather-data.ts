@@ -252,6 +252,7 @@ export interface DailyIndex {
   text: string
 }
 
+/** 生活指数 */
 export interface LivingIndex {
   /** 图片 URL */
   imageUrl: string
