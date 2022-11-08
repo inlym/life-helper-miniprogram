@@ -231,6 +231,52 @@ export interface MinutelyRain {
   minutely: MinutelyRainItem[]
 }
 
+/** 生活指数的中的单天详情 */
+export interface DailyIndex {
+  /** 格式化显示的日期 */
+  formattedDate: string
+
+  /** 人性化显示的“周几” */
+  optimalDayOfWeek: string
+
+  /** 预报日期 */
+  date: string
+
+  /** 生活指数预报等级 */
+  level: string
+
+  /** 生活指数预报级别名称 */
+  category: string
+
+  /** 生活指数预报的详细描述，可能为空 */
+  text: string
+}
+
+export interface LivingIndex {
+  /** 图片 URL */
+  imageUrl: string
+
+  /** 生活指数类型 ID */
+  type: string
+
+  /** 生活指数类型的名称 */
+  name: string
+
+  daily: DailyIndex[]
+}
+
+/** 增强版的单日详情，用于显示今日列表 */
+export interface EnhancedDailyIndex extends DailyIndex {
+  /** 图片 URL */
+  imageUrl: string
+
+  /** 生活指数类型 ID */
+  type: string
+
+  /** 生活指数类型的名称 */
+  name: string
+}
+
 /** 天气灾害预警信息 */
 export interface WarningNow {
   /** 图片的 URL 地址 */
@@ -268,6 +314,8 @@ export interface WeatherData {
 
   rain: MinutelyRain
 
+  indices: LivingIndex[]
+
   airNow: AirNow
 
   warnings: WarningNow[]
@@ -294,6 +342,9 @@ export interface WeatherData {
 
   /** 今天和明天的逐日预报 */
   f2d: WeatherDaily[]
+
+  /** 今日生活指数 */
+  todayIndex: EnhancedDailyIndex[]
 }
 
 /**
@@ -302,6 +353,28 @@ export interface WeatherData {
 export function processWeatherDaily(data: WeatherDaily): WeatherDaily {
   data.weekday = calcWeekdayText(data.date)
   return data
+}
+
+/**
+ * 获取今日生活指数
+ *
+ * @param indices 原始的生活指数数据
+ *
+ * @since 1.6.0
+ */
+export function getTodayIndex(indices: LivingIndex[]): EnhancedDailyIndex[] {
+  return indices.map((item: LivingIndex) => {
+    console.log(item)
+    const result: EnhancedDailyIndex = item.daily.find(
+      (day: DailyIndex) => day.optimalDayOfWeek === '今天'
+    )! as EnhancedDailyIndex
+
+    result.imageUrl = item.imageUrl
+    result.type = item.type
+    result.name = item.name
+
+    return result
+  })
 }
 
 /**
@@ -317,6 +390,9 @@ export function processWeatherData(data: WeatherData): WeatherData {
   data.f2d = data.daily.slice(todayIndex, todayIndex + 2)
 
   data.tempBars = getTempBarList(data.daily)
+
+  // 抽取今日生活指数
+  data.todayIndex = getTodayIndex(data.indices)
 
   return data
 }

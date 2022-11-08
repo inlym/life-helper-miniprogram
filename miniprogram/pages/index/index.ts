@@ -1,7 +1,9 @@
 import {
   AirNow,
+  EnhancedDailyIndex,
   getWeatherDataAnonymous,
   getWeatherDataByPlaceId,
+  LivingIndex,
   MinutelyRain,
   TempBar,
   WarningNow,
@@ -35,6 +37,10 @@ Page({
 
     /** 分钟级降水 */
     rain: {} as MinutelyRain,
+
+    /** 生活指数 */
+    indices: [] as LivingIndex[],
+    todayIndex: [] as EnhancedDailyIndex[],
 
     /** 实时空气质量 */
     airNow: {} as AirNow,

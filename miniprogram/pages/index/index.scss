@@ -11,6 +11,7 @@
   border-radius: 20rpx;
   background-color: var(--weui-BG-2);
 
+  // 纯文字标题
   .title {
     font-size: 34rpx;
     font-weight: bold;
@@ -20,6 +21,28 @@
     padding: 0 36rpx;
 
     border-bottom: 2rpx solid var(--weui-FG-3);
+  }
+
+  // 包含操作按钮的标题
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100rpx;
+    padding: 0 36rpx;
+    border-bottom: 2rpx solid var(--weui-FG-3);
+
+    .name {
+      font-size: 34rpx;
+      font-weight: bold;
+      line-height: 100rpx;
+    }
+
+    .link {
+      font-size: 28rpx;
+      color: var(--weui-LINK);
+    }
+
   }
 }
 
@@ -512,6 +535,44 @@
           }
         }
       }
+    }
+  }
+}
+
+// 生活指数
+.living {
+  .body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 24rpx 20rpx;
+
+    .item {
+      display: flex;
+      align-items: center;
+      width: 320rpx;
+      margin-top: 20rpx;
+      padding: 10rpx;
+      border-radius: 24rpx;
+      background-color: var(--weui-BG-1);
+
+      .left {
+        width: 160rpx;
+      }
+
+      .right {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+        .category {
+          font-size: 28rpx;
+          margin-top: 2rpx;
+          color: var(--weui-FG-1);
+        }
+      }
+
     }
   }
 }
