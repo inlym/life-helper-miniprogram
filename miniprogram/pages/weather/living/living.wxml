@@ -1,9 +1,29 @@
 <!--pages/weather/living/living.wxml-->
 <view class="page" data-weui-theme="{{ theme }}">
+
+    <view class="empty"></view>
+    <!-- 顶部选项区 -->
     <view class="head">
-        <view class="item" wx:for="{{ indices }}" wx:key="type">
+        <view class="item {{ index === activeIndex? 'active' : '' }}" wx:for="{{ indices }}" wx:key="type" data-type="{{ item.type }}"
+              bind:tap="handleHeadItemTap">
             <image class="image" src="{{ item.imageUrl }}"></image>
             <view class="name">{{ item.name }}</view>
         </view>
     </view>
+
+    <!-- 内容区 -->
+    <swiper class="body" current="{{ activeIndex }}" easing-function="easeInOutCubic" bind:change="handleSwiperItemChange">
+        <swiper-item class="item" wx:for="{{ indices }}" wx:key="type">
+            <view class="daily" wx:for="{{ item.daily }}" wx:key="date" wx:for-item="daily">
+                <view class="left">
+                    <view class="weekday">{{ daily.optimalDayOfWeek }}</view>
+                    <view class="date">{{ daily.formattedDate }}</view>
+                </view>
+                <view class="right">
+                    <view class="category living-level living-level--{{ daily.level }}">{{ daily.category }}</view>
+                    <view class="text">{{ daily.text }}</view>
+                </view>
+            </view>
+        </swiper-item>
+    </swiper>
 </view>

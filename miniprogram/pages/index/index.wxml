@@ -265,10 +265,10 @@
     <view class="living container" wx:if="{{ todayIndex.length>0 }}">
         <view class="head">
             <view class="name">生活指数</view>
-            <view class="link">更多</view>
+            <view class="link" bind:tap="goToLivingPage">更多</view>
         </view>
         <view class="body">
-            <view class="item" wx:for="{{ todayIndex }}" wx:key="date" data-type="{{ item.type }}" bind:tap="goToLivingPage">
+            <view class="item" wx:for="{{ todayIndex }}" wx:key="type" data-type="{{ item.type }}" bind:tap="goToLivingPage">
                 <image class="left" src="{{ item.imageUrl }}" mode="widthFix"></image>
                 <view class="right">
                     <view class="name">{{ item.name }}</view>

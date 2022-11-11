@@ -1,9 +1,17 @@
 /* pages/weather/living/living.wxss */
+
+@import "../../../assets/styles/weather.scss";
+
+.empty {
+  height: 24rpx;
+  background-color: var(--weui-BG-0);
+}
+
 .head {
   display: flex;
   justify-content: space-between;
   height: 200rpx;
-  margin: 20rpx;
+  margin: 0 20rpx;
   padding: 10rpx 20rpx;
   border-radius: 20rpx;
   background-color: var(--weui-BG-2);
@@ -13,20 +21,75 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    padding-bottom: 12rpx;
 
     .image {
       width: 160rpx;
     }
 
     .name {
-      font-size: 30rpx;
+      font-size: 28rpx;
       color: var(--weui-FG-1);
     }
   }
 
   .active {
-    border: 2rpx solid var(--weui-BRAND);
+    color: var(--weui-GREEN);
+    border: 4rpx solid var(--weui-BRAND);
     border-radius: 10rpx;
     background-color: var(--weui-FG-3);
+  }
+}
+
+.body {
+  height: 740rpx;
+  padding: 20rpx;
+
+
+  .item {
+    height: 800rpx;
+    border-radius: 10rpx;
+    background-color: var(--weui-BG-2);
+
+    // 一天的信息
+    .daily {
+      display: flex;
+      justify-content: space-between;
+      height: 220rpx;
+      margin: 20rpx;
+      padding: 16rpx;
+      background-color: var(--weui-BG-3);
+
+      .left {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width: 200rpx;
+
+        .weekday {
+          font-size: 30rpx;
+        }
+
+        .date {
+          font-size: 28rpx;
+          color: var(--weui-FG-1);
+        }
+      }
+
+      .right {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+
+        .text {
+          font-size: 26rpx;
+          margin-top: 28rpx;
+          padding-right: 10rpx;
+        }
+
+      }
+    }
   }
 }

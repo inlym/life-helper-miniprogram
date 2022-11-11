@@ -3,7 +3,7 @@
 // ----------------------------------------------------------------------------
 
 // =================================== 天气背景 ===================================
-[data-weui-theme='light'] .weather-bg {
+[data-weui-theme="light"] .weather-bg {
   background-repeat: no-repeat;
   background-position: 0 5%;
   background-size: 100% auto;
@@ -13,27 +13,27 @@
   }
 
   &--cloudy {
-    background-image: url('https://static.lifehelper.com.cn/qweather/bg/cloudy_day.png'),
-      linear-gradient(225deg, #d0dae8, #ccd4df 55%, #a5b3c5);
+    background-image: url("https://static.lifehelper.com.cn/qweather/bg/cloudy_day.png"),
+    linear-gradient(225deg, #d0dae8, #ccd4df 55%, #a5b3c5);
   }
 
   &--rain {
-    background-image: url('https://static.lifehelper.com.cn/qweather/bg/rain_day.png'),
-      linear-gradient(225deg, #dbebff, #dde5f4 55%, #becddd);
+    background-image: url("https://static.lifehelper.com.cn/qweather/bg/rain_day.png"),
+    linear-gradient(225deg, #dbebff, #dde5f4 55%, #becddd);
   }
 
   &--snow {
-    background-image: url('https://static.lifehelper.com.cn/qweather/bg/snow_day.png'),
-      linear-gradient(225deg, #d2f0fd, #e6f8fe 55%, #d6eded);
+    background-image: url("https://static.lifehelper.com.cn/qweather/bg/snow_day.png"),
+    linear-gradient(225deg, #d2f0fd, #e6f8fe 55%, #d6eded);
   }
 
   &--haze {
-    background-image: url('https://static.lifehelper.com.cn/qweather/bg/haze_day.png'),
-      linear-gradient(225deg, #b29c82, #ded9d7 64.29%, #d9d7dc);
+    background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_day.png"),
+    linear-gradient(225deg, #b29c82, #ded9d7 64.29%, #d9d7dc);
   }
 }
 
-[data-weui-theme='dark'] .weather-bg {
+[data-weui-theme="dark"] .weather-bg {
   background-repeat: no-repeat;
   background-position: 0 5%;
   background-size: 100% auto;
@@ -43,23 +43,23 @@
   }
 
   &--cloudy {
-    background-image: url('https://static.lifehelper.com.cn/qweather/bg/cloudy_night.png'),
-      linear-gradient(225deg, #8089a5, #424c66);
+    background-image: url("https://static.lifehelper.com.cn/qweather/bg/cloudy_night.png"),
+    linear-gradient(225deg, #8089a5, #424c66);
   }
 
   &--rain {
-    background-image: url('https://static.lifehelper.com.cn/qweather/bg/rain_night.png'),
-      linear-gradient(225deg, #2c4a77, #1f3b59);
+    background-image: url("https://static.lifehelper.com.cn/qweather/bg/rain_night.png"),
+    linear-gradient(225deg, #2c4a77, #1f3b59);
   }
 
   &--snow {
-    background-image: url('https://static.lifehelper.com.cn/qweather/bg/snow_night.png'),
-      linear-gradient(225deg, #18779e, #0d3f54);
+    background-image: url("https://static.lifehelper.com.cn/qweather/bg/snow_night.png"),
+    linear-gradient(225deg, #18779e, #0d3f54);
   }
 
   &--haze {
-    background-image: url('https://static.lifehelper.com.cn/qweather/bg/haze_night.png'),
-      linear-gradient(225deg, #8f8d52, #2b333c);
+    background-image: url("https://static.lifehelper.com.cn/qweather/bg/haze_night.png"),
+    linear-gradient(225deg, #8f8d52, #2b333c);
   }
 }
 
@@ -121,4 +121,42 @@
   &-level--5 {
     background-color: var(--weui-RED);
   }
+}
+
+// ================================= 生活指数等级颜色  =================================
+.living-level {
+  font-size: 28rpx;
+  margin-right: 20rpx;
+  padding: 6rpx 20rpx;
+  color: var(--weui-WHITE);
+  border-radius: 10rpx;
+
+  &--1 {
+    background-color: var(--weui-GREEN);
+  }
+
+  &--2 {
+    background-color: var(--weui-LIGHTGREEN);
+  }
+
+  &--3 {
+    background-color: var(--weui-BLUE);
+  }
+
+  &--4 {
+    background-color: var(--weui-INDIGO);
+  }
+
+  &--5 {
+    background-color: var(--weui-YELLOW);
+  }
+
+  &--6 {
+    background-color: var(--weui-ORANGE);
+  }
+
+  &--7, &--7 {
+    background-color: var(--weui-RED);
+  }
+
 }

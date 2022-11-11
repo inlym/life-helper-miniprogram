@@ -365,7 +365,6 @@ export function processWeatherDaily(data: WeatherDaily): WeatherDaily {
  */
 export function getTodayIndex(indices: LivingIndex[]): EnhancedDailyIndex[] {
   return indices.map((item: LivingIndex) => {
-    console.log(item)
     const result: EnhancedDailyIndex = item.daily.find(
       (day: DailyIndex) => day.optimalDayOfWeek === '今天'
     )! as EnhancedDailyIndex

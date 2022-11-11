@@ -191,7 +191,7 @@ Page({
    */
   goToLivingPage(e: TapEvent<{type: string}>) {
     const {indices} = this.data
-    const type = e.currentTarget.dataset.type
+    const type = e.currentTarget.dataset.type ?? ''
 
     wx.navigateTo({
       url: '/pages/weather/living/living',

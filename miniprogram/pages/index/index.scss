@@ -76,13 +76,6 @@
     }
   }
 
-  // 日期
-  .date {
-    font-size: 110%;
-    margin-top: 40rpx;
-    text-align: center;
-  }
-
   .weather-detail {
     display: flex;
     justify-content: center;
@@ -158,7 +151,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 540rpx;
+      width: 580rpx;
       height: 50rpx;
       margin-top: 20rpx;
       padding: 4rpx 20rpx 4rpx 28rpx;
@@ -188,10 +181,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 540rpx;
+      width: 580rpx;
       height: 50rpx;
       margin-top: 20rpx;
-      padding: 4rpx 20rpx 4rpx 28rpx;
+      padding: 6rpx 20rpx 4rpx 28rpx;
       border-radius: 14rpx;
       background-color: rgba(0, 0, 0, 10%);
 
@@ -216,7 +209,7 @@
     .list {
       display: flex;
       justify-content: space-between;
-      width: 540rpx;
+      width: 580rpx;
 
       border-radius: 20rpx;
       background-color: rgba(0, 0, 0, 5%);
