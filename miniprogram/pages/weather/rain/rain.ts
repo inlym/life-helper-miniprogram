@@ -1,5 +1,6 @@
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 import {MinutelyRain} from '../../../app/services/weather-data'
+import {PageChannelEvent} from '../../../app/core/constant'
 
 Page({
   data: {
@@ -16,10 +17,13 @@ Page({
 
   onLoad() {
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('transferData', (data) => {
-      this.setData(data)
-    })
+    if (eventChannel) {
+      eventChannel.on(PageChannelEvent.DATA_TRANSFER, (data) => {
+        this.setData(data)
+      })
+    }
 
+    // 将页面标题设为地点名称
     const title = this.data.locationName
     wx.setNavigationBarTitle({title})
   },

@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "生活指数"
+  "navigationBarTitleText": "生活指数",
+  "enablePullDownRefresh": false
 }

@@ -199,4 +199,17 @@ Page({
       res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {indices, type})
     })
   },
+
+  /**
+   * 跳转到“分钟级降水”页面
+   */
+  goToRainPage() {
+    const {rain, locationName} = this.data
+
+    wx.navigateTo({
+      url: '/pages/weather/rain/rain',
+    }).then((res) => {
+      res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {rain, locationName})
+    })
+  },
 })

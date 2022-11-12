@@ -1,1 +1,18 @@
-<view class="page" data-weui-theme="{{ theme }}"></view>
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="empty"></view>
+    <view class="rain-container weather-bg weather-bg--rain">
+        <view class="head">
+            <view class="summary">{{ rain.summary }}</view>
+        </view>
+        <view class="body">
+            <view class="chart">
+                <view class="item rain-bar" wx:for="{{ rain.minutely }}" wx:key="time" style="height: {{ item.precip*200+20 }}rpx"></view>
+            </view>
+            <view class="time">
+                <view class="desc">现在</view>
+                <view class="desc">1小时</view>
+                <view class="desc">2小时</view>
+            </view>
+        </view>
+    </view>
+</view>

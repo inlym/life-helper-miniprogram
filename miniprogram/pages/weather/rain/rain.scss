@@ -1,1 +1,49 @@
 /* pages/weather/rain/rain.wxss */
+
+@import "../../../assets/styles/weather.scss";
+
+.empty {
+  background-color: var(--weui-BG-0);
+  height: 32rpx;
+}
+
+.rain-container {
+  margin: 0 28rpx;
+  border-radius: 20rpx;
+  padding: 20rpx;
+
+  .head {
+    height: 160rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .summary {
+      font-size: 30rpx;
+    }
+  }
+
+  .body {
+    .chart {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      min-height: 200rpx;
+
+      .item {
+        width: 10rpx;
+      }
+    }
+
+    .time {
+      margin-top: 20rpx;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .desc {
+        font-size: 26rpx;
+      }
+    }
+  }
+}

@@ -160,3 +160,20 @@
   }
 
 }
+
+// 降水相关
+[data-weui-theme="light"] .rain-container{
+  background-color: #d7effb;
+
+  .rain-bar{
+    background-color: #5077fe;
+  }
+}
+
+[data-weui-theme="dark"] .rain-container{
+  background-color: #1e385d;
+
+  .rain-bar{
+    background-color: #a7c8f1;
+  }
+}

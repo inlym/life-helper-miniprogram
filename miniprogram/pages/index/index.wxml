@@ -38,7 +38,7 @@
 
         <!-- 分钟级降水 -->
         <view class="rain" wx:if="{{ rain.hasRain }}">
-            <view class="item">
+            <view class="item rain-container" bind:tap="goToRainPage">
                 <view class="name text-ellipsis-l1">{{ rain.summary }}</view>
                 <view class="iconfont icon-link"></view>
             </view>
