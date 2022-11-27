@@ -6,6 +6,7 @@
 import {StorageField} from './constant'
 import {requestForData} from './http'
 import {enhancedStorage, EnhancedStorage} from './storage'
+import dayjs from 'dayjs'
 
 /**
  * 获取微信 code
@@ -35,18 +36,21 @@ export function getCode(): Promise<string> {
 }
 
 /** 登录接口响应数据 */
-export interface TokenInfo {
-  /** 登录凭证创建时间 */
-  createTime: number
-
-  /** 登录凭证过期时间 */
-  expireTime: number
-
-  /** 登录凭证 */
+export interface SecurityToken {
+  /** 鉴权令牌 */
   token: string
 
-  /** 登录凭证类型 */
+  /** 权令牌类型 */
   type: string
+
+  /** 发起请求时，携带令牌的请求头名称 */
+  headerName: string
+
+  /** 创建时间 */
+  createTime: string
+
+  /** 过期时间 */
+  expireTime: string
 }
 
 /**
@@ -54,35 +58,22 @@ export interface TokenInfo {
  */
 export async function login(): Promise<string> {
   const code = await getCode()
-  const data = await requestForData<TokenInfo>({
+  const data = await requestForData<SecurityToken>({
     method: 'POST',
     url: '/login/wechat',
     data: {code},
     auth: false,
   })
 
-  console.log(data)
-
-  enhancedStorage.set(StorageField.TOKEN, data.token, data.expireTime)
+  enhancedStorage.set(StorageField.TOKEN, data)
 
   return data.token
 }
 
 /**
- * 获取本地存储的登录凭证，若为空，则返回空字符串
+ * 是否存有有效的安全令牌
  */
-export function getLocalToken(): string {
-  const token = enhancedStorage.get<string>(StorageField.TOKEN)
-  if (token) {
-    return token
-  }
-
-  return ''
-}
-
-/** 确保已登录 */
-export async function ensureLogined(): Promise<void> {
-  if (!getLocalToken()) {
-    await login()
-  }
+export function hasValidSecurityToken(): boolean {
+  const securityToken = enhancedStorage.get<SecurityToken>(StorageField.TOKEN)
+  return !!securityToken && dayjs(securityToken.expireTime).isAfter(dayjs())
 }

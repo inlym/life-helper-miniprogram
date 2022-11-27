@@ -1,5 +1,5 @@
 import {AxiosRequestConfig} from 'axios'
-import {getLocalToken, login} from '../core/auth'
+import {hasValidSecurityToken, login} from '../core/auth'
 import {RequestOptionsInternal} from './types'
 
 /**
@@ -10,9 +10,8 @@ import {RequestOptionsInternal} from './types'
  */
 export async function authInterceptor(config: AxiosRequestConfig): Promise<AxiosRequestConfig> {
   const auth = (config as unknown as RequestOptionsInternal).auth
-  const token = getLocalToken()
 
-  if (auth && !token) {
+  if (auth && !hasValidSecurityToken()) {
     await login()
   }
 

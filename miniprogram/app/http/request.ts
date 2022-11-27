@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {config} from '../core/config'
-import {accessTokenInterceptor} from './access-token-interceptor'
+import {securityTokenInterceptor} from './security-token-interceptor'
 import {aliyunApigwSignatureInterceptorBuilder} from './aliyun-apigw-signature-interceptor'
 import {authInterceptor} from './auth-interceptor'
 import {invalidTokenInterceptor} from './invalid-token-interceptor'
@@ -21,7 +21,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   aliyunApigwSignatureInterceptorBuilder(config.signature.key, config.signature.secret, false)
 )
-instance.interceptors.request.use(accessTokenInterceptor)
+instance.interceptors.request.use(securityTokenInterceptor)
 instance.interceptors.request.use(authInterceptor)
 instance.interceptors.request.use(showLoadingInterceptor)
 
