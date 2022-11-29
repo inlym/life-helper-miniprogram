@@ -18,3 +18,12 @@ export interface RequestOptionsInternal {
   /** 是否需要展示 Loading 提示 */
   loading?: boolean
 }
+
+/** 基本响应数据结构 */
+export interface BaseResponse {
+  /** 错误码 */
+  errorCode: number
+
+  /** 错误消息 */
+  errorMessage: string
+}
