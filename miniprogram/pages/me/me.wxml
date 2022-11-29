@@ -1,6 +1,6 @@
 <view class="page" data-weui-theme="{{ theme }}">
     <!-- 顶部头像区域 -->
-    <view class="top">
+    <view class="top" bindtap="goToUserInfoPage">
         <!-- 顶部占位区域 -->
         <top-space offset="{{ 50 }}"></top-space>
 
@@ -15,11 +15,6 @@
             <view class="info">
                 <view class="nickname">{{ userInfo.nickName }}</view>
                 <view class="desc">欢迎使用小鸣助手</view>
-            </view>
-
-            <!-- 操作区 -->
-            <view class="operator">
-                <button size="mini" type="primary" bindtap="onUpdateButtonTap">更新</button>
             </view>
         </view>
 

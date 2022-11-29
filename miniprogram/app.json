@@ -11,7 +11,8 @@
     "pages/album/list/list",
     "pages/album/detail/detail",
     "pages/album/edit/edit",
-    "pages/weather/living/living"
+    "pages/weather/living/living",
+    "pages/user/user-info/user-info"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",

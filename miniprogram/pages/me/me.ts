@@ -63,6 +63,8 @@ Page({
 
   /**
    * 点击「更新」按钮
+   *
+   * todo 这个方法已弃用，先留着，后续再删（2022.11.30）。
    */
   async onUpdateButtonTap() {
     wx.vibrateShort({type: 'medium'})
@@ -101,5 +103,10 @@ Page({
         this.clearAnimation('.avatar', {scale: true})
       }
     )
+  },
+
+  /** 跳转到【个人信息】页面 */
+  goToUserInfoPage() {
+    wx.navigateTo({url: '/pages/user/user-info/user-info'})
   },
 })

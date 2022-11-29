@@ -1,0 +1,6 @@
+<!--pages/user/user-info/user-info.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <mp-cells>
+        <mp-cell value="头像"></mp-cell>
+    </mp-cells>
+</view>
