@@ -1,7 +1,7 @@
 /** 天气地点 */
 import {StorageField} from '../core/constant'
 import {requestForData} from '../core/http'
-import {enhancedStorage} from '../core/storage'
+import {storage} from '../core/storage'
 
 /** 基础天气数据 */
 export interface BasicWeather {
@@ -93,7 +93,7 @@ export function getWeatherPlaceList(): Promise<GetWeatherPlaceListResponse> {
  * 获取当前选中的天气地点 ID
  */
 export function getSelectWeatherPlaceId(): string {
-  const id = enhancedStorage.get(StorageField.SELECTED_WEATHER_PLACE_ID)
+  const id = storage.get(StorageField.SELECTED_WEATHER_PLACE_ID)
   return id ? id : ''
 }
 
@@ -101,12 +101,12 @@ export function getSelectWeatherPlaceId(): string {
  * 设置当前选中的天气地点 ID
  */
 export function setSelectWeatherPlaceId(id: string): void {
-  enhancedStorage.set(StorageField.SELECTED_WEATHER_PLACE_ID, id)
+  storage.set(StorageField.SELECTED_WEATHER_PLACE_ID, id)
 }
 
 /**
  * 设置当前选中的天气地点 ID
  */
 export function removeSelectWeatherPlaceId(): void {
-  enhancedStorage.remove(StorageField.SELECTED_WEATHER_PLACE_ID)
+  storage.remove(StorageField.SELECTED_WEATHER_PLACE_ID)
 }

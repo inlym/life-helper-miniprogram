@@ -1,5 +1,5 @@
 import {AxiosRequestConfig, AxiosResponse} from 'axios'
-import {enhancedStorage} from '../core/storage'
+import {storage} from '../core/storage'
 import {ParamsUtils} from '../utils/params-utils'
 import {RequestOptionsInternal} from './types'
 
@@ -43,20 +43,20 @@ export function showLoadingInterceptor(config: AxiosRequestConfig): AxiosRequest
 
   if (loading) {
     const key = getKey(config)
-    enhancedStorage.set(key, RequestStatus.UNFINISHED, 60 * 1000)
+    storage.set(key, RequestStatus.UNFINISHED, 60 * 1000)
 
     setTimeout(() => {
-      if (enhancedStorage.get(key) === RequestStatus.UNFINISHED) {
+      if (storage.get(key) === RequestStatus.UNFINISHED) {
         wx.showLoading({
           title: '加载中...',
           mask: true,
         })
-        enhancedStorage.set('isShowingLoading', true)
+        storage.set('isShowingLoading', true)
 
         setTimeout(() => {
-          if (enhancedStorage.get(key) === RequestStatus.UNFINISHED) {
-            if (enhancedStorage.get('isShowingLoading') === true) {
-              enhancedStorage.remove('isShowingLoading')
+          if (storage.get(key) === RequestStatus.UNFINISHED) {
+            if (storage.get('isShowingLoading') === true) {
+              storage.remove('isShowingLoading')
               wx.hideLoading({
                 noConflict: true,
               })
@@ -79,9 +79,9 @@ export function hideLoadingInterceptor(response: AxiosResponse): AxiosResponse {
 
   if (loading) {
     const key = getKey(config)
-    enhancedStorage.set(key, RequestStatus.FINISHED, 60 * 1000)
-    if (enhancedStorage.get('isShowingLoading') === true) {
-      enhancedStorage.remove('isShowingLoading')
+    storage.set(key, RequestStatus.FINISHED, 60 * 1000)
+    if (storage.get('isShowingLoading') === true) {
+      storage.remove('isShowingLoading')
       wx.hideLoading({
         noConflict: true,
       })

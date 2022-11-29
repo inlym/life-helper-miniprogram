@@ -1,8 +1,7 @@
 import {AxiosRequestConfig} from 'axios'
 import {SecurityToken} from '../core/auth'
 import {StorageField} from '../core/constant'
-import {enhancedStorage} from '../core/storage'
-import dayjs from 'dayjs'
+import {storage} from '../core/storage'
 
 /**
  * 登录凭证拦截器
@@ -11,9 +10,9 @@ import dayjs from 'dayjs'
  * 本地存在登录凭证且未过期，则携带在请求头中，否则不进行任何操作。
  */
 export function securityTokenInterceptor(config: AxiosRequestConfig): AxiosRequestConfig {
-  const securityToken = enhancedStorage.get<SecurityToken>(StorageField.TOKEN)
+  const securityToken = storage.get<SecurityToken>(StorageField.TOKEN)
 
-  if (securityToken && dayjs(securityToken.expireTime).isAfter(dayjs())) {
+  if (securityToken) {
     const headers = config.headers || {}
     headers[securityToken.headerName] = securityToken.token
     config.headers = headers

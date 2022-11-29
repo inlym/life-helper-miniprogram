@@ -129,9 +129,9 @@ Page({
     // 此处是偷懒的写法，应该将字段值一个个取出来，然后再赋值
     this.setData(weatherData)
 
-    await wx.hideLoading()
+    wx.hideLoading()
 
-    await this.afterGettingData()
+    this.afterGettingData()
   },
 
   /** 获取并设置保留高度，只需在初始化时执行一次即可 */

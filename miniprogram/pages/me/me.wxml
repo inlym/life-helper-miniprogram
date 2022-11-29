@@ -14,7 +14,7 @@
             <!-- 昵称、使用天数 -->
             <view class="info">
                 <view class="nickname">{{ userInfo.nickName }}</view>
-                <view class="desc">已使用小鸣助手{{ registeredDays }}天</view>
+                <view class="desc">欢迎使用小鸣助手</view>
             </view>
 
             <!-- 操作区 -->

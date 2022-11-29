@@ -5,8 +5,7 @@
 
 import {StorageField} from './constant'
 import {requestForData} from './http'
-import {enhancedStorage, EnhancedStorage} from './storage'
-import dayjs from 'dayjs'
+import {storage, Storage} from './storage'
 
 /**
  * 获取微信 code
@@ -17,7 +16,7 @@ import dayjs from 'dayjs'
  */
 export function getCode(): Promise<string> {
   return new Promise((resolve, reject) => {
-    const code = enhancedStorage.get<string>(StorageField.CODE)
+    const code = storage.get<string>(StorageField.CODE)
     if (code) {
       resolve(code)
       return
@@ -26,7 +25,7 @@ export function getCode(): Promise<string> {
     wx.login({
       success(res) {
         resolve(res.code)
-        enhancedStorage.set(StorageField.CODE, res.code, EnhancedStorage.ofMinutes(5))
+        storage.set(StorageField.CODE, res.code, Storage.ofMinutes(5))
       },
       fail(res) {
         reject(new Error(res.errMsg))
@@ -56,7 +55,7 @@ export interface SecurityToken {
 /**
  * 登录
  */
-export async function login(): Promise<string> {
+export async function login(): Promise<SecurityToken> {
   const code = await getCode()
   const data = await requestForData<SecurityToken>({
     method: 'POST',
@@ -65,15 +64,7 @@ export async function login(): Promise<string> {
     auth: false,
   })
 
-  enhancedStorage.set(StorageField.TOKEN, data)
+  storage.set(StorageField.TOKEN, data, data.expireTime)
 
-  return data.token
-}
-
-/**
- * 是否存有有效的安全令牌
- */
-export function hasValidSecurityToken(): boolean {
-  const securityToken = enhancedStorage.get<SecurityToken>(StorageField.TOKEN)
-  return !!securityToken && dayjs(securityToken.expireTime).isAfter(dayjs())
+  return data
 }

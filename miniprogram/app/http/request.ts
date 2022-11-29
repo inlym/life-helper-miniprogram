@@ -1,13 +1,11 @@
 import axios from 'axios'
 import {config} from '../core/config'
-import {securityTokenInterceptor} from './security-token-interceptor'
 import {aliyunApigwSignatureInterceptorBuilder} from './aliyun-apigw-signature-interceptor'
 import {authInterceptor} from './auth-interceptor'
 import {invalidTokenInterceptor} from './invalid-token-interceptor'
-import {hideLoadingInterceptor, showLoadingInterceptor} from './loading-interceptor'
 import {miniprogramAdapter} from './miniprogram-adatper'
 import {requestLogInterceptor} from './request-log-interceptor'
-import {errorTipsInterceptor} from './error-tips-interceptor'
+import {securityTokenInterceptor} from './security-token-interceptor'
 
 const instance = axios.create({
   baseURL: config.baseURL,
@@ -23,12 +21,11 @@ instance.interceptors.request.use(
 )
 instance.interceptors.request.use(securityTokenInterceptor)
 instance.interceptors.request.use(authInterceptor)
-instance.interceptors.request.use(showLoadingInterceptor)
+// instance.interceptors.request.use(showLoadingInterceptor)
 
 // 响应拦截器
-instance.interceptors.response.use(hideLoadingInterceptor)
+// instance.interceptors.response.use(hideLoadingInterceptor)
 instance.interceptors.response.use(invalidTokenInterceptor)
 instance.interceptors.response.use(requestLogInterceptor)
-instance.interceptors.response.use(errorTipsInterceptor)
 
 export const request = instance

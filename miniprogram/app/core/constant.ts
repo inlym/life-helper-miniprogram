@@ -10,11 +10,6 @@ export const StorageField = {
   SELECTED_WEATHER_PLACE_ID: 'SELECTED_WEATHER_PLACE_ID',
 }
 
-/** 自定义请求头字段名 */
-export const HeaderField = {
-  JWT: 'x-lifehelper-auth-jwt',
-}
-
 /** 静态资源地址 */
 export const StaticUrl = {
   /** 用于分享时 logo */

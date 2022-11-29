@@ -1,5 +1,7 @@
 import {AxiosRequestConfig} from 'axios'
-import {hasValidSecurityToken, login} from '../core/auth'
+import {login} from '../core/auth'
+import {StorageField} from '../core/constant'
+import {storage} from '../core/storage'
 import {RequestOptionsInternal} from './types'
 
 /**
@@ -10,8 +12,9 @@ import {RequestOptionsInternal} from './types'
  */
 export async function authInterceptor(config: AxiosRequestConfig): Promise<AxiosRequestConfig> {
   const auth = (config as unknown as RequestOptionsInternal).auth
+  const securityToken = storage.get(StorageField.TOKEN)
 
-  if (auth && !hasValidSecurityToken()) {
+  if (auth && !securityToken) {
     await login()
   }
 

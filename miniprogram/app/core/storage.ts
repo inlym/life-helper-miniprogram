@@ -2,6 +2,32 @@
  * 对微信小程序原生的数据缓存做二次封装
  */
 
+import dayjs from 'dayjs'
+
+/**
+ * 计算到期时间的时间戳
+ *
+ * @param time 到期时间或有效时长（毫秒）
+ */
+function calcExpireTime(time?: string | number): number {
+  // 使用 2 年的毫秒数表示一个足够长的时间区间
+  const LONG_ENOUGH_MS = 2 * 365 * 24 * 3600 * 1000
+
+  if (typeof time === 'string') {
+    return dayjs(time).valueOf()
+  }
+
+  if (typeof time === 'number') {
+    if (time > LONG_ENOUGH_MS) {
+      return time
+    } else {
+      return Date.now() + time
+    }
+  }
+
+  return LONG_ENOUGH_MS
+}
+
 /** 最终存入数据缓存的数据格式 */
 export interface StorageWrapper<T = any> {
   /** 创建时间（时间戳，毫秒） */
@@ -17,7 +43,7 @@ export interface StorageWrapper<T = any> {
 /**
  * 二次封装的数据缓存方法
  */
-export class EnhancedStorage {
+export class Storage {
   constructor() {
     // 空
   }
@@ -48,15 +74,20 @@ export class EnhancedStorage {
    */
   set<T = any>(key: string, data: T, expiration: number): void
 
-  set<T = any>(first: string, second: T, third?: number): void {
+  /**
+   * 保存数据
+   *
+   * @param key 键名
+   * @param data 要存入的数据
+   * @param expiration 到期时间字符串
+   */
+  set<T = any>(key: string, data: T, expiration: string): void
+
+  set<T = any>(first: string, second: T, third?: number | string): void {
     const key = first
     const data = second
-
-    const longEnoughMs = 2 * 365 * 24 * 3600 * 1000
-    const expiration = third ? third : longEnoughMs
-
     const createTime = Date.now()
-    const expireTime = expiration > createTime ? expiration : expiration + createTime
+    const expireTime = calcExpireTime(third)
 
     const wrapper: StorageWrapper<T> = {createTime, expireTime, data}
 
@@ -95,4 +126,4 @@ export class EnhancedStorage {
   }
 }
 
-export const enhancedStorage = new EnhancedStorage()
+export const storage = new Storage()
