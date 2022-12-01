@@ -3,6 +3,7 @@
  */
 
 import dayjs from 'dayjs'
+import {logger} from './logger'
 
 /**
  * 计算到期时间的时间戳
@@ -13,19 +14,22 @@ function calcExpireTime(time?: string | number): number {
   // 使用 2 年的毫秒数表示一个足够长的时间区间
   const LONG_ENOUGH_MS = 2 * 365 * 24 * 3600 * 1000
 
+  // 情况（1）：形如 `2022-12-01 19:44:13` 格式的字符串
   if (typeof time === 'string') {
     return dayjs(time).valueOf()
   }
 
   if (typeof time === 'number') {
+    // 情况（2）：是一个时间戳
     if (time > LONG_ENOUGH_MS) {
       return time
     } else {
+      // 情况（3）：表示有效时长（毫秒）
       return Date.now() + time
     }
   }
 
-  return LONG_ENOUGH_MS
+  return Date.now() + LONG_ENOUGH_MS
 }
 
 /** 最终存入数据缓存的数据格式 */
@@ -90,6 +94,7 @@ export class Storage {
     const expireTime = calcExpireTime(third)
 
     const wrapper: StorageWrapper<T> = {createTime, expireTime, data}
+    logger.debug(`[Storage] key=${key}, data=${JSON.stringify(data)}`)
 
     wx.setStorageSync(key, wrapper)
   }
