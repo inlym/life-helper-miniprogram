@@ -1,1 +1,11 @@
 /* pages/user/user-info/user-info.wxss */
+.page-top {
+  height: 1rpx;
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+
+  border-radius: 8rpx;
+}

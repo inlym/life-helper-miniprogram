@@ -10,6 +10,7 @@ import {
 } from '../../../app/services/weather-place'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 import {CommonColor} from '../../../app/core/constant'
+import {TapEvent} from '../../../app/utils/types'
 
 Page({
   data: {
@@ -128,13 +129,13 @@ Page({
   },
 
   /** 处理“删除”按钮点击事件 */
-  handleRemoveButtonTap(e: WechatMiniprogram.CustomEvent<any, any, {id: string}>) {
+  handleRemoveButtonTap(e: TapEvent<{id: string}>) {
     const placeId = e.currentTarget.dataset.id
     this.remove(placeId)
   },
 
   /** 处理天气地点列表项点击事件 */
-  handleWeatherPlaceItemTap(e: WechatMiniprogram.CustomEvent<any, any, {id: string}>) {
+  handleWeatherPlaceItemTap(e: TapEvent<{id: string}>) {
     const placeId = e.currentTarget.dataset.id
 
     // 不在“编辑”状态才继续

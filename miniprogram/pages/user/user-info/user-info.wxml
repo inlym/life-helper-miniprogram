@@ -1,6 +1,33 @@
 <!--pages/user/user-info/user-info.wxml-->
 <view class="page" data-weui-theme="{{ theme }}">
+    <!-- 如果不加这个元素，就会留出一条空隙，暂时未找到原因 -->
+    <view class="page-top"></view>
+
     <mp-cells>
-        <mp-cell value="头像"></mp-cell>
+        <!-- 头像 -->
+        <mp-cell hover link value="头像">
+            <image
+                slot="footer"
+                class="avatar"
+                src="https://res.lifehelper.com.cn/avatar/de0124e7fdeb44d98a4088b5f3628d6c"
+                mode="widthFix"
+            ></image>
+        </mp-cell>
+
+        <!-- 昵称 -->
+        <mp-cell hover link value="昵称" footer="会飞的猪"> </mp-cell>
+    </mp-cells>
+
+    <mp-cells>
+        <mp-cell hover link value="性别" footer="男"> </mp-cell>
+        <mp-cell hover link value="地区" footer="浙江 宁波"> </mp-cell>
+    </mp-cells>
+
+    <mp-cells>
+        <mp-cell hover link value="账户ID" footer="1234567"> </mp-cell>
+    </mp-cells>
+
+    <mp-cells>
+        <mp-cell hover link value="我与小鸣助手" footer="已使用234天"> </mp-cell>
     </mp-cells>
 </view>
