@@ -1,20 +1,16 @@
+// pages/user/avatar/avatar.ts
+// 头像预览页
+
 import {PageChannelEvent} from '../../../app/core/constant'
-import {UserInfo} from '../../../app/services/userinfo'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
-// pages/user/user-info/user-info.ts
 Page({
   data: {
-    /** 用户资料 */
-    userInfo: {} as UserInfo,
+    /** 头像图片的 URL 地址 */
+    avatarUrl: '',
   },
 
   behaviors: [themeBehavior],
-
-  /** 初始化方法 */
-  init() {
-    // todo
-  },
 
   /** 生命周期函数--监听页面加载 */
   onLoad() {
@@ -27,11 +23,9 @@ Page({
     }
   },
 
-  /** 跳转到【头像预览】页 */
-  goToAvatarPage() {
-    const avatarUrl = this.data.userInfo.avatarUrl
-    wx.navigateTo({url: '/pages/user/avatar/avatar'}).then((res) => {
-      res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {avatarUrl})
-    })
+  /** 处理选择头像事件 */
+  handleChooseAvatar(e: WechatMiniprogram.CustomEvent<{avatarUrl: string}>) {
+    const avatarUrl = e.detail.avatarUrl
+    this.setData({avatarUrl})
   },
 })

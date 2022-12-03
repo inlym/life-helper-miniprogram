@@ -13,7 +13,8 @@
     "pages/album/edit/edit",
     "pages/weather/living/living",
     "pages/user/user-info/user-info",
-    "pages/system/error/error"
+    "pages/system/error/error",
+    "pages/user/avatar/avatar"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",

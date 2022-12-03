@@ -1,0 +1,6 @@
+<!--pages/user/avatar/avatar.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="space"></view>
+    <image class="avatar" src="{{ avatarUrl }}" mode="aspectFill"></image>
+    <button class="button" open-type="chooseAvatar" bindchooseavatar="handleChooseAvatar">修改头像</button>
+</view>

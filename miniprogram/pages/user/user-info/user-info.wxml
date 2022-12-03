@@ -5,7 +5,7 @@
 
     <mp-cells>
         <!-- 头像 -->
-        <mp-cell hover link value="头像">
+        <mp-cell hover link value="头像" bindtap="goToAvatarPage">
             <image slot="footer" class="avatar" src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
         </mp-cell>
 
