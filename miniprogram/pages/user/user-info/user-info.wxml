@@ -6,28 +6,29 @@
     <mp-cells>
         <!-- 头像 -->
         <mp-cell hover link value="头像">
-            <image
-                slot="footer"
-                class="avatar"
-                src="https://res.lifehelper.com.cn/avatar/de0124e7fdeb44d98a4088b5f3628d6c"
-                mode="widthFix"
-            ></image>
+            <image slot="footer" class="avatar" src="{{ userInfo.avatarUrl }}" mode="widthFix"></image>
         </mp-cell>
 
         <!-- 昵称 -->
-        <mp-cell hover link value="昵称" footer="会飞的猪"> </mp-cell>
+        <mp-cell hover link value="昵称" footer="{{ userInfo.nickName }}"> </mp-cell>
     </mp-cells>
 
     <mp-cells>
-        <mp-cell hover link value="性别" footer="男"> </mp-cell>
-        <mp-cell hover link value="地区" footer="浙江 宁波"> </mp-cell>
+        <mp-cell hover link value="性别" footer="{{ userInfo.gender }}"> </mp-cell>
+        <mp-cell
+            hover
+            link
+            value="地区"
+            footer="{{ userInfo.regionDisplayName ? userInfo.regionDisplayName : '请选择' }}"
+        >
+        </mp-cell>
     </mp-cells>
 
     <mp-cells>
-        <mp-cell hover link value="账户ID" footer="1234567"> </mp-cell>
+        <mp-cell hover link value="账户ID" footer="{{ userInfo.accountId }}"> </mp-cell>
     </mp-cells>
 
     <mp-cells>
-        <mp-cell hover link value="我与小鸣助手" footer="已使用234天"> </mp-cell>
+        <mp-cell hover link value="我与小鸣助手" footer="已使用{{ userInfo.registeredDays }}天"> </mp-cell>
     </mp-cells>
 </view>

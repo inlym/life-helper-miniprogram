@@ -20,12 +20,13 @@
 
   .info {
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: space-between;
 
-    width: 360rpx;
     margin-left: 30rpx;
     padding: 4rpx 0 10rpx;
+    padding-right: 28rpx;
 
     .nickname {
       font-size: 38rpx;
@@ -34,6 +35,9 @@
 
     .desc {
       font-size: 30rpx;
+
+      display: flex;
+      justify-content: space-between;
 
       color: var(--weui-FG-1);
     }

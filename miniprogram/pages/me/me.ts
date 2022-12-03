@@ -1,8 +1,8 @@
 // pages/me/me.ts
+import {PageChannelEvent} from '../../app/core/constant'
 import {getIpInfo} from '../../app/services/ip'
 import {IpInfo} from '../../app/services/ip.interface'
-import {getUserInfo, updateUserInfo} from '../../app/services/userinfo'
-import {UserInfo} from '../../app/services/userinfo.interface'
+import {getUserInfo, UserInfo} from '../../app/services/userinfo'
 import {shareAppBehavior} from '../../behaviors/share-app-behavior'
 import {themeBehavior} from '../../behaviors/theme-behavior'
 
@@ -19,9 +19,6 @@ Page({
 
     /** 将 IP 信息拼接成一句话描述 */
     ipDesc: '',
-
-    /** 已使用天数 */
-    registeredDays: 0,
   },
 
   behaviors: [themeBehavior, shareAppBehavior],
@@ -51,7 +48,7 @@ Page({
   /** 获取用户信息 */
   async getUserInfo() {
     const userInfo = await getUserInfo()
-    this.setData({userInfo, registeredDays: userInfo.registeredDays})
+    this.setData({userInfo})
   },
 
   /** 获取 IP 信息 */
@@ -59,27 +56,6 @@ Page({
     const ipInfo = await getIpInfo()
     const ipDesc = ipInfo.ip + (ipInfo.region ? ` (${ipInfo.region})` : '')
     this.setData({ipInfo, ipDesc})
-  },
-
-  /**
-   * 点击「更新」按钮
-   *
-   * todo 这个方法已弃用，先留着，后续再删（2022.11.30）。
-   */
-  async onUpdateButtonTap() {
-    wx.vibrateShort({type: 'medium'})
-    const result = await wx.getUserProfile({
-      lang: 'zh_CN',
-      desc: '获取您的头像和昵称',
-    })
-
-    const userInfo: UserInfo = {
-      nickName: result.userInfo.nickName,
-      avatarUrl: result.userInfo.avatarUrl,
-    }
-
-    this.setData({userInfo})
-    await updateUserInfo(userInfo)
   },
 
   /** 复制 IP 地址 */
@@ -107,6 +83,9 @@ Page({
 
   /** 跳转到【个人信息】页面 */
   goToUserInfoPage() {
-    wx.navigateTo({url: '/pages/user/user-info/user-info'})
+    const {userInfo} = this.data
+    wx.navigateTo({url: '/pages/user/user-info/user-info'}).then((res) => {
+      res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {userInfo})
+    })
   },
 })
