@@ -1,0 +1,8 @@
+<!--pages/system/error/error.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <mp-msg type="info" size="100" title="提示" desc="刚刚发生了一点小状况，现在已经恢复，你可以继续使用了！">
+        <view class="handle" slot="handle">
+            <button type="primary" bindtap="goToIndexPage">我知道了</button>
+        </view>
+    </mp-msg>
+</view>

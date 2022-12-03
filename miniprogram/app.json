@@ -12,7 +12,8 @@
     "pages/album/detail/detail",
     "pages/album/edit/edit",
     "pages/weather/living/living",
-    "pages/user/user-info/user-info"
+    "pages/user/user-info/user-info",
+    "pages/system/error/error"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",
@@ -61,7 +62,9 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "requiredPrivateInfos": ["chooseLocation"],
+  "requiredPrivateInfos": [
+    "chooseLocation"
+  ],
   "debug": false,
   "lazyCodeLoading": "requiredComponents",
   "darkmode": true,

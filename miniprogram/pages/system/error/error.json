@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mp-msg": "weui-miniprogram/msg/msg"
+  },
+  "navigationBarTitleText": "啊，出问题了",
+  "enablePullDownRefresh": false
+}

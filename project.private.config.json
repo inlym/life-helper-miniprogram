@@ -67,6 +67,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "个人信息",
+          "pathName": "pages/user/user-info/user-info",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "网络异常页",
+          "pathName": "pages/system/error/error",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
