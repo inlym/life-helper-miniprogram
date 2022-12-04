@@ -121,3 +121,12 @@ export async function updateAvatar(avatarUrl: string): Promise<UserInfo> {
   const newAvatarUrl = credential.url + '/' + credential.key
   return updateUserInfo({avatarUrl: newAvatarUrl})
 }
+
+/**
+ * 修改昵称
+ *
+ * @param nickName 新的昵称
+ */
+export async function updateNickName(nickName: string) {
+  return updateUserInfo({nickName})
+}

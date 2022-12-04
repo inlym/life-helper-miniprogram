@@ -1,0 +1,21 @@
+<!--pages/user/nick-name/nick-name.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <input
+        class="nickname-input"
+        type="text"
+        value="{{ currentNickName }}"
+        placeholder=""
+        focus
+        bindinput="handleInput"
+    />
+
+    <button
+        class="submit"
+        type="primary"
+        loading="{{ submitButtonLoading }}"
+        disabled="{{ submitButtonDisabled }}"
+        bindtap="submit"
+    >
+        提交
+    </button>
+</view>

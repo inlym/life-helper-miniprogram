@@ -81,6 +81,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "修改昵称",
+          "pathName": "pages/user/nick-name/nick-name",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

@@ -14,7 +14,8 @@
     "pages/weather/living/living",
     "pages/user/user-info/user-info",
     "pages/system/error/error",
-    "pages/user/avatar/avatar"
+    "pages/user/avatar/avatar",
+    "pages/user/nick-name/nick-name"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",

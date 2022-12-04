@@ -10,7 +10,7 @@
         </mp-cell>
 
         <!-- 昵称 -->
-        <mp-cell hover link value="昵称" footer="{{ userInfo.nickName }}"> </mp-cell>
+        <mp-cell hover link value="昵称" footer="{{ userInfo.nickName }}" bindtap="goToNickNamePage"> </mp-cell>
     </mp-cells>
 
     <mp-cells>

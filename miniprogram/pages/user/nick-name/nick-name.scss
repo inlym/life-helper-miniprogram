@@ -1,0 +1,15 @@
+/* pages/user/nick-name/nick-name.wxss */
+
+.nickname-input {
+  font-size: 32rpx;
+
+  height: 100rpx;
+  padding: 0 28rpx;
+
+  background-color: var(--weui-BG-2);
+}
+
+// 提交按钮
+.submit {
+  margin-top: 300rpx;
+}

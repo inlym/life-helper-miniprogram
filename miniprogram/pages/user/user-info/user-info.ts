@@ -1,4 +1,3 @@
-import {PageChannelEvent} from '../../../app/core/constant'
 import {getUserInfo, UserInfo} from '../../../app/services/userinfo'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
@@ -24,9 +23,11 @@ Page({
 
   /** 跳转到【头像预览】页 */
   goToAvatarPage() {
-    const avatarUrl = this.data.userInfo.avatarUrl
-    wx.navigateTo({url: '/pages/user/avatar/avatar'}).then((res) => {
-      res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {avatarUrl})
-    })
+    wx.navigateTo({url: '/pages/user/avatar/avatar'})
+  },
+
+  /** 跳转到【设置昵称】页 */
+  goToNickNamePage() {
+    wx.navigateTo({url: '/pages/user/nick-name/nick-name'})
   },
 })
