@@ -14,14 +14,28 @@
     </mp-cells>
 
     <mp-cells>
-        <mp-cell hover link value="性别" footer="{{ userInfo.gender }}"> </mp-cell>
-        <mp-cell
-            hover
-            link
-            value="地区"
-            footer="{{ userInfo.regionDisplayName ? userInfo.regionDisplayName : '请选择' }}"
+        <!-- 性别 -->
+        <picker class="gender" header-text="请选择性别" range="{{ genders }}" bindchange="handleGenderChange">
+            <mp-cell hover link value="性别" footer="{{ userInfo.gender }}"> </mp-cell>
+        </picker>
+
+        <!-- 地区 -->
+        <picker
+            class="region"
+            mode="region"
+            header-text="请选择地区"
+            value="{{ userInfo.region }}"
+            level="city"
+            bindchange="handleRegionChange"
         >
-        </mp-cell>
+            <mp-cell
+                hover
+                link
+                value="地区"
+                footer="{{ userInfo.regionDisplayName ? userInfo.regionDisplayName : '请选择' }}"
+            >
+            </mp-cell>
+        </picker>
     </mp-cells>
 
     <mp-cells>
@@ -31,4 +45,6 @@
     <mp-cells>
         <mp-cell hover link value="我与小鸣助手" footer="已使用{{ userInfo.registeredDays }}天"> </mp-cell>
     </mp-cells>
+
+    <!-- 非页面主体内容 -->
 </view>

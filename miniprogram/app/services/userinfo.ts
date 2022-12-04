@@ -54,9 +54,6 @@ export interface UpdateUserInfo {
   /** 头像图片的 URL 地址 */
   avatarUrl: string
 
-  /** 生日 */
-  birthday: string
-
   /**
    * 性别
    *
@@ -129,4 +126,22 @@ export async function updateAvatar(avatarUrl: string): Promise<UserInfo> {
  */
 export async function updateNickName(nickName: string) {
   return updateUserInfo({nickName})
+}
+
+/**
+ * 修改性别
+ *
+ * @param genderType 新的性别类型
+ */
+export async function updateGenderType(genderType: number) {
+  return updateUserInfo({genderType})
+}
+
+/**
+ * 修改地区
+ *
+ * @param cityId 地区对应的 adcode
+ */
+export async function updateRegion(cityId: number) {
+  return updateUserInfo({cityId})
 }
