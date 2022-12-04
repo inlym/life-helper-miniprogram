@@ -1,7 +1,7 @@
 // pages/user/avatar/avatar.ts
 // 头像预览页
 
-import {PageChannelEvent} from '../../../app/core/constant'
+import {getUserInfo, updateAvatar} from '../../../app/services/userinfo'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
 Page({
@@ -12,20 +12,21 @@ Page({
 
   behaviors: [themeBehavior],
 
-  /** 生命周期函数--监听页面加载 */
-  onLoad() {
-    // 第一次加载页面，数据由上个页面带过来
-    const eventChannel = this.getOpenerEventChannel()
-    if (eventChannel) {
-      eventChannel.on(PageChannelEvent.DATA_TRANSFER, (data) => {
-        this.setData(data)
-      })
-    }
+  /** 页面初始化方法 */
+  async init() {
+    const userInfo = await getUserInfo()
+    this.setData({avatarUrl: userInfo.avatarUrl})
+  },
+
+  onShow() {
+    this.init()
   },
 
   /** 处理选择头像事件 */
-  handleChooseAvatar(e: WechatMiniprogram.CustomEvent<{avatarUrl: string}>) {
+  async handleChooseAvatar(e: WechatMiniprogram.CustomEvent<{avatarUrl: string}>) {
     const avatarUrl = e.detail.avatarUrl
-    this.setData({avatarUrl})
+    await updateAvatar(avatarUrl)
+
+    this.init()
   },
 })

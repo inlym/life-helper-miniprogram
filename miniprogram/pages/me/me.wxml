@@ -8,7 +8,7 @@
         <view class="userinfo">
             <!-- 头像 -->
             <view class="avatar">
-                <image src="{{ userInfo.avatarUrl }}" mode="widthFix" bindload="onAvatarLoad"></image>
+                <image src="{{ userInfo.avatarUrl }}" mode="aspectFill" bindload="onAvatarLoad"></image>
             </view>
 
             <!-- 昵称、使用天数 -->

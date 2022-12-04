@@ -50,3 +50,17 @@ export function uploadToOss(tempFilePath: string, credential: OssPostCredential)
     },
   })
 }
+
+/**
+ * 不包含上传进度的上传方法
+ */
+export function uploadToOssWithoutProgress(tempFilePath: string, credential: OssPostCredential) {
+  return new Promise((resolve) => {
+    const task = uploadToOss(tempFilePath, credential)
+    task.onProgressUpdate((listener) => {
+      if (listener.progress === 100) {
+        resolve(true)
+      }
+    })
+  })
+}

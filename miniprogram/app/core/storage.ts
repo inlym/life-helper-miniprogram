@@ -94,7 +94,7 @@ export class Storage {
     const expireTime = calcExpireTime(third)
 
     const wrapper: StorageWrapper<T> = {createTime, expireTime, data}
-    logger.debug(`[Storage] key=${key}, data=${JSON.stringify(data)}`)
+    logger.debug(`[STORAGE][SET] key=${key}, data=${JSON.stringify(data)}`)
 
     wx.setStorageSync(key, wrapper)
   }
@@ -117,6 +117,8 @@ export class Storage {
       wx.removeStorageSync(key)
       return null
     }
+
+    logger.debug(`[STORAGE][GET] key=${key}, data=${JSON.stringify(wrapper.data)}`)
 
     return wrapper.data
   }

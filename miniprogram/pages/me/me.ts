@@ -1,5 +1,4 @@
 // pages/me/me.ts
-import {PageChannelEvent} from '../../app/core/constant'
 import {getIpInfo} from '../../app/services/ip'
 import {IpInfo} from '../../app/services/ip.interface'
 import {getUserInfo, UserInfo} from '../../app/services/userinfo'
@@ -31,10 +30,7 @@ Page({
     this.getIpInfo()
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad() {
+  onShow() {
     this.init()
   },
 
@@ -83,9 +79,6 @@ Page({
 
   /** 跳转到【个人信息】页面 */
   goToUserInfoPage() {
-    const {userInfo} = this.data
-    wx.navigateTo({url: '/pages/user/user-info/user-info'}).then((res) => {
-      res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {userInfo})
-    })
+    wx.navigateTo({url: '/pages/user/user-info/user-info'})
   },
 })

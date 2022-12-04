@@ -1,13 +1,16 @@
 /** 在 `Storage` 中存储的字段 */
 export const StorageField = {
   /** 上一次获取的 `code` 信息 */
-  CODE: 'code',
+  CODE: 'CODE',
 
   /** 登录凭证 `token` */
-  TOKEN: 'token',
+  TOKEN: 'TOKEN',
 
   /** 当前选中的天气地点 ID */
   SELECTED_WEATHER_PLACE_ID: 'SELECTED_WEATHER_PLACE_ID',
+
+  /** 用户信息 */
+  USER_INFO: 'USER_INFO',
 }
 
 /** 静态资源地址 */
