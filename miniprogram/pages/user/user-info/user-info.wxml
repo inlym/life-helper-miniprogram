@@ -39,7 +39,7 @@
     </mp-cells>
 
     <mp-cells>
-        <mp-cell hover link value="账户ID" footer="{{ userInfo.accountId }}"> </mp-cell>
+        <mp-cell hover link value="账户ID" footer="{{ userInfo.accountId }}" bindtap="goToAccountIdPage"> </mp-cell>
     </mp-cells>
 
     <mp-cells>

@@ -64,4 +64,9 @@ Page({
   goToNickNamePage() {
     wx.navigateTo({url: '/pages/user/nick-name/nick-name'})
   },
+
+  /** 跳转到【账户 ID】页 */
+  goToAccountIdPage() {
+    wx.navigateTo({url: '/pages/user/account-id/account-id'})
+  },
 })

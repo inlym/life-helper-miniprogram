@@ -1,0 +1,35 @@
+/* pages/user/account-id/account-id.wxss */
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .title {
+    font-size: 38rpx;
+    font-weight: bold;
+
+    margin-top: 200rpx;
+
+    text-align: center;
+  }
+
+  .content {
+    font-size: 80rpx;
+    font-weight: bold;
+
+    margin-top: 40rpx;
+    padding: 30rpx 50rpx;
+
+    text-align: center;
+    letter-spacing: 22rpx;
+
+    color: var(--weui-TEXTGREEN);
+    border-radius: 20rpx;
+    background-color: var(--weui-BG-2);
+  }
+
+  .copy {
+    margin-top: 400rpx;
+  }
+}

@@ -88,6 +88,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "账户 ID",
+          "pathName": "pages/user/account-id/account-id",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

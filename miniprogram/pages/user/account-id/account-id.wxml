@@ -1,0 +1,8 @@
+<!--pages/user/account-id/account-id.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="container">
+        <view class="title">我的账户 ID</view>
+        <view class="content">{{ accountId }}</view>
+        <button class="copy" bindtap="copy">复制</button>
+    </view>
+</view>
