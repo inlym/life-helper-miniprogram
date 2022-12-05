@@ -43,7 +43,14 @@
     </mp-cells>
 
     <mp-cells>
-        <mp-cell hover link value="我与小鸣助手" footer="已使用{{ userInfo.registeredDays }}天"> </mp-cell>
+        <mp-cell
+            hover
+            link
+            value="我与小鸣助手"
+            footer="已使用{{ userInfo.registeredDays }}天"
+            bindtap="goToRegisterTime"
+        >
+        </mp-cell>
     </mp-cells>
 
     <!-- 非页面主体内容 -->

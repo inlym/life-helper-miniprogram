@@ -1,0 +1,31 @@
+/* pages/user/register-time/register-time.wxss */
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .title {
+    font-size: 38rpx;
+    font-weight: bold;
+
+    margin-top: 200rpx;
+
+    text-align: center;
+  }
+
+  .content {
+    font-size: 50rpx;
+    font-weight: bold;
+
+    margin-top: 40rpx;
+    padding: 30rpx 50rpx;
+
+    text-align: center;
+    letter-spacing: 4rpx;
+
+    color: var(--weui-BRAND);
+    border-radius: 20rpx;
+    background-color: var(--weui-BG-2);
+  }
+}

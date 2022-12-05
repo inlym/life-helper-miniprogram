@@ -95,6 +95,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "注册时间",
+          "pathName": "pages/user/register-time/register-time",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

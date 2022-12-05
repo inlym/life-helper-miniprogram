@@ -69,4 +69,9 @@ Page({
   goToAccountIdPage() {
     wx.navigateTo({url: '/pages/user/account-id/account-id'})
   },
+
+  /** 跳转到【账户 ID】页 */
+  goToRegisterTime() {
+    wx.navigateTo({url: '/pages/user/register-time/register-time'})
+  },
 })

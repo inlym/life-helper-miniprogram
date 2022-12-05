@@ -1,0 +1,7 @@
+<!--pages/user/register-time/register-time.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="container">
+        <view class="title">我在这一刻加入小鸣助手</view>
+        <view class="content">{{ registerTime }}</view>
+    </view>
+</view>
