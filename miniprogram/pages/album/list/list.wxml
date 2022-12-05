@@ -67,7 +67,9 @@
     <!-- 底部脚注 -->
     <view class="weui-footer">
         <view class="weui-footer__links">
-            <navigator url="" class="weui-footer__link">小鸣相册 - 用照片和视频记录生活</navigator>
+            <navigator url="/pages/about/main/main" class="weui-footer__link"
+                >小鸣相册 - 用照片和视频记录生活</navigator
+            >
         </view>
         <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
     </view>

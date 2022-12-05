@@ -1,0 +1,4 @@
+<!--pages/about/main/main.wxml-->
+<view class="page" data-weui-theme="{{ theme }}">
+    <mp-msg icon="{{ logoUrl }}" ext-class="ext" title="小鸣助手" desc="{{ 'Version ' + version }}"></mp-msg>
+</view>

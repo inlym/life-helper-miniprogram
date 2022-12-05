@@ -23,12 +23,12 @@
     </view>
 
     <mp-cells>
-        <mp-cell value="我的 IP" footer="{{ ipDesc }}" hover bind:tap="copyIp"> </mp-cell>
+        <mp-cell value="关于小鸣助手" footer="{{ '版本' + version }}" hover link bindtap="goToVersionPage"> </mp-cell>
     </mp-cells>
 
     <view class="weui-footer weui-footer_fixed-bottom">
         <view class="weui-footer__links">
-            <navigator url="" class="weui-footer__link">小鸣助手 - 为生活赋能</navigator>
+            <navigator url="/pages/about/main/main" class="weui-footer__link">小鸣助手 - 为生活赋能</navigator>
         </view>
         <view class="weui-footer__text">Copyright © 2018-2022 lifehelper.com.cn</view>
     </view>

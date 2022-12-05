@@ -1,6 +1,6 @@
 // pages/me/me.ts
-import {getIpInfo} from '../../app/services/ip'
-import {IpInfo} from '../../app/services/ip.interface'
+
+import {getVersion} from '../../app/core/system'
 import {getUserInfo, UserInfo} from '../../app/services/userinfo'
 import {shareAppBehavior} from '../../behaviors/share-app-behavior'
 import {themeBehavior} from '../../behaviors/theme-behavior'
@@ -13,11 +13,8 @@ Page({
     /** 用户资料 */
     userInfo: {} as UserInfo,
 
-    /** IP 信息 */
-    ipInfo: {} as IpInfo,
-
-    /** 将 IP 信息拼接成一句话描述 */
-    ipDesc: '',
+    /** 当前的版本号 */
+    version: '',
   },
 
   behaviors: [themeBehavior, shareAppBehavior],
@@ -25,9 +22,10 @@ Page({
   /**
    * 页面初始化方法
    */
-  init() {
-    this.getUserInfo()
-    this.getIpInfo()
+  async init() {
+    const userInfo = await getUserInfo()
+    const version = getVersion()
+    this.setData({userInfo, version})
   },
 
   onShow() {
@@ -39,26 +37,6 @@ Page({
    */
   onPullDownRefresh() {
     this.init()
-  },
-
-  /** 获取用户信息 */
-  async getUserInfo() {
-    const userInfo = await getUserInfo()
-    this.setData({userInfo})
-  },
-
-  /** 获取 IP 信息 */
-  async getIpInfo() {
-    const ipInfo = await getIpInfo()
-    const ipDesc = ipInfo.ip + (ipInfo.region ? ` (${ipInfo.region})` : '')
-    this.setData({ipInfo, ipDesc})
-  },
-
-  /** 复制 IP 地址 */
-  async copyIp() {
-    const ip = this.data.ipInfo.ip
-    wx.vibrateShort({type: 'medium'})
-    wx.setClipboardData({data: ip})
   },
 
   /** 监听头像的图片加载完成 */
@@ -80,5 +58,10 @@ Page({
   /** 跳转到【个人信息】页面 */
   goToUserInfoPage() {
     wx.navigateTo({url: '/pages/user/user-info/user-info'})
+  },
+
+  /** 跳转到版本信息页 */
+  goToVersionPage() {
+    wx.navigateTo({url: '/pages/about/main/main'})
   },
 })

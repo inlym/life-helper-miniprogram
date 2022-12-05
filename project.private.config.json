@@ -102,6 +102,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "版本信息页",
+          "pathName": "pages/about/main/main",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

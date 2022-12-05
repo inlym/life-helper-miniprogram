@@ -4,6 +4,7 @@
  * @since 1.6.0
  */
 import {logger} from './logger'
+import {version} from './version'
 
 export function checkUpdate() {
   const updateManager = wx.getUpdateManager()
@@ -24,4 +25,11 @@ export function checkUpdate() {
   updateManager.onUpdateFailed(() => {
     logger.debug('版本更新失败')
   })
+}
+
+/**
+ * 获取当前的小程序版本号
+ */
+export function getVersion() {
+  return version
 }

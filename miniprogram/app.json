@@ -17,7 +17,8 @@
     "pages/user/avatar/avatar",
     "pages/user/nick-name/nick-name",
     "pages/user/account-id/account-id",
-    "pages/user/register-time/register-time"
+    "pages/user/register-time/register-time",
+    "pages/about/main/main"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",

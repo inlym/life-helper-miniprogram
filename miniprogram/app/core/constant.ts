@@ -15,8 +15,11 @@ export const StorageField = {
 
 /** 静态资源地址 */
 export const StaticUrl = {
+  /** 主标志 */
+  LOGO: 'https://static.lifehelper.com.cn/static/project/logo.png',
+
   /** 用于分享时 logo */
-  shareAppLogo: 'https://static.lifehelper.com.cn/static/project/share.jpeg',
+  SHARE_APP_LOGO: 'https://static.lifehelper.com.cn/static/project/share.jpeg',
 }
 
 /** 页面通道事件 */
