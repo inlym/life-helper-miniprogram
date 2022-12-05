@@ -21,6 +21,15 @@
             ></mp-icon>
         </view>
 
+        <!-- 日期 -->
+        <view class="date">
+            <view class="box">
+                <view class="bar"></view>
+                <view class="text">{{ date }}</view>
+                <view class="bar"></view>
+            </view>
+        </view>
+
         <!-- 详情天气信息：天气 icon、温度、天气文本描述 -->
         <view class="weather-detail">
             <image src="{{ now.iconUrl }}" mode="widthFix" class="weather-icon"></image>
@@ -45,7 +54,7 @@
         </view>
 
         <!-- 天气预警模块 -->
-        <view class="warning" wx:if="{{ warnings.length>0 }}">
+        <view class="warning" wx:if="{{ warnings.length > 0 }}">
             <view class="item" wx:for="{{ warnings }}" wx:key="id" bind:tap="goToWarningPage">
                 <view class="name">{{ item.name }}</view>
                 <view class="iconfont icon-link"></view>
@@ -76,8 +85,15 @@
     </view>
 
     <!-- 今明两天预报 -->
-    <view class="forecast-2days container" wx:if="{{ f2d.length>0 }}">
-        <view wx:for="{{ f2d }}" class="item" hover-class="hover" wx:key="date" data-date="{{ item.date }}" bindtap="goToWeatherDailyPage">
+    <view class="forecast-2days container" wx:if="{{ f2d.length > 0 }}">
+        <view
+            wx:for="{{ f2d }}"
+            class="item"
+            hover-class="hover"
+            wx:key="date"
+            data-date="{{ item.date }}"
+            bindtap="goToWeatherDailyPage"
+        >
             <view class="line">
                 <view class="weekday">{{ item.weekday }}</view>
                 <view class="text">{{ item.text }}</view>
@@ -90,7 +106,7 @@
     </view>
 
     <!-- 24小时预报 -->
-    <view class="weather-hourly container" wx:if="{{ hourly.length>0 }}">
+    <view class="weather-hourly container" wx:if="{{ hourly.length > 0 }}">
         <view class="title">24小时预报</view>
         <view class="content">
             <scroll-view
@@ -125,7 +141,7 @@
     </view>
 
     <!-- 未来15天预报 -->
-    <view class="weather-daily container" wx:if="{{ daily.length>0 }}">
+    <view class="weather-daily container" wx:if="{{ daily.length > 0 }}">
         <view class="title">15天预报</view>
         <view class="content">
             <scroll-view
@@ -262,13 +278,19 @@
     </view>
 
     <!-- 生活指数 -->
-    <view class="living container" wx:if="{{ todayIndex.length>0 }}">
+    <view class="living container" wx:if="{{ todayIndex.length > 0 }}">
         <view class="head">
             <view class="name">生活指数</view>
             <view class="link" bind:tap="goToLivingPage">更多</view>
         </view>
         <view class="body">
-            <view class="item" wx:for="{{ todayIndex }}" wx:key="type" data-type="{{ item.type }}" bind:tap="goToLivingPage">
+            <view
+                class="item"
+                wx:for="{{ todayIndex }}"
+                wx:key="type"
+                data-type="{{ item.type }}"
+                bind:tap="goToLivingPage"
+            >
                 <image class="left" src="{{ item.imageUrl }}" mode="widthFix"></image>
                 <view class="right">
                     <view class="name">{{ item.name }}</view>

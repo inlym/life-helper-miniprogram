@@ -1,4 +1,4 @@
-@import "../../assets/styles/weather.scss";
+@import '../../assets/styles/weather.scss';
 
 .page {
   padding-bottom: 30rpx;
@@ -28,8 +28,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     height: 100rpx;
     padding: 0 36rpx;
+
     border-bottom: 2rpx solid var(--weui-FG-3);
 
     .name {
@@ -40,9 +42,41 @@
 
     .link {
       font-size: 28rpx;
+
       color: var(--weui-LINK);
     }
+  }
+}
 
+// 日期
+.date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 60rpx;
+
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6rpx 10rpx;
+
+    border-radius: 8rpx;
+    background-color: rgba(0, 0, 0, 12%);
+
+    .bar {
+      width: 16rpx;
+      height: 4rpx;
+      margin: 0 20rpx;
+
+      background-color: currentColor;
+    }
+
+    .text {
+      font-size: 30rpx;
+    }
   }
 }
 
@@ -80,9 +114,8 @@
     display: flex;
     justify-content: center;
 
-    margin-top: 160rpx;
     --height: 160rpx;
-
+    margin-top: 160rpx;
 
     .weather-icon {
       width: var(--height);
@@ -151,10 +184,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       width: 580rpx;
       height: 50rpx;
       margin-top: 20rpx;
       padding: 4rpx 20rpx 4rpx 28rpx;
+
       border-radius: 14rpx;
 
       .name {
@@ -164,8 +199,6 @@
       .iconfont {
         opacity: 50%;
       }
-
-
     }
   }
 
@@ -180,10 +213,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       width: 580rpx;
       height: 50rpx;
       margin-top: 20rpx;
       padding: 6rpx 20rpx 4rpx 28rpx;
+
       border-radius: 14rpx;
       background-color: rgba(0, 0, 0, 10%);
 
@@ -208,6 +243,7 @@
     .list {
       display: flex;
       justify-content: space-between;
+
       width: 580rpx;
 
       border-radius: 20rpx;
@@ -233,7 +269,6 @@
     }
   }
 }
-
 
 // ================================== 今明两天天气 ==================================
 .forecast-2days {
@@ -537,14 +572,17 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
     padding: 0 24rpx 20rpx;
 
     .item {
       display: flex;
       align-items: center;
+
       width: 320rpx;
       margin-top: 20rpx;
       padding: 10rpx;
+
       border-radius: 24rpx;
       background-color: var(--weui-BG-1);
 
@@ -560,11 +598,12 @@
 
         .category {
           font-size: 28rpx;
+
           margin-top: 2rpx;
+
           color: var(--weui-FG-1);
         }
       }
-
     }
   }
 }
@@ -577,6 +616,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+
     padding: 60rpx 26rpx 26rpx;
 
     .box {
