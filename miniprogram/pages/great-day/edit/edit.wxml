@@ -1,0 +1,2 @@
+<!--pages/great-day/edit/edit.wxml-->
+<view class="page" data-weui-theme="{{ theme }}"> </view>

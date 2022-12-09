@@ -1,0 +1,2 @@
+<!--pages/great-day/list/list.wxml-->
+<view class="page" data-weui-theme="{{ theme }}"> </view>

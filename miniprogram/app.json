@@ -18,7 +18,10 @@
     "pages/user/nick-name/nick-name",
     "pages/user/account-id/account-id",
     "pages/user/register-time/register-time",
-    "pages/about/main/main"
+    "pages/about/main/main",
+    "pages/great-day/detail/detail",
+    "pages/great-day/edit/edit",
+    "pages/great-day/list/list"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",
