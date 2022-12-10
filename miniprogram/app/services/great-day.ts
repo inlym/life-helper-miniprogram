@@ -17,9 +17,6 @@ export interface GreatDay {
   /** emoji 表情 */
   icon: string
 
-  /** 备注 */
-  comment: string
-
   /**
    * 今天距离纪念日的天数（纪念日减去今天的天数）
    *
@@ -29,6 +26,14 @@ export interface GreatDay {
    * - [ <0 ]：纪念日已过去。
    */
   days: number
+
+  // =============================== 二次处理后新增的字段 ===============================
+
+  /** 格式化的日期 */
+  formattedDate: string
+
+  /** 非负的天数 */
+  daysAbs: number
 }
 
 export type CreateOrUpdateGreatDayDTO = Partial<GreatDay>
@@ -81,11 +86,17 @@ export function updateGreatDay(id: string, day: CreateOrUpdateGreatDayDTO): Prom
 /**
  * 获取列表
  */
-export function listGreatDay(): Promise<GreatDayListResponse> {
-  return requestForData({
+export async function listGreatDay(): Promise<GreatDay[]> {
+  const res = await requestForData<GreatDayListResponse>({
     method: 'GET',
     url: '/greatdays',
     auth: true,
+  })
+
+  return res.list.map((item) => {
+    item.formattedDate = getDateText(item.date)
+    item.daysAbs = Math.abs(item.days)
+    return item
   })
 }
 

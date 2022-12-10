@@ -1,1 +1,104 @@
 /* pages/great-day/list/list.wxss */
+
+.unnecessary-space {
+  height: 1rpx;
+}
+
+// 悬浮固定的“+”按钮
+.add {
+  position: fixed;
+  right: 30rpx;
+  bottom: 100rpx;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100rpx;
+  height: 100rpx;
+
+  border-radius: 50%;
+  background-color: var(--weui-BG-1);
+
+  .iconfont {
+    font-size: 80rpx;
+
+    color: var(--weui-BRAND);
+  }
+}
+
+.list {
+  padding: 0 20rpx;
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 150rpx;
+    margin-top: 20rpx;
+    padding: 0 30rpx;
+
+    border-radius: 20rpx;
+    background-color: var(--weui-BG-1);
+
+    .icon {
+      font-size: 60rpx;
+    }
+
+    .text {
+      margin-left: 30rpx;
+
+      .name {
+        font-size: 32rpx;
+
+        max-width: 420rpx;
+      }
+
+      .desc {
+        font-size: 24rpx;
+
+        margin-top: 16rpx;
+
+        color: var(--weui-FG-1);
+
+        .date {
+          color: var(--weui-PURPLE);
+        }
+      }
+    }
+
+    .space {
+      flex: 1;
+    }
+
+    .days {
+      display: flex;
+      align-items: flex-end;
+
+      margin-right: 10rpx;
+
+      .num {
+        font-size: 60rpx;
+        font-weight: bold;
+      }
+
+      .positive {
+        color: var(--weui-TEXTGREEN);
+      }
+
+      .negative {
+        color: var(--weui-ORANGE);
+      }
+
+      .text {
+        font-size: 26rpx;
+
+        margin-bottom: 14rpx;
+        margin-left: 8rpx;
+
+        color: var(--weui-FG-1);
+      }
+    }
+  }
+}

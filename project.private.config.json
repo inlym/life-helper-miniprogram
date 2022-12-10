@@ -13,69 +13,6 @@
           "scene": null
         },
         {
-          "name": "个人中心",
-          "pathName": "pages/me/me",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "扫码登录页",
-          "pathName": "pages/scan/login",
-          "query": "scene=2dd5c1ad554241c28c79e29115b3323e",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "临时首页",
-          "pathName": "pages/index2/index2",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "扫码登录页",
-          "pathName": "pages/scan/login",
-          "query": "scene=23d9ab4aa2924061a2d5858f947e2521",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "相册列表页",
-          "pathName": "pages/album/list/list",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "编辑相册",
-          "pathName": "pages/album/edit/edit",
-          "query": "album_id=234324sdafsdaf",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "天气地点列表页",
-          "pathName": "pages/weather/place/place",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "首页",
-          "pathName": "pages/index/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "个人信息",
-          "pathName": "pages/user/user-info/user-info",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "网络异常页",
           "pathName": "pages/system/error/error",
           "query": "",
@@ -83,36 +20,15 @@
           "scene": null
         },
         {
-          "name": "修改昵称",
-          "pathName": "pages/user/nick-name/nick-name",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "账户 ID",
-          "pathName": "pages/user/account-id/account-id",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "注册时间",
-          "pathName": "pages/user/register-time/register-time",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "版本信息页",
-          "pathName": "pages/about/main/main",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "纪念日（编辑）",
           "pathName": "pages/great-day/edit/edit",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "纪念日（列表）",
+          "pathName": "pages/great-day/list/list",
           "query": "",
           "launchMode": "default",
           "scene": null

@@ -48,6 +48,13 @@
         "selectedIconPath": "/assets/images/tabbar/home-filled.png"
       },
       {
+        "pagePath": "pages/great-day/list/list",
+        "text": "纪念日",
+        "iconPath": "@tabBarIconPath_Album",
+        "selectedIconPath": "/assets/images/tabbar/album-filled.png"
+      },
+
+      {
         "pagePath": "pages/album/list/list",
         "text": "相册",
         "iconPath": "@tabBarIconPath_Album",
@@ -70,9 +77,7 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "requiredPrivateInfos": [
-    "chooseLocation"
-  ],
+  "requiredPrivateInfos": ["chooseLocation"],
   "debug": false,
   "lazyCodeLoading": "requiredComponents",
   "darkmode": true,

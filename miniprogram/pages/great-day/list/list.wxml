@@ -1,2 +1,34 @@
 <!--pages/great-day/list/list.wxml-->
-<view class="page" data-weui-theme="{{ theme }}"> </view>
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="unnecessary-space"></view>
+
+    <!-- 列表区域 -->
+    <view class="list" wx:if="{{ list.length > 0 }}">
+        <!-- 单个列表项 -->
+        <view class="item" wx:for="{{ list }}" wx:key="id">
+            <view class="icon">{{ item.icon }}</view>
+            <view class="text">
+                <view class="name text-ellipsis-l1">{{ item.name }}</view>
+                <view class="desc" wx:if="{{ item.days >= 0 }}">
+                    <text>距离</text>
+                    <text class="date">{{ item.formattedDate }}</text>
+                    <text>还有</text>
+                </view>
+                <view class="desc" wx:else>
+                    <text class="date">{{ item.formattedDate }}</text>
+                    <text>已经过去</text>
+                </view>
+            </view>
+            <view class="space"></view>
+            <view class="days">
+                <view class="num {{ item.days >= 0 ? 'positive' : 'negative' }}">{{ item.daysAbs }}</view>
+                <view class="text">天</view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 悬浮固定的“添加”按钮 -->
+    <view class="add" bindtap="goToEditPage">
+        <view class="iconfont icon-add-fill"></view>
+    </view>
+</view>

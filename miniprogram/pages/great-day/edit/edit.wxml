@@ -12,7 +12,7 @@
             type="text"
             class="name"
             value="{{ name }}"
-            placeholder="请输入事件名称"
+            placeholder="请输入事件名称，例如：来到地球"
             maxlength="32"
             bindblur="handleNameInputBlur"
         />
