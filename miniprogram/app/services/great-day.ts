@@ -1,5 +1,6 @@
 // 「纪念日」模块服务
 
+import dayjs from 'dayjs'
 import {requestForData} from '../core/http'
 
 /** 纪念日对象 */
@@ -30,11 +31,16 @@ export interface GreatDay {
   days: number
 }
 
-export type CreateOrUpdateGreatDayDTO = Omit<GreatDay, 'id'>
+export type CreateOrUpdateGreatDayDTO = Partial<GreatDay>
 
 /** 获取列表响应数据 */
 export interface GreatDayListResponse {
   list: GreatDay[]
+}
+
+/** 获取 emoji 列表响应数据 */
+export interface EmojiListResponse {
+  list: string[]
 }
 
 /**
@@ -92,4 +98,23 @@ export function getGreatDayDetail(id: string): Promise<GreatDay> {
     url: `/greatday/${id}`,
     auth: true,
   })
+}
+
+/** 获取 emoji 列表 */
+export async function getEmojiList(): Promise<string[]> {
+  const res = await requestForData<EmojiListResponse>({
+    method: 'GET',
+    url: `/greatday-icon`,
+    auth: false,
+  })
+
+  return res.list
+}
+
+/** 获取文本格式的日期 */
+export function getDateText(date: string) {
+  const day = dayjs(date)
+  const month = day.month() + 1
+
+  return `${day.year()}年${month}月${day.date()}日`
 }

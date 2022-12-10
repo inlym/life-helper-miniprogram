@@ -26,6 +26,9 @@ export const StaticUrl = {
 export const PageChannelEvent = {
   /** 页面传递数据 */
   DATA_TRANSFER: 'DATA_TRANSFER',
+
+  /** 刷新页面数据 */
+  REFRESH_DATA: 'REFRESH_DATA',
 }
 
 /** 通用颜色 */

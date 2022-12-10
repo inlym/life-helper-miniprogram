@@ -1,1 +1,61 @@
 /* pages/great-day/edit/edit.wxss */
+
+.icon-area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 400rpx;
+
+  // border: 2rpx solid red;
+
+  .emoji {
+    font-size: 120rpx;
+  }
+
+  .button {
+    margin-top: 20rpx;
+  }
+}
+
+.input-area {
+  margin-top: 30rpx;
+  padding: 0 28rpx;
+
+  .name {
+    height: 100rpx;
+    padding: 0 28rpx;
+
+    border-radius: 24rpx;
+    background-color: var(--weui-BG-1);
+  }
+
+  .date-picker {
+    margin-top: 40rpx;
+
+    .picker-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      height: 100rpx;
+      padding: 0 28rpx;
+
+      border-radius: 24rpx;
+      background-color: var(--weui-BG-1);
+
+      .space {
+        flex: 1;
+      }
+
+      .iconfont {
+        margin-left: 20rpx;
+      }
+    }
+  }
+}
+
+.submit {
+  margin-top: 200rpx;
+}

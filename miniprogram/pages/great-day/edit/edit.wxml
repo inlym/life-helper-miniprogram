@@ -1,2 +1,45 @@
 <!--pages/great-day/edit/edit.wxml-->
-<view class="page" data-weui-theme="{{ theme }}"> </view>
+<view class="page" data-weui-theme="{{ theme }}">
+    <!-- 图标区域 -->
+    <view class="icon-area">
+        <view class="emoji">{{ icon }}</view>
+        <button class="button" size="mini" plain bindtap="changeEmoji">换一个</button>
+    </view>
+
+    <!-- 内容输入区域 -->
+    <view class="input-area">
+        <input
+            type="text"
+            class="name"
+            value="{{ name }}"
+            placeholder="请输入事件名称"
+            maxlength="32"
+            bindblur="handleNameInputBlur"
+        />
+
+        <picker
+            class="date-picker"
+            header-text="请选择日期"
+            mode="date"
+            value="{{ date }}"
+            bindchange="handleDatePickerChange"
+        >
+            <view class="picker-inner">
+                <view class="title">日期</view>
+                <view class="space"></view>
+                <view class="date">{{ formattedDate || '请选择日期' }}</view>
+                <view class="iconfont icon-link"></view>
+            </view>
+        </picker>
+    </view>
+
+    <button
+        class="submit"
+        type="primary"
+        bindtap="submit"
+        loading="{{ submitButtonLoading }}"
+        disabled="{{ submitButtonDisabled }}"
+    >
+        {{ submitButtonText }}
+    </button>
+</view>

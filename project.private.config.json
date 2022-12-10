@@ -109,6 +109,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "纪念日（编辑）",
+          "pathName": "pages/great-day/edit/edit",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
