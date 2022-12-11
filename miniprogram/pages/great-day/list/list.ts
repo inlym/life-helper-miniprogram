@@ -2,6 +2,7 @@
 
 import {PageChannelEvent} from '../../../app/core/constant'
 import {GreatDay, listGreatDay} from '../../../app/services/great-day'
+import {TapEvent} from '../../../app/utils/types'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
 Page({
@@ -29,6 +30,20 @@ Page({
     const self = this
     wx.navigateTo({
       url: '/pages/great-day/edit/edit',
+      events: {
+        [PageChannelEvent.REFRESH_DATA]: function () {
+          self.init()
+        },
+      },
+    })
+  },
+
+  /** 跳转到“详情”页 */
+  goToDetailPage(e: TapEvent<{id: string}>) {
+    const self = this
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/great-day/detail/detail?id=${id}`,
       events: {
         [PageChannelEvent.REFRESH_DATA]: function () {
           self.init()

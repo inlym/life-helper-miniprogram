@@ -1,1 +1,65 @@
 /* pages/great-day/detail/detail.wxss */
+
+page, .page {
+  background-color: var(--weui-BG-2);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 120rpx 0 80rpx;
+
+  .icon {
+    font-size: 120rpx;
+  }
+
+  .name {
+    font-size: 50rpx;
+    font-weight: bold;
+
+    margin-top: 60rpx;
+  }
+
+  .date {
+    font-size: 28rpx;
+
+    margin-top: 18rpx;
+
+    color: var(--weui-FG-1);
+  }
+
+  .days-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 500rpx;
+    height: 160rpx;
+    margin-top: 80rpx;
+    padding: 0 60rpx;
+
+    border-radius: 40rpx;
+    background-color: var(--weui-BG-0);
+
+    .text {
+      font-size: 28rpx;
+
+      color: var(--weui-FG-1);
+    }
+
+    .days {
+      font-size: 80rpx;
+      font-weight: bold;
+    }
+
+    .positive {
+      color: var(--weui-TEXTGREEN);
+    }
+
+    .negative {
+      color: var(--weui-ORANGE);
+    }
+  }
+}

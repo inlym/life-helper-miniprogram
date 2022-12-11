@@ -9,3 +9,8 @@ export interface TapEvent<T = any> {
     dataset: T
   }
 }
+
+/** 只包含一个 id 属性的类型，一般用在页面入参 */
+export interface Id {
+  id: string
+}

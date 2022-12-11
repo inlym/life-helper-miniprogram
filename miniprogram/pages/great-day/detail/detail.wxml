@@ -1,2 +1,14 @@
 <!--pages/great-day/detail/detail.wxml-->
-<view class="page" data-weui-theme="{{ theme }}"> </view>
+<view class="page" data-weui-theme="{{ theme }}">
+    <view class="container">
+        <view class="icon">{{ day.icon }}</view>
+        <view class="name">{{ day.name }}</view>
+        <view class="date">{{ day.formattedDate }}</view>
+        <view class="days-box">
+            <view class="text" wx:if="{{ day.days >= 0 }}">还有</view>
+            <view class="text" wx:if="{{ day.days < 0 }}">已经过去</view>
+            <view class="days {{ day.days >= 0 ? 'positive' : 'negative' }}">{{ day.daysAbs }}</view>
+            <view class="text">天</view>
+        </view>
+    </view>
+</view>

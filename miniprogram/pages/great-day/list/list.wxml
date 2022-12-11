@@ -5,7 +5,7 @@
     <!-- 列表区域 -->
     <view class="list" wx:if="{{ list.length > 0 }}">
         <!-- 单个列表项 -->
-        <view class="item" wx:for="{{ list }}" wx:key="id">
+        <view class="item" wx:for="{{ list }}" wx:key="id" data-id="{{ item.id }}" bindtap="goToDetailPage">
             <view class="icon">{{ item.icon }}</view>
             <view class="text">
                 <view class="name text-ellipsis-l1">{{ item.name }}</view>

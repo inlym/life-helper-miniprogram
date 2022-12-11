@@ -2,12 +2,8 @@
 
 import {PageChannelEvent} from '../../../app/core/constant'
 import {createGreatDay, getDateText, getEmojiList} from '../../../app/services/great-day'
+import {Id} from '../../../app/utils/types'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
-
-/** 页面入参 */
-export interface PageQuery {
-  id: string
-}
 
 Page({
   data: {
@@ -60,7 +56,7 @@ Page({
   behaviors: [themeBehavior],
 
   onLoad(query: Record<string, string | undefined>) {
-    const id = (query as unknown as PageQuery).id
+    const id = (query as unknown as Id).id
     if (id) {
       this.setData({id, type: 'update', submitButtonText: '保存'})
     }

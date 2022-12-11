@@ -48,6 +48,14 @@ export interface EmojiListResponse {
   list: string[]
 }
 
+/** 对响应数据做二次处理，添加了一些字段 */
+export function processGreatDay(day: GreatDay): GreatDay {
+  day.formattedDate = getDateText(day.date)
+  day.daysAbs = Math.abs(day.days)
+
+  return day
+}
+
 /**
  * 新增
  */
@@ -94,21 +102,21 @@ export async function listGreatDay(): Promise<GreatDay[]> {
   })
 
   return res.list.map((item) => {
-    item.formattedDate = getDateText(item.date)
-    item.daysAbs = Math.abs(item.days)
-    return item
+    return processGreatDay(item)
   })
 }
 
 /**
  * 获取单个详情
  */
-export function getGreatDayDetail(id: string): Promise<GreatDay> {
-  return requestForData({
+export async function getGreatDayDetail(id: string): Promise<GreatDay> {
+  const day = await requestForData({
     method: 'GET',
     url: `/greatday/${id}`,
     auth: true,
   })
+
+  return processGreatDay(day)
 }
 
 /** 获取 emoji 列表 */
