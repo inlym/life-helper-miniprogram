@@ -41,6 +41,14 @@ Page({
     wx.setNavigationBarTitle({title: day.name})
   },
 
+  /** 通知前一个页面（列表页）刷新 */
+  notifyListPageRefresh() {
+    const channel = this.getOpenerEventChannel()
+    if (typeof channel.emit === 'function') {
+      channel.emit(PageChannelEvent.REFRESH_DATA)
+    }
+  },
+
   /** 跳转到“编辑”页 */
   goToEditPage() {
     const self = this
@@ -50,6 +58,7 @@ Page({
       events: {
         [PageChannelEvent.REFRESH_DATA]: function () {
           self.init()
+          self.notifyListPageRefresh()
         },
       },
     }).then((res) => {

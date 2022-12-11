@@ -1,7 +1,7 @@
 // pages/great-day/edit/edit.ts
 
 import {PageChannelEvent} from '../../../app/core/constant'
-import {createGreatDay, getDateText, getEmojiList} from '../../../app/services/great-day'
+import {createGreatDay, getDateText, getEmojiList, GreatDay, updateGreatDay} from '../../../app/services/great-day'
 import {Id} from '../../../app/utils/types'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
@@ -36,6 +36,11 @@ Page({
      */
     id: '',
 
+    /**
+     * 详情数据（“编辑”情况用到）
+     */
+    day: {} as GreatDay,
+
     // ================================= 表单数据 =================================
 
     /** 纪念日名称 */
@@ -58,7 +63,15 @@ Page({
   onLoad(query: Record<string, string | undefined>) {
     const id = (query as unknown as Id).id
     if (id) {
+      // 带了 id 说明是“编辑”情况，目前唯一入口是“详情页”跳转过来
       this.setData({id, type: 'update', submitButtonText: '保存'})
+
+      this.getOpenerEventChannel().on(PageChannelEvent.DATA_TRANSFER, (data) => {
+        this.setData(data)
+
+        const {name, date, icon, formattedDate} = this.data.day
+        this.setData({name, date, icon, formattedDate})
+      })
     }
 
     this.init()
@@ -66,11 +79,16 @@ Page({
 
   /** 页面初始化方法 */
   async init() {
+    wx.showNavigationBarLoading()
+    await this.getEmojis()
+    wx.hideNavigationBarLoading()
+
     if (this.data.type === 'create') {
-      wx.showNavigationBarLoading()
-      await this.getEmojis()
       this.changeEmoji()
-      wx.hideNavigationBarLoading()
+    }
+
+    if (this.data.type === 'update') {
+      //
     }
   },
 
@@ -114,20 +132,31 @@ Page({
       })
 
       await createGreatDay({name, date, icon})
+    }
 
-      // 通过上个页面刷新数据
-      this.getOpenerEventChannel().emit(PageChannelEvent.REFRESH_DATA)
-
-      // 成功提示然后跳转返回
-      wx.showToast({
-        title: '创建成功',
-        icon: 'success',
+    if (this.data.type === 'update') {
+      // 提交按钮状态变更
+      this.setData({
+        submitButtonText: '正在保存 ...',
+        submitButtonLoading: true,
+        submitButtonDisabled: true,
       })
 
-      // 1秒后再返回，否则显得太快
-      setTimeout(() => {
-        wx.navigateBack()
-      }, 1000)
+      await updateGreatDay(id, {name, date, icon})
     }
+
+    // 通过上个页面刷新数据
+    this.getOpenerEventChannel().emit(PageChannelEvent.REFRESH_DATA)
+
+    // 成功提示然后跳转返回
+    wx.showToast({
+      title: '保存成功',
+      icon: 'success',
+    })
+
+    // 1秒后再返回，否则显得太快
+    setTimeout(() => {
+      wx.navigateBack()
+    }, 1000)
   },
 })

@@ -44,7 +44,7 @@ page, .page {
     background-color: var(--weui-BG-0);
 
     .text {
-      font-size: 28rpx;
+      font-size: 32rpx;
 
       color: var(--weui-FG-1);
     }
@@ -60,6 +60,46 @@ page, .page {
 
     .negative {
       color: var(--weui-ORANGE);
+    }
+  }
+}
+
+.button-area {
+  position: fixed;
+  bottom: 0rpx;
+
+  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 750rpx;
+    padding: 0 100rpx;
+
+    .delete {
+      color: var(--weui-RED) !important;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: space-between;
+
+      width: 100rpx;
+      height: 120rpx;
+
+      color: var(--weui-FG-1);
+
+      .iconfont {
+        font-size: 56rpx;
+      }
+
+      .text {
+        font-size: 28rpx;
+      }
     }
   }
 }

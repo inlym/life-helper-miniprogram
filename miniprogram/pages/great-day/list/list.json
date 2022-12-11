@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "纪念日",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "mp-msg": "weui-miniprogram/msg/msg"
+  }
 }

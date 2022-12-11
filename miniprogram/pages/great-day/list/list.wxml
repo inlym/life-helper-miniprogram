@@ -2,7 +2,7 @@
 <view class="page" data-weui-theme="{{ theme }}">
     <view class="unnecessary-space"></view>
 
-    <!-- 列表区域 -->
+    <!-- 列表区域（列表不为空情况） -->
     <view class="list" wx:if="{{ list.length > 0 }}">
         <!-- 单个列表项 -->
         <view class="item" wx:for="{{ list }}" wx:key="id" data-id="{{ item.id }}" bindtap="goToDetailPage">
@@ -25,6 +25,12 @@
                 <view class="text">天</view>
             </view>
         </view>
+    </view>
+
+    <!-- 列表为空情况 -->
+    <view class="empty-list" wx:else>
+        <view class="iconfont icon-empty"></view>
+        <view class="desc">暂无记录</view>
     </view>
 
     <!-- 悬浮固定的“添加”按钮 -->

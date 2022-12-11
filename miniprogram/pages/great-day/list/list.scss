@@ -102,3 +102,23 @@
     }
   }
 }
+
+.empty-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding-top: 100rpx;
+
+  color: var(--weui-FG-1);
+
+  .iconfont {
+    font-size: 60rpx;
+  }
+
+  .desc {
+    font-size: 28rpx;
+
+    margin-top: 20rpx;
+  }
+}
