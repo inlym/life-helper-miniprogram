@@ -1,6 +1,7 @@
 /* pages/great-day/detail/detail.wxss */
 
-page, .page {
+page,
+.page {
   background-color: var(--weui-BG-2);
 }
 
@@ -35,7 +36,8 @@ page, .page {
     align-items: center;
     justify-content: space-between;
 
-    width: 500rpx;
+    // width: 560rpx;
+
     height: 160rpx;
     margin-top: 80rpx;
     padding: 0 60rpx;
@@ -52,6 +54,8 @@ page, .page {
     .days {
       font-size: 80rpx;
       font-weight: bold;
+
+      margin: 0 40rpx;
     }
 
     .positive {
