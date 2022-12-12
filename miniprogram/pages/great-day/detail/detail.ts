@@ -3,6 +3,7 @@
 import {CommonColor, PageChannelEvent} from '../../../app/core/constant'
 import {deleteGreatDay, getGreatDayDetail, GreatDay} from '../../../app/services/great-day'
 import {Id} from '../../../app/utils/types'
+import {showSingleButtonModel} from '../../../app/utils/wx'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
 Page({
@@ -68,12 +69,7 @@ Page({
 
   /** 点击“分享”操作 */
   share() {
-    wx.showModal({
-      title: '提示',
-      content: '功能开发中，敬请期待！',
-      showCancel: false,
-      confirmText: '我知道了',
-    })
+    showSingleButtonModel('功能开发中，敬请期待！')
   },
 
   /** 点击“删除”操作 */

@@ -3,6 +3,7 @@
 import {PageChannelEvent} from '../../../app/core/constant'
 import {createGreatDay, getDateText, getEmojiList, GreatDay, updateGreatDay} from '../../../app/services/great-day'
 import {Id} from '../../../app/utils/types'
+import {showSingleButtonModel} from '../../../app/utils/wx'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
 Page({
@@ -123,40 +124,46 @@ Page({
   async submit() {
     const {id, name, date, icon} = this.data
 
-    if (this.data.type === 'create') {
-      // 提交按钮状态变更
-      this.setData({
-        submitButtonText: '正在创建 ...',
-        submitButtonLoading: true,
-        submitButtonDisabled: true,
+    if (!name) {
+      showSingleButtonModel('请输入事件名称！')
+    } else if (!date) {
+      showSingleButtonModel('请选择日期！')
+    } else {
+      if (this.data.type === 'create') {
+        // 提交按钮状态变更
+        this.setData({
+          submitButtonText: '正在创建 ...',
+          submitButtonLoading: true,
+          submitButtonDisabled: true,
+        })
+
+        await createGreatDay({name, date, icon})
+      }
+
+      if (this.data.type === 'update') {
+        // 提交按钮状态变更
+        this.setData({
+          submitButtonText: '正在保存 ...',
+          submitButtonLoading: true,
+          submitButtonDisabled: true,
+        })
+
+        await updateGreatDay(id, {name, date, icon})
+      }
+
+      // 通过上个页面刷新数据
+      this.getOpenerEventChannel().emit(PageChannelEvent.REFRESH_DATA)
+
+      // 成功提示然后跳转返回
+      wx.showToast({
+        title: '保存成功',
+        icon: 'success',
       })
 
-      await createGreatDay({name, date, icon})
+      // 1秒后再返回，否则显得太快
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 1000)
     }
-
-    if (this.data.type === 'update') {
-      // 提交按钮状态变更
-      this.setData({
-        submitButtonText: '正在保存 ...',
-        submitButtonLoading: true,
-        submitButtonDisabled: true,
-      })
-
-      await updateGreatDay(id, {name, date, icon})
-    }
-
-    // 通过上个页面刷新数据
-    this.getOpenerEventChannel().emit(PageChannelEvent.REFRESH_DATA)
-
-    // 成功提示然后跳转返回
-    wx.showToast({
-      title: '保存成功',
-      icon: 'success',
-    })
-
-    // 1秒后再返回，否则显得太快
-    setTimeout(() => {
-      wx.navigateBack()
-    }, 1000)
   },
 })
