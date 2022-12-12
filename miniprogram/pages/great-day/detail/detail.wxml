@@ -19,11 +19,11 @@
                 <view class="iconfont icon-edit"></view>
                 <view class="text">编辑</view>
             </view>
-            <view class="item">
+            <view class="item" bindtap="share">
                 <view class="iconfont icon-fenxiang"></view>
                 <view class="text">分享</view>
             </view>
-            <view class="item delete">
+            <view class="item delete" bindtap="delete">
                 <view class="iconfont icon-shanchu"></view>
                 <view class="text">删除</view>
             </view>

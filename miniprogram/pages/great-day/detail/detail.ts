@@ -1,7 +1,7 @@
 // pages/great-day/detail/detail.ts
 
-import {PageChannelEvent} from '../../../app/core/constant'
-import {getGreatDayDetail, GreatDay} from '../../../app/services/great-day'
+import {CommonColor, PageChannelEvent} from '../../../app/core/constant'
+import {deleteGreatDay, getGreatDayDetail, GreatDay} from '../../../app/services/great-day'
 import {Id} from '../../../app/utils/types'
 import {themeBehavior} from '../../../behaviors/theme-behavior'
 
@@ -64,5 +64,42 @@ Page({
     }).then((res) => {
       res.eventChannel.emit(PageChannelEvent.DATA_TRANSFER, {day})
     })
+  },
+
+  /** 点击“分享”操作 */
+  share() {
+    wx.showModal({
+      title: '提示',
+      content: '功能开发中，敬请期待！',
+      showCancel: false,
+      confirmText: '我知道了',
+    })
+  },
+
+  /** 点击“删除”操作 */
+  async delete() {
+    const id = this.data.id
+    const name = this.data.day.name
+
+    const res1 = await wx.showModal({
+      title: '提示',
+      content: `是否删除 ${name} ？`,
+      confirmText: '立即删除',
+      confirmColor: CommonColor.RED,
+    })
+
+    // 点击“确定”按钮
+    if (res1.confirm) {
+      await deleteGreatDay(id)
+      this.notifyListPageRefresh()
+      wx.showToast({
+        title: '删除成功',
+        icon: 'success',
+      })
+
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 1000)
+    }
   },
 })

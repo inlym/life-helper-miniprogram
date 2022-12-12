@@ -2,6 +2,7 @@
 
 import dayjs from 'dayjs'
 import {requestForData} from '../core/http'
+import {CommonListResponse} from '../utils/types'
 
 /** 纪念日对象 */
 export interface GreatDay {
@@ -36,17 +37,8 @@ export interface GreatDay {
   daysAbs: number
 }
 
-export type CreateOrUpdateGreatDayDTO = Partial<GreatDay>
-
-/** 获取列表响应数据 */
-export interface GreatDayListResponse {
-  list: GreatDay[]
-}
-
-/** 获取 emoji 列表响应数据 */
-export interface EmojiListResponse {
-  list: string[]
-}
+/** 新增、编辑情况时提交的请求数据 */
+export type SaveGreatDayDTO = Partial<GreatDay>
 
 /** 对响应数据做二次处理，添加了一些字段 */
 export function processGreatDay(day: GreatDay): GreatDay {
@@ -59,7 +51,7 @@ export function processGreatDay(day: GreatDay): GreatDay {
 /**
  * 新增
  */
-export function createGreatDay(day: CreateOrUpdateGreatDayDTO): Promise<GreatDay> {
+export function createGreatDay(day: SaveGreatDayDTO): Promise<GreatDay> {
   return requestForData({
     method: 'POST',
     url: '/greatday',
@@ -82,7 +74,7 @@ export function deleteGreatDay(id: string): Promise<GreatDay> {
 /**
  * 更新
  */
-export function updateGreatDay(id: string, day: CreateOrUpdateGreatDayDTO): Promise<GreatDay> {
+export function updateGreatDay(id: string, day: SaveGreatDayDTO): Promise<GreatDay> {
   return requestForData({
     method: 'PUT',
     url: `/greatday/${id}`,
@@ -95,7 +87,7 @@ export function updateGreatDay(id: string, day: CreateOrUpdateGreatDayDTO): Prom
  * 获取列表
  */
 export async function listGreatDay(): Promise<GreatDay[]> {
-  const res = await requestForData<GreatDayListResponse>({
+  const res = await requestForData<CommonListResponse<GreatDay>>({
     method: 'GET',
     url: '/greatdays',
     auth: true,
@@ -121,7 +113,7 @@ export async function getGreatDayDetail(id: string): Promise<GreatDay> {
 
 /** 获取 emoji 列表 */
 export async function getEmojiList(): Promise<string[]> {
-  const res = await requestForData<EmojiListResponse>({
+  const res = await requestForData<CommonListResponse<string>>({
     method: 'GET',
     url: `/greatday-icon`,
     auth: false,

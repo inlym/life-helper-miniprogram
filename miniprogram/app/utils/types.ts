@@ -14,3 +14,8 @@ export interface TapEvent<T = any> {
 export interface Id {
   id: string
 }
+
+/** 通用列表响应数据 */
+export interface CommonListResponse<T> {
+  list: T[]
+}
