@@ -53,7 +53,7 @@
       "sass"
     ],
     "ignoreDevUnusedFiles": false,
-    "ignoreUploadUnusedFiles": false,
+    "ignoreUploadUnusedFiles": true,
     "useStaticServer": true
   },
   "simulatorType": "wechat",

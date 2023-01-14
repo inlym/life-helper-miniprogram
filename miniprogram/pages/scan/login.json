@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "mp-msg": "weui-miniprogram/msg/msg"
+  },
   "navigationBarTitleText": "登录确认",
   "enablePullDownRefresh": false
 }

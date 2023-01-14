@@ -19,3 +19,11 @@ export interface Id {
 export interface CommonListResponse<T> {
   list: T[]
 }
+
+/** 通用响应数据结构（仅报错时返回），所有响应数据都需要继承该接口 */
+export interface CommonResponse {
+  /** 错误码 */
+  errorCode: number
+  /** 错误消息 */
+  errorMessage: string
+}

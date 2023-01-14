@@ -1,7 +1,8 @@
 <!--pages/scan/login.wxml-->
 
 <view class="page" data-weui-theme="{{ theme }}">
-    <view class="box">
+    <!-- “已扫码”情况 -->
+    <view class="scanned" wx:if="{{ status === 'scanned' }}">
         <view class="container">
             <image class="pc" src="{{ pcImageUrl }}" mode="widthFix"></image>
             <view class="title">确认登录“小鸣助手”网页版</view>
@@ -10,5 +11,19 @@
             <button class="confirm" bind:tap="confirm" type="primary" loading="{{ confirmLoading }}">确认登录</button>
             <view class="cancel" bind:tap="cancel">取消登录</view>
         </view>
+    </view>
+
+    <!-- “确认登录”操作且成功情况 -->
+    <view class="success" wx:if="{{ status === 'succeeded' }}">
+        <mp-msg type="success" title="已成功登录">
+            <button class="button" slot="handle" bindtap="goToIndex">我知道了</button>
+        </mp-msg>
+    </view>
+
+    <!-- 小程序无效情况 -->
+    <view class="failed" wx:if="{{ status === 'failed' }}">
+        <mp-msg type="warn" title="登录失败" desc="你扫描的小程序码已失效！">
+            <button class="button" slot="handle" bindtap="goToIndex">我知道了</button>
+        </mp-msg>
     </view>
 </view>

@@ -1,21 +1,26 @@
-/**
- * 扫码登录相关方法
- *
- * @date 2022-04-14
- */
-
 import {requestForData} from '../core/http'
-import {ScanLoginResult} from './scan-login.interface'
+import {CommonResponse} from '../utils/types'
+
+/** 扫码登录凭据 */
+export interface ScanLoginTicket extends CommonResponse {
+  /** 票据 ID */
+  id: string
+  /** 小程序码图片的 URL 地址 */
+  url: string
+  /** IP 地址 */
+  ip: string
+  /** 地区信息 */
+  region: string
+}
 
 /**
  * 进行 "扫码" 操作
  */
-export function scanQrCode(id: string): Promise<ScanLoginResult> {
+export function scanQrcode(id: string): Promise<ScanLoginTicket> {
   return requestForData({
     method: 'PUT',
-    url: '/login/qrcode',
-    params: {operator: 'scan'},
-    data: {id},
+    url: `/login/qrcode/${id}`,
+    data: {type: 'scan'},
     auth: true,
   })
 }
@@ -23,12 +28,11 @@ export function scanQrCode(id: string): Promise<ScanLoginResult> {
 /**
  * 进行 "确认登录" 操作
  */
-export function confirmQrCode(id: string): Promise<ScanLoginResult> {
+export function confirmQrcode(id: string): Promise<ScanLoginTicket> {
   return requestForData({
     method: 'PUT',
-    url: '/login/qrcode',
-    params: {operator: 'confirm'},
-    data: {id},
+    url: `/login/qrcode/${id}`,
+    data: {type: 'confirm'},
     auth: true,
   })
 }

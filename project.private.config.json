@@ -1,6 +1,7 @@
 {
   "setting": {
-    "compileHotReLoad": false
+    "compileHotReLoad": false,
+    "urlCheck": false
   },
   "condition": {
     "miniprogram": {
@@ -39,11 +40,18 @@
           "query": "id=109bc54bdc3f4e60b2c91ae8083acc11",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "扫码登录页",
+          "pathName": "pages/scan/login",
+          "query": "scene=eeeeeeee",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
   },
   "projectname": "life-helper-miniprogram",
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "2.27.3"
+  "libVersion": "2.29.1"
 }
