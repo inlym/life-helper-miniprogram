@@ -365,13 +365,19 @@ export function processWeatherDaily(data: WeatherDaily): WeatherDaily {
  */
 export function getTodayIndex(indices: LivingIndex[]): EnhancedDailyIndex[] {
   return indices.map((item: LivingIndex) => {
-    const result: EnhancedDailyIndex = item.daily.find(
+    let result: EnhancedDailyIndex = item.daily.find(
       (day: DailyIndex) => day.optimalDayOfWeek === '今天'
     )! as EnhancedDailyIndex
 
-    result.imageUrl = item.imageUrl
-    result.type = item.type
-    result.name = item.name
+    if (!result) {
+      result = item.daily.find((day: DailyIndex) => day.optimalDayOfWeek === '明天')! as EnhancedDailyIndex
+    }
+
+    if (result) {
+      result.imageUrl = item.imageUrl
+      result.type = item.type
+      result.name = item.name
+    }
 
     return result
   })
