@@ -21,7 +21,8 @@
     "pages/about/main/main",
     "pages/great-day/detail/detail",
     "pages/great-day/edit/edit",
-    "pages/great-day/list/list"
+    "pages/great-day/list/list",
+    "pages/ai/text/text"
   ],
   "entryPagePath": "pages/index/index",
   "sitemapLocation": "sitemap.json",
@@ -48,12 +49,18 @@
         "selectedIconPath": "/assets/images/tabbar/home-filled.png"
       },
       {
+        "pagePath": "pages/ai/text/text",
+        "text": "会话",
+        "iconPath": "@tabBarIconPath_Robot",
+        "selectedIconPath": "/assets/images/tabbar/robot-filled.png"
+      },
+
+      {
         "pagePath": "pages/great-day/list/list",
         "text": "纪念日",
         "iconPath": "@tabBarIconPath_Calendar",
         "selectedIconPath": "/assets/images/tabbar/calendar-filled.png"
       },
-
       {
         "pagePath": "pages/album/list/list",
         "text": "相册",

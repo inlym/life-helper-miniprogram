@@ -47,6 +47,13 @@
           "query": "scene=eeeeeeee",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "会话",
+          "pathName": "pages/ai/text/text",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

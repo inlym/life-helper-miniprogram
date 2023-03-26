@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "小鸣智能会话助手",
+  "usingComponents": {
+    "mp-loading": "weui-miniprogram/loading/loading"
+  }
+}

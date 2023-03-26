@@ -10,6 +10,7 @@
     "tabBarBackgroundColor": "#f7f7f7",
     "tabBarBorderStyle": "black",
     "tabBarIconPath_Home": "/assets/images/tabbar/home-outline-light.png",
+    "tabBarIconPath_Robot": "/assets/images/tabbar/robot-outline-light.png",
     "tabBarIconPath_Calendar": "/assets/images/tabbar/calendar-outline-light.png",
     "tabBarIconPath_Album": "/assets/images/tabbar/album-outline-light.png",
     "tabBarIconPath_Me": "/assets/images/tabbar/me-outline-light.png"
@@ -25,6 +26,7 @@
     "tabBarBackgroundColor": "#1e1e1e",
     "tabBarBorderStyle": "white",
     "tabBarIconPath_Home": "/assets/images/tabbar/home-outline-dark.png",
+    "tabBarIconPath_Robot": "/assets/images/tabbar/robot-outline-light.png",
     "tabBarIconPath_Calendar": "/assets/images/tabbar/calendar-outline-dark.png",
     "tabBarIconPath_Album": "/assets/images/tabbar/album-outline-dark.png",
     "tabBarIconPath_Me": "/assets/images/tabbar/me-outline-dark.png"
