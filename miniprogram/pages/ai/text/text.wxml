@@ -13,7 +13,13 @@
 
     <!-- 操作区 -->
     <view class="operate">
-        <input class="input" placeholder="请在此输入消息" bindblur="inputBlur" value="{{ prompt }}" />
+        <input
+            class="input"
+            placeholder="请在此输入消息"
+            bindinput="handleInput"
+            value="{{ inputValue }}"
+            cursor-spacing="8"
+        />
         <button class="button" size="mini" type="primary" bindtap="send" disabled="{{ buttonDisabled }}">发送</button>
     </view>
 </view>

@@ -17,6 +17,9 @@ Page({
     list: [] as Message[],
 
     /** 用户输入的消息内容 */
+    inputValue: '',
+
+    /** 用户输入的消息内容 */
     prompt: '',
 
     /** 发送按钮禁用状态 */
@@ -39,9 +42,14 @@ Page({
     this.setData({list})
   },
 
-  inputBlur(e: any) {
-    const value = e.detail.value
-    this.setData({prompt: value})
+  handleInput(e: any) {
+    const prompt = e.detail.value
+    console.log(prompt)
+    this.setData({prompt})
+  },
+
+  resetInput() {
+    this.setData({inputValue: ''})
   },
 
   /** 发送消息 */
@@ -63,6 +71,7 @@ Page({
 
     list.push({role: 'user', text: promot})
     this.setData({buttonDisabled: true, loading: true, list, prompt: ''})
+    this.resetInput()
     wx.pageScrollTo({scrollTop: 99999})
     const result = await createCompletion(promot)
     if (result.errorCode) {
