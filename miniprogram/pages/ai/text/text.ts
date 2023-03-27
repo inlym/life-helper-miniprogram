@@ -37,7 +37,6 @@ Page({
 
   handleInput(e: any) {
     const prompt = e.detail.value
-    console.log(prompt)
     this.setData({prompt})
   },
 
@@ -57,11 +56,9 @@ Page({
     // 定时器：防止出现异常，按钮一直禁用
     setTimeout(() => {
       if (this.data.buttonDisabled) {
-        this.setData({buttonDisabled: false})
+        this.setData({buttonDisabled: false, loading: false})
       }
     }, 30000)
-
-    console.log(messages)
 
     messages.push({role: 'user', content: prompt, id: ''} as AiChatMessage)
 
@@ -70,7 +67,11 @@ Page({
     wx.pageScrollTo({scrollTop: 99999})
 
     const aiChat = await appendMessage(id, prompt)
-    this.setData({buttonDisabled: false, messages: aiChat.messages, loading: false})
-    wx.pageScrollTo({scrollTop: 99999})
+
+    // 这里可能报一个 504 错误，暂时还不想处理
+    if (aiChat && aiChat.messages) {
+      this.setData({buttonDisabled: false, messages: aiChat.messages, loading: false})
+      wx.pageScrollTo({scrollTop: 99999})
+    }
   },
 })
