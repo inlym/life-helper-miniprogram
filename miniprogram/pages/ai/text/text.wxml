@@ -2,10 +2,15 @@
 <view class="page" data-weui-theme="{{ theme }}">
     <!-- 会话列表 -->
     <view class="list">
-        <view class="item" wx:for="{{ list }}">
-            <image wx:if="{{ item.role === 'system' }}" class="logo" src="{{ logoUrl }}" mode="widthFix"></image>
+        <view class="item" wx:for="{{ messages }}" wx:key="id">
+            <image
+                wx:if="{{ item.role === 'system' || item.role === 'assistant' }}"
+                class="logo"
+                src="{{ logoUrl }}"
+                mode="widthFix"
+            ></image>
             <view wx:if="{{ item.role === 'user' }}" class="avatar"><text>我</text></view>
-            <view class="text">{{ item.text }}</view>
+            <view class="text">{{ item.content }}</view>
         </view>
 
         <mp-loading show="{{ loading }}" type="circle" tips="正在准备回复，请耐心等待"></mp-loading>

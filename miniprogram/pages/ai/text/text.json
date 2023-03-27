@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "小鸣智能会话助手",
+  "navigationBarTitleText": "智能会话",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "mp-loading": "weui-miniprogram/loading/loading"

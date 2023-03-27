@@ -1,5 +1,5 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { ParamsUtils } from '../utils/params-utils'
+import {AxiosRequestConfig, AxiosResponse} from 'axios'
+import {ParamsUtils} from '../utils/params-utils'
 
 /** 请求方法 */
 export type Method = 'GET' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'POST' | 'PUT'
@@ -63,7 +63,7 @@ export function miniprogramAdapter<T>(config: AxiosRequestConfig): Promise<Axios
       method: <Method>config.method,
       url: wholeUrl,
       header: config.headers,
-      timeout: config.timeout || 10000,
+      timeout: config.timeout || 30000,
       data: config.data,
       success(res) {
         const response: AxiosResponse = {
