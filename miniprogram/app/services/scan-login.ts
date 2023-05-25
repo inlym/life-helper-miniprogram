@@ -2,7 +2,7 @@ import {requestForData} from '../core/http'
 import {CommonResponse} from '../utils/types'
 
 /** 扫码登录凭据 */
-export interface ScanLoginTicket extends CommonResponse {
+export interface QrCodeTicket extends CommonResponse {
   /** 票据 ID */
   id: string
   /** 小程序码图片的 URL 地址 */
@@ -16,11 +16,10 @@ export interface ScanLoginTicket extends CommonResponse {
 /**
  * 进行 "扫码" 操作
  */
-export function scanQrcode(id: string): Promise<ScanLoginTicket> {
+export function scanQrcode(id: string): Promise<QrCodeTicket> {
   return requestForData({
     method: 'PUT',
-    url: `/login/qrcode/${id}`,
-    data: {type: 'scan'},
+    url: `/login/qrcode/scan/${id}`,
     auth: true,
   })
 }
@@ -28,11 +27,10 @@ export function scanQrcode(id: string): Promise<ScanLoginTicket> {
 /**
  * 进行 "确认登录" 操作
  */
-export function confirmQrcode(id: string): Promise<ScanLoginTicket> {
+export function confirmQrcode(id: string): Promise<QrCodeTicket> {
   return requestForData({
     method: 'PUT',
-    url: `/login/qrcode/${id}`,
-    data: {type: 'confirm'},
+    url: `/login/qrcode/confirm/${id}`,
     auth: true,
   })
 }
