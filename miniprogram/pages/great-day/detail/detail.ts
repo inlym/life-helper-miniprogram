@@ -77,25 +77,29 @@ Page({
     const id = this.data.id
     const name = this.data.day.name
 
-    const res1 = await wx.showModal({
-      title: '提示',
-      content: `是否删除 ${name} ？`,
-      confirmText: '立即删除',
-      confirmColor: CommonColor.RED,
-    })
-
-    // 点击“确定”按钮
-    if (res1.confirm) {
-      await deleteGreatDay(id)
-      this.notifyListPageRefresh()
-      wx.showToast({
-        title: '删除成功',
-        icon: 'success',
+    if (this.data.day.systemCreated) {
+      showSingleButtonModel('系统默认数据，不允许操作删除！')
+    } else {
+      const res1 = await wx.showModal({
+        title: '提示',
+        content: `是否删除 ${name} ？`,
+        confirmText: '立即删除',
+        confirmColor: CommonColor.RED,
       })
 
-      setTimeout(() => {
-        wx.navigateBack()
-      }, 1000)
+      // 点击“确定”按钮
+      if (res1.confirm) {
+        await deleteGreatDay(id)
+        this.notifyListPageRefresh()
+        wx.showToast({
+          title: '删除成功',
+          icon: 'success',
+        })
+
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 1000)
+      }
     }
   },
 })

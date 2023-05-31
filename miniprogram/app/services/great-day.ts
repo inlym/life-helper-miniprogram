@@ -6,8 +6,10 @@ import {CommonListResponse} from '../utils/types'
 
 /** 纪念日对象 */
 export interface GreatDay {
+  // =============================== HTTP 响应数据字段 ===============================
+
   /** 纪念日 ID */
-  id: string
+  id: number
 
   /** 纪念日名称 */
   name: string
@@ -27,6 +29,14 @@ export interface GreatDay {
    * - [ <0 ]：纪念日已过去。
    */
   days: number
+
+  /**
+   * 是否是系统创建的
+   *
+   * ### 说明
+   * 如果是系统返回的默认数据，该字段为 `true`，该类数据不允许操作。
+   */
+  systemCreated: boolean
 
   // =============================== 二次处理后新增的字段 ===============================
 

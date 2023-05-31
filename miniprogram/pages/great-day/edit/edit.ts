@@ -148,22 +148,41 @@ Page({
           submitButtonDisabled: true,
         })
 
-        await updateGreatDay(id, {name, date, icon})
+        if (this.data.day.systemCreated) {
+          // 系统的默认数据，允许操作编辑，已“新增”的形式提交
+          await createGreatDay({name, date, icon})
+
+          // 通过上个页面刷新数据
+          this.getOpenerEventChannel().emit(PageChannelEvent.REFRESH_DATA)
+
+          // 成功提示然后跳转返回
+          wx.showToast({
+            title: '恭喜创建您的第一个纪念日',
+            icon: 'none',
+          })
+
+          // 1秒后再返回，否则显得太快
+          setTimeout(() => {
+            wx.switchTab({url: '/pages/great-day/list/list'})
+          }, 1000)
+        } else {
+          await updateGreatDay(id, {name, date, icon})
+
+          // 通过上个页面刷新数据
+          this.getOpenerEventChannel().emit(PageChannelEvent.REFRESH_DATA)
+
+          // 成功提示然后跳转返回
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+          })
+
+          // 1秒后再返回，否则显得太快
+          setTimeout(() => {
+            wx.navigateBack()
+          }, 1000)
+        }
       }
-
-      // 通过上个页面刷新数据
-      this.getOpenerEventChannel().emit(PageChannelEvent.REFRESH_DATA)
-
-      // 成功提示然后跳转返回
-      wx.showToast({
-        title: '保存成功',
-        icon: 'success',
-      })
-
-      // 1秒后再返回，否则显得太快
-      setTimeout(() => {
-        wx.navigateBack()
-      }, 1000)
     }
   },
 })
