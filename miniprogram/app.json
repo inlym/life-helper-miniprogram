@@ -49,18 +49,6 @@
         "selectedIconPath": "/assets/images/tabbar/home-filled.png"
       },
       {
-        "pagePath": "pages/great-day/list/list",
-        "text": "纪念日",
-        "iconPath": "@tabBarIconPath_Calendar",
-        "selectedIconPath": "/assets/images/tabbar/calendar-filled.png"
-      },
-      {
-        "pagePath": "pages/album/list/list",
-        "text": "相册",
-        "iconPath": "@tabBarIconPath_Album",
-        "selectedIconPath": "/assets/images/tabbar/album-filled.png"
-      },
-      {
         "pagePath": "pages/me/me",
         "text": "我",
         "iconPath": "@tabBarIconPath_Me",

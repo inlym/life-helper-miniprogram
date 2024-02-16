@@ -38,7 +38,7 @@
         </picker>
     </mp-cells>
 
-    <mp-cells>
+    <!-- <mp-cells>
         <mp-cell hover link value="账户ID" footer="{{ userInfo.accountId }}" bindtap="goToAccountIdPage"> </mp-cell>
     </mp-cells>
 
@@ -51,7 +51,7 @@
             bindtap="goToRegisterTime"
         >
         </mp-cell>
-    </mp-cells>
+    </mp-cells> -->
 
     <!-- 非页面主体内容 -->
 </view>

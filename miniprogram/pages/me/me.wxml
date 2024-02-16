@@ -15,7 +15,7 @@
             <view class="info">
                 <view class="nickname">{{ userInfo.nickName }}</view>
                 <view class="desc">
-                    <view class="text">账号ID：{{ userInfo.accountId }}</view>
+                    <view class="text">欢迎使用小鸣助手</view>
                     <view class="iconfont icon-link"></view>
                 </view>
             </view>

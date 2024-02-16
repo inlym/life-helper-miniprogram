@@ -60,7 +60,7 @@ export async function login(): Promise<SecurityToken> {
   const data = await requestForData<SecurityToken>({
     method: 'POST',
     url: '/login/wechat',
-    data: {code},
+    data: {code, appId: 'wx09c0a1ea5251c75a'},
     auth: false,
   })
 
